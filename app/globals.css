@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 6%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 6%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 40%;
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 173 80% 36%;
+    --primary: 173 80% 36%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 168 84% 78%;
+    --accent-foreground: 173 80% 18%;
+    --radius: 0.85rem;
+  }
+
+  .dark {
+    --background: 222 47% 5%;
+    --foreground: 210 20% 96%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 20% 96%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 16% 65%;
+    --border: 222 30% 14%;
+    --input: 222 30% 14%;
+    --ring: 173 80% 50%;
+    --primary: 173 80% 45%;
+    --primary-foreground: 222 47% 5%;
+    --accent: 168 84% 60%;
+    --accent-foreground: 222 47% 5%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+
+  ::selection {
+    @apply bg-teal-500/30 text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(20, 184, 166, 0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(120deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    @apply bg-background/70 backdrop-blur-md backdrop-saturate-150;
+  }
+}
