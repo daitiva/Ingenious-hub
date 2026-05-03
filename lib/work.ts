@@ -19,13 +19,13 @@ export const WORK: CaseStudy[] = [
     client: "Allegiance Education",
     sector: "Edtech · Test Prep",
     category: "Branding",
-    title: "A challenger identity for a serious-test-prep brand",
+    title: "From local classroom to national-level institute.",
     summary:
-      "Repositioned from a classroom to a national brand — wordmark, color system, and admissions collateral that look the part of a top-tier institute.",
-    scope: ["Brand Strategy", "Logo & Wordmark", "Print Collateral"],
+      "We repositioned the brand through identity design, messaging, and admissions assets that look the part of a top-tier institute.",
+    scope: ["Brand Strategy", "Identity", "Print"],
     result: [
-      { metric: "+62%", label: "admission inquiries (Q1 vs Q4)" },
-      { metric: "3 cities", label: "rolled out without a redesign" },
+      { metric: "+62%", label: "increase in admissions" },
+      { metric: "3 cities", label: "rolled out clean" },
     ],
     accent: "from-amber-400/30 to-teal-500/20",
     featured: true,
@@ -35,10 +35,10 @@ export const WORK: CaseStudy[] = [
     client: "Tax2Win",
     sector: "Fintech · Tax Filing",
     category: "Marketing",
-    title: "Outdoor + digital campaign that owned filing season",
+    title: "An outdoor + digital campaign that owned filing season.",
     summary:
-      "Hindi-first creative system for billboards, performance ads, and landing pages, built around a single promise: file with a real CA.",
-    scope: ["Campaign Design", "Outdoor Creative", "Performance Ads"],
+      "Hindi-first creative for billboards, performance ads, and landing pages, built around one promise: file with a real CA.",
+    scope: ["Campaign", "OOH", "Performance"],
     result: [
       { metric: "3.2×", label: "lead volume in 8 weeks" },
       { metric: "−34%", label: "blended CAC" },
@@ -54,10 +54,10 @@ export const WORK: CaseStudy[] = [
     title: "Fashion. Attitude. Forever.",
     summary:
       "A heritage-meets-modern identity for Tolaram Group's flagship label — circular monogram, premium stationery, and packaging.",
-    scope: ["Identity System", "Stationery", "Packaging"],
+    scope: ["Identity", "Stationery", "Packaging"],
     result: [
       { metric: "Day-1", label: "wholesale-ready brand book" },
-      { metric: "+48%", label: "organic IG growth in launch month" },
+      { metric: "+48%", label: "IG growth at launch" },
     ],
     accent: "from-rose-400/30 to-teal-500/20",
     featured: true,
@@ -67,10 +67,10 @@ export const WORK: CaseStudy[] = [
     client: "Unlock Career",
     sector: "Career · Coaching",
     category: "Web",
-    title: "A conversion-first site that books discovery calls on autopilot",
+    title: "A site that books discovery calls on autopilot.",
     summary:
-      "Replaced a templated WordPress build with a custom Next.js site, sharper offer page, and a calendar-led booking flow.",
-    scope: ["UI/UX", "Web Development", "CRO"],
+      "Replaced a templated build with a custom Next.js site, sharper offer page, and calendar-led booking flow.",
+    scope: ["UI/UX", "Development", "CRO"],
     result: [
       { metric: "5.4%", label: "visitor-to-call rate" },
       { metric: "−1.8s", label: "LCP improvement" },
@@ -82,10 +82,10 @@ export const WORK: CaseStudy[] = [
     client: "Jaipur Health Festival",
     sector: "Events · Healthcare",
     category: "PR",
-    title: "Owned media that sold out a city-scale festival",
+    title: "Owned media that sold out a city-scale festival.",
     summary:
-      "Press-led launch with Dainik Bhaskar and Dainik Jagran, founder bylines, and a unified visual system across stage, OOH, and social.",
-    scope: ["PR Strategy", "Press Outreach", "Event Identity"],
+      "Press launch with Dainik Bhaskar and Dainik Jagran, founder bylines, and a unified visual system across stage, OOH, and social.",
+    scope: ["PR Strategy", "Press", "Event Identity"],
     result: [
       { metric: "12+", label: "tier-1 features" },
       { metric: "Sold out", label: "first-edition partnerships" },
@@ -97,10 +97,10 @@ export const WORK: CaseStudy[] = [
     client: "DNS Pointers",
     sector: "B2B · Consulting",
     category: "Branding",
-    title: "A precise mark for a precise consultancy",
+    title: "A precise mark for a precise consultancy.",
     summary:
-      "Wordmark, target-arrow monogram, and Linkedin-first founder branding system that helped close two enterprise pilots.",
-    scope: ["Brand Identity", "Founder Branding", "LinkedIn System"],
+      "Wordmark, target-arrow monogram, and LinkedIn-first founder branding that helped close two enterprise pilots.",
+    scope: ["Identity", "Founder Branding", "LinkedIn"],
     result: [
       { metric: "2", label: "enterprise pilots closed" },
       { metric: "+5.7k", label: "founder followers in 90 days" },

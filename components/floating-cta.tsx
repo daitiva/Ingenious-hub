@@ -33,7 +33,7 @@ export function FloatingCTA() {
               <PhoneCall className="h-3.5 w-3.5" />
               <span className="absolute inset-0 rounded-full ring-2 ring-white/40 animate-pulse-ring" />
             </span>
-            <span className="hidden sm:inline">Book Free Strategy Call</span>
+            <span className="hidden sm:inline">Book a Free Strategy Call</span>
             <span className="sm:hidden">Book Call</span>
           </Link>
         </motion.div>

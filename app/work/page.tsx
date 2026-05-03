@@ -20,23 +20,23 @@ export default function WorkPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-muted/20 py-20 md:py-28">
+      <section className="border-b border-border bg-muted/20 py-16 md:py-24">
         <div className="container max-w-3xl">
           <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
             Work
           </p>
-          <h1 className="mt-3 text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Brands we&rsquo;ve quietly{" "}
-            <span className="font-serif italic">made loud.</span>
+          <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+            Work that{" "}
+            <span className="font-serif italic">delivers results.</span>
           </h1>
-          <p className="mt-5 text-pretty text-lg text-muted-foreground">
-            A selection of recent identity, web, marketing, and PR projects. Every result
-            below is real, measured, and signed off by the client.
+          <p className="mt-4 text-pretty text-base text-muted-foreground md:text-lg">
+            A selection of recent identity, web, marketing, and PR work. Every result is
+            real and signed off by the client.
           </p>
         </div>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <div className="container">
           <div className="flex flex-wrap gap-2">
             {FILTERS.map((f) => (

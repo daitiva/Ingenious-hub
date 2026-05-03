@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s · Ingenious Hub",
   },
   description:
-    "A premium branding & growth studio in Jaipur. Branding, websites, and performance marketing built to drive measurable revenue for startups and SMEs.",
+    "We turn brands into growth engines. Branding, websites, and performance marketing built to win attention, earn trust, and drive measurable revenue.",
   keywords: [
     "branding agency Jaipur",
     "digital marketing agency",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "Ingenious Hub",
   ],
   openGraph: {
-    title: "Ingenious Hub — Energize Your Brand",
+    title: "Ingenious Hub — We turn brands into growth engines.",
     description:
       "Branding, websites, and performance marketing built to drive measurable revenue.",
     url: "https://ingenioushub.com",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ingenious Hub — Energize Your Brand",
+    title: "Ingenious Hub — We turn brands into growth engines.",
     description:
       "Branding, websites, and performance marketing built to drive measurable revenue.",
   },

@@ -9,26 +9,26 @@ import { cn } from "@/lib/utils";
 
 export function CaseStudies() {
   return (
-    <section className="border-t border-border bg-muted/20 py-24 md:py-32">
+    <section className="border-t border-border bg-muted/20 py-20 md:py-24">
       <div className="container">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-end">
           <div className="max-w-xl">
             <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
               Selected work
             </p>
-            <h2 className="mt-3 text-balance text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-              Brands we&rsquo;ve quietly{" "}
-              <span className="font-serif italic">made loud.</span>
+            <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+              Work that{" "}
+              <span className="font-serif italic">delivers results.</span>
             </h2>
           </div>
           <Button asChild variant="outline">
             <Link href="/work">
-              View all case studies <ArrowUpRight className="h-4 w-4" />
+              View all <ArrowUpRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 md:mt-12 md:grid-cols-3">
           {FEATURED_WORK.map((w, i) => (
             <motion.article
               key={w.slug}
@@ -49,10 +49,10 @@ export function CaseStudies() {
                     {w.client.split(" ")[0]}
                   </span>
                 </div>
-                <div className="absolute left-4 top-4 inline-flex items-center rounded-full border border-foreground/10 bg-background/70 px-2.5 py-1 text-xs backdrop-blur">
+                <div className="absolute left-3 top-3 inline-flex items-center rounded-full border border-foreground/10 bg-background/70 px-2.5 py-1 text-xs backdrop-blur">
                   {w.category}
                 </div>
-                <div className="absolute bottom-4 right-4 grid grid-cols-2 gap-2">
+                <div className="absolute bottom-3 right-3 grid grid-cols-2 gap-2">
                   {w.result.map((r) => (
                     <div
                       key={r.label}
@@ -68,15 +68,15 @@ export function CaseStudies() {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-1 flex-col gap-3 p-6">
+              <div className="flex flex-1 flex-col gap-2.5 p-5">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {w.client} · {w.sector}
                 </p>
-                <h3 className="text-xl font-semibold leading-snug tracking-tight">
+                <h3 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
                   {w.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">{w.summary}</p>
-                <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-sm">
+                <div className="mt-auto flex items-center justify-between border-t border-border pt-3 text-sm">
                   <span className="text-muted-foreground">{w.scope.join(" · ")}</span>
                   <span className="inline-flex items-center gap-1 font-medium text-teal-600 dark:text-teal-400">
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

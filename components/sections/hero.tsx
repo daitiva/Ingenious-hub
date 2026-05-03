@@ -2,8 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, Star, Rocket, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const TRUST = [
+  { icon: Star, label: "4.6 on Google" },
+  { icon: Rocket, label: "60+ brands scaled" },
+  { icon: Zap, label: "Replies in 4 hrs" },
+];
 
 export function Hero() {
   return (
@@ -18,7 +24,7 @@ export function Hero() {
       />
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      <div className="container grid items-center gap-12 py-24 md:grid-cols-12 md:py-32">
+      <div className="container grid items-center gap-10 py-16 md:grid-cols-12 md:gap-12 md:py-24">
         <div className="md:col-span-7">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -34,62 +40,54 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-5 text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl"
+            className="mt-4 text-balance text-[44px] font-semibold leading-[1.05] tracking-tight md:text-7xl"
           >
-            We{" "}
+            We turn brands into{" "}
             <span className="font-serif italic text-teal-600 dark:text-teal-400">
-              energize
-            </span>{" "}
-            brands that want to grow.
+              growth engines.
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-6 max-w-xl text-pretty text-lg text-muted-foreground"
+            className="mt-5 max-w-xl text-pretty text-base text-muted-foreground md:text-lg"
           >
-            We&rsquo;re a Jaipur-based studio that packages branding, websites, and
-            performance marketing into one engine — built to win attention and drive
-            measurable revenue.
+            Branding, websites, and performance marketing — built to win attention,
+            earn trust, and drive measurable revenue.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-7 flex flex-wrap items-center gap-3"
           >
             <Button asChild size="lg">
               <Link href="/contact">
-                Book Free Strategy Call
+                Book a Free Strategy Call
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/work">See our work</Link>
+              <Link href="/work">View our work</Link>
             </Button>
           </motion.div>
 
-          <motion.div
+          <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted-foreground"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
           >
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              4.6★ on Google · 11+ reviews
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              Replies within 4 working hours
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              60+ brands shipped
-            </div>
-          </motion.div>
+            {TRUST.map((t) => (
+              <li key={t.label} className="inline-flex items-center gap-2">
+                <t.icon className="h-4 w-4 text-teal-500" />
+                {t.label}
+              </li>
+            ))}
+          </motion.ul>
         </div>
 
         <div className="relative md:col-span-5">
@@ -109,7 +107,7 @@ function HeroMark() {
       className="relative mx-auto aspect-square w-full max-w-md"
     >
       <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-teal-500/20 via-teal-300/10 to-transparent blur-2xl" />
-      <div className="relative h-full w-full rounded-[2rem] border border-teal-500/20 bg-card/60 p-10 shadow-[0_30px_80px_-30px_rgba(13,148,136,0.45)] backdrop-blur-sm">
+      <div className="relative h-full w-full rounded-[2rem] border border-teal-500/20 bg-card/60 p-8 shadow-[0_30px_80px_-30px_rgba(13,148,136,0.45)] backdrop-blur-sm md:p-10">
         <div className="flex h-full w-full items-center justify-center">
           <motion.svg
             viewBox="0 0 200 240"
@@ -141,21 +139,9 @@ function HeroMark() {
               rx="6"
               fill="url(#tealGrad)"
             />
-            <motion.circle
-              cx="100"
-              cy="40"
-              r="34"
-              fill="none"
-              stroke="#14b8a6"
-              strokeOpacity="0.25"
-              strokeWidth="2"
-              animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2.4, repeat: Infinity }}
-              style={{ originX: "100px", originY: "40px" }}
-            />
           </motion.svg>
         </div>
-        <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-xl border border-border bg-background/70 px-4 py-2.5 text-xs text-muted-foreground backdrop-blur">
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-border bg-background/70 px-4 py-2.5 text-xs text-muted-foreground backdrop-blur">
           <span className="font-mono uppercase tracking-widest">Mark · 2025</span>
           <span className="text-teal-600 dark:text-teal-400">energize your brand</span>
         </div>
