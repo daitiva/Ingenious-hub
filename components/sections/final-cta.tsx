@@ -24,10 +24,9 @@ export function FinalCTA() {
               <span className="font-serif italic text-teal-300">grow</span> your
               brand?
             </motion.h2>
-            <p className="mt-6 max-w-xl text-pretty text-background/80">
-              Book a 60-min strategy call. Free, no-deck. You&rsquo;ll walk away
-              with two or three things to fix this week — whether or not we work
-              together.
+            <p className="mt-6 max-w-xl text-background/80">
+              60-min call. Free. No deck. Two or three things to fix this week —
+              whether we work together or not.
             </p>
           </div>
 

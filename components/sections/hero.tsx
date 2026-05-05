@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
-const WORDS = ["Brand", "Story", "System", "Engine", "Outcome"];
+const TICKER = ["Brand", "Story", "System", "Engine", "Outcome"];
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -29,8 +29,7 @@ export function Hero() {
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
       <motion.div style={{ y, opacity }} className="relative">
-        <div className="container pb-12 pt-20 md:pb-20 md:pt-32">
-          {/* Eyebrow row — editorial: index + location */}
+        <div className="container pb-12 pt-16 md:pb-20 md:pt-28">
           <div className="flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
             <span className="inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
@@ -43,7 +42,6 @@ export function Hero() {
             </span>
           </div>
 
-          {/* Display headline */}
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -52,11 +50,8 @@ export function Hero() {
           >
             <SplitLine delay={0.05}>We don&rsquo;t build</SplitLine>
             <SplitLine delay={0.18}>
-              <span className="text-muted-foreground">websites.</span>
-              <span className="ml-3 align-middle md:ml-6">
-                <Mark />
-              </span>
-              <span className="ml-3 md:ml-6">We build</span>
+              <span className="text-muted-foreground">websites.</span>{" "}
+              <span>We build</span>
             </SplitLine>
             <SplitLine delay={0.32}>
               <span className="font-serif italic text-teal-600 dark:text-teal-400">
@@ -66,13 +61,10 @@ export function Hero() {
             </SplitLine>
           </motion.h1>
 
-          {/* Sub + CTAs — editorial split */}
-          <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12 md:items-end">
+          <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-12 md:items-end">
             <div className="md:col-span-5">
-              <p className="text-fluid-base text-pretty text-muted-foreground">
-                A creative &amp; digital growth partner for ambitious brands —
-                trusted by founders across India, the GCC, and beyond. Strategy,
-                design, and performance, run as one engine.
+              <p className="text-fluid-base text-muted-foreground">
+                A creative &amp; growth partner for ambitious brands.
               </p>
             </div>
             <div className="md:col-span-4 md:col-start-9 flex flex-col gap-3 sm:flex-row">
@@ -80,25 +72,25 @@ export function Hero() {
                 href="/contact"
                 className="group inline-flex h-12 flex-1 items-center justify-between rounded-full bg-foreground px-5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
               >
-                Book a Strategy Call
+                Book a Call
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
               </Link>
               <Link
                 href="/work"
                 className="group inline-flex h-12 flex-1 items-center justify-between rounded-full border border-border px-5 text-sm font-medium hover:border-teal-500/50"
               >
-                See the work
+                See work
                 <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
               </Link>
             </div>
           </div>
 
-          {/* Marquee tagline strip */}
-          <div className="relative mt-16 overflow-hidden md:mt-24">
+          {/* Ticker strip */}
+          <div className="relative mt-14 overflow-hidden md:mt-20">
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
             <div className="flex w-max gap-12 animate-marquee-slow">
-              {[...WORDS, ...WORDS, ...WORDS, ...WORDS].map((w, i) => (
+              {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((w, i) => (
                 <span
                   key={i}
                   className="inline-flex items-center gap-12 whitespace-nowrap text-fluid-3xl font-medium tracking-tight"
@@ -112,8 +104,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Bottom meta strip */}
-          <div className="mt-12 grid gap-4 border-t border-border pt-6 text-sm md:mt-16 md:grid-cols-4">
+          <div className="mt-10 grid gap-4 border-t border-border pt-6 text-sm md:mt-14 md:grid-cols-4">
             <Meta label="Est." value="2016 · Jaipur" />
             <Meta label="Brands shipped" value="60+" />
             <Meta label="Avg. response" value="< 4 working hrs" />
@@ -122,26 +113,6 @@ export function Hero() {
         </div>
       </motion.div>
     </section>
-  );
-}
-
-function Mark() {
-  return (
-    <span
-      className="relative inline-flex h-[0.7em] w-[0.7em] translate-y-[-0.05em] items-center justify-center align-middle"
-      aria-hidden
-    >
-      <svg viewBox="0 0 200 240" className="h-full w-full">
-        <defs>
-          <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#5eead4" />
-            <stop offset="100%" stopColor="#0d9488" />
-          </linearGradient>
-        </defs>
-        <circle cx="100" cy="40" r="22" fill="url(#heroGrad)" />
-        <rect x="80" y="78" width="40" height="140" rx="6" fill="url(#heroGrad)" />
-      </svg>
-    </span>
   );
 }
 

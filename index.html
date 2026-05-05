@@ -89,16 +89,12 @@
     .nav { position: fixed; inset: 2px 0 auto 0; z-index: 50; height: 60px; transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease; border-bottom: 1px solid transparent; }
     .nav.scrolled { background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: saturate(150%) blur(12px); -webkit-backdrop-filter: saturate(150%) blur(12px); border-bottom-color: color-mix(in srgb, var(--border) 60%, transparent); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-    .logo { display: inline-flex; align-items: center; gap: 10px; }
-    .logo-mark { position: relative; display: inline-flex; align-items: center; justify-content: center; height: 34px; width: 34px; border-radius: 10px; border: 1px solid rgba(20,184,166,0.3); background: linear-gradient(135deg, var(--t-50), #fff); box-shadow: var(--shadow-sm); }
-    [data-theme="dark"] .logo-mark { background: linear-gradient(135deg, rgba(13,148,136,0.15), var(--bg)); }
-    .logo-mark svg { color: var(--t-600); height: 18px; width: 18px; }
-    [data-theme="dark"] .logo-mark svg { color: var(--t-300); }
+    .logo { display: inline-flex; align-items: baseline; gap: 5px; color: var(--t-600); }
+    [data-theme="dark"] .logo { color: var(--t-300); }
+    .logo-i { height: 22px; width: auto; transform: translateY(2px); }
     .logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .logo-name { font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
-    .logo-name .accent { color: var(--t-600); }
-    [data-theme="dark"] .logo-name .accent { color: var(--t-300); }
-    .logo-sub { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-fg); margin-top: 2px; }
+    .logo-name { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 21px; letter-spacing: -0.01em; line-height: 1; }
+    .logo-sub { margin-top: 4px; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-fg); }
 
     .nav-links { display: none; align-items: center; gap: 4px; }
     .nav-links a { position: relative; padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--muted-fg); border-radius: 999px; transition: color .2s ease; display: inline-flex; gap: 6px; align-items: center; }
@@ -149,9 +145,6 @@
     .hero-headline .muted { color: var(--muted-fg); }
     .hero-headline .accent { color: var(--t-600); }
     [data-theme="dark"] .hero-headline .accent { color: var(--t-300); }
-    .hero-mark-inline { display: inline-flex; vertical-align: middle; height: 0.7em; width: 0.7em; margin: 0 .15em; transform: translateY(-.05em); }
-    .hero-mark-inline svg { height: 100%; width: 100%; }
-
     .hero-meta { margin-top: 48px; display: grid; gap: 24px; }
     @media (min-width: 768px) { .hero-meta { margin-top: 64px; grid-template-columns: 5fr 3fr 4fr; align-items: end; gap: 32px; } }
     .hero-meta p { margin: 0; color: var(--muted-fg); }
@@ -258,16 +251,76 @@
     .case-grid > .story { grid-column: span 12; }
     @media (min-width: 768px) { .case-grid > .cover { grid-column: span 6; } .case-grid > .story { grid-column: span 6; } }
     .case.reverse .case-grid > .cover { order: 2; }
-    .case-cover { position: relative; aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; }
-    .case-cover .stamp { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font-family: 'Instrument Serif', serif; font-style: italic; line-height: .95; color: rgba(0,0,0,.8); font-size: clamp(48px, 6vw, 96px); }
-    [data-theme="dark"] .case-cover .stamp { color: rgba(255,255,255,.85); }
-    .case-cover .tag { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.75); font-size: 11px; backdrop-filter: blur(6px); }
+    .case-cover { position: relative; aspect-ratio: 5/4; border-radius: 22px; overflow: hidden; }
+    .case-cover .tag { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.75); font-size: 11px; backdrop-filter: blur(6px); z-index: 5; }
     [data-theme="dark"] .case-cover .tag { border-color: rgba(255,255,255,.18); background: rgba(0,0,0,.5); color: rgba(255,255,255,.85); }
-    .case-cover .metrics { position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .case-cover .metric { padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.85); backdrop-filter: blur(6px); }
-    [data-theme="dark"] .case-cover .metric { border-color: rgba(255,255,255,.18); background: rgba(0,0,0,.55); color: rgba(255,255,255,.92); }
-    .case-cover .metric .m { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+    .case-cover .metrics { position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; z-index: 5; }
+    .case-cover .metric { padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.92); backdrop-filter: blur(6px); }
+    [data-theme="dark"] .case-cover .metric { border-color: rgba(255,255,255,.18); background: rgba(0,0,0,.65); color: rgba(255,255,255,.92); }
+    .case-cover .metric .m { font-size: 16px; font-weight: 600; letter-spacing: -.01em; }
     .case-cover .metric .l { font-size: 9.5px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted-fg); }
+
+    /* Allegiance cover */
+    .cv-alle { background: #F1E8D6; }
+    [data-theme="dark"] .cv-alle { background: #1c1611; }
+    .cv-alle .big { position: absolute; inset: 0; display: grid; place-items: center; }
+    .cv-alle .big .num { font-weight: 600; line-height: .78; letter-spacing: -.04em; font-size: clamp(7rem, 18vw, 16rem); }
+    .cv-alle .big .pct { position: absolute; right: -12px; top: 6px; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); color: var(--t-600); }
+    [data-theme="dark"] .cv-alle .big .pct { color: var(--t-300); }
+    .cv-alle .spine { position: absolute; left: 24px; top: 24px; bottom: 24px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(0,0,0,.55); font-family: ui-monospace, monospace; }
+    [data-theme="dark"] .cv-alle .spine { color: rgba(255,255,255,.55); }
+    .cv-alle .spine .vert { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Inter', sans-serif; }
+    .cv-alle .card { position: absolute; right: -16px; top: 40px; width: 130px; transform: rotate(6deg); border-radius: 8px; background: rgba(0,0,0,.92); color: white; padding: 12px; box-shadow: 0 12px 24px rgba(0,0,0,.18); display: none; }
+    @media (min-width: 768px) { .cv-alle .card { display: block; } }
+    .cv-alle .card .lab { font-size: 10px; letter-spacing: .12em; opacity: .7; text-transform: uppercase; }
+    .cv-alle .card .l1 { margin-top: 8px; height: 4px; width: 50px; border-radius: 2px; background: var(--t-300); }
+    .cv-alle .card .l2 { margin-top: 4px; height: 4px; width: 70px; border-radius: 2px; background: rgba(255,255,255,.3); }
+    .cv-alle .card .l3 { margin-top: 4px; height: 4px; width: 40px; border-radius: 2px; background: rgba(255,255,255,.3); }
+
+    /* Tax2Win cover */
+    .cv-tax { background: #ECFDF5; }
+    [data-theme="dark"] .cv-tax { background: rgba(6, 78, 59, 0.3); }
+    .cv-tax .head { position: absolute; left: 24px; right: 24px; top: 24px; }
+    .cv-tax .label { font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #047857; }
+    [data-theme="dark"] .cv-tax .label { color: #6ee7b7; }
+    .cv-tax .h { margin-top: 10px; font-weight: 600; line-height: .95; letter-spacing: -.04em; font-size: clamp(2rem, 5.5vw, 3.6rem); }
+    .cv-tax .h .it { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--t-600); }
+    [data-theme="dark"] .cv-tax .h .it { color: var(--t-300); }
+    .cv-tax .bars { position: absolute; left: 24px; right: 24px; bottom: 80px; display: flex; gap: 6px; height: 96px; align-items: flex-end; }
+    .cv-tax .bars .bar { flex: 1; border-radius: 4px 4px 0 0; background: linear-gradient(to bottom, var(--t-500), var(--t-700)); }
+    .cv-tax .phone { position: absolute; right: 22px; top: 22px; height: 130px; width: 64px; border: 2px solid #111; border-radius: 16px; background: white; padding: 6px; transform: rotate(6deg); display: none; }
+    @media (min-width: 768px) { .cv-tax .phone { display: block; } }
+    [data-theme="dark"] .cv-tax .phone { border-color: rgba(255,255,255,.85); background: #07090c; }
+    .cv-tax .phone .screen { height: 100%; width: 100%; border-radius: 10px; background: linear-gradient(to bottom, #a7f3d0, #10b981); }
+
+    /* Yug cover */
+    .cv-yug { background: #FFF1F2; }
+    [data-theme="dark"] .cv-yug { background: rgba(127, 29, 29, 0.25); }
+    .cv-yug .disc { position: absolute; inset: 0; display: grid; place-items: center; }
+    .cv-yug .disc .ring { position: relative; height: 220px; width: 220px; border: 1px solid rgba(0,0,0,.3); border-radius: 50%; display: grid; place-items: center; }
+    @media (min-width: 768px) { .cv-yug .disc .ring { height: 280px; width: 280px; } }
+    [data-theme="dark"] .cv-yug .disc .ring { border-color: rgba(255,255,255,.35); }
+    .cv-yug .disc .ring::before { content:""; position: absolute; inset: 8px; border: 1px solid rgba(0,0,0,.15); border-radius: 50%; }
+    [data-theme="dark"] .cv-yug .disc .ring::before { border-color: rgba(255,255,255,.18); }
+    .cv-yug .disc .body { text-align: center; font-family: 'Instrument Serif', serif; font-style: italic; }
+    .cv-yug .disc .body .top { font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: rgba(0,0,0,.6); font-family: 'Inter', sans-serif; font-style: normal; }
+    [data-theme="dark"] .cv-yug .disc .body .top { color: rgba(255,255,255,.65); }
+    .cv-yug .disc .body .word { margin-top: 10px; font-size: clamp(3rem, 7vw, 5rem); line-height: 1; }
+    .cv-yug .disc .body .word .accent { color: var(--t-600); }
+    [data-theme="dark"] .cv-yug .disc .body .word .accent { color: var(--t-300); }
+    .cv-yug .swatch { position: absolute; left: 24px; top: 24px; height: 64px; width: 8px; border-radius: 4px; background: #fb7185; }
+    .cv-yug .lookbook { position: absolute; right: 24px; bottom: -16px; height: 92px; width: 150px; transform: rotate(-4deg); border-radius: 8px; background: rgba(255,255,255,.95); padding: 12px; box-shadow: 0 14px 28px rgba(0,0,0,.18); display: none; }
+    @media (min-width: 768px) { .cv-yug .lookbook { display: block; } }
+    [data-theme="dark"] .cv-yug .lookbook { background: rgba(0,0,0,.78); }
+    .cv-yug .lookbook .l0 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(0,0,0,.65); }
+    [data-theme="dark"] .cv-yug .lookbook .l0 { color: rgba(255,255,255,.7); }
+    .cv-yug .lookbook .l1, .cv-yug .lookbook .l2, .cv-yug .lookbook .l3 { height: 4px; border-radius: 2px; }
+    .cv-yug .lookbook .l1 { margin-top: 10px; width: 60px; background: rgba(0,0,0,.85); }
+    .cv-yug .lookbook .l2 { margin-top: 4px; width: 76px; background: rgba(0,0,0,.4); }
+    .cv-yug .lookbook .l3 { margin-top: 4px; width: 40px; background: rgba(0,0,0,.4); }
+    [data-theme="dark"] .cv-yug .lookbook .l1 { background: rgba(255,255,255,.85); }
+    [data-theme="dark"] .cv-yug .lookbook .l2,
+    [data-theme="dark"] .cv-yug .lookbook .l3 { background: rgba(255,255,255,.4); }
     .case-client { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); }
     .case-h { margin: 12px 0 0; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
     .case-steps { margin: 32px 0 0; display: grid; gap: 20px; padding-top: 24px; border-top: 1px solid var(--border); }
@@ -398,15 +451,13 @@
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a class="logo" href="#top" aria-label="Ingenious Hub home">
-      <span class="logo-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="6" r="3.2" fill="currentColor"/>
-          <path d="M13 13h6v15h-6z" fill="currentColor"/>
-        </svg>
-      </span>
+    <a class="logo" href="#top" aria-label="Ingenious Hub — energize your brand">
+      <svg viewBox="0 0 28 64" class="logo-i" aria-hidden="true">
+        <circle cx="14" cy="9" r="4.5" fill="currentColor"/>
+        <rect x="9.5" y="18" width="9" height="38" rx="1.4" fill="currentColor"/>
+      </svg>
       <span class="logo-text">
-        <span class="logo-name">ingenious <span class="accent">hub</span></span>
+        <span class="logo-name">ngenious hub</span>
         <span class="logo-sub">energize your brand</span>
       </span>
     </a>
@@ -457,20 +508,7 @@
 
       <h1 class="hero-headline display-tight t-display">
         <span class="line"><span>We don&rsquo;t build</span></span>
-        <span class="line"><span><span class="muted">websites.</span>
-          <span class="hero-mark-inline" aria-hidden="true">
-            <svg viewBox="0 0 200 240">
-              <defs>
-                <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#5eead4"/>
-                  <stop offset="100%" stop-color="#0d9488"/>
-                </linearGradient>
-              </defs>
-              <circle cx="100" cy="40" r="22" fill="url(#hg)"/>
-              <rect x="80" y="78" width="40" height="140" rx="6" fill="url(#hg)"/>
-            </svg>
-          </span>
-          We build</span></span>
+        <span class="line"><span><span class="muted">websites.</span> We build</span></span>
         <span class="line"><span><span class="serif accent">growth engines</span>.</span></span>
       </h1>
 
@@ -517,20 +555,20 @@
         </div>
         <div class="col-9">
           <p class="manifesto-headline t-3xl reveal">
-            Most agencies sell <span class="serif" style="color:var(--muted-fg)">deliverables.</span> We sell <span style="color:var(--t-600)">outcomes</span> — branding, websites, and performance built as a single engine that compounds in a quarter, not a year.
+            Most agencies sell <span class="serif" style="color:var(--muted-fg)">deliverables.</span> We sell <span style="color:var(--t-600)">outcomes</span>.
           </p>
           <div class="manifesto-pillars">
             <div class="pillar reveal">
-              <div class="pillar-row"><span class="num">01</span><span class="lab">The problem</span></div>
-              <p>Brands are stuck stitching three vendors who don&rsquo;t talk. The brand looks fine, the site is dated, the ads burn cash.</p>
+              <div class="pillar-row"><span class="num">01</span><span class="lab">Problem</span></div>
+              <p>Three vendors, no shared metric. Brand pretty, ads burning.</p>
             </div>
             <div class="pillar reveal">
-              <div class="pillar-row"><span class="num">02</span><span class="lab">Our insight</span></div>
-              <p>Growth happens when positioning, product surface, and acquisition are built by one team — measured against the same number.</p>
+              <div class="pillar-row"><span class="num">02</span><span class="lab">Insight</span></div>
+              <p>Brand, web, and acquisition compound only when one team owns them.</p>
             </div>
             <div class="pillar reveal">
-              <div class="pillar-row"><span class="num">03</span><span class="lab">The solution</span></div>
-              <p>A small senior crew that owns brand, web, and performance end-to-end. Weekly dashboards. Monthly compounding.</p>
+              <div class="pillar-row"><span class="num">03</span><span class="lab">Solution</span></div>
+              <p>Senior crew. One roadmap. Weekly dashboards.</p>
             </div>
           </div>
         </div>
@@ -647,7 +685,7 @@
           <h2 class="t-4xl display-tight" style="font-weight:600; margin-top:20px;">
             A studio in Jaipur. <span class="serif" style="color:var(--muted-fg)">Brands across continents.</span>
           </h2>
-          <p style="margin-top:24px; max-width:480px; color:var(--muted-fg); line-height:1.6;">We work with founders building from India and beyond — across edtech, fintech, D2C, healthcare, and B2B SaaS. Async by default, senior on every call.</p>
+          <p style="margin-top:20px; max-width:420px; color:var(--muted-fg); line-height:1.6;">Founders across edtech, fintech, D2C, and B2B. Async by default.</p>
         </div>
         <div class="col-7">
           <div class="globe-grid" id="globeGrid"></div>
@@ -664,8 +702,8 @@
         <div class="col-7">
           <p class="eyebrow">007 — Let&rsquo;s build</p>
           <h2 class="final-h t-display" style="margin-top:24px;">Ready to <span class="accent">grow</span> your brand?</h2>
-          <p style="margin-top:24px; max-width:560px; color:rgba(255,255,255,.78); line-height:1.6; font-size:17px;">
-            Book a 60-min strategy call. Free, no-deck. You&rsquo;ll walk away with two or three things to fix this week — whether or not we work together.
+          <p style="margin-top:20px; max-width:520px; color:rgba(255,255,255,.78); line-height:1.6; font-size:17px;">
+            60-min call. Free. No deck. Two or three things to fix this week — whether we work together or not.
           </p>
         </div>
         <div class="col-5" style="display:flex; align-items:flex-end; justify-content:flex-end;">
@@ -822,11 +860,11 @@
 
   // SERVICES
   const SERVICES = [
-    { id:'branding', title:'Branding & Identity', tagline:'Build a brand people remember — and trust enough to choose.', outcome:'Strong positioning + premium perception', accent:'linear-gradient(135deg, rgba(252,211,77,.55), rgba(20,184,166,.4))' },
-    { id:'web', title:'Website & UI/UX', tagline:'Websites designed to convert, not just impress.', outcome:'Higher engagement + better conversion', accent:'linear-gradient(135deg, rgba(125,211,252,.55), rgba(20,184,166,.4))' },
-    { id:'performance', title:'Performance Marketing', tagline:'Turn attention into predictable growth.', outcome:'Consistent inbound pipeline', accent:'linear-gradient(135deg, rgba(110,231,183,.55), rgba(20,184,166,.4))' },
-    { id:'creative', title:'Creative & Content', tagline:'Content that actually drives action.', outcome:'Higher reach + stronger recall', accent:'linear-gradient(135deg, rgba(251,113,133,.5), rgba(20,184,166,.4))' },
-    { id:'pr', title:'PR & Growth', tagline:'Build authority where it matters.', outcome:'Credibility + visibility', accent:'linear-gradient(135deg, rgba(196,181,253,.55), rgba(20,184,166,.4))' },
+    { id:'branding', title:'Branding & Identity', tagline:'Brands people remember.', outcome:'Premium perception', accent:'linear-gradient(135deg, rgba(252,211,77,.55), rgba(20,184,166,.4))' },
+    { id:'web', title:'Website & UI/UX', tagline:'Sites built to convert.', outcome:'Better conversion', accent:'linear-gradient(135deg, rgba(125,211,252,.55), rgba(20,184,166,.4))' },
+    { id:'performance', title:'Performance Marketing', tagline:'Predictable growth, not vanity.', outcome:'Consistent pipeline', accent:'linear-gradient(135deg, rgba(110,231,183,.55), rgba(20,184,166,.4))' },
+    { id:'creative', title:'Creative & Content', tagline:'Content that earns action.', outcome:'Reach + recall', accent:'linear-gradient(135deg, rgba(251,113,133,.5), rgba(20,184,166,.4))' },
+    { id:'pr', title:'PR & Growth', tagline:'Authority where it matters.', outcome:'Credibility + visibility', accent:'linear-gradient(135deg, rgba(196,181,253,.55), rgba(20,184,166,.4))' },
   ];
   const svcList = document.getElementById('svcList');
   svcList.innerHTML = SERVICES.map((s, i) => `
@@ -866,53 +904,91 @@
     });
   }
 
-  // CASES
+  // CASES — layered editorial covers, no flat italic stamps
   const CASES = [
     {
-      idx:'01', client:'Allegiance Education', sector:'Edtech · Test Prep', cat:'Branding',
-      title:'From local classroom to a national-level institute.',
-      problem:"Strong faculty, weak brand. The market couldn't tell Allegiance apart from a dozen local coaching centers.",
-      strategy:'Repositioned around outcomes, not subjects. New wordmark, color system, admissions narrative, and city-launch playbook.',
-      result:'Brand ran across three cities without a single redesign — and lifted admissions by 62% the following quarter.',
-      metrics:[{m:'+62%',l:'admissions'},{m:'3 cities',l:'rolled out'},{m:'1 system',l:'no rework'}],
-      bg: 'linear-gradient(135deg, rgba(253,230,138,.7), rgba(20,184,166,.35))',
-      brand:'Allegiance',
-      reverse: false,
+      idx:'01', client:'Allegiance Education', sector:'Edtech · Test Prep',
+      title:'From a classroom to a national institute.',
+      problem:'Strong faculty, generic brand.',
+      strategy:'Reposition around outcomes, not subjects.',
+      result:'+62% admissions, rolled across 3 cities.',
+      metrics:[{m:'+62%',l:'admissions'},{m:'3',l:'cities live'},{m:'1',l:'system'}],
+      cover:'allegiance', reverse: false,
     },
     {
-      idx:'02', client:'Tax2Win', sector:'Fintech · Tax Filing', cat:'Marketing',
-      title:'An outdoor + digital campaign that owned filing season.',
-      problem:'Tax filing is a commodity category. Tax2Win was getting buried under bigger ad budgets and lookalike messaging.',
-      strategy:'Hindi-first creative system anchored on one promise — file with a real CA. Synced billboards, paid ads, and landing pages so the story compounded.',
-      result:'3.2× lead volume in eight weeks while blended CAC dropped a third — entirely on the back of campaign coherence.',
-      metrics:[{m:'3.2×',l:'lead volume'},{m:'−34%',l:'blended CAC'},{m:'8 wks',l:'time to result'}],
-      bg: 'linear-gradient(135deg, rgba(167,243,208,.7), rgba(20,184,166,.35))',
-      brand:'Tax2Win',
-      reverse: true,
+      idx:'02', client:'Tax2Win', sector:'Fintech · Tax Filing',
+      title:'Owning filing season, end-to-end.',
+      problem:'Commoditised category, lookalike ads.',
+      strategy:'Hindi-first promise, synced OOH + paid + LP.',
+      result:'3.2× leads, −34% CAC in eight weeks.',
+      metrics:[{m:'3.2×',l:'leads'},{m:'−34%',l:'CAC'},{m:'8 wks',l:'to result'}],
+      cover:'tax2win', reverse: true,
     },
     {
-      idx:'03', client:'Yug Vaastra', sector:'D2C · Fashion (Tolaram Group)', cat:'Branding',
+      idx:'03', client:'Yug Vaastra', sector:'D2C Fashion · Tolaram',
       title:'Heritage that ships.',
-      problem:'A 75-year-old textile house launching its first D2C label needed a brand that felt premium without losing its lineage.',
-      strategy:'Circular monogram, modern serif wordmark, and a stationery + packaging system designed to feel as deliberate as the product.',
-      result:'Wholesale-ready brand book on day one. Organic IG growth of 48% in launch month — purely off design + content.',
-      metrics:[{m:'Day-1',l:'wholesale ready'},{m:'+48%',l:'IG launch month'},{m:'75 yrs',l:'of heritage'}],
-      bg: 'linear-gradient(135deg, rgba(254,205,211,.7), rgba(20,184,166,.35))',
-      brand:'Yug Vaastra',
-      reverse: false,
+      problem:'75-year textile house going D2C — needed gravitas.',
+      strategy:'Circular monogram + serif wordmark + premium pack.',
+      result:'Day-1 wholesale-ready. +48% IG launch month.',
+      metrics:[{m:'Day-1',l:'wholesale'},{m:'+48%',l:'IG'},{m:'75 yrs',l:'lineage'}],
+      cover:'yug', reverse: false,
     }
   ];
+
+  function coverHtml(kind) {
+    if (kind === 'allegiance') return `
+      <div class="case-cover cv-alle">
+        <div class="big"><div style="position:relative"><span class="num">62</span><span class="pct">%</span></div></div>
+        <div class="spine">
+          <span>A · 01</span>
+          <span class="vert">Allegiance — Admissions</span>
+          <span>2024</span>
+        </div>
+        <div class="card">
+          <div class="lab">Admit Card</div>
+          <div class="l1"></div><div class="l2"></div><div class="l3"></div>
+        </div>
+      </div>`;
+    if (kind === 'tax2win') return `
+      <div class="case-cover cv-tax">
+        <div class="head">
+          <div class="label">Filing Season · 2024</div>
+          <div class="h">Ab ki baar,<br/><span class="it">real CA</span> ke saath.</div>
+        </div>
+        <div class="bars">
+          ${[35,55,28,70,48,82,64,92,78,100].map(h => `<div class="bar" style="height:${h}%"></div>`).join('')}
+        </div>
+        <div class="phone"><div class="screen"></div></div>
+      </div>`;
+    return `
+      <div class="case-cover cv-yug">
+        <div class="disc">
+          <div class="ring">
+            <div class="body">
+              <div class="top">Tolaram · since 1950</div>
+              <div class="word">yu<span class="accent">g</span></div>
+              <div class="top">fashion · attitude · forever</div>
+            </div>
+          </div>
+        </div>
+        <div class="swatch"></div>
+        <div class="lookbook">
+          <div class="l0">Lookbook · SS25</div>
+          <div class="l1"></div><div class="l2"></div><div class="l3"></div>
+        </div>
+      </div>`;
+  }
 
   document.getElementById('caseList').innerHTML = CASES.map(c => `
     <article class="case ${c.reverse ? 'reverse' : ''} reveal">
       <div class="container">
         <div class="case-grid">
           <div class="cover">
-            <div class="case-cover" style="background:${c.bg}">
-              <div class="stamp serif">${c.brand}</div>
+            <div style="position:relative">
+              ${coverHtml(c.cover)}
               <span class="tag"><span class="mono">${c.idx}</span><span style="opacity:.4">·</span>${c.sector}</span>
-              <div class="metrics">
-                ${c.metrics.map(m => `<div class="metric"><div class="m">${m.m}</div><div class="l">${m.l}</div></div>`).join('')}
+              <div class="metrics" style="position:absolute; left:16px; right:16px; bottom:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; z-index:5;">
+                ${c.metrics.map(m => `<div class="metric" style="padding:8px 12px;border-radius:12px;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.92);backdrop-filter:blur(6px);"><div class="m" style="font-size:16px;font-weight:600;letter-spacing:-.01em">${m.m}</div><div class="l" style="font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted-fg)">${m.l}</div></div>`).join('')}
               </div>
             </div>
           </div>

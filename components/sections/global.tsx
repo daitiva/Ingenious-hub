@@ -38,10 +38,8 @@ export function GlobalReach() {
                 Brands across continents.
               </span>
             </h2>
-            <p className="mt-6 max-w-md text-pretty text-muted-foreground">
-              We work with founders building from India and beyond — across
-              edtech, fintech, D2C, healthcare, and B2B SaaS. Async by default,
-              senior on every call.
+            <p className="mt-5 max-w-md text-muted-foreground">
+              Founders across edtech, fintech, D2C, and B2B. Async by default.
             </p>
           </div>
 
