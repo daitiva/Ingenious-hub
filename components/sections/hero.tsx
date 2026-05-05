@@ -1,19 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles, Star, Rocket, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
-const TRUST = [
-  { icon: Star, label: "4.6 on Google" },
-  { icon: Rocket, label: "60+ brands scaled" },
-  { icon: Zap, label: "Replies in 4 hrs" },
-];
+const WORDS = ["Brand", "Story", "System", "Engine", "Outcome"];
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   return (
-    <section className="relative isolate overflow-hidden">
+    <section ref={ref} className="relative isolate overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(20,184,166,0.18),transparent_70%)]"
@@ -24,128 +28,151 @@ export function Hero() {
       />
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      <div className="container grid items-center gap-10 py-16 md:grid-cols-12 md:gap-12 md:py-24">
-        <div className="md:col-span-7">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 px-3 py-1 text-xs font-medium text-teal-700 dark:text-teal-300"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            Branding · Web · Performance · PR
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-4 text-balance text-[44px] font-semibold leading-[1.05] tracking-tight md:text-7xl"
-          >
-            We turn brands into{" "}
-            <span className="font-serif italic text-teal-600 dark:text-teal-400">
-              growth engines.
+      <motion.div style={{ y, opacity }} className="relative">
+        <div className="container pb-12 pt-20 md:pb-20 md:pt-32">
+          {/* Eyebrow row — editorial: index + location */}
+          <div className="flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
+              Index 001 / The Studio
             </span>
-          </motion.h1>
+            <span className="hidden md:inline-flex items-center gap-3">
+              <span className="font-mono">26.92° N · 75.78° E</span>
+              <span className="opacity-40">·</span>
+              <span>Jaipur — Worldwide</span>
+            </span>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-5 max-w-xl text-pretty text-base text-muted-foreground md:text-lg"
-          >
-            Branding, websites, and performance marketing — built to win attention,
-            earn trust, and drive measurable revenue.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-7 flex flex-wrap items-center gap-3"
-          >
-            <Button asChild size="lg">
-              <Link href="/contact">
-                Book a Free Strategy Call
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/work">View our work</Link>
-            </Button>
-          </motion.div>
-
-          <motion.ul
+          {/* Display headline */}
+          <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
+            transition={{ duration: 0.8 }}
+            className="mt-10 display-tight font-semibold text-fluid-display"
           >
-            {TRUST.map((t) => (
-              <li key={t.label} className="inline-flex items-center gap-2">
-                <t.icon className="h-4 w-4 text-teal-500" />
-                {t.label}
-              </li>
-            ))}
-          </motion.ul>
-        </div>
+            <SplitLine delay={0.05}>We don&rsquo;t build</SplitLine>
+            <SplitLine delay={0.18}>
+              <span className="text-muted-foreground">websites.</span>
+              <span className="ml-3 align-middle md:ml-6">
+                <Mark />
+              </span>
+              <span className="ml-3 md:ml-6">We build</span>
+            </SplitLine>
+            <SplitLine delay={0.32}>
+              <span className="font-serif italic text-teal-600 dark:text-teal-400">
+                growth engines
+              </span>
+              <span className="text-foreground">.</span>
+            </SplitLine>
+          </motion.h1>
 
-        <div className="relative md:col-span-5">
-          <HeroMark />
+          {/* Sub + CTAs — editorial split */}
+          <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-5">
+              <p className="text-fluid-base text-pretty text-muted-foreground">
+                A creative &amp; digital growth partner for ambitious brands —
+                trusted by founders across India, the GCC, and beyond. Strategy,
+                design, and performance, run as one engine.
+              </p>
+            </div>
+            <div className="md:col-span-4 md:col-start-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="group inline-flex h-12 flex-1 items-center justify-between rounded-full bg-foreground px-5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              >
+                Book a Strategy Call
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
+              </Link>
+              <Link
+                href="/work"
+                className="group inline-flex h-12 flex-1 items-center justify-between rounded-full border border-border px-5 text-sm font-medium hover:border-teal-500/50"
+              >
+                See the work
+                <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Marquee tagline strip */}
+          <div className="relative mt-16 overflow-hidden md:mt-24">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
+            <div className="flex w-max gap-12 animate-marquee-slow">
+              {[...WORDS, ...WORDS, ...WORDS, ...WORDS].map((w, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-12 whitespace-nowrap text-fluid-3xl font-medium tracking-tight"
+                >
+                  {w}
+                  <span className="font-serif italic text-teal-600 dark:text-teal-400">
+                    energized
+                  </span>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom meta strip */}
+          <div className="mt-12 grid gap-4 border-t border-border pt-6 text-sm md:mt-16 md:grid-cols-4">
+            <Meta label="Est." value="2016 · Jaipur" />
+            <Meta label="Brands shipped" value="60+" />
+            <Meta label="Avg. response" value="< 4 working hrs" />
+            <Meta label="Rating" value="4.6 ★ on Google" />
+          </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
-function HeroMark() {
+function Mark() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative mx-auto aspect-square w-full max-w-md"
+    <span
+      className="relative inline-flex h-[0.7em] w-[0.7em] translate-y-[-0.05em] items-center justify-center align-middle"
+      aria-hidden
     >
-      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-teal-500/20 via-teal-300/10 to-transparent blur-2xl" />
-      <div className="relative h-full w-full rounded-[2rem] border border-teal-500/20 bg-card/60 p-8 shadow-[0_30px_80px_-30px_rgba(13,148,136,0.45)] backdrop-blur-sm md:p-10">
-        <div className="flex h-full w-full items-center justify-center">
-          <motion.svg
-            viewBox="0 0 200 240"
-            className="h-full w-auto"
-            initial={{ rotate: -2 }}
-            animate={{ rotate: [-2, 2, -2] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            aria-hidden
-          >
-            <defs>
-              <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#5eead4" />
-                <stop offset="100%" stopColor="#0d9488" />
-              </linearGradient>
-            </defs>
-            <motion.circle
-              cx="100"
-              cy="40"
-              r="22"
-              fill="url(#tealGrad)"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <rect
-              x="80"
-              y="78"
-              width="40"
-              height="140"
-              rx="6"
-              fill="url(#tealGrad)"
-            />
-          </motion.svg>
-        </div>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-border bg-background/70 px-4 py-2.5 text-xs text-muted-foreground backdrop-blur">
-          <span className="font-mono uppercase tracking-widest">Mark · 2025</span>
-          <span className="text-teal-600 dark:text-teal-400">energize your brand</span>
-        </div>
+      <svg viewBox="0 0 200 240" className="h-full w-full">
+        <defs>
+          <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#5eead4" />
+            <stop offset="100%" stopColor="#0d9488" />
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="40" r="22" fill="url(#heroGrad)" />
+        <rect x="80" y="78" width="40" height="140" rx="6" fill="url(#heroGrad)" />
+      </svg>
+    </span>
+  );
+}
+
+function SplitLine({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  return (
+    <span className="block overflow-hidden">
+      <motion.span
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay }}
+        className="inline-block"
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+function Meta({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        {label}
       </div>
-    </motion.div>
+      <div className="mt-1 font-medium tracking-tight">{value}</div>
+    </div>
   );
 }

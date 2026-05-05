@@ -1,71 +1,72 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Hammer, TrendingUp } from "lucide-react";
 
 const STEPS = [
   {
-    icon: Search,
     label: "Understand",
-    title: "Audit, position, find the angle.",
-    body: "We audit your brand and identify the growth gaps that matter.",
+    duration: "Week 1–2",
+    body: "We audit positioning, product surface, and acquisition. You get a sharp diagnosis — gaps, opportunities, and the one bet that compounds fastest.",
   },
   {
-    icon: Hammer,
     label: "Build",
-    title: "Design and execute end-to-end.",
-    body: "Brand, product, marketing — we ship a system you can run.",
+    duration: "Week 3–8",
+    body: "Brand, web, and campaigns built in parallel by one senior team. Weekly demo, one shared roadmap, no agency-stitching.",
   },
   {
-    icon: TrendingUp,
     label: "Scale",
-    title: "Optimize and improve continuously.",
-    body: "Weekly check-ins, dashboards, and a tight sprint cadence.",
+    duration: "Ongoing",
+    body: "Monthly compounding. Performance dashboards, sprint cadence, and a retainer that earns its keep against the same metric every month.",
   },
 ];
 
 export function Process() {
   return (
-    <section className="py-20 md:py-24">
-      <div className="container">
-        <div className="max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
-            How we work
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
-            Simple. Focused.{" "}
-            <span className="font-serif italic">Effective.</span>
-          </h2>
-        </div>
+    <section className="border-y border-border bg-cream/40 dark:bg-muted/20">
+      <div className="container py-24 md:py-32">
+        <header className="grid gap-6 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-3">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              How we work
+            </p>
+          </div>
+          <div className="md:col-span-9">
+            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+              A loop, not a{" "}
+              <span className="font-serif italic text-muted-foreground">
+                deck.
+              </span>
+            </h2>
+          </div>
+        </header>
 
-        <div className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3">
-          {STEPS.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="relative rounded-2xl border border-border bg-card p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    Step 0{i + 1}
-                  </span>
-                </div>
-                <h3 className="mt-5 text-lg font-semibold tracking-tight">
-                  {s.label}. {s.title}
-                </h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{s.body}</p>
-              </motion.div>
-            );
-          })}
-        </div>
+        <ol className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:mt-20 md:grid-cols-3">
+          {STEPS.map((s, i) => (
+            <motion.li
+              key={s.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className="bg-background p-7 md:p-10"
+            >
+              <div className="flex items-baseline justify-between">
+                <span className="font-mono text-xs text-muted-foreground">
+                  Step {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {s.duration}
+                </span>
+              </div>
+              <h3 className="mt-6 text-fluid-2xl font-semibold tracking-tight">
+                {s.label}.
+              </h3>
+              <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+                {s.body}
+              </p>
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </section>
   );

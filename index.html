@@ -3,38 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ingenious Hub — We turn brands into growth engines.</title>
-  <meta name="description" content="Branding, websites, and performance marketing — built to win attention, earn trust, and drive measurable revenue." />
+  <title>Ingenious Hub — A creative & digital growth partner for ambitious brands</title>
+  <meta name="description" content="A Jaipur-based creative & digital growth studio. Branding, websites, and performance marketing built as one engine for brands that want to dominate." />
+  <meta name="theme-color" content="#0d9488" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d9488'/><circle cx='16' cy='8' r='3.2' fill='%235eead4'/><rect x='13' y='13' width='6' height='14' rx='1' fill='%235eead4'/></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json">
+  [
+    {"@context":"https://schema.org","@type":"Organization","@id":"https://ingenioushub.com#organization","name":"Ingenious Hub","legalName":"Ingenious Hub Enterprise (P) Ltd.","url":"https://ingenioushub.com","logo":"https://ingenioushub.com/favicon.svg","slogan":"We turn brands into growth engines.","foundingDate":"2016","description":"A creative & digital growth partner for ambitious brands.","address":{"@type":"PostalAddress","streetAddress":"2-TA-8, Sector 2, Jawahar Nagar","addressLocality":"Jaipur","addressRegion":"Rajasthan","postalCode":"302004","addressCountry":"IN"},"contactPoint":[{"@type":"ContactPoint","telephone":"+91-99999-99999","contactType":"Sales","email":"hello@ingenioushub.com","areaServed":["IN","AE","GB","US"],"availableLanguage":["en","hi"]}],"sameAs":["https://www.linkedin.com/company/ingenious-hub","https://instagram.com/ingenioushub"],"areaServed":["India","United Arab Emirates","United Kingdom","Singapore"],"knowsAbout":["Brand Strategy","Visual Identity","UI/UX Design","Web Development","Performance Marketing","Public Relations","Founder Branding","Lead Generation"]},
+    {"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://ingenioushub.com#service","name":"Ingenious Hub","priceRange":"₹₹₹","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.6","reviewCount":"11"},"address":{"@type":"PostalAddress","addressLocality":"Jaipur","addressRegion":"Rajasthan","postalCode":"302004","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":26.9124,"longitude":75.7873},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"19:00"}]}
+  ]
+  </script>
+
   <style>
     :root {
-      --bg: #ffffff;
-      --fg: #0a1118;
-      --muted: #f4f7f8;
-      --muted-fg: #5b6873;
-      --card: #ffffff;
-      --border: #e4e9ed;
-      --teal-50:#f0fdfa; --teal-100:#ccfbf1; --teal-200:#99f6e4; --teal-300:#5eead4;
-      --teal-400:#2dd4bf; --teal-500:#14b8a6; --teal-600:#0d9488; --teal-700:#0f766e;
-      --teal-800:#115e59; --teal-900:#134e4a;
+      --cream:   #f4f0e8;
+      --bg:      #ffffff;
+      --fg:      #0e0c08;
+      --muted:   #f4f0e8;
+      --muted-fg:#5b6873;
+      --card:    #ffffff;
+      --border:  #e2e1d8;
+
+      --t-50:#f0fdfa; --t-300:#5eead4; --t-400:#2dd4bf;
+      --t-500:#14b8a6; --t-600:#0d9488; --t-700:#0f766e; --t-900:#134e4a;
+
       --shadow-sm: 0 1px 2px rgba(10,17,24,0.04);
-      --shadow-md: 0 8px 24px -8px rgba(13,148,136,0.25);
       --shadow-lg: 0 30px 80px -30px rgba(13,148,136,0.45);
-      --shadow-xl: 0 40px 120px -40px rgba(13,148,136,0.6);
-      --radius: 14px;
-      --radius-lg: 22px;
-      --container: 1200px;
+      --container: 1320px;
     }
     [data-theme="dark"] {
-      --bg: #07090c;
-      --fg: #ecf0f3;
-      --muted: #11161c;
-      --muted-fg: #9aa6b1;
-      --card: #0c1116;
-      --border: #1a2128;
+      --cream:   #11100c;
+      --bg:      #0a0907;
+      --fg:      #ecf0f3;
+      --muted:   #14130f;
+      --muted-fg:#9aa6b1;
+      --card:    #100f0c;
+      --border:  #232220;
     }
 
     * { box-sizing: border-box; }
@@ -42,10 +50,8 @@
     body {
       margin: 0;
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      -webkit-font-smoothing: antialiased;
-      font-feature-settings: "ss01" 1, "calt" 1;
+      background: var(--bg); color: var(--fg);
+      -webkit-font-smoothing: antialiased; font-feature-settings: "ss01" 1, "calt" 1;
       transition: background-color .25s ease, color .25s ease;
     }
     img, svg { display: block; max-width: 100%; }
@@ -54,98 +60,70 @@
     ::selection { background: rgba(20,184,166,0.3); }
 
     .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
-    @media (min-width: 768px) { .container { padding: 0 24px; } }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+
     .serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .gradient-text {
-      background: linear-gradient(120deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .eyebrow {
-      font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--teal-600);
-    }
-    [data-theme="dark"] .eyebrow { color: var(--teal-300); }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 0 22px; height: 44px; border-radius: 999px; font-size: 14px; font-weight: 500;
-      transition: transform .15s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
-      white-space: nowrap;
+    .eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--muted-fg);
     }
-    .btn:active { transform: scale(.98); }
-    .btn-primary { background: var(--teal-600); color: #fff; box-shadow: 0 8px 24px -8px rgba(13,148,136,0.55); }
-    .btn-primary:hover { background: var(--teal-700); }
-    .btn-outline { border: 1px solid var(--border); color: var(--fg); background: transparent; }
-    .btn-outline:hover { border-color: rgba(20,184,166,0.45); background: var(--muted); }
-    .btn-lg { height: 48px; padding: 0 26px; font-size: 15px; }
-    .btn-sm { height: 36px; padding: 0 16px; font-size: 14px; }
-    .btn svg { width: 16px; height: 16px; }
-    .btn-white { background: #fff; color: var(--teal-900); }
-    .btn-white:hover { background: var(--teal-50); }
+    .display-tight { letter-spacing: -0.04em; line-height: 0.92; }
+    .text-balance { text-wrap: balance; }
+    .text-pretty { text-wrap: pretty; }
+
+    /* Fluid type scale */
+    .t-base { font-size: clamp(1rem, 0.96rem + 0.2vw, 1.05rem); line-height: 1.6; }
+    .t-lg   { font-size: clamp(1.1rem, 1rem + 0.5vw, 1.25rem); line-height: 1.55; }
+    .t-2xl  { font-size: clamp(1.5rem, 1.3rem + 1vw, 1.85rem); }
+    .t-3xl  { font-size: clamp(2rem, 1.6rem + 2vw, 2.6rem); }
+    .t-4xl  { font-size: clamp(2.6rem, 2rem + 3vw, 3.6rem); }
+    .t-5xl  { font-size: clamp(3.2rem, 2.4rem + 4vw, 5rem); }
+    .t-display { font-size: clamp(3rem, 2rem + 8vw, 11rem); }
+
+    /* Scroll progress */
+    .scroll-progress { position: fixed; left:0; right:0; top:0; height:2px; z-index:60; background: linear-gradient(90deg, var(--t-500) var(--p,0%), transparent var(--p,0%)); pointer-events:none; }
 
     /* Nav */
-    .nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 50; height: 60px;
-      transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
-      border-bottom: 1px solid transparent;
-    }
-    .nav.scrolled {
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      backdrop-filter: saturate(150%) blur(12px);
-      -webkit-backdrop-filter: saturate(150%) blur(12px);
-      border-bottom-color: color-mix(in srgb, var(--border) 60%, transparent);
-    }
+    .nav { position: fixed; inset: 2px 0 auto 0; z-index: 50; height: 60px; transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: saturate(150%) blur(12px); -webkit-backdrop-filter: saturate(150%) blur(12px); border-bottom-color: color-mix(in srgb, var(--border) 60%, transparent); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
     .logo { display: inline-flex; align-items: center; gap: 10px; }
-    .logo-mark {
-      position: relative; display: inline-flex; align-items: center; justify-content: center;
-      height: 34px; width: 34px; border-radius: 10px;
-      border: 1px solid rgba(20,184,166,0.3);
-      background: linear-gradient(135deg, var(--teal-50), #fff);
-      box-shadow: var(--shadow-sm);
-    }
+    .logo-mark { position: relative; display: inline-flex; align-items: center; justify-content: center; height: 34px; width: 34px; border-radius: 10px; border: 1px solid rgba(20,184,166,0.3); background: linear-gradient(135deg, var(--t-50), #fff); box-shadow: var(--shadow-sm); }
     [data-theme="dark"] .logo-mark { background: linear-gradient(135deg, rgba(13,148,136,0.15), var(--bg)); }
-    .logo-mark svg { color: var(--teal-600); height: 18px; width: 18px; }
-    [data-theme="dark"] .logo-mark svg { color: var(--teal-300); }
+    .logo-mark svg { color: var(--t-600); height: 18px; width: 18px; }
+    [data-theme="dark"] .logo-mark svg { color: var(--t-300); }
     .logo-text { display: flex; flex-direction: column; line-height: 1; }
     .logo-name { font-weight: 500; font-size: 15px; letter-spacing: -0.01em; }
-    .logo-name .accent { color: var(--teal-600); }
-    [data-theme="dark"] .logo-name .accent { color: var(--teal-300); }
+    .logo-name .accent { color: var(--t-600); }
+    [data-theme="dark"] .logo-name .accent { color: var(--t-300); }
     .logo-sub { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-fg); margin-top: 2px; }
 
     .nav-links { display: none; align-items: center; gap: 4px; }
-    .nav-links a {
-      position: relative; padding: 8px 14px; font-size: 14px; font-weight: 500;
-      color: var(--muted-fg); border-radius: 999px; transition: color .2s ease;
-    }
+    .nav-links a { position: relative; padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--muted-fg); border-radius: 999px; transition: color .2s ease; display: inline-flex; gap: 6px; align-items: center; }
+    .nav-links a .num { font-family: ui-monospace, monospace; font-size: 10px; opacity: .55; }
     .nav-links a:hover, .nav-links a.active { color: var(--fg); }
-    .nav-links a.active::after {
-      content: ""; position: absolute; left: 12px; right: 12px; bottom: -2px;
-      height: 1px; background: var(--teal-500);
-    }
+    .nav-links a.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -2px; height: 1px; background: var(--t-500); }
     .nav-actions { display: flex; align-items: center; gap: 8px; }
-    .icon-btn {
-      height: 38px; width: 38px; border-radius: 999px; border: 1px solid var(--border);
-      display: inline-flex; align-items: center; justify-content: center; color: var(--fg);
-      transition: background-color .2s ease;
-    }
+    .icon-btn { height: 38px; width: 38px; border-radius: 999px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--fg); transition: background-color .2s ease; }
     .icon-btn:hover { background: var(--muted); }
     .icon-btn svg { width: 16px; height: 16px; }
-    .nav-cta { display: none; }
+    .nav-cta { display: none; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--fg); color: var(--bg); font-size: 14px; font-weight: 500; align-items: center; gap: 6px; transition: transform .2s ease; }
+    .nav-cta:hover { transform: translateY(-1px); }
+    .nav-cta svg { width: 14px; height: 14px; }
     .menu-btn { display: inline-flex; }
 
     .mobile-menu { display: none; border-top: 1px solid var(--border); background: var(--bg); }
     .mobile-menu.open { display: block; }
-    .mobile-menu .container { display: flex; flex-direction: column; gap: 4px; padding-top: 14px; padding-bottom: 14px; }
-    .mobile-menu a {
-      padding: 11px 12px; border-radius: 10px; font-size: 15px; font-weight: 500;
-    }
-    .mobile-menu a:hover, .mobile-menu a:active { background: var(--muted); }
+    .mobile-menu .container { display: flex; flex-direction: column; padding-top: 12px; padding-bottom: 16px; }
+    .mobile-menu a { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 4px; font-size: 22px; font-weight: 500; letter-spacing: -.02em; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:last-of-type { border-bottom: 0; }
+    .mobile-menu a .num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted-fg); }
+    .mobile-menu .cta { display: inline-flex; justify-content: space-between; align-items: center; height: 50px; padding: 0 18px; margin-top: 14px; background: var(--fg); color: var(--bg); border-radius: 999px; font-size: 14px; font-weight: 500; border-bottom: 0; }
 
     @media (min-width: 768px) {
-      .nav { height: 64px; }
+      .nav { height: 64px; inset: 2px 0 auto 0; }
       .nav-links { display: flex; }
       .nav-cta { display: inline-flex; }
       .menu-btn { display: none; }
@@ -156,212 +134,225 @@
 
     /* Hero */
     .hero { position: relative; isolation: isolate; overflow: hidden; }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; z-index: -1;
-      background: radial-gradient(60% 50% at 50% 0%, rgba(20,184,166,0.18), transparent 70%);
-    }
-    .hero::after {
-      content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; z-index: -1;
-      background: linear-gradient(90deg, transparent, rgba(20,184,166,0.4), transparent);
-    }
-    .hero-grain {
-      position: absolute; inset: 0; z-index: -1; pointer-events: none;
-      background-image: radial-gradient(rgba(20,184,166,0.06) 1px, transparent 1px);
-      background-size: 18px 18px;
-      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-              mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    }
-    .hero-grid {
-      display: grid; gap: 40px; align-items: center; padding: 64px 0;
-      grid-template-columns: 1fr;
-    }
-    @media (min-width: 900px) {
-      .hero-grid { grid-template-columns: 7fr 5fr; padding: 96px 0; gap: 48px; }
-    }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
-      font-size: 12px; font-weight: 500;
-      border: 1px solid rgba(20,184,166,0.25); background: rgba(20,184,166,0.06); color: var(--teal-700);
-    }
-    [data-theme="dark"] .pill { color: var(--teal-300); }
-    .pill svg { width: 14px; height: 14px; }
-    h1.hero-title {
-      margin: 16px 0 0; font-size: clamp(36px, 6vw, 72px); font-weight: 600;
-      line-height: 1.05; letter-spacing: -0.025em; text-wrap: balance;
-    }
-    h1.hero-title .accent { color: var(--teal-600); }
-    [data-theme="dark"] h1.hero-title .accent { color: var(--teal-300); }
-    .hero-sub { margin-top: 18px; max-width: 560px; font-size: 16px; color: var(--muted-fg); text-wrap: pretty; line-height: 1.6; }
-    @media (min-width: 768px) { .hero-sub { font-size: 18px; } }
-    .hero-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .hero-trust { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 14px; color: var(--muted-fg); list-style: none; padding: 0; margin-bottom: 0; }
-    .hero-trust li { display: inline-flex; align-items: center; gap: 8px; }
-    .hero-trust svg { color: var(--teal-500); width: 16px; height: 16px; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 50% at 50% 0%, rgba(20,184,166,0.18), transparent 70%); }
+    .hero-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(rgba(20,184,166,0.06) 1px, transparent 1px); background-size: 18px 18px; -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%); mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%); }
+    .hero-eyebrow-row { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--muted-fg); }
+    .pulse-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--t-500); margin-right: 8px; vertical-align: middle; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+    .hero-headline { margin: 40px 0 0; font-weight: 600; }
+    .hero-headline .line { display: block; overflow: hidden; }
+    .hero-headline .line > span { display: inline-block; transform: translateY(100%); animation: rise .85s cubic-bezier(.22,1,.36,1) forwards; }
+    .hero-headline .line:nth-child(1) > span { animation-delay: .05s; }
+    .hero-headline .line:nth-child(2) > span { animation-delay: .18s; }
+    .hero-headline .line:nth-child(3) > span { animation-delay: .32s; }
+    @keyframes rise { to { transform: translateY(0); } }
+    .hero-headline .muted { color: var(--muted-fg); }
+    .hero-headline .accent { color: var(--t-600); }
+    [data-theme="dark"] .hero-headline .accent { color: var(--t-300); }
+    .hero-mark-inline { display: inline-flex; vertical-align: middle; height: 0.7em; width: 0.7em; margin: 0 .15em; transform: translateY(-.05em); }
+    .hero-mark-inline svg { height: 100%; width: 100%; }
 
-    .hero-mark {
-      position: relative; aspect-ratio: 1/1; max-width: 380px; margin: 0 auto; width: 100%;
-    }
-    @media (min-width: 768px) { .hero-mark { max-width: 440px; } }
-    .hero-mark::before {
-      content: ""; position: absolute; inset: 0; border-radius: 32px; filter: blur(40px);
-      background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(94,234,212,0.1), transparent);
-    }
-    .hero-mark-inner {
-      position: relative; height: 100%; width: 100%; padding: 32px;
-      border-radius: 32px; border: 1px solid rgba(20,184,166,0.2);
-      background: color-mix(in srgb, var(--card) 60%, transparent);
-      backdrop-filter: blur(8px);
-      box-shadow: var(--shadow-lg);
-      display: flex; align-items: center; justify-content: center;
-    }
-    @media (min-width: 768px) { .hero-mark-inner { padding: 40px; } }
-    .hero-mark-inner svg { height: 100%; width: auto; max-height: 280px; animation: sway 8s ease-in-out infinite; }
-    @keyframes sway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-    .hero-mark-foot {
-      position: absolute; left: 16px; right: 16px; bottom: 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 14px; border-radius: 12px;
-      border: 1px solid var(--border); background: color-mix(in srgb, var(--bg) 70%, transparent);
-      backdrop-filter: blur(8px); font-size: 11.5px; color: var(--muted-fg);
-    }
-    .hero-mark-foot .accent { color: var(--teal-600); }
-    [data-theme="dark"] .hero-mark-foot .accent { color: var(--teal-300); }
+    .hero-meta { margin-top: 48px; display: grid; gap: 24px; }
+    @media (min-width: 768px) { .hero-meta { margin-top: 64px; grid-template-columns: 5fr 3fr 4fr; align-items: end; gap: 32px; } }
+    .hero-meta p { margin: 0; color: var(--muted-fg); }
+    .hero-cta-stack { display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 480px) { .hero-cta-stack { flex-direction: row; } }
+    .btn-cta { display: inline-flex; height: 48px; flex: 1; align-items: center; justify-content: space-between; padding: 0 20px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: transform .2s ease, background-color .2s ease, border-color .2s ease; }
+    .btn-cta.primary { background: var(--fg); color: var(--bg); }
+    .btn-cta.primary:hover { transform: translateY(-2px); }
+    .btn-cta.primary svg { transition: transform .2s ease; }
+    .btn-cta.primary:hover svg { transform: rotate(45deg); }
+    .btn-cta.outline { border: 1px solid var(--border); color: var(--fg); }
+    .btn-cta.outline:hover { border-color: rgba(20,184,166,.5); }
+    .btn-cta svg { width: 14px; height: 14px; }
 
-    /* Trust strip */
-    .strip { padding: 32px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 50%, var(--bg)); }
-    .strip-label { text-align: center; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-fg); margin: 0 0 20px; }
-    .marquee { position: relative; overflow: hidden; }
-    .marquee::before, .marquee::after {
-      content: ""; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
-    }
-    .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
-    .marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
-    .marquee-track { display: flex; gap: 40px; width: max-content; padding: 0 20px; animation: marquee 38s linear infinite; }
-    .marquee-track span { white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: var(--muted-fg); }
-    @media (min-width: 768px) { .marquee-track span { font-size: 17px; } }
+    /* Hero marquee tagline */
+    .hero-marquee { position: relative; margin-top: 56px; overflow: hidden; }
+    @media (min-width: 768px) { .hero-marquee { margin-top: 96px; } }
+    .hero-marquee::before, .hero-marquee::after { content: ""; position: absolute; inset-y: 0; top: 0; bottom: 0; width: 96px; z-index: 2; pointer-events: none; }
+    .hero-marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+    .hero-marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+    .hero-marquee-track { display: flex; gap: 48px; width: max-content; padding: 0 20px; animation: marquee 60s linear infinite; }
+    .hero-marquee-track span { white-space: nowrap; display: inline-flex; align-items: center; gap: 48px; font-weight: 500; letter-spacing: -0.025em; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* Section */
-    section.block { padding: 72px 0; }
-    @media (min-width: 768px) { section.block { padding: 96px 0; } }
-    .block-head { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; justify-content: space-between; }
-    @media (min-width: 768px) { .block-head { flex-direction: row; align-items: flex-end; gap: 24px; } }
-    .block-title { margin: 12px 0 0; font-size: clamp(28px, 4.5vw, 52px); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; text-wrap: balance; max-width: 600px; }
-    .block-sub { max-width: 460px; color: var(--muted-fg); text-wrap: pretty; line-height: 1.6; font-size: 15px; }
+    .hero-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: grid; gap: 16px; grid-template-columns: 1fr 1fr; font-size: 14px; }
+    @media (min-width: 640px) { .hero-foot { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 768px) { .hero-foot { margin-top: 64px; } }
+    .hero-foot .l { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); }
+    .hero-foot .v { margin-top: 4px; font-weight: 500; letter-spacing: -.01em; }
 
-    /* Services grid */
-    .services-grid { display: grid; gap: 14px; margin-top: 40px; grid-template-columns: 1fr; }
-    @media (min-width: 768px) { .services-grid { gap: 16px; margin-top: 48px; grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1100px) { .services-grid { grid-template-columns: repeat(3, 1fr); } .services-grid > a:nth-child(1), .services-grid > a:nth-child(5) { grid-column: span 2; } }
-    .service-card {
-      position: relative; overflow: hidden; padding: 22px;
-      border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card);
-      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-      display: flex; flex-direction: column; justify-content: space-between; min-height: 240px;
-    }
-    @media (min-width: 768px) { .service-card { padding: 24px; min-height: 260px; } }
-    .service-card:hover { transform: translateY(-2px); border-color: rgba(20,184,166,0.4); box-shadow: var(--shadow-lg); }
-    .service-card::before {
-      content: ""; position: absolute; right: -64px; top: -64px; height: 160px; width: 160px;
-      border-radius: 50%; background: rgba(20,184,166,0.10); filter: blur(40px);
-    }
-    .service-row { display: flex; align-items: center; justify-content: space-between; position: relative; }
-    .service-icon {
-      display: inline-flex; align-items: center; justify-content: center; height: 40px; width: 40px;
-      border-radius: 12px; background: rgba(20,184,166,0.1); color: var(--teal-600);
-    }
-    [data-theme="dark"] .service-icon { color: var(--teal-300); }
-    .service-icon svg { width: 20px; height: 20px; }
-    .service-num { font-size: 12px; color: var(--muted-fg); }
-    .service-card h3 { margin: 18px 0 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; position: relative; }
-    @media (min-width: 768px) { .service-card h3 { font-size: 22px; } }
-    .service-card .tagline { margin: 6px 0 0; font-size: 14px; color: var(--muted-fg); position: relative; line-height: 1.55; }
-    .chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; position: relative; list-style: none; padding: 0; }
-    .chip {
-      padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border);
-      background: var(--bg); font-size: 12px; color: var(--muted-fg);
-    }
-    .service-foot {
-      margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; position: relative;
-    }
-    .service-foot .arrow { color: var(--teal-600); display: inline-flex; align-items: center; gap: 4px; font-weight: 500; }
-    [data-theme="dark"] .service-foot .arrow { color: var(--teal-300); }
+    /* Trust strip */
+    .trust { padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .trust-track { display: flex; gap: 48px; width: max-content; padding: 0 20px; animation: marquee 38s linear infinite; color: var(--muted-fg); }
+    .trust-track span { white-space: nowrap; display: inline-flex; align-items: center; gap: 48px; font-weight: 500; font-size: 14px; }
+    @media (min-width: 768px) { .trust-track span { font-size: 16px; } }
+    .trust-overflow { position: relative; overflow: hidden; }
+    .trust-overflow::before, .trust-overflow::after { content:""; position:absolute; top:0; bottom:0; width: 80px; z-index: 2; pointer-events: none; }
+    .trust-overflow::before { left:0; background: linear-gradient(90deg, var(--bg), transparent); }
+    .trust-overflow::after { right:0; background: linear-gradient(-90deg, var(--bg), transparent); }
 
-    /* Case studies */
-    .work-section { border-top: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 35%, var(--bg)); }
-    .work-grid { display: grid; gap: 18px; margin-top: 40px; grid-template-columns: 1fr; }
-    @media (min-width: 768px) { .work-grid { margin-top: 48px; gap: 20px; } }
-    @media (min-width: 900px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
-    .work-card {
-      display: flex; flex-direction: column; overflow: hidden;
-      border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card);
-      transition: transform .25s ease, box-shadow .25s ease;
+    /* Generic block padding */
+    section.block { padding: 96px 0; }
+    @media (min-width: 768px) { section.block { padding: 128px 0; } }
+    .block-grid { display: grid; gap: 32px; }
+    @media (min-width: 768px) { .block-grid { grid-template-columns: repeat(12, 1fr); align-items: end; } }
+    .col-3 { grid-column: span 12; } .col-9 { grid-column: span 12; } .col-7 { grid-column: span 12; } .col-5 { grid-column: span 12; }
+    @media (min-width: 768px) {
+      .col-3 { grid-column: span 3; } .col-9 { grid-column: span 9; }
+      .col-7 { grid-column: span 7; } .col-5 { grid-column: span 5; }
+      .col-4 { grid-column: span 4; } .col-8 { grid-column: span 8; }
+      .col-6 { grid-column: span 6; }
     }
-    .work-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .work-cover { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-    .work-cover .bg { position: absolute; inset: 0; }
-    .work-cover .label { position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; background: color-mix(in srgb, var(--bg) 70%, transparent); border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent); backdrop-filter: blur(6px); }
-    .work-cover .stamp { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(38px, 5vw, 60px); color: color-mix(in srgb, var(--fg) 75%, transparent); }
-    .work-results { position: absolute; right: 12px; bottom: 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; max-width: 65%; }
-    .result-card { padding: 6px 10px; border-radius: 10px; background: color-mix(in srgb, var(--bg) 80%, transparent); border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent); backdrop-filter: blur(6px); text-align: right; }
-    .result-card .m { font-size: 12px; font-weight: 600; letter-spacing: -0.01em; }
-    .result-card .l { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-fg); }
-    .work-body { display: flex; flex-direction: column; gap: 10px; padding: 20px; flex: 1; }
-    .work-meta { font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-fg); margin: 0; }
-    .work-body h3 { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.3; letter-spacing: -0.015em; }
-    .work-body p { margin: 0; font-size: 14px; color: var(--muted-fg); line-height: 1.55; }
-    .work-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted-fg); display: flex; justify-content: space-between; align-items: center; }
-    .work-foot svg { color: var(--teal-600); width: 16px; height: 16px; }
-    [data-theme="dark"] .work-foot svg { color: var(--teal-300); }
+
+    /* Manifesto */
+    .manifesto { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .manifesto-headline { font-weight: 500; line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
+    .manifesto-pillars { margin-top: 56px; display: grid; gap: 32px; }
+    @media (min-width: 768px) { .manifesto-pillars { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
+    .pillar { padding-top: 18px; border-top: 1px solid var(--border); }
+    .pillar-row { display: flex; align-items: baseline; justify-content: space-between; }
+    .pillar-row .num { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted-fg); }
+    .pillar-row .lab { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); }
+    .pillar p { margin: 16px 0 0; line-height: 1.6; }
+    .manifesto-bg { position: absolute; inset-x: 0; bottom: -32px; left: 0; right: 0; pointer-events: none; user-select: none; white-space: nowrap; font-weight: 600; opacity: .04; }
+
+    /* Services editorial list */
+    .svc-list { margin-top: 56px; list-style: none; padding: 0; counter-reset: svc; }
+    @media (min-width: 768px) { .svc-list { margin-top: 80px; } }
+    .svc-list li { border-top: 1px solid var(--border); }
+    .svc-list li:last-child { border-bottom: 1px solid var(--border); }
+    .svc-row { display: grid; align-items: baseline; gap: 16px; padding: 28px 0; grid-template-columns: 36px 1fr auto; transition: padding .3s ease; }
+    @media (min-width: 768px) { .svc-row { grid-template-columns: 56px 1fr 220px 56px; padding: 40px 0; } }
+    .svc-row .idx { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted-fg); }
+    .svc-title { font-weight: 500; letter-spacing: -.025em; transition: color .3s ease, transform .5s cubic-bezier(.22,1,.36,1); }
+    .svc-row:hover .svc-title { color: var(--t-600); transform: translateX(12px); }
+    [data-theme="dark"] .svc-row:hover .svc-title { color: var(--t-300); }
+    .svc-tag { font-size: 13px; color: var(--muted-fg); margin-top: 6px; transition: opacity .3s ease, transform .5s cubic-bezier(.22,1,.36,1); opacity: .55; }
+    @media (min-width: 768px) { .svc-tag { font-size: 14px; } }
+    .svc-row:hover .svc-tag { opacity: 1; transform: translateX(12px); }
+    .svc-out { display: none; text-align: right; }
+    @media (min-width: 768px) { .svc-out { display: block; } }
+    .svc-out .l { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); }
+    .svc-out .v { margin-top: 4px; font-size: 14px; font-weight: 500; }
+    .svc-arrow { display: none; height: 48px; width: 48px; border-radius: 50%; border: 1px solid var(--border); align-items: center; justify-content: center; transition: all .3s ease; }
+    @media (min-width: 768px) { .svc-arrow { display: inline-flex; } }
+    .svc-row:hover .svc-arrow { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+    .svc-arrow svg { width: 16px; height: 16px; transition: transform .25s ease; }
+    .svc-row:hover .svc-arrow svg { transform: rotate(45deg); }
+
+    /* Hover image preview */
+    .reveal-stage { position: fixed; z-index: 35; transform: translate(-50%, -50%); width: clamp(220px, 26vw, 380px); aspect-ratio: 4/5; border-radius: 18px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .reveal-stage.show { opacity: 1; }
+    .reveal-stage .stamp { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 56px; color: rgba(0,0,0,.7); }
+    [data-theme="dark"] .reveal-stage .stamp { color: rgba(255,255,255,.8); }
+    .reveal-stage .meta { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.7); backdrop-filter: blur(6px); font-size: 11px; }
+    [data-theme="dark"] .reveal-stage .meta { border-color: rgba(255,255,255,.15); background: rgba(0,0,0,.55); }
+
+    /* Featured cases */
+    .case { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .case + .case { border-top: 0; }
+    .case-grid { display: grid; gap: 32px; padding: 64px 0; }
+    @media (min-width: 768px) { .case-grid { padding: 96px 0; grid-template-columns: repeat(12, 1fr); gap: 48px; } }
+    .case-grid > .cover { grid-column: span 12; }
+    .case-grid > .story { grid-column: span 12; }
+    @media (min-width: 768px) { .case-grid > .cover { grid-column: span 6; } .case-grid > .story { grid-column: span 6; } }
+    .case.reverse .case-grid > .cover { order: 2; }
+    .case-cover { position: relative; aspect-ratio: 4/5; border-radius: 22px; overflow: hidden; }
+    .case-cover .stamp { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; font-family: 'Instrument Serif', serif; font-style: italic; line-height: .95; color: rgba(0,0,0,.8); font-size: clamp(48px, 6vw, 96px); }
+    [data-theme="dark"] .case-cover .stamp { color: rgba(255,255,255,.85); }
+    .case-cover .tag { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.75); font-size: 11px; backdrop-filter: blur(6px); }
+    [data-theme="dark"] .case-cover .tag { border-color: rgba(255,255,255,.18); background: rgba(0,0,0,.5); color: rgba(255,255,255,.85); }
+    .case-cover .metrics { position: absolute; left: 16px; right: 16px; bottom: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .case-cover .metric { padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,.1); background: rgba(255,255,255,.85); backdrop-filter: blur(6px); }
+    [data-theme="dark"] .case-cover .metric { border-color: rgba(255,255,255,.18); background: rgba(0,0,0,.55); color: rgba(255,255,255,.92); }
+    .case-cover .metric .m { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+    .case-cover .metric .l { font-size: 9.5px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted-fg); }
+    .case-client { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); }
+    .case-h { margin: 12px 0 0; font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+    .case-steps { margin: 32px 0 0; display: grid; gap: 20px; padding-top: 24px; border-top: 1px solid var(--border); }
+    @media (min-width: 768px) { .case-steps { grid-template-columns: repeat(3, 1fr); } }
+    .case-steps dt { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-fg); margin: 0; }
+    .case-steps dd { margin: 8px 0 0; font-size: 14px; line-height: 1.55; }
+    .case-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 32px; font-size: 14px; font-weight: 500; }
+    .case-link .arrow { display: inline-flex; height: 36px; width: 36px; border-radius: 50%; border: 1px solid var(--border); align-items: center; justify-content: center; transition: all .25s ease; }
+    .case-link:hover .arrow { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+    .case-link:hover .arrow svg { transform: rotate(45deg); }
+    .case-link .arrow svg { width: 14px; height: 14px; transition: transform .25s ease; }
+
+    /* Metrics block */
+    .metrics-section { background: var(--fg); color: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .metrics-section .container { padding-top: 80px; padding-bottom: 80px; }
+    @media (min-width: 768px) { .metrics-section .container { padding-top: 96px; padding-bottom: 96px; } }
+    .metrics-section .eyebrow { color: rgba(255,255,255,.55); }
+    .metrics-h { font-weight: 600; line-height: 1.1; letter-spacing: -.02em; text-wrap: balance; }
+    .metrics-h .accent { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--t-300); }
+    .metric-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.12); }
+    .metric-cell { background: var(--fg); padding: 24px; }
+    @media (min-width: 768px) { .metric-cell { padding: 32px; } }
+    .metric-cell .m { font-weight: 600; letter-spacing: -.04em; line-height: 0.92; }
+    .metric-cell .l { margin-top: 8px; font-size: 13px; color: rgba(255,255,255,.7); }
 
     /* Process */
-    .process-grid { display: grid; gap: 14px; margin-top: 40px; grid-template-columns: 1fr; }
-    @media (min-width: 768px) { .process-grid { margin-top: 48px; grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-    .process-card { padding: 22px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card); }
-    @media (min-width: 768px) { .process-card { padding: 24px; } }
-    .process-row { display: flex; align-items: center; justify-content: space-between; }
-    .process-card h3 { margin: 18px 0 0; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; }
-    .process-card p { margin: 6px 0 0; font-size: 14px; color: var(--muted-fg); line-height: 1.55; }
+    .process { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .process-grid { display: grid; gap: 1px; margin-top: 56px; border-radius: 22px; overflow: hidden; background: var(--border); border: 1px solid var(--border); }
+    @media (min-width: 768px) { .process-grid { margin-top: 80px; grid-template-columns: repeat(3, 1fr); } }
+    .process-cell { background: var(--bg); padding: 28px; }
+    @media (min-width: 768px) { .process-cell { padding: 40px; } }
+    .process-cell .row { display: flex; align-items: baseline; justify-content: space-between; }
+    .process-cell .num { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted-fg); }
+    .process-cell .dur { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted-fg); }
+    .process-cell h3 { margin: 24px 0 0; font-size: clamp(1.4rem, 1.2rem + .8vw, 1.7rem); font-weight: 600; letter-spacing: -.02em; }
+    .process-cell p { margin: 12px 0 0; color: var(--muted-fg); line-height: 1.6; font-size: 14.5px; }
 
     /* Testimonials */
-    .quotes-section { border-top: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 35%, var(--bg)); }
-    .quotes { display: grid; gap: 16px; margin-top: 40px; grid-template-columns: 1fr; }
-    @media (min-width: 768px) { .quotes { margin-top: 48px; grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-    .quote {
-      position: relative; padding: 22px; border: 1px solid var(--border); border-radius: var(--radius-lg);
-      background: var(--card); display: flex; flex-direction: column; justify-content: space-between;
-    }
-    @media (min-width: 768px) { .quote { padding: 24px; } }
-    .quote .q-mark { color: rgba(20,184,166,0.6); width: 22px; height: 22px; }
-    .quote blockquote { margin: 16px 0 0; font-size: 15.5px; line-height: 1.6; }
-    .quote figcaption { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border); }
-    .quote .name { font-weight: 600; font-size: 14px; }
+    .quotes { display: grid; gap: 24px; margin-top: 56px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .quotes { margin-top: 80px; grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+    .quote { padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-direction: column; }
+    .quote .qm { font-family: 'Instrument Serif', serif; font-size: 56px; line-height: 1; color: rgba(20,184,166,.55); }
+    .quote blockquote { margin: 16px 0 0; font-size: clamp(1.05rem, .95rem + .5vw, 1.25rem); font-weight: 500; line-height: 1.4; }
+    .quote figcaption { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+    .quote .name { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
     .quote .role { font-size: 12px; color: var(--muted-fg); margin-top: 2px; }
+    .quote .ix { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted-fg); }
+
+    /* Global */
+    .globe-grid { display: grid; gap: 1px; border-radius: 22px; overflow: hidden; background: var(--border); border: 1px solid var(--border); grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 768px) { .globe-grid { grid-template-columns: repeat(3, 1fr); } }
+    .globe-cell { background: var(--bg); padding: 24px; }
+    @media (min-width: 768px) { .globe-cell { padding: 28px; } }
+    .globe-cell .row { display: flex; align-items: center; gap: 8px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted-fg); }
+    .globe-cell .row .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--t-500); }
+    .globe-cell .city { margin-top: 12px; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); font-weight: 500; letter-spacing: -.02em; }
+    .globe-cell .note { margin-top: 4px; font-size: 12px; color: var(--muted-fg); }
+    .caps { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .cap { padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted-fg); }
 
     /* Final CTA */
-    .final-cta-wrap { padding: 56px 0; }
-    @media (min-width: 768px) { .final-cta-wrap { padding: 72px 0; } }
-    .final-cta {
-      position: relative; overflow: hidden; padding: 36px 28px;
-      border-radius: 26px; color: #fff;
-      background: linear-gradient(135deg, var(--teal-600), var(--teal-700) 50%, var(--teal-900));
-      border: 1px solid rgba(20,184,166,0.2);
-      box-shadow: var(--shadow-xl);
-    }
-    @media (min-width: 768px) { .final-cta { padding: 56px; } }
-    .final-cta::before { content: ""; position: absolute; right: -80px; top: -80px; width: 256px; height: 256px; border-radius: 50%; background: rgba(94,234,212,0.2); filter: blur(60px); }
-    .final-cta::after { content: ""; position: absolute; left: -40px; bottom: -128px; width: 288px; height: 288px; border-radius: 50%; background: rgba(34,211,238,0.2); filter: blur(60px); }
-    .final-cta-grid { position: relative; display: grid; gap: 24px; }
-    @media (min-width: 768px) { .final-cta-grid { grid-template-columns: 8fr 4fr; align-items: end; gap: 32px; } }
-    .final-cta .eyebrow { color: rgba(204,251,241,0.85); }
-    .final-cta h2 { margin: 12px 0 0; font-size: clamp(28px, 5vw, 56px); font-weight: 600; line-height: 1.05; letter-spacing: -0.025em; text-wrap: balance; }
-    .final-cta p { margin: 12px 0 0; max-width: 540px; color: rgba(204,251,241,0.92); line-height: 1.6; font-size: 15px; }
-    .final-cta-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
-    @media (min-width: 768px) { .final-cta-actions { justify-content: flex-end; } }
+    .final { background: var(--fg); color: var(--bg); }
+    .final .container { padding-top: 96px; padding-bottom: 96px; }
+    @media (min-width: 768px) { .final .container { padding-top: 128px; padding-bottom: 128px; } }
+    .final .eyebrow { color: rgba(255,255,255,.55); }
+    .final-h { font-weight: 600; letter-spacing: -.04em; line-height: .92; }
+    .final-h .accent { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--t-300); }
+    .final-actions { display: flex; flex-direction: column; gap: 12px; }
+    .final-btn { display: inline-flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 24px; border-radius: 999px; font-size: 15px; font-weight: 500; transition: transform .2s ease; }
+    .final-btn.primary { background: var(--bg); color: var(--fg); }
+    .final-btn.primary:hover { transform: translateY(-2px); }
+    .final-btn.outline { border: 1px solid rgba(255,255,255,.2); color: var(--bg); }
+    .final-btn.outline:hover { background: rgba(255,255,255,.06); }
+    .final-btn .pill { display: inline-flex; align-items: center; justify-content: center; height: 36px; width: 36px; border-radius: 50%; }
+    .final-btn.primary .pill { background: var(--fg); color: var(--bg); }
+    .final-btn.outline .pill { border: 1px solid rgba(255,255,255,.3); }
+    .final-btn .pill svg { width: 14px; height: 14px; transition: transform .2s ease; }
+    .final-btn:hover .pill svg { transform: rotate(45deg); }
+    .final-strip { margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.15); display: grid; gap: 16px; grid-template-columns: 1fr 1fr; font-size: 14px; }
+    @media (min-width: 768px) { .final-strip { margin-top: 96px; grid-template-columns: repeat(4, 1fr); } }
+    .final-strip .l { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    .final-strip .v { margin-top: 4px; }
 
     /* Footer */
-    footer.site { border-top: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 35%, var(--bg)); }
+    footer.site { background: var(--bg); border-top: 1px solid var(--border); }
     .footer-grid { display: grid; gap: 36px; padding: 48px 0; grid-template-columns: 1fr; }
     @media (min-width: 768px) { .footer-grid { padding: 56px 0; gap: 40px; grid-template-columns: 5fr 3fr 3fr 1fr; } }
     .footer-grid h4 { margin: 0 0 14px; font-size: 13.5px; font-weight: 600; }
@@ -370,56 +361,39 @@
     .footer-grid a:hover { color: var(--fg); }
     .footer-meta { font-size: 13.5px; color: var(--muted-fg); margin-top: 18px; display: flex; flex-direction: column; gap: 7px; }
     .footer-meta span { display: inline-flex; align-items: center; gap: 8px; }
-    .footer-meta svg { color: var(--teal-500); width: 15px; height: 15px; flex-shrink: 0; }
+    .footer-meta svg { color: var(--t-500); width: 15px; height: 15px; flex-shrink: 0; }
     .footer-socials { display: flex; gap: 10px; }
-    .footer-socials a {
-      display: inline-flex; align-items: center; justify-content: center; height: 36px; width: 36px;
-      border-radius: 999px; border: 1px solid var(--border); color: var(--muted-fg);
-    }
-    .footer-socials a:hover { border-color: var(--teal-500); color: var(--teal-600); }
+    .footer-socials a { display: inline-flex; align-items: center; justify-content: center; height: 36px; width: 36px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted-fg); }
+    .footer-socials a:hover { border-color: var(--t-500); color: var(--t-600); }
     .footer-bottom { border-top: 1px solid var(--border); }
     .footer-bottom .container { display: flex; justify-content: space-between; gap: 8px; padding: 18px 20px; flex-direction: column; font-size: 12px; color: var(--muted-fg); }
-    @media (min-width: 768px) { .footer-bottom .container { flex-direction: row; align-items: center; padding: 22px 24px; } }
+    @media (min-width: 768px) { .footer-bottom .container { flex-direction: row; align-items: center; padding: 22px 32px; } }
 
     /* Floating CTA */
-    .float-cta {
-      position: fixed; right: 16px; bottom: 16px; z-index: 40;
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 16px; border-radius: 999px;
-      background: var(--teal-600); color: #fff; font-size: 14px; font-weight: 500;
-      box-shadow: 0 18px 40px -12px rgba(13,148,136,0.7);
-      opacity: 0; transform: translateY(24px) scale(.9); pointer-events: none;
-      transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.2,1);
-    }
+    .float-cta { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 999px; background: var(--fg); color: var(--bg); font-size: 14px; font-weight: 500; box-shadow: 0 18px 40px -12px rgba(0,0,0,.4); opacity: 0; transform: translateY(24px) scale(.9); pointer-events: none; transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.2,1); }
     @media (min-width: 768px) { .float-cta { right: 24px; bottom: 24px; padding: 12px 18px; } }
     .float-cta.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
     .float-cta:hover { transform: translateY(-2px) scale(1.02); }
-    .float-cta .ring {
-      position: relative; height: 26px; width: 26px; border-radius: 50%;
-      background: rgba(255,255,255,0.18); display: inline-flex; align-items: center; justify-content: center;
-    }
+    .float-cta .ring { position: relative; height: 26px; width: 26px; border-radius: 50%; background: rgba(255,255,255,.12); display: inline-flex; align-items: center; justify-content: center; }
     .float-cta .ring svg { width: 13px; height: 13px; }
-    .float-cta .ring::after {
-      content: ""; position: absolute; inset: 0; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.4);
-      animation: pulseRing 2s ease-out infinite;
-    }
-    @keyframes pulseRing { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(1.6); opacity: 0; } }
+    .float-cta .ring::after { content:""; position: absolute; inset:0; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); animation: pulseRing 2s ease-out infinite; }
+    @keyframes pulseRing { 0% { transform: scale(1); opacity:.6; } 100% { transform: scale(1.6); opacity: 0; } }
     @media (max-width: 480px) { .float-cta .label-full { display: none; } }
     @media (min-width: 481px) { .float-cta .label-short { display: none; } }
 
     /* Reveal */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
     @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-      .hero-mark-inner svg { animation: none; }
-      .float-cta .ring::after { animation: none; }
+      .hero-marquee-track, .trust-track, .float-cta .ring::after, .pulse-dot, .hero-headline .line > span { animation: none !important; }
+      .hero-headline .line > span { transform: none !important; }
     }
   </style>
 </head>
 <body>
+
+<span class="scroll-progress" id="scrollProgress" aria-hidden="true"></span>
 
 <!-- NAV -->
 <header class="nav" id="nav">
@@ -437,18 +411,18 @@
       </span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#top" class="active">Home</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#top" class="active"><span class="num">01</span>Home</a>
+      <a href="#services"><span class="num">02</span>Services</a>
+      <a href="#work"><span class="num">03</span>Work</a>
+      <a href="#about"><span class="num">04</span>About</a>
+      <a href="#contact"><span class="num">05</span>Contact</a>
     </nav>
     <div class="nav-actions">
       <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
         <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a class="btn btn-primary btn-sm nav-cta" href="#contact">Book Call
+      <a class="nav-cta" href="#contact">Book Call
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
       </a>
       <button id="menuBtn" class="icon-btn menu-btn" aria-label="Toggle menu" aria-expanded="false">
@@ -458,12 +432,14 @@
   </div>
   <div id="mobileMenu" class="mobile-menu" hidden>
     <div class="container">
-      <a href="#top">Home</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a class="btn btn-primary" style="margin-top:8px" href="#contact">Book a Free Strategy Call</a>
+      <a href="#top"><span>Home</span><span class="num">01</span></a>
+      <a href="#services"><span>Services</span><span class="num">02</span></a>
+      <a href="#work"><span>Work</span><span class="num">03</span></a>
+      <a href="#about"><span>About</span><span class="num">04</span></a>
+      <a href="#contact"><span>Contact</span><span class="num">05</span></a>
+      <a class="cta" href="#contact">Book a Free Strategy Call
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+      </a>
     </div>
   </div>
 </header>
@@ -473,129 +449,238 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-grain" aria-hidden="true"></div>
-    <div class="container hero-grid">
-      <div>
-        <span class="pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 14.39 8.26 21 9.27l-4.78 4.66L17.45 21 12 17.77 6.55 21l1.23-7.07L3 9.27l6.61-1.01L12 2z"/></svg>
-          Branding · Web · Performance · PR
-        </span>
-        <h1 class="hero-title">
-          We turn brands into <span class="serif accent">growth engines.</span>
-        </h1>
-        <p class="hero-sub">
-          Branding, websites, and performance marketing — built to win attention, earn trust, and drive measurable revenue.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#contact">
-            Book a Free Strategy Call
+    <div class="container" style="padding-top: 56px; padding-bottom: 64px;">
+      <div class="hero-eyebrow-row">
+        <span><span class="pulse-dot"></span> Index 001 / The Studio</span>
+        <span class="hide-mobile" style="display:none">26.92° N · 75.78° E · Jaipur — Worldwide</span>
+      </div>
+
+      <h1 class="hero-headline display-tight t-display">
+        <span class="line"><span>We don&rsquo;t build</span></span>
+        <span class="line"><span><span class="muted">websites.</span>
+          <span class="hero-mark-inline" aria-hidden="true">
+            <svg viewBox="0 0 200 240">
+              <defs>
+                <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#5eead4"/>
+                  <stop offset="100%" stop-color="#0d9488"/>
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="40" r="22" fill="url(#hg)"/>
+              <rect x="80" y="78" width="40" height="140" rx="6" fill="url(#hg)"/>
+            </svg>
+          </span>
+          We build</span></span>
+        <span class="line"><span><span class="serif accent">growth engines</span>.</span></span>
+      </h1>
+
+      <div class="hero-meta">
+        <p class="t-base">A creative &amp; digital growth partner for ambitious brands — trusted by founders across India, the GCC, and beyond. Strategy, design, and performance, run as one engine.</p>
+        <div></div>
+        <div class="hero-cta-stack">
+          <a class="btn-cta primary" href="#contact">Book a Strategy Call
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
           </a>
-          <a class="btn btn-outline btn-lg" href="#work">View our work</a>
+          <a class="btn-cta outline" href="#work">See the work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </a>
         </div>
-        <ul class="hero-trust">
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 4.6 on Google</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2zM9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> 60+ brands scaled</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Replies in 4 hrs</li>
-        </ul>
       </div>
-      <div class="hero-mark" aria-hidden="true">
-        <div class="hero-mark-inner">
-          <svg viewBox="0 0 200 240">
-            <defs>
-              <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#5eead4"/>
-                <stop offset="100%" stop-color="#0d9488"/>
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="40" r="22" fill="url(#tealGrad)"/>
-            <rect x="80" y="78" width="40" height="140" rx="6" fill="url(#tealGrad)"/>
-          </svg>
-        </div>
-        <div class="hero-mark-foot">
-          <span class="mono" style="text-transform:uppercase; letter-spacing: .15em;">Mark · 2025</span>
-          <span class="accent">energize your brand</span>
-        </div>
+
+      <div class="hero-marquee">
+        <div class="hero-marquee-track t-3xl" id="heroMarquee"></div>
+      </div>
+
+      <div class="hero-foot">
+        <div><div class="l">Est.</div><div class="v">2016 · Jaipur</div></div>
+        <div><div class="l">Brands shipped</div><div class="v">60+</div></div>
+        <div><div class="l">Avg. response</div><div class="v">&lt; 4 working hrs</div></div>
+        <div><div class="l">Rating</div><div class="v">4.6 ★ on Google</div></div>
       </div>
     </div>
   </section>
 
   <!-- TRUST STRIP -->
-  <section class="strip">
-    <p class="strip-label">Trusted by founders &amp; teams across India</p>
-    <div class="marquee">
-      <div class="marquee-track" id="marqueeTrack"></div>
+  <section class="trust">
+    <div class="trust-overflow">
+      <div class="trust-track" id="trustTrack"></div>
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="container" style="padding-top:96px; padding-bottom:96px; position:relative; z-index:1;">
+      <div class="block-grid">
+        <div class="col-3">
+          <p class="eyebrow">002 — The Studio</p>
+          <p class="mono" style="margin-top:20px; font-size:12px; color:var(--muted-fg);">Why we exist</p>
+        </div>
+        <div class="col-9">
+          <p class="manifesto-headline t-3xl reveal">
+            Most agencies sell <span class="serif" style="color:var(--muted-fg)">deliverables.</span> We sell <span style="color:var(--t-600)">outcomes</span> — branding, websites, and performance built as a single engine that compounds in a quarter, not a year.
+          </p>
+          <div class="manifesto-pillars">
+            <div class="pillar reveal">
+              <div class="pillar-row"><span class="num">01</span><span class="lab">The problem</span></div>
+              <p>Brands are stuck stitching three vendors who don&rsquo;t talk. The brand looks fine, the site is dated, the ads burn cash.</p>
+            </div>
+            <div class="pillar reveal">
+              <div class="pillar-row"><span class="num">02</span><span class="lab">Our insight</span></div>
+              <p>Growth happens when positioning, product surface, and acquisition are built by one team — measured against the same number.</p>
+            </div>
+            <div class="pillar reveal">
+              <div class="pillar-row"><span class="num">03</span><span class="lab">The solution</span></div>
+              <p>A small senior crew that owns brand, web, and performance end-to-end. Weekly dashboards. Monthly compounding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="manifesto-bg t-display" id="manifestoBg" aria-hidden="true">Strategy · Design · Engineering · Performance · Strategy · Design · Engineering · Performance</div>
+  </section>
+
+  <!-- SERVICES (Editorial list) -->
   <section class="block" id="services">
     <div class="container">
-      <div class="block-head reveal">
-        <div>
-          <span class="eyebrow">What we do</span>
-          <h2 class="block-title">Five focused offerings. <span class="serif" style="color:var(--muted-fg)">Zero fluff.</span></h2>
+      <div class="block-grid">
+        <div class="col-3"><p class="eyebrow">003 — Capabilities</p></div>
+        <div class="col-9">
+          <h2 class="t-5xl display-tight" style="font-weight:600; margin:0;">
+            Five disciplines. <span class="serif" style="color:var(--muted-fg)">One growth system.</span>
+          </h2>
         </div>
-        <p class="block-sub">We don&rsquo;t sell 30 disconnected services. We design integrated systems that help brands grow faster and smarter.</p>
       </div>
-      <div class="services-grid" id="servicesGrid"></div>
+      <ol class="svc-list" id="svcList"></ol>
     </div>
+    <div class="reveal-stage" id="revealStage" aria-hidden="true"></div>
   </section>
 
-  <!-- CASE STUDIES -->
-  <section class="block work-section" id="work">
-    <div class="container">
-      <div class="block-head reveal">
-        <div>
-          <span class="eyebrow">Selected work</span>
-          <h2 class="block-title">Work that <span class="serif">delivers results.</span></h2>
+  <!-- FEATURED CASES -->
+  <section id="work">
+    <div class="container" style="padding-top: 64px; padding-bottom: 32px;">
+      <div class="block-grid">
+        <div class="col-3"><p class="eyebrow">004 — Selected work</p></div>
+        <div class="col-7">
+          <h2 class="t-5xl display-tight" style="font-weight:600; margin:0;">
+            Cases, not a <span class="serif" style="color:var(--muted-fg)">gallery.</span>
+          </h2>
         </div>
-        <a class="btn btn-outline" href="#contact">View all
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
-        </a>
       </div>
-      <div class="work-grid" id="workGrid"></div>
+    </div>
+    <div id="caseList"></div>
+  </section>
+
+  <!-- METRICS -->
+  <section class="metrics-section">
+    <div class="container">
+      <div class="block-grid">
+        <div class="col-4">
+          <p class="eyebrow">005 — Trust</p>
+          <h2 class="metrics-h t-3xl" style="margin-top:20px;">
+            Numbers, signed off by the <span class="accent">people who paid</span> for them.
+          </h2>
+        </div>
+        <div class="col-8">
+          <div class="metric-grid">
+            <div class="metric-cell"><div class="m t-4xl">60+</div><div class="l">brands shipped since 2016</div></div>
+            <div class="metric-cell"><div class="m t-4xl">9 yrs</div><div class="l">in business — and counting</div></div>
+            <div class="metric-cell"><div class="m t-4xl">12+</div><div class="l">tier-1 features earned</div></div>
+            <div class="metric-cell"><div class="m t-4xl">4.6★</div><div class="l">client rating · 11 reviews</div></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- PROCESS -->
-  <section class="block" id="about">
-    <div class="container">
-      <div class="reveal" style="max-width: 640px;">
-        <span class="eyebrow">How we work</span>
-        <h2 class="block-title">Simple. Focused. <span class="serif">Effective.</span></h2>
+  <section class="process" id="about">
+    <div class="container" style="padding-top:96px; padding-bottom:96px;">
+      <div class="block-grid">
+        <div class="col-3"><p class="eyebrow">How we work</p></div>
+        <div class="col-9">
+          <h2 class="t-5xl display-tight" style="font-weight:600; margin:0;">
+            A loop, not a <span class="serif" style="color:var(--muted-fg)">deck.</span>
+          </h2>
+        </div>
       </div>
-      <div class="process-grid" id="processGrid"></div>
+      <ol class="process-grid">
+        <li class="process-cell">
+          <div class="row"><span class="num">Step 01</span><span class="dur">Week 1–2</span></div>
+          <h3>Understand.</h3>
+          <p>We audit positioning, product surface, and acquisition. You get a sharp diagnosis — gaps, opportunities, and the one bet that compounds fastest.</p>
+        </li>
+        <li class="process-cell">
+          <div class="row"><span class="num">Step 02</span><span class="dur">Week 3–8</span></div>
+          <h3>Build.</h3>
+          <p>Brand, web, and campaigns built in parallel by one senior team. Weekly demo, one shared roadmap, no agency-stitching.</p>
+        </li>
+        <li class="process-cell">
+          <div class="row"><span class="num">Step 03</span><span class="dur">Ongoing</span></div>
+          <h3>Scale.</h3>
+          <p>Monthly compounding. Performance dashboards, sprint cadence, and a retainer that earns its keep against the same metric every month.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="block quotes-section">
+  <section class="block">
     <div class="container">
-      <div class="reveal" style="max-width: 640px;">
-        <span class="eyebrow">What clients say</span>
-        <h2 class="block-title">Measured by what our clients <span class="serif">ship next.</span></h2>
+      <div class="block-grid">
+        <div class="col-3"><p class="eyebrow">What founders say</p></div>
+        <div class="col-9">
+          <h2 class="t-5xl display-tight" style="font-weight:600; margin:0;">
+            Measured by what our clients <span class="serif" style="color:var(--muted-fg)">ship next.</span>
+          </h2>
+        </div>
       </div>
-      <div class="quotes" id="quotesGrid"></div>
+      <div class="quotes" id="quotesList"></div>
+    </div>
+  </section>
+
+  <!-- GLOBAL REACH -->
+  <section class="block" style="padding-top:0;">
+    <div class="container">
+      <div class="block-grid">
+        <div class="col-5">
+          <p class="eyebrow">006 — Reach</p>
+          <h2 class="t-4xl display-tight" style="font-weight:600; margin-top:20px;">
+            A studio in Jaipur. <span class="serif" style="color:var(--muted-fg)">Brands across continents.</span>
+          </h2>
+          <p style="margin-top:24px; max-width:480px; color:var(--muted-fg); line-height:1.6;">We work with founders building from India and beyond — across edtech, fintech, D2C, healthcare, and B2B SaaS. Async by default, senior on every call.</p>
+        </div>
+        <div class="col-7">
+          <div class="globe-grid" id="globeGrid"></div>
+          <div class="caps" id="capsList"></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="final-cta-wrap" id="contact">
+  <section class="final" id="contact">
     <div class="container">
-      <div class="final-cta reveal">
-        <div class="final-cta-grid">
-          <div>
-            <span class="eyebrow">Ready when you are</span>
-            <h2>Ready to <span class="serif">grow your brand?</span></h2>
-            <p>Book a free strategy call and walk away with actionable insights — whether we work together or not.</p>
-          </div>
-          <div class="final-cta-actions">
-            <a class="btn btn-white btn-lg" href="mailto:hello@ingenioushub.com">
-              Book a Free Strategy Call
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
+      <div class="block-grid">
+        <div class="col-7">
+          <p class="eyebrow">007 — Let&rsquo;s build</p>
+          <h2 class="final-h t-display" style="margin-top:24px;">Ready to <span class="accent">grow</span> your brand?</h2>
+          <p style="margin-top:24px; max-width:560px; color:rgba(255,255,255,.78); line-height:1.6; font-size:17px;">
+            Book a 60-min strategy call. Free, no-deck. You&rsquo;ll walk away with two or three things to fix this week — whether or not we work together.
+          </p>
+        </div>
+        <div class="col-5" style="display:flex; align-items:flex-end; justify-content:flex-end;">
+          <div class="final-actions" style="width:100%; max-width:420px;">
+            <a class="final-btn primary" href="mailto:hello@ingenioushub.com">Book a Strategy Call <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span></a>
+            <a class="final-btn outline" href="https://wa.me/919999999999?text=Hi%20Ingenious%20Hub%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noreferrer">WhatsApp the studio <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span></a>
+            <a href="mailto:hello@ingenioushub.com" style="margin-top:6px; font-size:13px; color:rgba(255,255,255,.6); display:inline-flex; align-items:center; gap:8px;"><span class="mono">→</span> hello@ingenioushub.com</a>
           </div>
         </div>
+      </div>
+      <div class="final-strip">
+        <div><div class="l">Studio</div><div class="v">2-TA-8, Sector 2, Jawahar Nagar, Jaipur</div></div>
+        <div><div class="l">Hours</div><div class="v">Mon–Sat · 10am – 7pm IST</div></div>
+        <div><div class="l">Phone</div><div class="v">+91 99999 99999</div></div>
+        <div><div class="l">Reply window</div><div class="v">&lt; 4 working hours</div></div>
       </div>
     </div>
   </section>
@@ -620,7 +705,7 @@
           </span>
         </a>
         <p style="margin: 16px 0 0; max-width: 360px; font-size: 14px; color: var(--muted-fg); line-height: 1.55;">
-          A Jaipur-based branding and growth studio. Strategy, design, and marketing — one cohesive system.
+          A creative & digital growth partner for ambitious brands. Strategy, design, and performance — built as one engine.
         </p>
         <div class="footer-meta">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 2-TA-8, Sector 2, Jawahar Nagar, Jaipur 302004</span>
@@ -658,7 +743,7 @@
   <div class="footer-bottom">
     <div class="container">
       <p>© <span id="year"></span> Ingenious Hub Enterprise (P) Ltd. All rights reserved.</p>
-      <p class="serif" style="color: var(--fg); opacity:.8;">Building brands that perform.</p>
+      <p class="serif" style="opacity:.8;">Building brands that perform.</p>
     </div>
   </div>
 </footer>
@@ -667,183 +752,223 @@
   <span class="ring">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
   </span>
-  <span class="label-full">Book a Free Strategy Call</span>
+  <span class="label-full">Book a Strategy Call</span>
   <span class="label-short">Book Call</span>
 </a>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Theme toggle
+  // THEME
   (function () {
     const root = document.documentElement;
     const saved = localStorage.getItem('ih-theme');
     const initial = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     root.setAttribute('data-theme', initial);
-    syncIcons();
+    sync();
     document.getElementById('themeToggle').addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       localStorage.setItem('ih-theme', next);
-      syncIcons();
+      sync();
     });
-    function syncIcons() {
+    function sync() {
       const dark = root.getAttribute('data-theme') === 'dark';
       document.getElementById('iconSun').style.display = dark ? 'none' : 'block';
       document.getElementById('iconMoon').style.display = dark ? 'block' : 'none';
     }
   })();
 
-  // Sticky nav blur + floating CTA
+  // NAV scroll + progress + floating CTA
   const nav = document.getElementById('nav');
+  const sp = document.getElementById('scrollProgress');
   const onScroll = () => {
+    const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const p = max > 0 ? (window.scrollY / max) * 100 : 0;
+    sp.style.setProperty('--p', p + '%');
     nav.classList.toggle('scrolled', window.scrollY > 12);
-    document.getElementById('floatCta').classList.toggle('show', window.scrollY > 600);
+    document.getElementById('floatCta').classList.toggle('show', window.scrollY > 700);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Mobile menu
+  // MOBILE MENU
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   menuBtn.addEventListener('click', () => {
     const open = mobileMenu.classList.toggle('open');
     mobileMenu.hidden = !open;
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
   });
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    mobileMenu.classList.remove('open'); mobileMenu.hidden = true; menuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open'); mobileMenu.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }));
 
-  // Marquee content
+  // HERO MARQUEE
+  const WORDS = ['Brand', 'Story', 'System', 'Engine', 'Outcome'];
+  const heroMarquee = document.getElementById('heroMarquee');
+  heroMarquee.innerHTML = Array.from({ length: 4 }, () => WORDS.map(w =>
+    `<span>${w} <span class="serif" style="color:var(--t-600)">energized</span></span>`
+  ).join('')).join('');
+
+  // TRUST MARQUEE
   const CLIENTS = ["Allegiance Education","A2Z Smart Spaces","Tax2Win","Yug Vaastra","Unlock Career","DNS Pointers","CRM Pointers","Basta","Jaipur Health Festival","WooCom Pro"];
-  const marquee = document.getElementById('marqueeTrack');
-  marquee.innerHTML = [...CLIENTS, ...CLIENTS].map(c => `<span>${c}</span>`).join('');
+  document.getElementById('trustTrack').innerHTML = [...CLIENTS, ...CLIENTS].map(c =>
+    `<span>${c}<span style="opacity:.4">✦</span></span>`
+  ).join('');
 
-  // Icons
-  const ICON = {
-    sparkles: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.4L12 15l-1.9-4.6L5.5 9l4.6-1.4L12 3z"/><path d="M19 14l.7 1.6L21.5 16l-1.8.4L19 18l-.7-1.6L16.5 16l1.8-.4L19 14z"/><path d="M5 16l.5 1.2L7 17.6l-1.5.4L5 19.4l-.5-1.4L3 17.6l1.5-.4L5 16z"/></svg>',
-    monitor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-    trending: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
-    pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>',
-    mega: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
-    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-    hammer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>',
-    trendUp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
-    quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 7H5a2 2 0 0 0-2 2v6h6V9H6c0-1.1.9-2 2-2V5a4 4 0 0 0-4 4v8h6v-6H9V7zm10 0h-4a2 2 0 0 0-2 2v6h6V9h-3c0-1.1.9-2 2-2V5a4 4 0 0 0-4 4v8h6v-6h-1V7z"/></svg>',
-  };
-
-  // Services
+  // SERVICES
   const SERVICES = [
-    { id:'branding', icon:'sparkles', title:'Branding & Identity', tagline:'Build a brand people remember — and trust enough to choose.', includes:['Logo','Visual Identity','Brand Strategy'], outcome:'Strong positioning + premium perception' },
-    { id:'web', icon:'monitor', title:'Website & UI/UX', tagline:'Websites designed to convert, not just impress.', includes:['UI/UX','Web Design','Development'], outcome:'Higher engagement + better conversion' },
-    { id:'performance', icon:'trending', title:'Performance Marketing', tagline:'Turn attention into predictable growth.', includes:['SEO','Paid Ads','Lead Generation'], outcome:'Consistent inbound pipeline' },
-    { id:'creative', icon:'pen', title:'Creative & Content', tagline:'Content that actually drives action.', includes:['Social Media','Creatives','Campaigns'], outcome:'Higher reach + stronger recall' },
-    { id:'pr', icon:'mega', title:'PR & Growth', tagline:'Build authority where it matters.', includes:['PR','Founder Branding'], outcome:'Credibility + visibility' },
+    { id:'branding', title:'Branding & Identity', tagline:'Build a brand people remember — and trust enough to choose.', outcome:'Strong positioning + premium perception', accent:'linear-gradient(135deg, rgba(252,211,77,.55), rgba(20,184,166,.4))' },
+    { id:'web', title:'Website & UI/UX', tagline:'Websites designed to convert, not just impress.', outcome:'Higher engagement + better conversion', accent:'linear-gradient(135deg, rgba(125,211,252,.55), rgba(20,184,166,.4))' },
+    { id:'performance', title:'Performance Marketing', tagline:'Turn attention into predictable growth.', outcome:'Consistent inbound pipeline', accent:'linear-gradient(135deg, rgba(110,231,183,.55), rgba(20,184,166,.4))' },
+    { id:'creative', title:'Creative & Content', tagline:'Content that actually drives action.', outcome:'Higher reach + stronger recall', accent:'linear-gradient(135deg, rgba(251,113,133,.5), rgba(20,184,166,.4))' },
+    { id:'pr', title:'PR & Growth', tagline:'Build authority where it matters.', outcome:'Credibility + visibility', accent:'linear-gradient(135deg, rgba(196,181,253,.55), rgba(20,184,166,.4))' },
   ];
-
-  document.getElementById('servicesGrid').innerHTML = SERVICES.map((s, i) => `
-    <a class="service-card reveal" href="#${s.id}" style="transition-delay:${i * 40}ms">
-      <div>
-        <div class="service-row">
-          <span class="service-icon">${ICON[s.icon]}</span>
-          <span class="mono service-num">0${i+1}</span>
+  const svcList = document.getElementById('svcList');
+  svcList.innerHTML = SERVICES.map((s, i) => `
+    <li class="reveal" data-idx="${i}">
+      <a class="svc-row" href="#${s.id}">
+        <span class="idx">${String(i+1).padStart(2,'0')}</span>
+        <div>
+          <div class="svc-title t-4xl">${s.title}</div>
+          <div class="svc-tag">${s.tagline}</div>
         </div>
-        <h3>${s.title}</h3>
-        <p class="tagline">${s.tagline}</p>
-        <ul class="chips">
-          ${s.includes.map(c => `<li class="chip">${c}</li>`).join('')}
-        </ul>
-      </div>
-      <div class="service-foot">
-        <span style="color: var(--muted-fg)">${s.outcome}</span>
-        <span class="arrow">Explore <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
-      </div>
-    </a>
+        <div class="svc-out"><div class="l">Outcome</div><div class="v">${s.outcome}</div></div>
+        <span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+      </a>
+    </li>
   `).join('');
 
-  // Work
-  const WORK = [
+  // SERVICES hover image preview (desktop)
+  const stage = document.getElementById('revealStage');
+  let stageActive = -1;
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (isFinePointer) {
+    document.querySelectorAll('.svc-row').forEach((row, i) => {
+      row.addEventListener('mouseenter', () => {
+        stageActive = i;
+        const s = SERVICES[i];
+        stage.innerHTML = `<div style="position:absolute; inset:0; background:${s.accent}"></div>
+          <div class="stamp">${s.title.split(' ')[0]}</div>
+          <div class="meta"><span class="mono" style="color:var(--muted-fg)">${String(i+1).padStart(2,'0')} / 05</span><span>Read brief →</span></div>`;
+        stage.classList.add('show');
+      });
+      row.addEventListener('mouseleave', () => { stageActive = -1; stage.classList.remove('show'); });
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (stageActive < 0) return;
+      stage.style.left = e.clientX + 'px';
+      stage.style.top = e.clientY + 'px';
+    });
+  }
+
+  // CASES
+  const CASES = [
     {
-      first:'Allegiance', client:'Allegiance Education', sector:'Edtech · Test Prep', cat:'Branding',
-      title:'From local classroom to national-level institute.',
-      summary:'We repositioned the brand through identity design, messaging, and admissions assets that look the part of a top-tier institute.',
-      scope:'Brand · Identity · Print',
-      results:[{m:'+62%', l:'increase in admissions'},{m:'3 cities', l:'rolled out clean'}],
-      bg: 'linear-gradient(135deg, rgba(251,191,36,0.3), rgba(20,184,166,0.2))'
+      idx:'01', client:'Allegiance Education', sector:'Edtech · Test Prep', cat:'Branding',
+      title:'From local classroom to a national-level institute.',
+      problem:"Strong faculty, weak brand. The market couldn't tell Allegiance apart from a dozen local coaching centers.",
+      strategy:'Repositioned around outcomes, not subjects. New wordmark, color system, admissions narrative, and city-launch playbook.',
+      result:'Brand ran across three cities without a single redesign — and lifted admissions by 62% the following quarter.',
+      metrics:[{m:'+62%',l:'admissions'},{m:'3 cities',l:'rolled out'},{m:'1 system',l:'no rework'}],
+      bg: 'linear-gradient(135deg, rgba(253,230,138,.7), rgba(20,184,166,.35))',
+      brand:'Allegiance',
+      reverse: false,
     },
     {
-      first:'Tax2Win', client:'Tax2Win', sector:'Fintech · Tax Filing', cat:'Marketing',
+      idx:'02', client:'Tax2Win', sector:'Fintech · Tax Filing', cat:'Marketing',
       title:'An outdoor + digital campaign that owned filing season.',
-      summary:'Hindi-first creative for billboards, performance ads, and landing pages, built around one promise: file with a real CA.',
-      scope:'Campaign · OOH · Performance',
-      results:[{m:'3.2×', l:'lead volume'},{m:'−34%', l:'blended CAC'}],
-      bg: 'linear-gradient(135deg, rgba(52,211,153,0.3), rgba(20,184,166,0.2))'
+      problem:'Tax filing is a commodity category. Tax2Win was getting buried under bigger ad budgets and lookalike messaging.',
+      strategy:'Hindi-first creative system anchored on one promise — file with a real CA. Synced billboards, paid ads, and landing pages so the story compounded.',
+      result:'3.2× lead volume in eight weeks while blended CAC dropped a third — entirely on the back of campaign coherence.',
+      metrics:[{m:'3.2×',l:'lead volume'},{m:'−34%',l:'blended CAC'},{m:'8 wks',l:'time to result'}],
+      bg: 'linear-gradient(135deg, rgba(167,243,208,.7), rgba(20,184,166,.35))',
+      brand:'Tax2Win',
+      reverse: true,
     },
     {
-      first:'Yug', client:'Yug Vaastra', sector:'D2C · Fashion (Tolaram)', cat:'Branding',
-      title:'Fashion. Attitude. Forever.',
-      summary:'A heritage-meets-modern identity for Tolaram Group&rsquo;s flagship label — circular monogram, premium stationery, and packaging.',
-      scope:'Identity · Stationery · Packaging',
-      results:[{m:'Day-1', l:'wholesale-ready'},{m:'+48%', l:'IG growth'}],
-      bg: 'linear-gradient(135deg, rgba(251,113,133,0.3), rgba(20,184,166,0.2))'
+      idx:'03', client:'Yug Vaastra', sector:'D2C · Fashion (Tolaram Group)', cat:'Branding',
+      title:'Heritage that ships.',
+      problem:'A 75-year-old textile house launching its first D2C label needed a brand that felt premium without losing its lineage.',
+      strategy:'Circular monogram, modern serif wordmark, and a stationery + packaging system designed to feel as deliberate as the product.',
+      result:'Wholesale-ready brand book on day one. Organic IG growth of 48% in launch month — purely off design + content.',
+      metrics:[{m:'Day-1',l:'wholesale ready'},{m:'+48%',l:'IG launch month'},{m:'75 yrs',l:'of heritage'}],
+      bg: 'linear-gradient(135deg, rgba(254,205,211,.7), rgba(20,184,166,.35))',
+      brand:'Yug Vaastra',
+      reverse: false,
     }
   ];
-  document.getElementById('workGrid').innerHTML = WORK.map((w, i) => `
-    <article class="work-card reveal" style="transition-delay:${i * 60}ms">
-      <div class="work-cover">
-        <div class="bg" style="background:${w.bg}"></div>
-        <div class="stamp">${w.first}</div>
-        <span class="label">${w.cat}</span>
-        <div class="work-results">
-          ${w.results.map(r => `<div class="result-card"><div class="m">${r.m}</div><div class="l">${r.l}</div></div>`).join('')}
-        </div>
-      </div>
-      <div class="work-body">
-        <p class="work-meta">${w.client} · ${w.sector}</p>
-        <h3>${w.title}</h3>
-        <p>${w.summary}</p>
-        <div class="work-foot">
-          <span>${w.scope}</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+
+  document.getElementById('caseList').innerHTML = CASES.map(c => `
+    <article class="case ${c.reverse ? 'reverse' : ''} reveal">
+      <div class="container">
+        <div class="case-grid">
+          <div class="cover">
+            <div class="case-cover" style="background:${c.bg}">
+              <div class="stamp serif">${c.brand}</div>
+              <span class="tag"><span class="mono">${c.idx}</span><span style="opacity:.4">·</span>${c.sector}</span>
+              <div class="metrics">
+                ${c.metrics.map(m => `<div class="metric"><div class="m">${m.m}</div><div class="l">${m.l}</div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="story">
+            <p class="case-client">${c.client}</p>
+            <h3 class="case-h t-4xl">${c.title}</h3>
+            <dl class="case-steps">
+              <div><dt>Problem</dt><dd>${c.problem}</dd></div>
+              <div><dt>Strategy</dt><dd>${c.strategy}</dd></div>
+              <div><dt>Result</dt><dd>${c.result}</dd></div>
+            </dl>
+            <a href="#contact" class="case-link">
+              <span>Read the case</span>
+              <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+            </a>
+          </div>
         </div>
       </div>
     </article>
   `).join('');
 
-  // Process
-  const STEPS = [
-    { icon:'search', label:'Understand', body:'We audit your brand and identify the growth gaps that matter.' },
-    { icon:'hammer', label:'Build', body:'Brand, product, marketing — we ship a system you can run.' },
-    { icon:'trendUp', label:'Scale', body:'Weekly check-ins, dashboards, and a tight sprint cadence.' },
-  ];
-  document.getElementById('processGrid').innerHTML = STEPS.map((s, i) => `
-    <div class="process-card reveal" style="transition-delay:${i * 80}ms">
-      <div class="process-row">
-        <span class="service-icon">${ICON[s.icon]}</span>
-        <span class="mono service-num" style="letter-spacing:.2em; text-transform:uppercase">Step 0${i+1}</span>
-      </div>
-      <h3>${s.label}.</h3>
-      <p>${s.body}</p>
-    </div>
-  `).join('');
-
-  // Quotes
+  // QUOTES
   const QUOTES = [
-    { body:"They understood our business before designing anything. The results spoke for themselves.", name:"Saurabh Sharma", role:"Founder, Allegiance Education" },
-    { body:"First agency we&rsquo;ve worked with that talks revenue, not impressions. CAC dropped a third in two months.", name:"Aakash V.", role:"Growth Lead, Tax2Win" },
-    { body:"Identity, packaging, launch campaign — they ran it as one team. Felt like an in-house creative wing on day one.", name:"Yug Tolaram", role:"Director, Yug Vaastra" },
+    { body:'They understood our business before designing anything. The results spoke for themselves.', name:'Saurabh Sharma', role:'Founder, Allegiance Education' },
+    { body:"First agency we've worked with that talks revenue, not impressions. CAC dropped a third in two months.", name:'Aakash V.', role:'Growth Lead, Tax2Win' },
+    { body:'Identity, packaging, launch campaign — they ran it as one team. Felt like an in-house creative wing on day one.', name:'Yug Tolaram', role:'Director, Yug Vaastra' },
   ];
-  document.getElementById('quotesGrid').innerHTML = QUOTES.map((q, i) => `
-    <figure class="quote reveal" style="transition-delay:${i * 80}ms">
-      <span class="q-mark">${ICON.quote}</span>
-      <blockquote>&ldquo;${q.body}&rdquo;</blockquote>
+  document.getElementById('quotesList').innerHTML = QUOTES.map((q, i) => `
+    <figure class="quote reveal">
+      <span class="qm">&ldquo;</span>
+      <blockquote>${q.body}</blockquote>
       <figcaption>
-        <div class="name">${q.name}</div>
-        <div class="role">${q.role}</div>
+        <div><div class="name">${q.name}</div><div class="role">${q.role}</div></div>
+        <span class="ix">${String(i+1).padStart(2,'0')} / 0${QUOTES.length}</span>
       </figcaption>
     </figure>
   `).join('');
+
+  // GLOBAL
+  const CITIES = [
+    { city:'Jaipur', note:'HQ · Studio' },
+    { city:'Bengaluru', note:'Founders & SaaS' },
+    { city:'Mumbai', note:'D2C & Media' },
+    { city:'Delhi NCR', note:'B2B & Edtech' },
+    { city:'Dubai', note:'GCC accounts' },
+    { city:'London', note:'EMEA partners' },
+  ];
+  document.getElementById('globeGrid').innerHTML = CITIES.map((c, i) => `
+    <div class="globe-cell reveal">
+      <div class="row"><span class="dot"></span>${String(i+1).padStart(2,'0')}</div>
+      <div class="city">${c.city}</div>
+      <div class="note">${c.note}</div>
+    </div>
+  `).join('');
+  const CAPS = ['Brand Strategy','Identity Systems','Web & Product UI','Engineering','Performance Marketing','Lead Generation','Content Engines','Public Relations','Founder Branding'];
+  document.getElementById('capsList').innerHTML = CAPS.map(c => `<span class="cap">${c}</span>`).join('');
 
   // Reveal-on-scroll
   const io = new IntersectionObserver(entries => {
@@ -851,7 +976,7 @@
   }, { rootMargin: '-80px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Active nav state via scroll
+  // Active nav state
   const sections = ['top','services','work','about','contact'].map(id => document.getElementById(id));
   const links = [...document.querySelectorAll('.nav-links a')];
   const sIO = new IntersectionObserver(entries => {

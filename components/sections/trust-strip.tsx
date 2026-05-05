@@ -14,28 +14,26 @@ const CLIENTS = [
 export function TrustStrip() {
   const row = [...CLIENTS, ...CLIENTS];
   return (
-    <section className="border-y border-border bg-muted/30 py-8">
-      <div className="container mb-5 flex items-center justify-center text-center">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          Trusted by founders &amp; teams across India
-        </p>
-      </div>
+    <section className="border-t border-border py-8">
       <div className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent"
         />
-        <div className="flex w-max animate-marquee gap-10 px-6">
+        <div className="flex w-max animate-marquee gap-12 px-6 text-muted-foreground/70">
           {row.map((c, i) => (
             <span
               key={i}
-              className="whitespace-nowrap text-sm font-medium tracking-tight text-muted-foreground/80 md:text-base"
+              className="inline-flex items-center gap-12 whitespace-nowrap text-sm font-medium tracking-[-0.01em] md:text-base"
             >
               {c}
+              <span aria-hidden className="opacity-40">
+                ✦
+              </span>
             </span>
           ))}
         </div>

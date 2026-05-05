@@ -12,7 +12,7 @@ const config: Config = {
       center: true,
       padding: "1.25rem",
       screens: {
-        "2xl": "1280px",
+        "2xl": "1320px",
       },
     },
     extend: {
@@ -38,6 +38,8 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        ink: "hsl(var(--ink))",
+        cream: "hsl(var(--cream))",
         teal: {
           50: "#f0fdfa",
           100: "#ccfbf1",
@@ -60,8 +62,29 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         serif: ["var(--font-instrument)", "Georgia", "serif"],
       },
+      fontSize: {
+        "fluid-xs": "clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem)",
+        "fluid-sm": "clamp(0.88rem, 0.84rem + 0.2vw, 0.95rem)",
+        "fluid-base": "clamp(1rem, 0.96rem + 0.2vw, 1.05rem)",
+        "fluid-lg": "clamp(1.1rem, 1rem + 0.5vw, 1.25rem)",
+        "fluid-xl": "clamp(1.3rem, 1.1rem + 1vw, 1.5rem)",
+        "fluid-2xl": "clamp(1.6rem, 1.3rem + 1.5vw, 2rem)",
+        "fluid-3xl": "clamp(2rem, 1.6rem + 2vw, 2.75rem)",
+        "fluid-4xl": "clamp(2.6rem, 2rem + 3vw, 3.75rem)",
+        "fluid-5xl": "clamp(3.2rem, 2.4rem + 4vw, 5rem)",
+        "fluid-6xl": "clamp(4rem, 3rem + 5vw, 6.5rem)",
+        "fluid-7xl": "clamp(4.5rem, 3.5rem + 7vw, 9rem)",
+        "fluid-display": "clamp(3rem, 2rem + 8vw, 11rem)",
+      },
+      letterSpacing: {
+        tightest: "-0.04em",
+      },
       keyframes: {
         marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "marquee-slow": {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-50%)" },
         },
@@ -73,11 +96,17 @@ const config: Config = {
           "0%": { transform: "scale(1)", opacity: "0.6" },
           "100%": { transform: "scale(1.6)", opacity: "0" },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "-1000px 0" },
+          "100%": { backgroundPosition: "1000px 0" },
+        },
       },
       animation: {
         marquee: "marquee 35s linear infinite",
+        "marquee-slow": "marquee-slow 60s linear infinite",
         "fade-up": "fade-up 0.6s ease-out forwards",
         "pulse-ring": "pulse-ring 2s ease-out infinite",
+        shimmer: "shimmer 3s linear infinite",
       },
     },
   },
