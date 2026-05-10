@@ -9,11 +9,11 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/", label: "Home", num: "01" },
-  { href: "/services", label: "Services", num: "02" },
-  { href: "/work", label: "Work", num: "03" },
-  { href: "/about", label: "About", num: "04" },
-  { href: "/contact", label: "Contact", num: "05" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -52,7 +52,11 @@ export function Navbar() {
         )}
       >
         <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center" aria-label="Ingenious Hub home">
+          <Link
+            href="/"
+            className="flex items-center"
+            aria-label="Ingenious Hub home"
+          >
             <Logo />
           </Link>
 
@@ -67,13 +71,12 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     active
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  <span className="font-mono text-[10px] opacity-50">{item.num}</span>
                   {item.label}
                   {active && (
                     <span className="absolute inset-x-3 -bottom-0.5 h-px bg-teal-500" />
@@ -89,7 +92,7 @@ export function Navbar() {
               href="/contact"
               className="hidden h-10 items-center gap-2 rounded-full bg-foreground px-4 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 md:inline-flex"
             >
-              Book Call
+              Start a project
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
             <button
@@ -111,19 +114,16 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex items-baseline justify-between border-b border-border py-3 text-2xl font-medium tracking-tight last:border-b-0"
+                  className="border-b border-border py-3 text-2xl font-medium tracking-tight last:border-b-0"
                 >
-                  <span>{item.label}</span>
-                  <span className="font-mono text-xs text-muted-foreground">
-                    {item.num}
-                  </span>
+                  {item.label}
                 </Link>
               ))}
               <Link
                 href="/contact"
                 className="mt-4 inline-flex h-12 items-center justify-between rounded-full bg-foreground px-5 text-sm font-medium text-background"
               >
-                Book a Free Strategy Call
+                Start a project
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>

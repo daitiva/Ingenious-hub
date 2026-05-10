@@ -17,8 +17,9 @@ type Case = {
   sector: string;
   title: string;
   problem: string;
-  strategy: string;
-  result: string;
+  thinking: string;
+  execution: string;
+  impact: string;
   metrics: { metric: string; label: string }[];
   visual: Visual;
 };
@@ -30,8 +31,9 @@ const CASES: Case[] = [
     sector: "Edtech · Test Prep",
     title: "From a classroom to a national institute.",
     problem: "Strong faculty, generic brand.",
-    strategy: "Reposition around outcomes, not subjects.",
-    result: "+62% admissions, rolled across 3 cities.",
+    thinking: "Reposition around outcomes, not subjects.",
+    execution: "Brand strategy, identity, admissions print.",
+    impact: "+62% admissions, rolled across 3 cities.",
     metrics: [
       { metric: "+62%", label: "admissions" },
       { metric: "3", label: "cities live" },
@@ -45,8 +47,9 @@ const CASES: Case[] = [
     sector: "Fintech · Tax Filing",
     title: "Owning filing season, end-to-end.",
     problem: "Commoditised category, lookalike ads.",
-    strategy: "Hindi-first promise, synced OOH + paid + LP.",
-    result: "3.2× leads, −34% CAC in eight weeks.",
+    thinking: "Hindi-first promise — file with a real CA.",
+    execution: "OOH, performance ads, landing pages — synced.",
+    impact: "3.2× leads, −34% CAC in eight weeks.",
     metrics: [
       { metric: "3.2×", label: "leads" },
       { metric: "−34%", label: "CAC" },
@@ -60,8 +63,9 @@ const CASES: Case[] = [
     sector: "D2C Fashion · Tolaram",
     title: "Heritage that ships.",
     problem: "75-year textile house going D2C — needed gravitas.",
-    strategy: "Circular monogram + serif wordmark + premium pack.",
-    result: "Day-1 wholesale-ready. +48% IG launch month.",
+    thinking: "Heritage-meets-modern wordmark + premium pack.",
+    execution: "Circular monogram, stationery, retail packaging.",
+    impact: "Day-1 wholesale-ready. +48% IG launch month.",
     metrics: [
       { metric: "Day-1", label: "wholesale" },
       { metric: "+48%", label: "IG" },
@@ -169,8 +173,9 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
 
             <dl className="mt-7 grid gap-5 border-t border-border pt-6">
               <Step label="Problem" body={c.problem} />
-              <Step label="Strategy" body={c.strategy} />
-              <Step label="Result" body={c.result} />
+              <Step label="Thinking" body={c.thinking} />
+              <Step label="Execution" body={c.execution} />
+              <Step label="Impact" body={c.impact} />
             </dl>
 
             <Link
