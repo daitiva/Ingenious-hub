@@ -7,8 +7,7 @@
 	.st1{display:inline;fill:url(#SVGID_1_);}
 	.st2{display:inline;}
 	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
-	.st4{clip-path:url(#SVGID_3_);}
-	.st5{clip-path:url(#SVGID_5_);}
+	.st4{fill:url(#SVGID_2_);}
 </style>
 <g class="st0">
 	
@@ -26,34 +25,12 @@
 			C165.8,218,199,246.1,237,246.1L237,246.1L237,246.1z"/>
 	</g>
 </g>
-<g>
-	<g>
-		<g>
-			<defs>
-				<path id="SVGID_2_" d="M56.1,438.2v27.2c27.2-1.2,84-3.9,93.4,29.9c5.4,20.2,5.4,124.5,5.4,150.2v193.7
-					c-1.2,89.4,6.6,121.8-93.4,128.7V995c52.9-1.2,105.5-3.9,158.3-5.4c48.6,1.2,98.8,3.9,144.7,5.4v-27.2
-					c-107-6.6-92.2-47.4-94.9-136.6v-435L56.1,438.2L56.1,438.2L56.1,438.2z M199.6,226.9c37.8,0,68.9-32.3,68.9-71.6
-					c0-40.5-31.1-73.1-71.6-73.1s-73.1,32.6-73.1,73.1C123.8,197,159.1,226.9,199.6,226.9L199.6,226.9L199.6,226.9z"/>
-			</defs>
-			<clipPath id="SVGID_3_">
-				<use xlink:href="#SVGID_2_"  style="overflow:visible;"/>
-			</clipPath>
-			<g class="st4">
-				<g>
-					<defs>
-						<rect id="SVGID_4_" x="56.1" y="82.2" width="308.5" height="912.8"/>
-					</defs>
-					<clipPath id="SVGID_5_">
-						<use xlink:href="#SVGID_4_"  style="overflow:visible;"/>
-					</clipPath>
-					<g transform="matrix(1 0 0 1 0 -6.103516e-05)" class="st5">
-						
-							<image style="overflow:visible;enable-background:new    ;" width="60" height="157" xlink:href="../../../../Desktop/78C6BE85.jpg"  transform="matrix(5.9823 0 0 -5.9823 37.5612 1011.8677)">
-						</image>
-					</g>
-				</g>
-			</g>
-		</g>
-	</g>
-</g>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="209.0733" y1="199.309" x2="213.0733" y2="933.309">
+	<stop  offset="0" style="stop-color:#81D5D3"/>
+	<stop  offset="1" style="stop-color:#009E8B"/>
+</linearGradient>
+<path class="st4" d="M57.7,439.6v27.2c27.2-1.2,84-3.9,93.4,29.9c5.4,20.2,5.4,124.5,5.4,150.2v193.7
+	c-1.2,89.4,6.6,121.8-93.4,128.7v27.1c52.9-1.2,105.5-3.9,158.3-5.4c48.6,1.2,98.8,3.9,144.7,5.4v-27.2
+	c-107-6.6-92.2-47.4-94.9-136.6v-435L57.7,439.6L57.7,439.6L57.7,439.6z M201.2,228.3c37.8,0,68.9-32.3,68.9-71.6
+	c0-40.5-31.1-73.1-71.6-73.1s-73.1,32.6-73.1,73.1C125.4,198.4,160.7,228.3,201.2,228.3L201.2,228.3L201.2,228.3z"/>
 </svg>
