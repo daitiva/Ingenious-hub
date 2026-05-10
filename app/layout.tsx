@@ -3,6 +3,7 @@ import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { StatusRibbon } from "@/components/status-ribbon";
 import { Footer } from "@/components/footer";
 import { FloatingCTA } from "@/components/floating-cta";
 
@@ -187,7 +188,10 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />
-          <main className="pt-16">{children}</main>
+          <main className="pt-[64px]">
+            <StatusRibbon />
+            {children}
+          </main>
           <Footer />
           <FloatingCTA />
         </ThemeProvider>
