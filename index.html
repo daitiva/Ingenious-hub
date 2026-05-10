@@ -6,7 +6,7 @@
   <title>Ingenious Hub — A creative & growth studio for ambitious brands</title>
   <meta name="description" content="A premium branding, advertising, marketing & PR studio. Strategy, design, and performance run as one engine — for brands that want to be remembered." />
   <meta name="theme-color" content="#0d9488" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230d9488'/><circle cx='16' cy='8' r='3.2' fill='%235eead4'/><rect x='13' y='13' width='6' height='14' rx='1' fill='%235eead4'/></svg>" />
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -71,12 +71,12 @@
     .nav.scrolled { background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: saturate(150%) blur(12px); border-bottom-color: color-mix(in srgb, var(--border) 60%, transparent); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
     @media (min-width: 768px) { .nav { height: 64px; } }
-    .logo { display: inline-flex; align-items: baseline; gap: 5px; color: var(--t-600); }
-    [data-theme="dark"] .logo { color: var(--t-300); }
-    .logo-i { height: 22px; width: auto; transform: translateY(2px); }
-    .logo-text { display: flex; flex-direction: column; line-height: 1; }
-    .logo-name { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 21px; letter-spacing: -0.01em; line-height: 1; }
-    .logo-sub { margin-top: 4px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-fg); }
+    .logo { display: inline-flex; align-items: center; gap: 8px; }
+    .logo-img { height: 22px; width: auto; display: block; }
+    @media (min-width: 768px) { .logo-img { height: 24px; } }
+    [data-theme="dark"] .logo-img { filter: brightness(0) invert(1) opacity(0.85); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 4px; }
+    .logo-sub { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-fg); padding-left: 1px; }
 
     .nav-links { display: none; align-items: center; gap: 4px; }
     .nav-links a { position: relative; padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--muted-fg); border-radius: 999px; transition: color .2s; }
@@ -386,12 +386,8 @@
 <header class="nav" id="nav">
   <div class="container nav-inner">
     <a class="logo" href="#top" aria-label="Ingenious Hub — energize your brand">
-      <svg viewBox="0 0 28 64" class="logo-i" aria-hidden="true">
-        <circle cx="14" cy="9" r="4.5" fill="currentColor"/>
-        <rect x="9.5" y="18" width="9" height="38" rx="1.4" fill="currentColor"/>
-      </svg>
       <span class="logo-text">
-        <span class="logo-name">ngenious hub</span>
+        <img src="public/logo.svg" alt="Ingenious Hub" class="logo-img" onerror="this.onerror=null;this.src='./public/logo.svg'"/>
         <span class="logo-sub">energize your brand</span>
       </span>
     </a>
