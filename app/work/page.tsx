@@ -25,7 +25,7 @@ export default function WorkPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
             Work
           </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-3 text-balance text-4xl font-light leading-[1.05] tracking-tightest md:text-6xl">
             Work that{" "}
             <span className="font-serif italic">delivers results.</span>
           </h1>
@@ -86,7 +86,7 @@ export default function WorkPage() {
                     <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                       {w.client} · {w.sector}
                     </p>
-                    <h3 className="text-2xl font-semibold leading-snug tracking-tight">
+                    <h3 className="text-2xl font-light leading-snug tracking-tight">
                       {w.title}
                     </h3>
                     <p className="text-sm text-muted-foreground">{w.summary}</p>

@@ -38,8 +38,18 @@ export function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  // Parallax + fade only on screens >= md to avoid mobile readability issues
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const handler = () => setIsDesktop(mq.matches);
+    handler();
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const yDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const opacityDesktop = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   // Auto-cycle through showcase tiles
   const [active, setActive] = useState(0);
@@ -63,7 +73,10 @@ export function Hero() {
       />
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      <motion.div style={{ y, opacity }} className="relative w-full">
+      <motion.div
+        style={isDesktop ? { y: yDesktop, opacity: opacityDesktop } : undefined}
+        className="relative w-full"
+      >
         <div className="container pt-12 md:pt-16">
           <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
             {/* LEFT — statement */}
@@ -77,7 +90,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="mt-7 display-tight font-semibold text-fluid-7xl"
+                className="mt-7 display-tight font-normal text-fluid-7xl"
               >
                 <SplitLine delay={0.05}>Brands aren&rsquo;t built.</SplitLine>
                 <SplitLine delay={0.22}>
@@ -209,7 +222,7 @@ function ShowcaseArt({ visual }: { visual: string }) {
     return (
       <div className="absolute inset-0 grid place-items-center">
         <div className="relative">
-          <span className="block font-semibold leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(7rem,16vw,15rem)]">
+          <span className="block font-light leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(7rem,16vw,15rem)]">
             62
           </span>
           <span className="absolute -right-5 top-2 font-serif text-fluid-3xl italic text-teal-600 dark:text-teal-300">
@@ -226,7 +239,7 @@ function ShowcaseArt({ visual }: { visual: string }) {
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
             Filing Season · 2024
           </div>
-          <div className="mt-2 font-semibold leading-[0.95] tracking-tightest text-foreground text-[clamp(1.6rem,4.5vw,3rem)]">
+          <div className="mt-2 font-light leading-[0.95] tracking-tightest text-foreground text-[clamp(1.6rem,4.5vw,3rem)]">
             Ab ki baar,
             <br />
             <span className="font-serif italic text-teal-600 dark:text-teal-300">

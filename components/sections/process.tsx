@@ -31,7 +31,7 @@ export function Process() {
             </p>
           </div>
           <div className="md:col-span-9">
-            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="text-balance font-light text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               A loop, not a{" "}
               <span className="font-serif italic text-muted-foreground">
                 deck.
@@ -58,7 +58,7 @@ export function Process() {
                   {s.duration}
                 </span>
               </div>
-              <h3 className="mt-6 text-fluid-2xl font-semibold tracking-tight">
+              <h3 className="mt-6 text-fluid-2xl font-light tracking-tight">
                 {s.label}.
               </h3>
               <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">

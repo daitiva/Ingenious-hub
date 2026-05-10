@@ -86,9 +86,9 @@ export function FeaturedCases() {
             </p>
           </div>
           <div className="md:col-span-7">
-            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="text-balance font-light text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               Cases, not a{" "}
-              <span className="font-serif italic text-muted-foreground">
+              <span className="font-serif italic text-teal-600 dark:text-teal-400">
                 gallery.
               </span>
             </h2>
@@ -166,7 +166,7 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7 }}
-              className="mt-3 text-balance font-semibold text-fluid-3xl leading-[1.1] tracking-tight md:text-fluid-4xl"
+              className="mt-3 text-balance font-light text-fluid-3xl leading-[1.1] tracking-tight md:text-fluid-4xl"
             >
               {c.title}
             </motion.h3>
@@ -225,7 +225,7 @@ function AllegianceCover() {
       {/* Big number */}
       <div className="absolute inset-0 grid place-items-center">
         <div className="relative">
-          <span className="block font-semibold leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(8rem,18vw,18rem)]">
+          <span className="block font-light leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(8rem,18vw,18rem)]">
             62
           </span>
           <span className="absolute -right-6 top-3 font-serif text-fluid-4xl italic text-teal-600 dark:text-teal-300">
@@ -265,7 +265,7 @@ function Tax2WinCover() {
         <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
           Filing Season · 2024
         </div>
-        <div className="mt-2 font-semibold leading-[0.95] tracking-tightest text-foreground text-[clamp(2.2rem,5.5vw,4.5rem)]">
+        <div className="mt-2 font-light leading-[0.95] tracking-tightest text-foreground text-[clamp(2.2rem,5.5vw,4.5rem)]">
           Ab ki baar,<br />
           <span className="font-serif italic text-teal-600 dark:text-teal-300">
             real CA

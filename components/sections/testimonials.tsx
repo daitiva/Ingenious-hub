@@ -31,7 +31,7 @@ export function Testimonials() {
             </p>
           </div>
           <div className="md:col-span-9">
-            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="text-balance font-light text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               Measured by what our clients{" "}
               <span className="font-serif italic text-muted-foreground">
                 ship next.

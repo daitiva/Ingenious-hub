@@ -18,7 +18,7 @@ export function Metrics() {
             <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">
               005 — Trust
             </p>
-            <h2 className="mt-5 text-balance font-semibold text-fluid-3xl leading-[1.1] tracking-tight md:text-fluid-4xl">
+            <h2 className="mt-5 text-balance font-light text-fluid-3xl leading-[1.1] tracking-tight md:text-fluid-4xl">
               Numbers, signed off by the{" "}
               <span className="font-serif italic text-teal-300">
                 people who paid
@@ -37,7 +37,7 @@ export function Metrics() {
                   transition={{ duration: 0.5, delay: i * 0.05 }}
                   className="bg-foreground p-6 md:p-8"
                 >
-                  <div className="font-semibold text-fluid-4xl tracking-tightest md:text-fluid-5xl">
+                  <div className="font-light text-fluid-4xl tracking-tightest md:text-fluid-5xl">
                     {m.v}
                   </div>
                   <div className="mt-2 text-sm text-background/70">{m.l}</div>

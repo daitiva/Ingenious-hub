@@ -18,7 +18,7 @@ export function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
-              className="mt-5 text-balance display-tight font-semibold text-fluid-7xl"
+              className="mt-5 text-balance display-tight font-light text-fluid-7xl"
             >
               Let&rsquo;s build the brand{" "}
               <span className="font-serif italic text-teal-300">
@@ -45,7 +45,7 @@ export function FinalCTA() {
                 </span>
               </Link>
               <a
-                href="https://wa.me/919999999999?text=Hi%20Ingenious%20Hub%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                href="https://wa.me/919587015816?text=Hi%20Ingenious%20Hub%2C%20I%27d%20like%20to%20discuss%20a%20project."
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex h-14 items-center justify-between gap-6 rounded-full border border-background/20 px-6 transition-colors hover:bg-background/5"
@@ -69,7 +69,7 @@ export function FinalCTA() {
         <div className="mt-16 grid gap-4 border-t border-background/15 pt-6 text-sm md:mt-24 md:grid-cols-4">
           <Cell label="Studio" value="Jaipur · Worldwide" />
           <Cell label="Hours" value="Mon–Sat · 10am – 7pm IST" />
-          <Cell label="Phone" value="+91 99999 99999" />
+          <Cell label="Phone" value="+91 95870 15816" />
           <Cell label="Reply window" value="< 4 working hours" />
         </div>
       </div>

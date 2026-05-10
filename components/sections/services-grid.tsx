@@ -14,7 +14,7 @@ export function ServicesGrid() {
             <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
               What we do
             </p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+            <h2 className="mt-3 text-balance text-3xl font-light leading-[1.1] tracking-tightest md:text-5xl">
               Five focused offerings.{" "}
               <span className="font-serif italic text-muted-foreground">
                 Zero fluff.
@@ -57,7 +57,7 @@ export function ServicesGrid() {
                         0{i + 1}
                       </span>
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold tracking-tight md:text-2xl">
+                    <h3 className="mt-5 text-xl font-light tracking-tight md:text-2xl">
                       {s.title}
                     </h3>
                     <p className="mt-1.5 text-sm text-muted-foreground">{s.tagline}</p>

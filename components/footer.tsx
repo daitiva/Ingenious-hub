@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, Instagram, Linkedin } from "lucide-react";
 
 const COLUMNS = [
   {
-    title: "Services",
+    title: "Capabilities",
     links: [
       { href: "/services#branding", label: "Branding & Identity" },
       { href: "/services#web", label: "Website & UI/UX" },
@@ -17,6 +17,7 @@ const COLUMNS = [
     title: "Studio",
     links: [
       { href: "/work", label: "Work" },
+      { href: "/clients", label: "Clients" },
       { href: "/about", label: "About" },
       { href: "/contact", label: "Contact" },
     ],
@@ -30,24 +31,23 @@ export function Footer() {
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">
-            A creative + growth studio in Jaipur. We package brand, web, and performance
-            marketing into one engine that turns attention into revenue.
+            A creative + growth studio in Jaipur. Strategy, design, and performance —
+            built as one engine.
           </p>
           <div className="mt-6 space-y-2 text-sm text-muted-foreground">
             <p className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-teal-500" />
-              2-TA-8, Sector 2, Jawahar Nagar, Jaipur 302004
-            </p>
-            <p className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-teal-500" />
-              <a href="mailto:hello@ingenioushub.com" className="hover:text-foreground">
+              <a
+                href="mailto:hello@ingenioushub.com"
+                className="hover:text-foreground"
+              >
                 hello@ingenioushub.com
               </a>
             </p>
             <p className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-teal-500" />
-              <a href="tel:+919999999999" className="hover:text-foreground">
-                +91 99999 99999
+              <a href="tel:+919587015816" className="hover:text-foreground">
+                +91 95870 15816
               </a>
             </p>
           </div>
@@ -98,9 +98,12 @@ export function Footer() {
 
       <div className="border-t border-border">
         <div className="container flex flex-col items-start justify-between gap-3 py-6 text-xs text-muted-foreground md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Ingenious Hub Enterprise (P) Ltd. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Ingenious Hub Enterprise (P) Ltd. All
+            rights reserved.
+          </p>
           <p className="font-serif italic text-foreground/80">
-            Building brands that perform.
+            Brands aren&rsquo;t built. They&rsquo;re remembered.
           </p>
         </div>
       </div>

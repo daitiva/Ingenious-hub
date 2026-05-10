@@ -101,7 +101,7 @@ const SCHEMAS = [
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+91-99999-99999",
+        telephone: "+91-95870-15816",
         contactType: "Sales",
         email: "hello@ingenioushub.com",
         areaServed: ["IN", "AE", "GB", "US"],

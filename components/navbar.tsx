@@ -12,6 +12,7 @@ const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/work", label: "Work" },
+  { href: "/clients", label: "Clients" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -21,7 +22,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [progress, setProgress] = React.useState(0);
-  const [now, setNow] = React.useState<string>("");
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -33,22 +33,6 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  React.useEffect(() => {
-    const tick = () => {
-      setNow(
-        new Intl.DateTimeFormat("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false,
-          timeZone: "Asia/Kolkata",
-        }).format(new Date()) + " IST"
-      );
-    };
-    tick();
-    const id = setInterval(tick, 60_000);
-    return () => clearInterval(id);
   }, []);
 
   React.useEffect(() => setOpen(false), [pathname]);
@@ -104,12 +88,6 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* Editorial right strip — location + time + CTA */}
-            <div className="hidden items-center gap-3 text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground lg:flex">
-              <span className="font-mono">Jaipur</span>
-              <span className="opacity-30">·</span>
-              <span className="font-mono">{now || "10:00 IST"}</span>
-            </div>
             <ThemeToggle />
             <Link
               href="/contact"

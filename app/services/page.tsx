@@ -19,7 +19,7 @@ export default function ServicesPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
             Services
           </p>
-          <h1 className="mt-3 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-3 text-balance text-4xl font-light leading-[1.05] tracking-tightest md:text-6xl">
             Five focused offerings.{" "}
             <span className="font-serif italic">Zero fluff.</span>
           </h1>
@@ -55,7 +55,7 @@ export default function ServicesPage() {
                         0{i + 1} / 05
                       </span>
                     </div>
-                    <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-tight">
+                    <h2 className="mt-6 text-3xl font-light leading-tight tracking-tight">
                       {s.title}
                     </h2>
                     <p className="mt-2 font-serif text-lg italic text-muted-foreground">

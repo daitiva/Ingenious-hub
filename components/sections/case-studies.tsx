@@ -16,7 +16,7 @@ export function CaseStudies() {
             <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
               Selected work
             </p>
-            <h2 className="mt-3 text-balance text-3xl font-semibold leading-[1.1] tracking-tight md:text-5xl">
+            <h2 className="mt-3 text-balance text-3xl font-light leading-[1.1] tracking-tightest md:text-5xl">
               Work that{" "}
               <span className="font-serif italic">delivers results.</span>
             </h2>
@@ -72,7 +72,7 @@ export function CaseStudies() {
                 <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                   {w.client} · {w.sector}
                 </p>
-                <h3 className="text-lg font-semibold leading-snug tracking-tight md:text-xl">
+                <h3 className="text-lg font-medium leading-snug tracking-tight md:text-xl">
                   {w.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">{w.summary}</p>

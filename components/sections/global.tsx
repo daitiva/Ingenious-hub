@@ -32,7 +32,7 @@ export function GlobalReach() {
             <p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
               006 — Reach
             </p>
-            <h2 className="mt-5 text-balance font-semibold text-fluid-3xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="mt-5 text-balance font-light text-fluid-3xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               A studio in Jaipur.{" "}
               <span className="font-serif italic text-muted-foreground">
                 Brands across continents.

@@ -23,7 +23,7 @@ export function Insights() {
             </p>
           </div>
           <div className="md:col-span-6">
-            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="text-balance font-light text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               Notes from the{" "}
               <span className="font-serif italic text-muted-foreground">
                 studio.

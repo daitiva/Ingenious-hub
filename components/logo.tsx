@@ -6,6 +6,12 @@ type LogoProps = {
   showTag?: boolean;
 };
 
+/**
+ * Wordmark + tagline lockup. The tagline is rendered inside an SVG with
+ * `textLength` set to the SVG's intrinsic viewBox width, so it always stretches
+ * to exactly the same edge-to-edge width as the wordmark above it — no pixel
+ * math, no media queries.
+ */
 export function Logo({ className, showTag = true }: LogoProps) {
   return (
     <span
@@ -17,13 +23,30 @@ export function Logo({ className, showTag = true }: LogoProps) {
         alt="Ingenious Hub"
         width={244}
         height={66}
-        className="h-6 w-auto md:h-7"
+        className="h-[26px] w-auto md:h-7"
         priority
       />
       {showTag && (
-        <span className="mt-1 pl-[1px] text-[9.5px] uppercase tracking-[0.22em] text-muted-foreground">
-          energize your brand
-        </span>
+        <svg
+          viewBox="0 0 244 14"
+          aria-hidden
+          className="mt-[5px] block h-[10px] w-full text-muted-foreground md:h-[11px]"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            x="0"
+            y="11"
+            fill="currentColor"
+            fontFamily="Inter, system-ui, sans-serif"
+            fontSize="11"
+            fontWeight="400"
+            letterSpacing="0"
+            textLength="244"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            energize your brand
+          </text>
+        </svg>
       )}
     </span>
   );

@@ -14,7 +14,7 @@ export function Accreditations() {
             </p>
           </div>
           <div className="md:col-span-8">
-            <h2 className="text-balance font-semibold text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
+            <h2 className="text-balance font-light text-fluid-4xl leading-[1.05] tracking-tightest md:text-fluid-5xl">
               Recognised by the rooms that{" "}
               <span className="font-serif italic text-muted-foreground">
                 set the bar.
@@ -46,12 +46,12 @@ export function Accreditations() {
                   {a.href ? "View ↗" : "Verified"}
                 </a>
               </div>
-              <h3 className="mt-6 font-semibold tracking-tight text-fluid-xl">
+              <h3 className="mt-6 font-light tracking-tight text-fluid-xl">
                 {a.org}
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">{a.byline}</p>
               <div className="mt-7 border-t border-border pt-4">
-                <div className="font-semibold tracking-tightest text-fluid-2xl">
+                <div className="font-light tracking-tightest text-fluid-2xl">
                   {a.metric}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">
