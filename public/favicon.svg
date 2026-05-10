@@ -1,5 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#ffffff"/>
-  <circle cx="32" cy="16" r="6" fill="#1FB6A6"/>
-  <path d="M27 26 h10 a1 1 0 0 1 1 1 v22 a1 1 0 0 1 -1 1 h-10 a1 1 0 0 1 -1 -1 v-22 a1 1 0 0 1 1 -1 z" fill="#1FB6A6"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1080 1080" style="enable-background:new 0 0 1080 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="540" y1="1027.8165" x2="540" y2="52.5626" gradientTransform="matrix(1 0 0 -1 0 1077.8898)">
+	<stop  offset="0" style="stop-color:#81D5D3"/>
+	<stop  offset="0.3677" style="stop-color:#4DBFB6"/>
+	<stop  offset="0.7935" style="stop-color:#16A797"/>
+	<stop  offset="1" style="stop-color:#009E8B"/>
+</linearGradient>
+<circle class="st0" cx="540" cy="540" r="534"/>
+<g>
+	<path class="st1" d="M393.7,444.4v25.5c25.5-1.1,78.9-3.7,87.7,28.1c5.1,19,5.1,116.9,5.1,141v181.9c-1.1,84,6.2,114.3-87.7,120.9
+		v25.5c49.6-1.1,99-3.7,148.7-5.1c45.7,1.1,92.8,3.7,135.9,5.1v-25.5c-100.4-6.2-86.5-44.5-89.1-128.2V404.9L393.7,444.4
+		L393.7,444.4L393.7,444.4z M528.4,246.1c35.5,0,64.7-30.4,64.7-67.2c0-38-29.2-68.7-67.2-68.7s-68.7,30.6-68.7,68.7
+		C457.2,218,490.4,246.1,528.4,246.1L528.4,246.1L528.4,246.1z"/>
+</g>
 </svg>
