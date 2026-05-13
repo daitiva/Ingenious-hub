@@ -29,7 +29,7 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-border bg-muted/30">
       <div className="container grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-5">
-          <Logo />
+          <Logo size="lg" />
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">
             A creative + growth studio in Jaipur. Strategy, design, and performance —
             built as one engine.

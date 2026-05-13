@@ -4,12 +4,14 @@ import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { CLIENTS, type Client } from "@/lib/clients";
+import { ClientLogo } from "@/components/client-logo";
 import { cn } from "@/lib/utils";
 
 const FILTERS = [
   "All",
   "Edtech",
   "D2C",
+  "B2C",
   "Fintech",
   "B2B",
   "Healthcare",
@@ -94,11 +96,19 @@ export function ClientsClient() {
                   duration: 0.3,
                   delay: Math.min(i * 0.012, 0.4),
                 }}
-                className="group relative flex aspect-[4/3] items-center justify-center bg-background p-4 text-center md:p-6"
+                className="group relative flex aspect-[4/3] items-center justify-center bg-background p-4 text-center transition-colors hover:bg-muted/30 md:p-6"
               >
-                <span className="text-balance text-sm font-medium tracking-tight text-foreground/80 transition-colors group-hover:text-teal-600 dark:group-hover:text-teal-400 md:text-base">
-                  {c.name}
-                </span>
+                <div className="flex h-full max-h-[80px] w-full max-w-[140px] items-center justify-center">
+                  <ClientLogo
+                    name={c.name}
+                    className="grayscale transition-all duration-300 group-hover:grayscale-0"
+                    fallback={
+                      <span className="text-balance text-sm font-medium tracking-tight text-foreground/80 transition-colors group-hover:text-teal-600 dark:group-hover:text-teal-400 md:text-base">
+                        {c.name}
+                      </span>
+                    }
+                  />
+                </div>
                 <span className="absolute right-2 top-2 font-mono text-[9px] text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
                   {c.category}
                 </span>
@@ -107,11 +117,12 @@ export function ClientsClient() {
           </ul>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
-            Logo files for these clients live at{" "}
+            Logo files live at{" "}
             <code className="rounded bg-muted px-1.5 py-0.5 font-mono">
               public/clients/
             </code>{" "}
-            — drop in <code>{`<slug>.svg`}</code> to swap a name for a mark.
+            — drop in <code>{`<slug>.png`}</code> (or SVG / JPG) to swap a name
+            for a mark.
           </p>
         </div>
       </section>

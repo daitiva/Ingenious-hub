@@ -5,7 +5,17 @@
 
 export type Client = {
   name: string;
-  category: "Edtech" | "D2C" | "Fintech" | "B2B" | "Healthcare" | "Media" | "Real Estate" | "Public" | "Tech";
+  category:
+    | "Edtech"
+    | "D2C"
+    | "B2C"
+    | "Fintech"
+    | "B2B"
+    | "Healthcare"
+    | "Media"
+    | "Real Estate"
+    | "Public"
+    | "Tech";
 };
 
 export const CLIENTS: Client[] = [

@@ -31,7 +31,7 @@ export function Accreditations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="bg-background p-6 md:p-8"
+              className="bg-background p-4"
             >
               <div className="flex items-baseline justify-between">
                 <span className="font-mono text-[11px] text-muted-foreground">
@@ -46,15 +46,15 @@ export function Accreditations() {
                   {a.href ? "View ↗" : "Verified"}
                 </a>
               </div>
-              <h3 className="mt-6 font-light tracking-tight text-fluid-xl">
+              <h3 className="mt-4 font-light tracking-tight text-fluid-xl">
                 {a.org}
               </h3>
-              <p className="mt-1 text-sm text-muted-foreground">{a.byline}</p>
-              <div className="mt-7 border-t border-border pt-4">
+              <p className="mt-1 text-xs text-muted-foreground">{a.byline}</p>
+              <div className="mt-4 border-t border-border pt-3">
                 <div className="font-light tracking-tightest text-fluid-2xl">
                   {a.metric}
                 </div>
-                <div className="mt-1 text-xs text-muted-foreground">
+                <div className="mt-1 text-[11px] text-muted-foreground">
                   {a.metricLabel}
                 </div>
               </div>

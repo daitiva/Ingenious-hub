@@ -4,7 +4,7 @@ const ITEMS = [
   "Now booking · Q1 2026 · 5 spots open",
   "Studio · Jaipur — Worldwide",
   "Branding · Web · Performance · PR",
-  "4.6 ★ on Google · 11 reviews",
+  "4.6 ★ on Google",
   "60+ brands shipped since 2016",
   "Replies within 4 working hours",
   "Recognised by DesignRush · Clutch · 50Pros",

@@ -1,34 +1,46 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ClientLogo } from "@/components/client-logo";
 
 const SHOWCASE = [
   {
     client: "Allegiance Education",
+    slug: "allegiance-education",
     sector: "Edtech · Test Prep",
     metric: "+62%",
     metricLabel: "admissions",
-    visual: "allegiance",
-    accent: "bg-amber-100 dark:bg-amber-950/40",
+    eyebrow: "Brand Re-Launch · 2024",
+    accent:
+      "bg-gradient-to-br from-amber-50 to-amber-200/40 dark:from-amber-950/40 dark:to-amber-900/20",
   },
   {
     client: "Tax2Win",
+    slug: "tax2win",
     sector: "Fintech · Tax Filing",
     metric: "3.2×",
     metricLabel: "leads",
-    visual: "tax2win",
-    accent: "bg-emerald-100 dark:bg-emerald-950/40",
+    eyebrow: "Filing Season · 2024",
+    accent:
+      "bg-gradient-to-br from-emerald-50 to-emerald-200/40 dark:from-emerald-950/40 dark:to-emerald-900/20",
   },
   {
     client: "Yug Vaastra",
+    slug: "yug-vaastra",
     sector: "D2C · Tolaram",
     metric: "+48%",
     metricLabel: "IG growth",
-    visual: "yug",
-    accent: "bg-rose-100 dark:bg-rose-950/40",
+    eyebrow: "Heritage that ships",
+    accent:
+      "bg-gradient-to-br from-rose-50 to-rose-200/40 dark:from-rose-950/40 dark:to-rose-900/20",
   },
 ] as const;
 
@@ -163,15 +175,14 @@ function ShowcaseTile({
       <AnimatePresence mode="wait">
         <motion.div
           key={current.client}
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className={`absolute inset-0 overflow-hidden rounded-2xl border border-border ${current.accent}`}
         >
-          <ShowcaseArt visual={current.visual} />
-
-          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/80 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] backdrop-blur">
+          {/* "Now showing" pill */}
+          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/80 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] backdrop-blur z-10">
             <span className="relative inline-flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-500/60" />
               <span className="relative inline-flex h-full w-full rounded-full bg-teal-500" />
@@ -179,17 +190,47 @@ function ShowcaseTile({
             Now showing
           </div>
 
+          {/* Eyebrow tag */}
+          <div className="absolute inset-x-4 top-16 flex justify-end">
+            <span className="rounded-full border border-foreground/10 bg-background/60 px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] text-foreground/70 backdrop-blur">
+              {current.eyebrow}
+            </span>
+          </div>
+
+          {/* Centered brand logo */}
+          <div className="absolute inset-x-6 top-1/2 -translate-y-1/2">
+            <motion.div
+              key={current.slug}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="mx-auto flex h-32 max-w-[260px] items-center justify-center md:h-44 md:max-w-[300px]"
+            >
+              <ClientLogo
+                name={current.client}
+                slug={current.slug}
+                className="drop-shadow-sm"
+                fallback={
+                  <span className="text-center font-serif text-3xl italic text-foreground/85 md:text-5xl">
+                    {current.client}
+                  </span>
+                }
+              />
+            </motion.div>
+          </div>
+
+          {/* Bottom info card */}
           <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 rounded-xl border border-foreground/10 bg-background/85 px-4 py-3 backdrop-blur">
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 {current.sector}
               </div>
-              <div className="mt-0.5 text-sm font-semibold tracking-tight">
+              <div className="mt-0.5 text-sm font-medium tracking-tight">
                 {current.client}
               </div>
             </div>
             <div className="text-right">
-              <div className="text-fluid-xl font-semibold tracking-tightest">
+              <div className="text-fluid-xl font-light tracking-tightest">
                 {current.metric}
               </div>
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -212,73 +253,6 @@ function ShowcaseTile({
             }`}
           />
         ))}
-      </div>
-    </div>
-  );
-}
-
-function ShowcaseArt({ visual }: { visual: string }) {
-  if (visual === "allegiance") {
-    return (
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="relative">
-          <span className="block font-light leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(7rem,16vw,15rem)]">
-            62
-          </span>
-          <span className="absolute -right-5 top-2 font-serif text-fluid-3xl italic text-teal-600 dark:text-teal-300">
-            %
-          </span>
-        </div>
-      </div>
-    );
-  }
-  if (visual === "tax2win") {
-    return (
-      <>
-        <div className="absolute inset-x-6 top-16">
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
-            Filing Season · 2024
-          </div>
-          <div className="mt-2 font-light leading-[0.95] tracking-tightest text-foreground text-[clamp(1.6rem,4.5vw,3rem)]">
-            Ab ki baar,
-            <br />
-            <span className="font-serif italic text-teal-600 dark:text-teal-300">
-              real CA
-            </span>{" "}
-            ke saath.
-          </div>
-        </div>
-        <div className="absolute inset-x-6 bottom-24 flex h-20 items-end gap-2">
-          {[35, 55, 28, 70, 48, 82, 64, 92, 78, 100].map((h, i) => (
-            <div
-              key={i}
-              className="flex-1 rounded-t bg-gradient-to-b from-teal-500 to-teal-700"
-              style={{ height: `${h}%` }}
-            />
-          ))}
-        </div>
-      </>
-    );
-  }
-  // yug
-  return (
-    <div className="absolute inset-0 grid place-items-center">
-      <div className="relative h-56 w-56 rounded-full border border-foreground/30 md:h-64 md:w-64">
-        <div className="absolute inset-2 rounded-full border border-foreground/15" />
-        <div className="absolute inset-0 grid place-items-center text-center">
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.35em] text-foreground/60">
-              Tolaram · since 1950
-            </div>
-            <div className="mt-2 font-serif text-fluid-5xl italic leading-none">
-              yu
-              <span className="text-teal-600 dark:text-teal-300">g</span>
-            </div>
-            <div className="mt-2 text-[10px] uppercase tracking-[0.35em] text-foreground/60">
-              fashion · attitude · forever
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

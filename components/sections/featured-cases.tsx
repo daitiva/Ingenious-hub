@@ -4,16 +4,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { ClientLogo } from "@/components/client-logo";
 import { cn } from "@/lib/utils";
-
-type Visual =
-  | "allegiance"
-  | "tax2win"
-  | "yug";
 
 type Case = {
   index: string;
   client: string;
+  slug: string;
   sector: string;
   title: string;
   problem: string;
@@ -21,13 +18,16 @@ type Case = {
   execution: string;
   impact: string;
   metrics: { metric: string; label: string }[];
-  visual: Visual;
+  /** Optional rich detail line under the logo (e.g., a campaign headline) */
+  eyebrow?: string;
+  accent: string;
 };
 
 const CASES: Case[] = [
   {
     index: "01",
     client: "Allegiance Education",
+    slug: "allegiance-education",
     sector: "Edtech · Test Prep",
     title: "From a classroom to a national institute.",
     problem: "Strong faculty, generic brand.",
@@ -39,11 +39,14 @@ const CASES: Case[] = [
       { metric: "3", label: "cities live" },
       { metric: "1", label: "system" },
     ],
-    visual: "allegiance",
+    eyebrow: "Brand Re-Launch · 2024",
+    accent:
+      "bg-gradient-to-br from-amber-50 to-amber-200/50 dark:from-amber-950/40 dark:to-amber-900/20",
   },
   {
     index: "02",
     client: "Tax2Win",
+    slug: "tax2win",
     sector: "Fintech · Tax Filing",
     title: "Owning filing season, end-to-end.",
     problem: "Commoditised category, lookalike ads.",
@@ -55,11 +58,14 @@ const CASES: Case[] = [
       { metric: "−34%", label: "CAC" },
       { metric: "8 wks", label: "to result" },
     ],
-    visual: "tax2win",
+    eyebrow: "Ab ki baar, real CA ke saath.",
+    accent:
+      "bg-gradient-to-br from-emerald-50 to-emerald-200/50 dark:from-emerald-950/40 dark:to-emerald-900/20",
   },
   {
     index: "03",
     client: "Yug Vaastra",
+    slug: "yug-vaastra",
     sector: "D2C Fashion · Tolaram",
     title: "Heritage that ships.",
     problem: "75-year textile house going D2C — needed gravitas.",
@@ -71,7 +77,9 @@ const CASES: Case[] = [
       { metric: "+48%", label: "IG" },
       { metric: "75 yrs", label: "lineage" },
     ],
-    visual: "yug",
+    eyebrow: "Tolaram · since 1950",
+    accent:
+      "bg-gradient-to-br from-rose-50 to-rose-200/50 dark:from-rose-950/40 dark:to-rose-900/20",
   },
 ];
 
@@ -131,21 +139,22 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
             reverse && "md:[direction:rtl]"
           )}
         >
+          {/* Cover */}
           <div className="md:col-span-7 [direction:ltr]">
             <motion.div style={{ y: yMark }} className="relative">
-              <CoverVisual visual={c.visual} />
-              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/75 px-3 py-1 text-[11px] backdrop-blur">
+              <CaseCover c={c} />
+              <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-background/75 px-3 py-1 text-[11px] backdrop-blur z-10">
                 <span className="font-mono">{c.index}</span>
                 <span className="opacity-50">·</span>
                 <span>{c.sector}</span>
               </div>
-              <div className="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2">
+              <div className="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2 z-10">
                 {c.metrics.map((m) => (
                   <div
                     key={m.label}
                     className="rounded-xl border border-foreground/10 bg-background/90 px-3 py-2 backdrop-blur"
                   >
-                    <div className="text-base font-semibold tracking-tight md:text-lg">
+                    <div className="text-base font-light tracking-tightest md:text-lg">
                       {m.metric}
                     </div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -157,6 +166,7 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
             </motion.div>
           </div>
 
+          {/* Story */}
           <div className="md:col-span-5 [direction:ltr]">
             <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               {c.client}
@@ -196,6 +206,42 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
   );
 }
 
+/* Cover: brand logo centered on accent gradient, with project eyebrow below. */
+function CaseCover({ c }: { c: Case }) {
+  return (
+    <div
+      className={cn(
+        "relative aspect-[5/4] w-full overflow-hidden rounded-2xl",
+        c.accent
+      )}
+    >
+      {/* subtle vignette so light PNGs lift off the gradient */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.45),transparent_75%)] dark:bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,0.06),transparent_75%)]"
+      />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-8 pb-24 pt-16 text-center">
+        <ClientLogo
+          name={c.client}
+          slug={c.slug}
+          className="max-h-[44%] w-auto max-w-[70%] drop-shadow-sm"
+          fallback={
+            <span className="font-serif text-fluid-5xl italic text-foreground/85">
+              {c.client}
+            </span>
+          }
+        />
+        {c.eyebrow && (
+          <span className="mt-6 inline-flex max-w-[80%] items-center gap-2 rounded-full border border-foreground/10 bg-background/60 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/70 backdrop-blur">
+            {c.eyebrow}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Step({ label, body }: { label: string; body: string }) {
   return (
     <div className="grid grid-cols-[100px_1fr] gap-4 md:gap-6">
@@ -205,132 +251,6 @@ function Step({ label, body }: { label: string; body: string }) {
       <dd className="text-pretty text-sm leading-relaxed text-foreground/90 md:text-base">
         {body}
       </dd>
-    </div>
-  );
-}
-
-/* — Editorial cover visuals —
-   Each cover is a layered composition (no flat italic stamp) to feel
-   like an actual project artefact, not a placeholder. */
-function CoverVisual({ visual }: { visual: Visual }) {
-  if (visual === "allegiance") return <AllegianceCover />;
-  if (visual === "tax2win") return <Tax2WinCover />;
-  return <YugCover />;
-}
-
-/* 01 · Allegiance Education — admissions brochure aesthetic */
-function AllegianceCover() {
-  return (
-    <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl bg-[#F1E8D6] dark:bg-[#1c1611]">
-      {/* Big number */}
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="relative">
-          <span className="block font-light leading-[0.78] tracking-tightest text-foreground/90 text-[clamp(8rem,18vw,18rem)]">
-            62
-          </span>
-          <span className="absolute -right-6 top-3 font-serif text-fluid-4xl italic text-teal-600 dark:text-teal-300">
-            %
-          </span>
-        </div>
-      </div>
-      {/* Vertical line + label like a brochure spine */}
-      <div className="absolute inset-y-6 left-6 flex flex-col items-center justify-between text-[10px] uppercase tracking-[0.2em] text-foreground/60">
-        <span className="font-mono">A · 01</span>
-        <span className="rotate-180 [writing-mode:vertical-rl]">
-          Allegiance Education — Admissions
-        </span>
-        <span className="font-mono">2024</span>
-      </div>
-      {/* Card stack mockup */}
-      <div className="absolute -right-4 top-10 hidden w-32 rotate-6 rounded-md bg-foreground/95 p-3 text-background shadow-lg md:block">
-        <div className="text-[10px] tracking-wide opacity-70">Admit Card</div>
-        <div className="mt-2 h-1 w-12 rounded bg-teal-300" />
-        <div className="mt-1 h-1 w-16 rounded bg-background/30" />
-        <div className="mt-1 h-1 w-10 rounded bg-background/30" />
-      </div>
-      <div className="absolute right-6 bottom-20 hidden w-24 -rotate-3 rounded-md bg-background/90 p-2 shadow-md md:block">
-        <div className="h-1 w-10 rounded bg-foreground/80" />
-        <div className="mt-1 h-1 w-14 rounded bg-foreground/40" />
-      </div>
-    </div>
-  );
-}
-
-/* 02 · Tax2Win — billboard / OOH composition */
-function Tax2WinCover() {
-  return (
-    <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl bg-emerald-50 dark:bg-emerald-950/30">
-      {/* Top bar headline */}
-      <div className="absolute inset-x-6 top-6">
-        <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
-          Filing Season · 2024
-        </div>
-        <div className="mt-2 font-light leading-[0.95] tracking-tightest text-foreground text-[clamp(2.2rem,5.5vw,4.5rem)]">
-          Ab ki baar,<br />
-          <span className="font-serif italic text-teal-600 dark:text-teal-300">
-            real CA
-          </span>{" "}
-          ke saath.
-        </div>
-      </div>
-      {/* Performance bars */}
-      <div className="absolute inset-x-6 bottom-20 flex h-24 items-end gap-2">
-        {[35, 55, 28, 70, 48, 82, 64, 92, 78, 100].map((h, i) => (
-          <div
-            key={i}
-            className="flex-1 rounded-t bg-gradient-to-b from-teal-500 to-teal-700"
-            style={{ height: `${h}%` }}
-          />
-        ))}
-      </div>
-      {/* Phone mockup pill */}
-      <div className="absolute right-6 top-6 hidden h-32 w-16 rotate-6 rounded-2xl border-2 border-foreground/80 bg-background p-1.5 md:block">
-        <div className="h-full w-full rounded-lg bg-gradient-to-b from-emerald-200 to-emerald-500" />
-      </div>
-    </div>
-  );
-}
-
-/* 03 · Yug Vaastra — packaging / monogram aesthetic */
-function YugCover() {
-  return (
-    <div className="relative aspect-[5/4] w-full overflow-hidden rounded-2xl bg-rose-50 dark:bg-rose-950/30">
-      {/* Monogram disc */}
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="relative h-56 w-56 rounded-full border border-foreground/30 md:h-72 md:w-72">
-          <div className="absolute inset-2 rounded-full border border-foreground/15" />
-          <div className="absolute inset-0 grid place-items-center text-center font-serif italic">
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.35em] text-foreground/60">
-                Tolaram · since 1950
-              </div>
-              <div className="mt-2 text-fluid-5xl leading-none">
-                yu
-                <span className="text-teal-600 dark:text-teal-300">g</span>
-              </div>
-              <div className="mt-2 text-[10px] uppercase tracking-[0.35em] text-foreground/60">
-                fashion · attitude · forever
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Tag swatch */}
-      <div className="absolute left-6 top-6 h-16 w-2 rounded bg-rose-400" aria-hidden />
-      <div className="absolute left-12 top-6 hidden md:block">
-        <div className="h-2 w-10 rounded bg-foreground/70" />
-        <div className="mt-1 h-2 w-16 rounded bg-foreground/40" />
-        <div className="mt-1 h-2 w-8 rounded bg-foreground/40" />
-      </div>
-      {/* Card mockup */}
-      <div className="absolute -bottom-6 right-6 hidden h-24 w-40 rotate-[-4deg] rounded-md bg-background/95 p-3 shadow-lg md:block">
-        <div className="text-[10px] uppercase tracking-[0.2em] text-foreground/60">
-          Lookbook · SS25
-        </div>
-        <div className="mt-2 h-1 w-16 rounded bg-foreground/80" />
-        <div className="mt-1 h-1 w-20 rounded bg-foreground/40" />
-        <div className="mt-1 h-1 w-12 rounded bg-foreground/40" />
-      </div>
     </div>
   );
 }
