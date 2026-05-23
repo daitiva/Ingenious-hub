@@ -1,165 +1,171 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { ClientLogo } from "@/components/client-logo";
 
+/**
+ * Hero — Section 1 of the homepage narrative arc.
+ *
+ * Composition: 7/5 asymmetric split. Left: thesis statement + single CTA.
+ * Right: a single curated brand artefact (Allegiance brochure or Yug monogram)
+ * with parallax on scroll. No carousel. No auto-rotate. No marquee.
+ *
+ * Bottom: a thin micro-trust row anchored to the lower edge — not a separate slab.
+ */
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax only on screens that can hold attention; mobile reads straight through.
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px) and (prefers-reduced-motion: no-preference)");
+    const handler = () => setIsDesktop(mq.matches);
+    handler();
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const yArtefact = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const yLetter = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacityArtefact = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
+
   return (
-    <section className="relative isolate overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(20,184,166,0.18),transparent_70%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-teal-500/40 to-transparent"
-      />
+    <section
+      ref={ref}
+      className="relative isolate flex min-h-[calc(100svh-64px)] items-end overflow-hidden pb-12 pt-28 md:pb-16 md:pt-32"
+    >
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      <div className="container grid items-center gap-12 py-24 md:grid-cols-12 md:py-32">
-        <div className="md:col-span-7">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 px-3 py-1 text-xs font-medium text-teal-700 dark:text-teal-300"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            Branding · Web · Performance · PR
-          </motion.div>
+      {/* Oversized brand letter that parallaxes upward — counter-motion to the artefact */}
+      <motion.div
+        aria-hidden
+        style={isDesktop ? { y: yLetter } : undefined}
+        className="pointer-events-none absolute -bottom-32 right-[-8vw] -z-10 select-none font-serif italic leading-[0.7] text-foreground/[0.04] dark:text-foreground/[0.06] text-[clamp(20rem,42vw,55rem)]"
+      >
+        a
+      </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-5 text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl"
-          >
-            We{" "}
-            <span className="font-serif italic text-teal-600 dark:text-teal-400">
-              energize
-            </span>{" "}
-            brands that want to grow.
-          </motion.h1>
+      <div className="container relative">
+        <div className="grid items-end gap-10 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
+          {/* LEFT — thesis */}
+          <div className="md:col-span-7">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              The Studio · Jaipur · Worldwide · Since 2016
+            </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-6 max-w-xl text-pretty text-lg text-muted-foreground"
-          >
-            We&rsquo;re a Jaipur-based studio that packages branding, websites, and
-            performance marketing into one engine — built to win attention and drive
-            measurable revenue.
-          </motion.p>
+            <h1 className="mt-7 font-display font-light text-d-1">
+              <SplitLine delay={0.05}>We design the brands</SplitLine>
+              <SplitLine delay={0.22}>
+                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                  people choose.
+                </span>
+              </SplitLine>
+            </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-9 flex flex-wrap items-center gap-3"
-          >
-            <Button asChild size="lg">
-              <Link href="/contact">
-                Book Free Strategy Call
-                <ArrowUpRight className="h-4 w-4" />
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8 max-w-md text-body-lg text-muted-foreground"
+            >
+              A strategic branding and digital-experience studio. We argue that
+              brands are won on coherence — not budget — and then we build for it.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="mt-10"
+            >
+              <Link
+                href="/contact"
+                className="focus-ring group inline-flex h-12 items-center gap-3 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              >
+                Start a project
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
               </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/work">See our work</Link>
-            </Button>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted-foreground"
-          >
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              4.6★ on Google · 11+ reviews
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              Replies within 4 working hours
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
-              60+ brands shipped
-            </div>
-          </motion.div>
+          {/* RIGHT — single artefact */}
+          <div className="md:col-span-5">
+            <motion.figure
+              style={isDesktop ? { y: yArtefact, opacity: opacityArtefact } : undefined}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto aspect-[4/5] w-full max-w-md"
+            >
+              {/* Soft warm card behind the artefact; not a gradient cliché */}
+              <div className="absolute inset-0 rounded-2xl border border-hairline bg-card/60 shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:bg-card/40 dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]" />
+
+              {/* Hairline registration marks — feels like an art-board, not a card */}
+              <span aria-hidden className="absolute left-3 top-3 h-3 w-3 border-l border-t border-foreground/30" />
+              <span aria-hidden className="absolute right-3 top-3 h-3 w-3 border-r border-t border-foreground/30" />
+              <span aria-hidden className="absolute left-3 bottom-3 h-3 w-3 border-l border-b border-foreground/30" />
+              <span aria-hidden className="absolute right-3 bottom-3 h-3 w-3 border-r border-b border-foreground/30" />
+
+              <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
+                <ClientLogo
+                  name="Allegiance Education"
+                  slug="allegiance-education"
+                  className="max-h-[60%] w-auto max-w-full"
+                  fallback={
+                    <span className="text-center font-serif text-5xl italic text-foreground/80">
+                      Allegiance
+                    </span>
+                  }
+                />
+              </div>
+
+              <figcaption className="absolute inset-x-4 bottom-4 flex items-end justify-between rounded-lg border border-hairline bg-card px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground dark:bg-card/80">
+                <span>Allegiance Education</span>
+                <span className="font-mono">+62%</span>
+              </figcaption>
+            </motion.figure>
+          </div>
         </div>
 
-        <div className="relative md:col-span-5">
-          <HeroMark />
+        {/* Micro-trust strip — anchored to the lower edge, four stats, no animation noise */}
+        <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border pt-6 text-sm md:mt-24 md:grid-cols-4">
+          <Stat label="Brands shipped" value="60+" />
+          <Stat label="Google rating" value="4.6 ★" />
+          <Stat label="Reply window" value="< 4 working hrs" />
+          <Stat label="Accreditation" value="DesignRush · Clutch" />
         </div>
       </div>
     </section>
   );
 }
 
-function HeroMark() {
+function SplitLine({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative mx-auto aspect-square w-full max-w-md"
-    >
-      <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-teal-500/20 via-teal-300/10 to-transparent blur-2xl" />
-      <div className="relative h-full w-full rounded-[2rem] border border-teal-500/20 bg-card/60 p-10 shadow-[0_30px_80px_-30px_rgba(13,148,136,0.45)] backdrop-blur-sm">
-        <div className="flex h-full w-full items-center justify-center">
-          <motion.svg
-            viewBox="0 0 200 240"
-            className="h-full w-auto"
-            initial={{ rotate: -2 }}
-            animate={{ rotate: [-2, 2, -2] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            aria-hidden
-          >
-            <defs>
-              <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#5eead4" />
-                <stop offset="100%" stopColor="#0d9488" />
-              </linearGradient>
-            </defs>
-            <motion.circle
-              cx="100"
-              cy="40"
-              r="22"
-              fill="url(#tealGrad)"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <rect
-              x="80"
-              y="78"
-              width="40"
-              height="140"
-              rx="6"
-              fill="url(#tealGrad)"
-            />
-            <motion.circle
-              cx="100"
-              cy="40"
-              r="34"
-              fill="none"
-              stroke="#14b8a6"
-              strokeOpacity="0.25"
-              strokeWidth="2"
-              animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2.4, repeat: Infinity }}
-              style={{ originX: "100px", originY: "40px" }}
-            />
-          </motion.svg>
-        </div>
-        <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-xl border border-border bg-background/70 px-4 py-2.5 text-xs text-muted-foreground backdrop-blur">
-          <span className="font-mono uppercase tracking-widest">Mark · 2025</span>
-          <span className="text-teal-600 dark:text-teal-400">energize your brand</span>
-        </div>
-      </div>
-    </motion.div>
+    <span className="block overflow-hidden pb-[0.08em]">
+      <motion.span
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1], delay }}
+        className="inline-block"
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+      <div className="mt-1 font-medium tracking-tight">{value}</div>
+    </div>
   );
 }

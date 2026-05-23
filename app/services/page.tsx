@@ -14,24 +14,24 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-border bg-muted/20 py-20 md:py-28">
+      <section className="border-b border-border bg-muted/20 py-16 md:py-24">
         <div className="container max-w-3xl">
           <p className="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400">
             Services
           </p>
-          <h1 className="mt-3 text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Five offerings.{" "}
-            <span className="font-serif italic">One growth engine.</span>
+          <h1 className="mt-3 text-balance text-4xl font-light leading-[1.05] tracking-tightest md:text-6xl">
+            Five focused offerings.{" "}
+            <span className="font-serif italic">Zero fluff.</span>
           </h1>
-          <p className="mt-5 text-pretty text-lg text-muted-foreground">
-            We don&rsquo;t do thirty things badly. We do five things well — and we plug
-            them together so your brand, site, and acquisition stop fighting each other.
+          <p className="mt-4 text-pretty text-base text-muted-foreground md:text-lg">
+            We don&rsquo;t sell 30 disconnected services. We design integrated systems
+            that help brands grow faster and smarter.
           </p>
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
-        <div className="container space-y-20 md:space-y-28">
+      <section className="py-16 md:py-20">
+        <div className="container space-y-16 md:space-y-20">
           {SERVICES.map((s, i) => {
             const Icon = s.icon;
             const reversed = i % 2 === 1;
@@ -55,7 +55,7 @@ export default function ServicesPage() {
                         0{i + 1} / 05
                       </span>
                     </div>
-                    <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-tight">
+                    <h2 className="mt-6 text-3xl font-light leading-tight tracking-tight">
                       {s.title}
                     </h2>
                     <p className="mt-2 font-serif text-lg italic text-muted-foreground">

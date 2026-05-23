@@ -4,36 +4,34 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 6%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 6%;
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 40%;
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 173 80% 36%;
-    --primary: 173 80% 36%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 168 84% 78%;
-    --accent-foreground: 173 80% 18%;
-    --radius: 0.85rem;
+    /* Light surface — warm bone */
+    --background: 38 35% 93%;
+    --foreground: 35 18% 5%;
+    --card: 36 30% 96%;
+    --card-foreground: 35 18% 5%;
+    --muted: 38 25% 88%;
+    --muted-foreground: 30 8% 36%;
+    --border: 36 18% 86%;
+    --input: 36 18% 86%;
+    --ring: 173 80% 28%;
+    --primary: 173 80% 28%;
+    --primary-foreground: 38 35% 95%;
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 222 47% 5%;
-    --foreground: 210 20% 96%;
-    --card: 222 47% 7%;
-    --card-foreground: 210 20% 96%;
-    --muted: 222 30% 12%;
-    --muted-foreground: 215 16% 65%;
-    --border: 222 30% 14%;
-    --input: 222 30% 14%;
+    /* Dark surface — cool mist */
+    --background: 220 18% 5%;
+    --foreground: 38 28% 92%;
+    --card: 220 18% 7%;
+    --card-foreground: 38 28% 92%;
+    --muted: 220 14% 11%;
+    --muted-foreground: 30 8% 64%;
+    --border: 220 14% 14%;
+    --input: 220 14% 14%;
     --ring: 173 80% 50%;
-    --primary: 173 80% 45%;
-    --primary-foreground: 222 47% 5%;
-    --accent: 168 84% 60%;
-    --accent-foreground: 222 47% 5%;
+    --primary: 173 80% 42%;
+    --primary-foreground: 220 18% 5%;
   }
 
   * {
@@ -42,45 +40,69 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss02" 1, "cv11" 1;
   }
 
   ::selection {
-    @apply bg-teal-500/30 text-foreground;
+    @apply bg-teal-600/20 text-foreground;
+  }
+
+  /* Skip to content — accessibility */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    padding: 0.75rem 1rem;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    z-index: 100;
+    border-radius: 0 0 0.5rem 0;
+  }
+  .skip-link:focus {
+    left: 0;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Editorial hairline — used as a section separator that animates in */
+  .hairline {
+    background: hsl(var(--border));
+    height: 1px;
+    transform-origin: left;
   }
 
-  .text-pretty {
-    text-wrap: pretty;
+  /* Subtle paper grain — used once on hero only */
+  .grain {
+    background-image: radial-gradient(
+        hsl(var(--foreground) / 0.025) 1px,
+        transparent 1px
+      );
+    background-size: 14px 14px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
-  .grain::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(20, 184, 166, 0.06) 1px, transparent 1px);
-    background-size: 18px 18px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  /* Focus ring used site-wide */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
+}
 
-  .gradient-text {
-    background: linear-gradient(120deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .glass {
-    @apply bg-background/70 backdrop-blur-md backdrop-saturate-150;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

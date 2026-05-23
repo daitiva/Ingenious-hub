@@ -22,61 +22,60 @@ export const SERVICES: ServicePillar[] = [
   {
     id: "branding",
     title: "Branding & Identity",
-    tagline: "A brand that is felt, not just seen.",
+    tagline: "Brands people remember.",
     description:
-      "Strategic positioning, naming systems, and a visual identity that makes your audience choose you on instinct.",
-    includes: ["Logo Design", "Brand Strategy", "Visual Identity"],
+      "Strategic positioning and a visual identity that earns the price you want to charge.",
+    includes: ["Logo", "Visual Identity", "Brand Strategy"],
     whoItsFor:
-      "Founders launching a new venture or rebranding an existing one to look the part of where they're headed.",
-    outcomeMetric: "Brand recall worth charging more for",
+      "Founders launching, rebranding, or moving upmarket.",
+    outcomeMetric: "Premium perception",
     icon: Sparkles,
   },
   {
     id: "web",
     title: "Website & UI/UX",
-    tagline: "Sites that convert, not just impress.",
+    tagline: "Sites built to convert.",
     description:
-      "Conversion-led websites and product UI built on Next.js, Webflow, or WordPress — fast, accessible, measurable.",
-    includes: ["Website Design", "UI/UX", "Web Development"],
+      "Conversion-led websites and product UI — fast, accessible, measurable.",
+    includes: ["UI/UX", "Web Design", "Development"],
     whoItsFor:
-      "Teams whose current site is leaking leads, looks dated, or can't keep up with the brand.",
-    outcomeMetric: "2–4× lift in qualified inbound",
+      "Teams whose current site is leaking leads.",
+    outcomeMetric: "Better conversion",
     icon: MonitorSmartphone,
   },
   {
     id: "performance",
     title: "Performance Marketing",
-    tagline: "Pipeline you can predict.",
+    tagline: "Predictable growth, not vanity.",
     description:
-      "Paid acquisition, SEO, and lead funnels engineered around CAC and lifetime value — not vanity metrics.",
-    includes: ["SEO", "Paid Ads (Meta + Google)", "Lead Generation"],
+      "Paid, SEO, and lead funnels engineered around CAC.",
+    includes: ["SEO", "Paid Ads", "Lead Gen"],
     whoItsFor:
-      "Founders who want to grow revenue without scaling guesswork or babysitting freelancers.",
-    outcomeMetric: "Lower CAC, sharper attribution",
+      "Founders scaling revenue, not guesswork.",
+    outcomeMetric: "Consistent pipeline",
     icon: TrendingUp,
   },
   {
     id: "creative",
     title: "Creative & Content",
-    tagline: "Scroll-stopping creative, on tempo.",
+    tagline: "Content that earns action.",
     description:
-      "On-brand social, ad creatives, and campaign systems that ship weekly — not once a quarter.",
-    includes: ["Social Media", "Ad Creatives", "Campaign Design"],
-    whoItsFor:
-      "Brands that need a creative engine — not another freelancer with a backlog.",
-    outcomeMetric: "+40–80% engagement on average",
+      "Social, ad creatives, and campaigns shipping weekly — not quarterly.",
+    includes: ["Social", "Creatives", "Campaigns"],
+    whoItsFor: "Brands that need a creative engine, not another freelancer.",
+    outcomeMetric: "Reach + recall",
     icon: PenTool,
   },
   {
     id: "pr",
     title: "PR & Growth",
-    tagline: "Tell the story that gets you trusted.",
+    tagline: "Authority where it matters.",
     description:
-      "Founder-led PR, thought leadership, and earned media that stack credibility before your buyer says hello.",
-    includes: ["Public Relations", "Founder Branding"],
+      "Founder-led PR and earned media that stack credibility before the buyer says hello.",
+    includes: ["PR", "Founder Branding"],
     whoItsFor:
-      "Founders raising, hiring, or selling into rooms where reputation enters before you do.",
-    outcomeMetric: "Tier-1 features and a sharper personal narrative",
+      "Founders raising, hiring, or selling.",
+    outcomeMetric: "Credibility + visibility",
     icon: Megaphone,
   },
 ];
