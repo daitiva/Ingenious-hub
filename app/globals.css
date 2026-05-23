@@ -4,39 +4,34 @@
 
 @layer base {
   :root {
-    --cream: 38 32% 92%;
-    --ink: 30 8% 6%;
-
-    --background: 0 0% 100%;
-    --foreground: 30 8% 6%;
-    --card: 0 0% 100%;
-    --card-foreground: 30 8% 6%;
-    --muted: 38 25% 94%;
-    --muted-foreground: 220 9% 36%;
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 173 80% 36%;
-    --primary: 173 80% 36%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 168 84% 78%;
-    --accent-foreground: 173 80% 18%;
-    --radius: 0.85rem;
+    /* Light surface — warm bone */
+    --background: 38 35% 93%;
+    --foreground: 35 18% 5%;
+    --card: 36 30% 96%;
+    --card-foreground: 35 18% 5%;
+    --muted: 38 25% 88%;
+    --muted-foreground: 30 8% 36%;
+    --border: 36 18% 86%;
+    --input: 36 18% 86%;
+    --ring: 173 80% 28%;
+    --primary: 173 80% 28%;
+    --primary-foreground: 38 35% 95%;
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 30 8% 6%;
-    --foreground: 38 32% 92%;
-    --card: 30 8% 8%;
-    --card-foreground: 38 32% 92%;
-    --muted: 30 8% 11%;
-    --muted-foreground: 220 9% 66%;
-    --border: 30 8% 14%;
-    --input: 30 8% 14%;
+    /* Dark surface — cool mist */
+    --background: 220 18% 5%;
+    --foreground: 38 28% 92%;
+    --card: 220 18% 7%;
+    --card-foreground: 38 28% 92%;
+    --muted: 220 14% 11%;
+    --muted-foreground: 30 8% 64%;
+    --border: 220 14% 14%;
+    --input: 220 14% 14%;
     --ring: 173 80% 50%;
-    --primary: 173 80% 45%;
-    --primary-foreground: 30 8% 6%;
-    --accent: 168 84% 60%;
-    --accent-foreground: 30 8% 6%;
+    --primary: 173 80% 42%;
+    --primary-foreground: 220 18% 5%;
   }
 
   * {
@@ -45,15 +40,31 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss02" 1;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss02" 1, "cv11" 1;
   }
 
   ::selection {
-    @apply bg-teal-500/30 text-foreground;
+    @apply bg-teal-600/20 text-foreground;
+  }
+
+  /* Skip to content — accessibility */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    padding: 0.75rem 1rem;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    z-index: 100;
+    border-radius: 0 0 0.5rem 0;
+  }
+  .skip-link:focus {
+    left: 0;
   }
 }
 
@@ -61,72 +72,37 @@
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
 
-  .grain::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(20, 184, 166, 0.06) 1px, transparent 1px);
-    background-size: 18px 18px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  }
-
-  .gradient-text {
-    background: linear-gradient(120deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .glass {
-    @apply bg-background/70 backdrop-blur-md backdrop-saturate-150;
-  }
-
-  .display-tight {
-    letter-spacing: -0.04em;
-    line-height: 0.92;
-  }
-
-  .clip-rise > * {
-    display: inline-block;
-    will-change: transform;
-  }
-
-  /* Editorial slab divider line */
-  .rule {
-    position: relative;
-  }
-  .rule::before {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
+  /* Editorial hairline — used as a section separator that animates in */
+  .hairline {
+    background: hsl(var(--border));
     height: 1px;
-    background: currentColor;
-    opacity: 0.12;
+    transform-origin: left;
   }
 
-  /* Scroll-progress bar in nav */
-  .scroll-progress {
-    position: fixed;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, #14b8a6 var(--progress, 0%), transparent var(--progress, 0%));
-    z-index: 60;
-    pointer-events: none;
+  /* Subtle paper grain — used once on hero only */
+  .grain {
+    background-image: radial-gradient(
+        hsl(var(--foreground) / 0.025) 1px,
+        transparent 1px
+      );
+    background-size: 14px 14px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
-  /* Hover image preview for editorial service rows */
-  .reveal-img-stage {
-    pointer-events: none;
-    position: fixed;
-    z-index: 35;
-    transform: translate(-50%, -50%);
-    width: clamp(220px, 26vw, 380px);
-    aspect-ratio: 4/5;
-    border-radius: 18px;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.18s ease;
+  /* Focus ring used site-wide */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
-  .reveal-img-stage.show { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

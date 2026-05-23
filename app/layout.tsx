@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { StatusRibbon } from "@/components/status-ribbon";
 import { Footer } from "@/components/footer";
-import { FloatingCTA } from "@/components/floating-cta";
+import { SmoothScroll } from "@/components/smooth-scroll";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
+
+// Inter doubles as our display family until a premium display can be licensed.
+// The CSS var name is kept distinct so the swap is one line in tailwind.config.
+const displayFont = inter;
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -21,35 +24,35 @@ const instrument = Instrument_Serif({
   variable: "--font-instrument",
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://ingenioushub.com"),
   title: {
-    default:
-      "Ingenious Hub — A creative & digital growth partner for ambitious brands",
+    default: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
     template: "%s · Ingenious Hub",
   },
   description:
-    "Ingenious Hub is a Jaipur-based creative and digital growth studio building branding, websites, and performance systems that compound revenue for ambitious brands across India, the GCC, and beyond.",
+    "A Jaipur-based strategic branding and digital-experience studio. We design the brands people choose — across edtech, D2C, fintech, healthcare, and B2B.",
   keywords: [
     "branding agency India",
     "creative agency Jaipur",
-    "digital marketing studio",
-    "growth marketing partner",
-    "UI UX design agency",
-    "performance marketing",
-    "Ingenious Hub",
+    "digital branding studio",
+    "UI UX agency India",
+    "brand strategy studio",
     "PR agency Jaipur",
-    "brand strategy India",
+    "Ingenious Hub",
+    "website development Jaipur",
     "founder branding",
   ],
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
-    title:
-      "Ingenious Hub — A creative & digital growth partner for ambitious brands",
-    description:
-      "Branding, websites, and performance — built as one engine for brands that want to dominate.",
+    title: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
+    description: "We design the brands people choose.",
     url: "https://ingenioushub.com",
     siteName: "Ingenious Hub",
     locale: "en_IN",
@@ -57,10 +60,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Ingenious Hub — A creative & digital growth partner for ambitious brands",
-    description:
-      "Branding, websites, and performance — built as one engine for brands that want to dominate.",
+    title: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
+    description: "We design the brands people choose.",
   },
   robots: {
     index: true,
@@ -72,9 +73,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.svg",
-  },
+  icons: { icon: "/favicon.svg" },
 };
 
 const SCHEMAS = [
@@ -85,17 +84,15 @@ const SCHEMAS = [
     name: "Ingenious Hub",
     legalName: "Ingenious Hub Enterprise (P) Ltd.",
     url: "https://ingenioushub.com",
-    logo: "https://ingenioushub.com/favicon.svg",
-    slogan: "We turn brands into growth engines.",
+    logo: "https://ingenioushub.com/logo.svg",
+    slogan: "We design the brands people choose.",
     foundingDate: "2016",
     description:
-      "A creative & digital growth partner for ambitious brands. Branding, websites, and performance marketing as one system.",
+      "A strategic branding and digital-experience studio for ambitious brands.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "2-TA-8, Sector 2, Jawahar Nagar",
       addressLocality: "Jaipur",
       addressRegion: "Rajasthan",
-      postalCode: "302004",
       addressCountry: "IN",
     },
     contactPoint: [
@@ -121,7 +118,8 @@ const SCHEMAS = [
       "Performance Marketing",
       "Public Relations",
       "Founder Branding",
-      "Lead Generation",
+      "Advertising",
+      "Creative Direction",
     ],
   },
   {
@@ -129,17 +127,8 @@ const SCHEMAS = [
     "@type": "ProfessionalService",
     "@id": "https://ingenioushub.com#service",
     name: "Ingenious Hub",
-    image: "https://ingenioushub.com/favicon.svg",
     priceRange: "₹₹₹",
     parentOrganization: { "@id": "https://ingenioushub.com#organization" },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "2-TA-8, Sector 2, Jawahar Nagar",
-      addressLocality: "Jaipur",
-      addressRegion: "Rajasthan",
-      postalCode: "302004",
-      addressCountry: "IN",
-    },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.6",
@@ -153,7 +142,14 @@ const SCHEMAS = [
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
         opens: "10:00",
         closes: "19:00",
       },
@@ -166,11 +162,6 @@ const SCHEMAS = [
     url: "https://ingenioushub.com",
     name: "Ingenious Hub",
     publisher: { "@id": "https://ingenioushub.com#organization" },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://ingenioushub.com/?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
   },
 ];
 
@@ -182,18 +173,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrument.variable}`}
+      className={`${inter.variable} ${instrument.variable} ${mono.variable}`}
+      style={{ ["--font-display" as string]: displayFont.style.fontFamily }}
       suppressHydrationWarning
     >
       <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <SmoothScroll />
           <Navbar />
-          <main className="pt-[64px]">
-            <StatusRibbon />
+          <main id="main" className="pt-[64px]">
             {children}
           </main>
           <Footer />
-          <FloatingCTA />
         </ThemeProvider>
         {SCHEMAS.map((s, i) => (
           <script

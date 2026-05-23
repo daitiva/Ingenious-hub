@@ -1,22 +1,20 @@
 import { Hero } from "@/components/sections/hero";
-import { Capabilities } from "@/components/sections/capabilities";
-import { RandomizedWork } from "@/components/sections/randomized-work";
-import { FeaturedCases } from "@/components/sections/featured-cases";
-import { Accreditations } from "@/components/sections/accreditations";
-import { ClientEcosystem } from "@/components/sections/client-ecosystem";
-import { Insights } from "@/components/sections/insights";
+import { Thesis } from "@/components/sections/thesis";
+import { FeaturedWork } from "@/components/sections/featured-work";
+import { ServicesPosture } from "@/components/sections/services-posture";
+import { Industries } from "@/components/sections/industries";
+import { Proof } from "@/components/sections/proof";
 import { FinalCTA } from "@/components/sections/final-cta";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Capabilities />
-      <RandomizedWork />
-      <FeaturedCases />
-      <Accreditations />
-      <ClientEcosystem />
-      <Insights />
+      <Thesis />
+      <FeaturedWork />
+      <ServicesPosture />
+      <Industries />
+      <Proof />
       <FinalCTA />
     </>
   );
