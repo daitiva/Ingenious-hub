@@ -3,7 +3,6 @@
 import * as React from "react";
 import { cn, slugify } from "@/lib/utils";
 import { getLogoEntry } from "@/lib/client-logos";
-import { CLIENTS } from "@/lib/clients";
 
 type ClientLogoProps = {
   /** Display name — used for alt text + placeholder + slug derivation */
@@ -22,19 +21,17 @@ type ClientLogoProps = {
 };
 
 /**
- * Two-tier source strategy:
- *   1. /public/clients/<slug>.<ext> if the manifest says `verified`.
- *   2. Google's favicon service at sz=128 if the client has a public
- *      `domain` set on lib/clients.ts. This is "good enough" for an
- *      editorial wall — sharp icon, served from Google's CDN, no
- *      third-party JS, no privacy hit.
- *   3. Typographic placeholder at identical dimensions otherwise.
+ * Two-tier source strategy — kept honest:
+ *   1. /public/clients/<slug>.<ext> if the manifest says `verified`. The
+ *      file is uploaded by the studio; we render it.
+ *   2. Editorial typographic placeholder otherwise. Reads as an intentional
+ *      brand wordmark in the studio's serif, not as a missing asset.
  *
- * All three render at the same box so the grid never shifts.
+ * Past iterations tried Google's favicon CDN as a tier-2 source. The output
+ * was upscaled 32px PNGs that read as broken-favicons on a premium wall, so
+ * that path is removed. To swap a placeholder for a real mark, drop the SVG
+ * at /public/clients/<slug>.svg and flip the manifest entry to "verified".
  */
-
-const GOOGLE_FAVICON = "https://www.google.com/s2/favicons?sz=128&domain=";
-
 export function ClientLogo({
   name,
   slug: slugOverride,
@@ -44,124 +41,96 @@ export function ClientLogo({
   fallback,
   loading = "lazy",
 }: ClientLogoProps) {
-  const [localErrored, setLocalErrored] = React.useState(false);
-  const [domainErrored, setDomainErrored] = React.useState(false);
-
+  const [errored, setErrored] = React.useState(false);
   const slug = slugOverride ?? slugify(name);
   const entry = getLogoEntry(slug);
-  const client = CLIENTS.find((c) => c.name === name);
 
   // Blocked entries never render an asset.
   if (entry.status === "blocked") {
-    return (
-      <Placeholder name={name} className={className}>
-        {fallback ?? name}
-      </Placeholder>
-    );
+    return <Placeholder name={name}>{fallback ?? name}</Placeholder>;
   }
 
   // Tier 1 — verified local asset.
-  if (entry.status === "verified" && !localErrored) {
+  if (entry.status === "verified" && !errored) {
     const ext = entry.ext ?? "svg";
     const src = `/clients/${slug}.${ext}`;
     const mono = forceMono ?? entry.monochrome ?? false;
     return (
-      <BrandImg
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
         src={src}
         alt={name}
+        width={200}
+        height={120}
         loading={loading}
-        mono={mono}
-        tone={tone}
-        className={className}
-        onError={() => setLocalErrored(true)}
+        decoding="async"
+        onError={() => setErrored(true)}
+        className={cn(
+          "block h-full w-full max-w-full object-contain",
+          mono &&
+            "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
+          tone === "mono" &&
+            "[filter:grayscale(1)_contrast(0.9)] opacity-80 transition-[filter,opacity] duration-300 hover:[filter:grayscale(0)] hover:opacity-100",
+          className
+        )}
       />
     );
   }
 
-  // Tier 2 — domain-sourced fallback (Google favicons). Sharp 128px PNG.
-  if (client?.domain && !domainErrored) {
-    return (
-      <BrandImg
-        src={`${GOOGLE_FAVICON}${client.domain}`}
-        alt={name}
-        loading={loading}
-        // Favicons are full-colour by default; respect tone="mono" for the wall
-        mono={forceMono ?? false}
-        tone={tone}
-        className={cn("h-auto max-h-12 w-auto", className)}
-        onError={() => setDomainErrored(true)}
-      />
-    );
-  }
-
-  // Tier 3 — typographic placeholder.
-  return (
-    <Placeholder name={name} className={className}>
-      {fallback ?? name}
-    </Placeholder>
-  );
+  // Tier 2 — editorial typographic placeholder.
+  return <Placeholder name={name}>{fallback ?? name}</Placeholder>;
 }
 
-function BrandImg({
-  src,
-  alt,
-  loading,
-  mono,
-  tone,
-  className,
-  onError,
-}: {
-  src: string;
-  alt: string;
-  loading?: "lazy" | "eager";
-  mono?: boolean;
-  tone?: "auto" | "mono" | "default";
-  className?: string;
-  onError?: () => void;
-}) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt}
-      width={200}
-      height={120}
-      loading={loading ?? "lazy"}
-      decoding="async"
-      referrerPolicy="no-referrer"
-      onError={onError}
-      className={cn(
-        "block h-full w-full max-w-full object-contain",
-        mono &&
-          "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
-        tone === "mono" &&
-          "[filter:grayscale(1)_contrast(0.9)] opacity-80 transition-[filter,opacity] duration-300 hover:[filter:grayscale(0)] hover:opacity-100",
-        className
-      )}
-    />
-  );
-}
-
+/**
+ * The placeholder is a tight, hand-tuned typographic composition designed
+ * to look intentional next to real logos on the same wall. Serif italic for
+ * the wordmark, a thin hairline rule above and below to mimic a printer's
+ * nameplate, and a tiny mono colophon underneath that contextualises it.
+ *
+ * Two-line names break at the space; long names step down a size so the
+ * wall never feels lopsided.
+ */
 function Placeholder({
   name,
-  className,
   children,
 }: {
   name: string;
-  className?: string;
   children: React.ReactNode;
 }) {
-  const isLong = name.length > 18;
+  // Three buckets — sizes tuned so a wall of mixed-length names reads
+  // visually balanced at the same cell dimensions.
+  const len = name.length;
+  const size =
+    len <= 12
+      ? "text-2xl md:text-[1.6rem]"
+      : len <= 22
+        ? "text-xl md:text-[1.35rem]"
+        : "text-base md:text-lg";
+
   return (
     <span
       aria-label={name}
-      className={cn(
-        "flex h-full w-full items-center justify-center text-balance text-center font-serif italic leading-tight tracking-tight text-foreground/70",
-        isLong ? "text-base md:text-lg" : "text-lg md:text-2xl",
-        className
-      )}
+      className="group/ph relative inline-flex h-full w-full flex-col items-center justify-center gap-1.5 px-2 text-center"
     >
-      {children}
+      {/* Top hairline */}
+      <span
+        aria-hidden
+        className="h-px w-6 bg-foreground/25 transition-[width,background] duration-500 group-hover/ph:w-10 group-hover/ph:bg-foreground/45"
+      />
+      {/* Wordmark */}
+      <span
+        className={cn(
+          "block text-balance font-serif italic leading-[1.05] tracking-tight text-foreground/85",
+          size
+        )}
+      >
+        {children}
+      </span>
+      {/* Bottom hairline */}
+      <span
+        aria-hidden
+        className="h-px w-6 bg-foreground/25 transition-[width,background] duration-500 group-hover/ph:w-10 group-hover/ph:bg-foreground/45"
+      />
     </span>
   );
 }
