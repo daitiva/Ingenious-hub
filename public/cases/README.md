@@ -29,7 +29,7 @@ fall back to a typographic placeholder rendered via
 
 Per-case photography (`hero.jpg`, gallery images) is currently not
 wired into the components — the moment a folder of real photos lands,
-update the engineering side (`<CardChrome>` in
+update the engineering side (`<CaseCard>` in
 `components/sections/hero.tsx` and the hero block of
 `app/work/[slug]/page.tsx`) to read from `/cases/<slug>/hero.jpg`.
 

@@ -12,11 +12,14 @@ import { cn } from "@/lib/utils";
  * Hero — Section 1 of the homepage narrative arc.
  *
  * Composition: 7/5 asymmetric split. Left: thesis statement + single CTA.
- * Right: a three-card editorial tearsheet stack — overlapping case
- * cards that read as a physical pile of brand spec sheets. Each card
- * carries its own slow scroll parallax for depth.
+ * Right: an editorial tearsheet stack — three overlapping case cards
+ * (Allegiance front, Tax2Win middle, Yug Vaastra back) angled like a
+ * physical pile of brand spec sheets on a desk. Each card pulls its mark
+ * from the verified-logo manifest; when the studio drops a real artefact
+ * at /public/clients/<slug>.svg (and flips the manifest), the card swaps
+ * to the real mark — same component, no rewrite.
  *
- * Motion: a sequenced choreography that hits in this order —
+ * Motion choreography:
  *   t=0.05  eyebrow fades in
  *   t=0.15  headline line 1 reveals word-by-word
  *   t=0.55  headline line 2 (serif italic accent)
@@ -26,6 +29,12 @@ import { cn } from "@/lib/utils";
  *   t=1.95  middle card resolves
  *   t=2.05  front card resolves
  *   t=2.25  meta-strip stats stagger in
+ *
+ * Reveal masking: the per-line mask is `overflow-hidden pb-[0.2em]
+ * -mb-[0.2em]`. Earlier per-word masks clipped italic glyph overshoot
+ * + serif descenders ("p" in "people", "g" in "design") because each
+ * word sat in its own narrow clip box. Per-line keeps the mask at
+ * line boundaries where overshoot is harmless.
  *
  * Everything respects prefers-reduced-motion via the global media-query
  * safety net in globals.css.
@@ -53,12 +62,13 @@ export function Hero() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // Differential parallax per layer — front travels furthest, back least.
+  // Each card moves at its own rate — front slowest, back fastest — to
+  // create depth differential without overdoing it.
   const yFront = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const yMiddle = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+  const yMid = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
   const yBack = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
   const yLetter = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacityFront = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
+  const opacityStack = useTransform(scrollYProgress, [0, 0.8], [1, 0.5]);
 
   return (
     <section
@@ -67,7 +77,7 @@ export function Hero() {
     >
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      {/* Oversized brand letter that parallaxes upward — counter-motion to the artefact */}
+      {/* Oversized brand letter that parallaxes upward — counter-motion to the stack */}
       <motion.div
         aria-hidden
         style={isDesktop ? { y: yLetter } : undefined}
@@ -96,7 +106,7 @@ export function Hero() {
               <RevealLine startDelay={0.15}>We design the brands</RevealLine>
               <RevealLine
                 startDelay={0.55}
-                className="font-serif italic tracking-[-0.02em] text-teal-600 dark:text-teal-400"
+                className="font-serif italic tracking-tight text-teal-600 dark:text-teal-400"
               >
                 people choose.
               </RevealLine>
@@ -128,73 +138,73 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT — tearsheet stack. Three overlapping case cards angled
-              like a physical pile of brand spec sheets. Back two are
-              hidden below md so the mobile composition stays focused on
-              a single mark. */}
+          {/* RIGHT — tearsheet stack */}
           <div className="md:col-span-5">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
-              {/* Back card — Yug Vaastra */}
+            <motion.figure
+              style={isDesktop ? { opacity: opacityStack } : undefined}
+              className="relative mx-auto aspect-[4/5] w-full max-w-md"
+            >
+              {/* Back — Yug Vaastra. Hidden on mobile so the layout breathes. */}
               <div
                 aria-hidden
-                className="absolute inset-0 hidden -translate-x-[6%] translate-y-[6%] rotate-[-4deg] [filter:blur(0.5px)] md:block"
+                className="absolute inset-0 hidden -translate-x-[7%] translate-y-[6%] rotate-[-4deg] md:block"
               >
-                <motion.figure
+                <motion.div
                   style={isDesktop ? { y: yBack } : undefined}
-                  initial={{ opacity: 0, scale: 0.94 }}
+                  initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 0.55, scale: 1 }}
                   transition={{ duration: 1.2, delay: 1.85, ease: EASE }}
-                  className="absolute inset-0"
+                  className="h-full w-full"
                 >
-                  <CardChrome
-                    name="Yug Vaastra"
+                  <CaseCard
                     slug="yug-vaastra"
-                    metric="2.1×"
-                    meta="Spiritual Lifestyle · 2024"
+                    name="Yug Vaastra"
+                    sector="D2C · Fashion"
+                    metric="+48%"
+                    tone="back"
                   />
-                </motion.figure>
+                </motion.div>
               </div>
 
-              {/* Middle card — Tax2Win */}
+              {/* Middle — Tax2Win. Hidden on mobile. */}
               <div
                 aria-hidden
-                className="absolute inset-0 hidden translate-x-[3%] translate-y-[2%] rotate-[2deg] md:block"
+                className="absolute inset-0 hidden translate-x-[4%] translate-y-[3%] rotate-[3deg] md:block"
               >
-                <motion.figure
-                  style={isDesktop ? { y: yMiddle } : undefined}
-                  initial={{ opacity: 0, scale: 0.96 }}
+                <motion.div
+                  style={isDesktop ? { y: yMid } : undefined}
+                  initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 0.85, scale: 1 }}
-                  transition={{ duration: 1.2, delay: 1.95, ease: EASE }}
-                  className="absolute inset-0"
+                  transition={{ duration: 1.15, delay: 1.95, ease: EASE }}
+                  className="h-full w-full"
                 >
-                  <CardChrome
-                    name="Tax2Win"
+                  <CaseCard
                     slug="tax2win"
-                    metric="+38%"
-                    meta="Fintech · 2023"
+                    name="Tax2Win"
+                    sector="Fintech · Tax Filing"
+                    metric="3.2×"
+                    tone="mid"
                   />
-                </motion.figure>
+                </motion.div>
               </div>
 
-              {/* Front card — Allegiance. The lead, the focal point. */}
-              <motion.figure
-                style={
-                  isDesktop ? { y: yFront, opacity: opacityFront } : undefined
-                }
+              {/* Front — Allegiance. The primary read, single card on mobile. */}
+              <motion.div
+                style={isDesktop ? { y: yFront } : undefined}
                 initial={{ opacity: 0, scale: 0.97, y: 12 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 2.05, ease: EASE }}
-                className="absolute inset-0"
+                className="relative h-full w-full"
               >
-                <CardChrome
-                  name="Allegiance Education"
+                <CaseCard
                   slug="allegiance-education"
+                  name="Allegiance Education"
+                  sector="Edtech · Test Prep"
                   metric="+62%"
-                  meta="Education · 2024"
-                  eager
+                  tone="front"
                 />
-              </motion.figure>
-            </div>
+              </motion.div>
+            </motion.figure>
           </div>
         </div>
 
@@ -221,14 +231,73 @@ export function Hero() {
 }
 
 /**
- * RevealLine — splits a line into words and animates each word rising
- * from below with a slight stagger. The mask sits at the LINE boundary
- * (one outer span with overflow-hidden), not per-word, so italic glyph
- * overshoot and tight letter-spacing never collide with neighbouring
- * clip boxes. A generous bottom buffer (0.2em) gives serif descenders
- * full room to draw.
+ * One tearsheet card. Chrome (border, RegistrationCorners, caption) is
+ * shared; the brand mark routes through ClientLogo, which reads the
+ * verified-logo manifest. Drop a real artefact at /public/clients/<slug>.svg
+ * (and flip the manifest entry to "verified") and the card replaces its
+ * typographic placeholder with the real mark — same code path.
+ */
+function CaseCard({
+  slug,
+  name,
+  sector,
+  metric,
+  tone,
+}: {
+  slug: string;
+  name: string;
+  sector: string;
+  metric: string;
+  tone: "front" | "mid" | "back";
+}) {
+  return (
+    <figure
+      className={cn(
+        "relative h-full w-full",
+        tone === "back" && "blur-[0.5px]"
+      )}
+    >
+      <div className="absolute inset-0 rounded-2xl border border-hairline bg-card/90 shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:bg-card/60 dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]" />
+      <RegistrationCorners inset="inset-3" />
+
+      <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
+        <ClientLogo
+          name={name}
+          slug={slug}
+          className="max-h-[60%] w-auto max-w-full"
+          loading={tone === "front" ? "eager" : "lazy"}
+          fallback={
+            <span className="text-center font-serif text-4xl italic text-foreground/85 md:text-5xl">
+              {name.split(" ")[0]}
+            </span>
+          }
+        />
+      </div>
+
+      <figcaption className="absolute inset-x-4 bottom-4 flex items-end justify-between rounded-lg border border-hairline bg-card px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground dark:bg-card/80">
+        <span>{sector}</span>
+        <span className="font-mono">{metric}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+/**
+ * RevealLine — wraps a single line of headline copy in a per-line mask
+ * and animates each word rising from below.
  *
- * Stagger is per-word, not per-letter, so long headlines don't feel slow.
+ * Per-line (not per-word) clipping: italic / serif glyphs overshoot
+ * their own box on the slanted side. When each word had its own narrow
+ * clip box, that overshoot was clipped at the word boundary, producing
+ * visibly truncated letters in line 2 ("people choose."). One line-wide
+ * mask keeps the overshoot inside the clip and only ever clips at the
+ * line's outer edges, where there's nothing to overshoot into.
+ *
+ * pb-[0.2em] / -mb-[0.2em]: the mask extends 0.2em below the line-box
+ * so descenders ("p", "g", "y") sit inside the visible band. The
+ * negative margin pulls the next sibling back up so layout doesn't
+ * shift. 0.2em clears Instrument Serif Italic descenders; the previous
+ * 0.12em was tuned for sans only.
  */
 function RevealLine({
   children,
@@ -241,22 +310,19 @@ function RevealLine({
   stagger?: number;
   className?: string;
 }) {
-  const segments = String(children).split(/(\s+)/);
-  let wordIndex = -1;
+  const words = String(children).split(/(\s+)/);
   return (
     <span
       className={cn(
-        "relative block overflow-hidden -mb-[0.2em] pb-[0.2em]",
+        "relative -mb-[0.2em] block overflow-hidden pb-[0.2em]",
         className
       )}
     >
-      {segments.map((segment, i) => {
+      {words.map((segment, i) => {
         // Preserve raw whitespace segments so wrapping behaves naturally.
         if (/^\s+$/.test(segment)) {
           return <span key={i}>{segment}</span>;
         }
-        wordIndex += 1;
-        const wIdx = wordIndex;
         return (
           <motion.span
             key={i}
@@ -265,7 +331,7 @@ function RevealLine({
             transition={{
               duration: 1,
               ease: EASE,
-              delay: startDelay + wIdx * stagger,
+              delay: startDelay + i * stagger,
             }}
             className="inline-block"
           >
@@ -274,56 +340,6 @@ function RevealLine({
         );
       })}
     </span>
-  );
-}
-
-/**
- * CardChrome — the registration-card composition shared by all three
- * cards in the tearsheet stack. Kept hero-local because no other
- * section uses this exact arrangement.
- *
- * Real artwork drop-in: when a verified asset exists at
- * /public/clients/<slug>.svg (per `lib/client-logos.ts`), ClientLogo
- * serves it. Otherwise the typographic placeholder reads as an
- * intentional wordmark.
- */
-function CardChrome({
-  name,
-  slug,
-  metric,
-  meta,
-  eager,
-}: {
-  name: string;
-  slug: string;
-  metric: string;
-  meta: string;
-  eager?: boolean;
-}) {
-  return (
-    <>
-      <div className="absolute inset-0 rounded-2xl border border-hairline bg-card shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]" />
-      <RegistrationCorners inset="inset-3" />
-
-      <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
-        <ClientLogo
-          name={name}
-          slug={slug}
-          className="max-h-[60%] w-auto max-w-full"
-          loading={eager ? "eager" : "lazy"}
-          fallback={
-            <span className="text-center font-serif text-4xl italic text-foreground/80 md:text-5xl">
-              {name.split(" ")[0]}
-            </span>
-          }
-        />
-      </div>
-
-      <figcaption className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2 rounded-lg border border-hairline bg-card px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground dark:bg-card/80">
-        <span className="truncate">{meta}</span>
-        <span className="shrink-0 font-mono">{metric}</span>
-      </figcaption>
-    </>
   );
 }
 
