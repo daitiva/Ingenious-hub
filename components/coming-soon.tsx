@@ -2,6 +2,20 @@ import Link from "next/link";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
 import { Reveal } from "@/components/motion-reveal";
 
+/**
+ * Used by route page files to tag a ComingSoon page as `noindex`. Spread
+ * into the route's `export const metadata` so search engines don't surface
+ * placeholder content. Once the real essay lands, drop the spread.
+ */
+export const comingSoonMetadata = {
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: { index: false, follow: true },
+  },
+} as const;
+
 type ComingSoonProps = {
   /** e.g. "Industries · Edtech" */
   eyebrow: string;

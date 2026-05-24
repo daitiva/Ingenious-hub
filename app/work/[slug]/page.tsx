@@ -47,15 +47,46 @@ export default function CasePage({ params }: { params: { slug: string } }) {
   const { prev, next } = getAdjacentCases(work.slug);
   const inverted = detail.tone === "ink";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: `${work.client} — ${work.title}`,
-    about: work.sector,
-    creator: { "@type": "Organization", name: "Ingenious Hub" },
-    description: detail.problemEssay,
-    url: `https://ingenioushub.com/work/${work.slug}`,
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "@id": `https://ingenioushub.com/work/${work.slug}#case`,
+      name: `${work.client} — ${work.title}`,
+      headline: work.title,
+      about: work.sector,
+      creator: { "@id": "https://ingenioushub.com#organization" },
+      publisher: { "@id": "https://ingenioushub.com#organization" },
+      description: detail.problemEssay,
+      url: `https://ingenioushub.com/work/${work.slug}`,
+      inLanguage: "en-IN",
+      keywords: [work.category, work.sector, work.client].join(", "),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://ingenioushub.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Work",
+          item: "https://ingenioushub.com/work",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: work.client,
+          item: `https://ingenioushub.com/work/${work.slug}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <article className="relative">

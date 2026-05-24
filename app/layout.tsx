@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { SERVICES } from "@/lib/services";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -176,7 +177,21 @@ const SCHEMAS = [
     url: "https://ingenioushub.com",
     name: "Ingenious Hub",
     publisher: { "@id": "https://ingenioushub.com#organization" },
+    inLanguage: "en-IN",
   },
+  // One Service entry per pillar — gives Google + AI surfaces a structured
+  // read of what the studio offers, separately from the org schema.
+  ...SERVICES.map((s) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `https://ingenioushub.com/services#${s.id}`,
+    name: s.title,
+    serviceType: s.title,
+    description: s.description,
+    provider: { "@id": "https://ingenioushub.com#organization" },
+    areaServed: ["India", "United Arab Emirates", "United Kingdom"],
+    url: `https://ingenioushub.com/services#${s.id}`,
+  })),
 ];
 
 export default function RootLayout({

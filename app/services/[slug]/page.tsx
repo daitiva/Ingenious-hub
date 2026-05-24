@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVICES } from "@/lib/services";
-import { ComingSoon } from "@/components/coming-soon";
+import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 
 export const dynamic = "force-static";
 
@@ -20,6 +20,7 @@ export function generateMetadata({
     title: `${s.title} — Service`,
     description: s.description,
     alternates: { canonical: `/services/${s.id}` },
+    ...comingSoonMetadata,
   };
 }
 

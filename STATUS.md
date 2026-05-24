@@ -15,6 +15,7 @@ This is a working document. Update it at the end of every meaningful pass.
 | **B** | Case studies · /process · /work · client trust system | **Shipped** |
 | **B+** | Coming-soon for `/industries/<slug>`, `/services/<slug>`, `/insights`. Warm-charcoal dark mode. Editorial trust strip. | **Shipped** |
 | **B++** | Audit + hardening — registration-corners DRY, custom 404/error, scroll-progress rAF, Lenis touch-gate, CLS-safe ClientLogo, robots disallow, theme-color meta | **Shipped** |
+| **B+++** | Selective robots policy (AI training blocked, search & real-time AI allowed), Service + BreadcrumbList JSON-LD, ComingSoon pages noindex, dark mode lifted to graphite, alphabetical client order, outside-tap menu close, tier-2 logo source via Google favicons | **Shipped** |
 | **C** | Sanity CMS · long-form essays per industry / service · insights blog · custom OG images · verified-logo collection | **Pending** |
 | **D** | Localisation · /careers · A/B infra | **Deferred** |
 

@@ -1,10 +1,18 @@
 import type { MetadataRoute } from "next";
 import { getAllCaseSlugs } from "@/lib/cases";
-import { INDUSTRIES } from "@/lib/industries";
-import { SERVICES } from "@/lib/services";
 
 const BASE = "https://ingenioushub.com";
 
+/**
+ * Sitemap only lists URLs we want indexed today.
+ *
+ * Explicitly excluded:
+ *   - /industries/<slug>  — ComingSoon, marked noindex on the page itself.
+ *   - /services/<slug>    — ComingSoon, marked noindex.
+ *   - /insights/<slug>    — does not exist yet.
+ *
+ * As content lands for those routes, add the relevant slugs back here.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -14,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/services`,   lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/industries`, lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${BASE}/process`,    lastModified: now, changeFrequency: "yearly",  priority: 0.8 },
-    { url: `${BASE}/insights`,   lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
     { url: `${BASE}/about`,      lastModified: now, changeFrequency: "yearly",  priority: 0.7 },
     { url: `${BASE}/clients`,    lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/contact`,    lastModified: now, changeFrequency: "yearly",  priority: 0.7 },
@@ -27,19 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const industries: MetadataRoute.Sitemap = INDUSTRIES.map(({ slug }) => ({
-    url: `${BASE}/industries/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  const services: MetadataRoute.Sitemap = SERVICES.map(({ id }) => ({
-    url: `${BASE}/services/${id}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [...staticPages, ...cases, ...industries, ...services];
+  return [...staticPages, ...cases];
 }

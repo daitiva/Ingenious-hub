@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { ComingSoon } from "@/components/coming-soon";
+import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 
 export const metadata: Metadata = {
   title: "Insights — the studio's writing",
   description:
     "Editorial notes from the studio on branding, design, and growth. Publishing on rolling basis.",
   alternates: { canonical: "/insights" },
+  ...comingSoonMetadata,
 };
 
 export default function InsightsIndexPage() {

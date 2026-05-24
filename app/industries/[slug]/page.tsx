@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { INDUSTRIES } from "@/lib/industries";
-import { ComingSoon } from "@/components/coming-soon";
+import { ComingSoon, comingSoonMetadata } from "@/components/coming-soon";
 
 export const dynamic = "force-static";
 
@@ -20,6 +20,7 @@ export function generateMetadata({
     title: `${ind.label} — Industry`,
     description: `How Ingenious Hub thinks about ${ind.label.toLowerCase()} brands.`,
     alternates: { canonical: `/industries/${ind.slug}` },
+    ...comingSoonMetadata,
   };
 }
 
