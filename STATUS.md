@@ -16,6 +16,7 @@ This is a working document. Update it at the end of every meaningful pass.
 | **B+** | Coming-soon for `/industries/<slug>`, `/services/<slug>`, `/insights`. Warm-charcoal dark mode. Editorial trust strip. | **Shipped** |
 | **B++** | Audit + hardening — registration-corners DRY, custom 404/error, scroll-progress rAF, Lenis touch-gate, CLS-safe ClientLogo, robots disallow, theme-color meta | **Shipped** |
 | **B+++** | Selective robots policy (AI training blocked, search & real-time AI allowed), Service + BreadcrumbList JSON-LD, ComingSoon pages noindex, dark mode lifted to graphite, alphabetical client order, outside-tap menu close, tier-2 logo source via Google favicons | **Shipped** |
+| **B++++** | Hero v2 — line-level reveal mask (fixes descender/italic clipping), three-card editorial tearsheet stack with differential parallax, `/public/cases/<slug>/` photo drop-zone documented | **Shipped** |
 | **C** | Sanity CMS · long-form essays per industry / service · insights blog · custom OG images · verified-logo collection | **Pending** |
 | **D** | Localisation · /careers · A/B infra | **Deferred** |
 
@@ -112,7 +113,7 @@ This is a working document. Update it at the end of every meaningful pass.
 | --- | --- | --- | --- |
 | C1 | Verified client logos — drop SVGs at `public/clients/<slug>.svg` | Studio | 85 placeholders today; manifest at `lib/client-logos.ts`. |
 | C2 | Re-match the 52 PNGs in `public/clients/_unverified-archive/` to specific brands | Studio | Files are unnamed by brand. |
-| C3 | Real case-study photography under `public/cases/<slug>/` | Studio | Templates ready; logo composition is current placeholder. |
+| C3 | Real case-study photography under `public/cases/<slug>/` | Studio | Drop-zone convention now documented at `public/cases/README.md`. Hero cards + `/work/<slug>` heroes will read from `hero.jpg` once files land (engineering wires the swap). |
 | C4 | Long-form essay copy for `/industries/<slug>` × 6 | Studio + Claude | One per industry. ComingSoon page lives there today. |
 | C5 | Long-form essay copy for `/services/<slug>` × 5 | Studio + Claude | One per pillar. |
 | C6 | Four launch `/insights/<slug>` essays | Studio + Claude | Voice rules in `lib/voice.md`. |
