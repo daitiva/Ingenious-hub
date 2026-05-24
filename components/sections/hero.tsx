@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ClientLogo } from "@/components/client-logo";
+import { RegistrationCorners } from "@/components/registration-corners";
 
 /**
  * Hero — Section 1 of the homepage narrative arc.
@@ -108,10 +109,7 @@ export function Hero() {
               <div className="absolute inset-0 rounded-2xl border border-hairline bg-card/60 shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:bg-card/40 dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]" />
 
               {/* Hairline registration marks — feels like an art-board, not a card */}
-              <span aria-hidden className="absolute left-3 top-3 h-3 w-3 border-l border-t border-foreground/30" />
-              <span aria-hidden className="absolute right-3 top-3 h-3 w-3 border-r border-t border-foreground/30" />
-              <span aria-hidden className="absolute left-3 bottom-3 h-3 w-3 border-l border-b border-foreground/30" />
-              <span aria-hidden className="absolute right-3 bottom-3 h-3 w-3 border-r border-b border-foreground/30" />
+              <RegistrationCorners inset="inset-3" />
 
               <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
                 <ClientLogo

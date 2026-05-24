@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ClientLogo } from "@/components/client-logo";
 import { Reveal } from "@/components/motion-reveal";
+import { RegistrationCorners } from "@/components/registration-corners";
 import { cn } from "@/lib/utils";
 
 type Case = {
@@ -180,16 +181,15 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
       className={cn("relative border-b border-border last:border-b-0", TONE_BG[c.tone])}
     >
       <div className="container py-16 md:py-24">
-        <div className={cn("grid gap-10 md:grid-cols-12 md:gap-14", reverse && "md:[direction:rtl]")}>
-          {/* Cover */}
-          <div className="md:col-span-7 [direction:ltr]">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-14">
+          {/* Cover — visual order driven by grid `order`, NOT direction:rtl.
+              Avoids reversing screen-reader read-order while keeping the
+              alternating editorial layout on md+ screens. */}
+          <div className={cn("md:col-span-7", reverse && "md:order-2")}>
             <motion.div style={{ y: yArt }} className="relative">
               {/* Editorial registration card */}
               <div className="relative aspect-[5/4] overflow-hidden rounded-2xl border border-hairline bg-background">
-                <span aria-hidden className="absolute left-4 top-4 h-3 w-3 border-l border-t border-foreground/30" />
-                <span aria-hidden className="absolute right-4 top-4 h-3 w-3 border-r border-t border-foreground/30" />
-                <span aria-hidden className="absolute left-4 bottom-4 h-3 w-3 border-l border-b border-foreground/30" />
-                <span aria-hidden className="absolute right-4 bottom-4 h-3 w-3 border-r border-b border-foreground/30" />
+                <RegistrationCorners />
 
                 <div className="absolute inset-x-12 inset-y-16 flex items-center justify-center">
                   <ClientLogo
@@ -225,7 +225,7 @@ function CaseSlab({ c, reverse }: { c: Case; reverse: boolean }) {
           </div>
 
           {/* Story */}
-          <div className="md:col-span-5 [direction:ltr]">
+          <div className={cn("md:col-span-5", reverse && "md:order-1")}>
             <p className={cn("font-mono text-[11px] uppercase tracking-[0.22em]", isInverted ? "text-background/60" : "text-muted-foreground")}>
               {c.index} · {c.sector}
             </p>

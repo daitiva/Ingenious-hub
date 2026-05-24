@@ -74,6 +74,20 @@ export const metadata: Metadata = {
     },
   },
   icons: { icon: "/favicon.svg" },
+  // Address-bar tint per theme. Matches the bone background in light and
+  // the warm-charcoal background in dark.
+  other: {
+    "theme-color": "#F4F0E8",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F4F0E8" },
+    { media: "(prefers-color-scheme: dark)", color: "#18161A" },
+  ],
 };
 
 const SCHEMAS = [

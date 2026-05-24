@@ -52,7 +52,9 @@ export function ClientLogo({
   }
 
   // Verified path — render the asset. If it 404s at runtime, gracefully
-  // fall back to the placeholder so layout never breaks.
+  // fall back to the placeholder so layout never breaks. Explicit dimensions
+  // + aspect-ratio container so we never trigger CLS even when images load
+  // slowly on a cold cache.
   if (entry.status === "verified" && !errored) {
     const ext = entry.ext ?? "svg";
     const src = `/clients/${slug}.${ext}`;
@@ -62,11 +64,13 @@ export function ClientLogo({
       <img
         src={src}
         alt={name}
+        width={200}
+        height={120}
         loading={loading}
         decoding="async"
         onError={() => setErrored(true)}
         className={cn(
-          "block max-h-full max-w-full object-contain",
+          "block h-full w-full max-w-full object-contain",
           mono &&
             "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
           tone === "mono" &&

@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { getCase, getAllCaseSlugs, getAdjacentCases } from "@/lib/cases";
 import { ClientLogo } from "@/components/client-logo";
 import { Reveal } from "@/components/motion-reveal";
+import { RegistrationCorners } from "@/components/registration-corners";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-static";
@@ -86,11 +87,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
 
             <div className="md:col-span-5">
               <div className="relative mx-auto aspect-[5/4] w-full max-w-md overflow-hidden rounded-2xl border border-hairline bg-background/95">
-                {/* Registration corners */}
-                <span aria-hidden className="absolute left-4 top-4 h-3 w-3 border-l border-t border-foreground/30" />
-                <span aria-hidden className="absolute right-4 top-4 h-3 w-3 border-r border-t border-foreground/30" />
-                <span aria-hidden className="absolute left-4 bottom-4 h-3 w-3 border-l border-b border-foreground/30" />
-                <span aria-hidden className="absolute right-4 bottom-4 h-3 w-3 border-r border-b border-foreground/30" />
+                <RegistrationCorners />
 
                 <div className="absolute inset-x-12 inset-y-14 flex items-center justify-center">
                   <ClientLogo

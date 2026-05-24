@@ -20,18 +20,40 @@ export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [progress, setProgress] = React.useState(0);
+  const progressRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    // rAF-batched. `scrolled` state only toggles on threshold crossings, so
+    // React re-renders are rare. Progress hairline mutates DOM via ref and
+    // never triggers a re-render at all.
+    let raf = 0;
+    let lastScrolled = false;
+
     const onScroll = () => {
-      setScrolled(window.scrollY > 12);
-      const h = document.documentElement;
-      const max = h.scrollHeight - h.clientHeight;
-      setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = window.scrollY;
+        const isScrolled = y > 12;
+        if (isScrolled !== lastScrolled) {
+          lastScrolled = isScrolled;
+          setScrolled(isScrolled);
+        }
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? (y / max) * 100 : 0;
+        if (progressRef.current) {
+          progressRef.current.style.transform = `scaleX(${p / 100})`;
+          progressRef.current.style.opacity = p > 1 ? "1" : "0";
+        }
+      });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   // Close menu on route change
@@ -57,14 +79,11 @@ export function Navbar() {
 
   return (
     <>
-      {/* Scroll progress hairline */}
+      {/* Scroll progress hairline — mutated via ref, never via React render */}
       <div
+        ref={progressRef}
         aria-hidden
-        className={cn(
-          "fixed left-0 right-0 top-0 z-[60] h-px origin-left bg-teal-600/70 transition-opacity",
-          progress > 1 ? "opacity-100" : "opacity-0"
-        )}
-        style={{ transform: `scaleX(${progress / 100})` }}
+        className="pointer-events-none fixed left-0 right-0 top-0 z-[60] h-px origin-left bg-teal-600/70 opacity-0 transition-opacity duration-200 will-change-transform"
       />
 
       <header

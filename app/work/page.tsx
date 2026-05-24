@@ -8,6 +8,7 @@ import { WORK, type WorkCategory } from "@/lib/work";
 import { CASE_DETAILS } from "@/lib/cases";
 import { ClientLogo } from "@/components/client-logo";
 import { Reveal } from "@/components/motion-reveal";
+import { RegistrationCorners } from "@/components/registration-corners";
 import { cn } from "@/lib/utils";
 
 const FILTERS: ("All" | WorkCategory)[] = [
@@ -105,10 +106,7 @@ export default function WorkIndexPage() {
                       className="focus-ring group block"
                     >
                       <div className="relative aspect-[5/4] overflow-hidden rounded-2xl border border-hairline bg-card">
-                        <span aria-hidden className="absolute left-4 top-4 h-3 w-3 border-l border-t border-foreground/30" />
-                        <span aria-hidden className="absolute right-4 top-4 h-3 w-3 border-r border-t border-foreground/30" />
-                        <span aria-hidden className="absolute left-4 bottom-4 h-3 w-3 border-l border-b border-foreground/30" />
-                        <span aria-hidden className="absolute right-4 bottom-4 h-3 w-3 border-r border-b border-foreground/30" />
+                        <RegistrationCorners />
 
                         <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center transition-transform duration-700 ease-out group-hover:scale-[1.02]">
                           <ClientLogo

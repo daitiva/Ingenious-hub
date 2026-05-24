@@ -6,7 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: [
+          "/api/",
+          "/clients/_unverified-archive/",
+        ],
       },
     ],
     sitemap: "https://ingenioushub.com/sitemap.xml",
