@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { CLIENTS, type Client } from "@/lib/clients";
 import { ClientLogo } from "@/components/client-logo";
+import { logoStats } from "@/lib/client-logos";
 import { cn } from "@/lib/utils";
 
 const FILTERS = [
@@ -35,94 +36,116 @@ export function ClientsClient() {
     return CLIENTS.filter((c) => c.category === filter);
   }, [filter]);
 
+  const stats = logoStats();
+
   return (
     <>
-      <section className="border-b border-border bg-cream/40 py-16 dark:bg-muted/20 md:py-24">
-        <div className="container max-w-3xl">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-teal-600 dark:text-teal-300">
-            Clients
-          </p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mt-3 text-balance font-light text-fluid-5xl leading-[1.05] tracking-tightest md:text-fluid-6xl"
-          >
-            {CLIENTS.length}+ brands.{" "}
-            <span className="font-serif italic text-teal-600 dark:text-teal-400">
-              One studio.
-            </span>
-          </motion.h1>
-          <p className="mt-5 max-w-2xl text-pretty text-base text-muted-foreground md:text-lg">
-            Founders we&rsquo;ve built brands, websites, and pipelines for —
-            across edtech, D2C, fintech, healthcare, B2B, and beyond.
-          </p>
+      {/* HEADER */}
+      <section className="relative border-b border-border bg-bone/40 py-20 dark:bg-muted/20 md:py-28">
+        <div className="container">
+          <div className="grid gap-10 md:grid-cols-12 md:gap-12">
+            <div className="md:col-span-3">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                Clients · {CLIENTS.length}+ engagements
+              </p>
+            </div>
+            <div className="md:col-span-9">
+              <h1 className="text-balance font-display text-d-2 font-light leading-[1.05]">
+                The brands that{" "}
+                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                  asked us to argue
+                </span>{" "}
+                their case.
+              </h1>
+              <p className="mt-7 max-w-2xl text-body-lg text-muted-foreground">
+                Startups, family enterprises, public-good missions, fintechs,
+                D2C labels — every entry below is a real engagement. Logos
+                appear in monochrome on the wall by design; hover or focus a
+                tile to see the brand mark in full colour.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20">
+      {/* FILTER + WALL */}
+      <section className="py-16 md:py-24">
         <div className="container">
-          <div className="flex flex-wrap gap-2">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                type="button"
-                onClick={() => setFilter(f)}
-                className={cn(
-                  "rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
-                  filter === f
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border text-muted-foreground hover:border-teal-500/40 hover:text-foreground"
-                )}
-              >
-                {f}
-                {f !== "All" && (
-                  <span className="ml-1.5 text-[10px] opacity-60">
-                    {CLIENTS.filter((c) => c.category === f).length}
-                  </span>
-                )}
-              </button>
-            ))}
+          <div
+            role="tablist"
+            aria-label="Filter clients by industry"
+            className="flex flex-wrap gap-2"
+          >
+            {FILTERS.map((f) => {
+              const isActive = filter === f;
+              const count =
+                f === "All"
+                  ? CLIENTS.length
+                  : CLIENTS.filter((c) => c.category === f).length;
+              return (
+                <button
+                  key={f}
+                  role="tab"
+                  aria-selected={isActive}
+                  type="button"
+                  onClick={() => setFilter(f)}
+                  className={cn(
+                    "focus-ring inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
+                    isActive
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground hover:text-foreground"
+                  )}
+                >
+                  <span>{f}</span>
+                  <span className="text-[10px] opacity-60">{count}</span>
+                </button>
+              );
+            })}
           </div>
 
-          <ul className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <motion.ul
+            layout
+            className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3 md:mt-16 md:grid-cols-4 lg:grid-cols-5"
+          >
             {list.map((c, i) => (
               <motion.li
                 key={c.name}
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.3,
-                  delay: Math.min(i * 0.012, 0.4),
-                }}
-                className="group relative flex aspect-[4/3] items-center justify-center bg-background p-4 text-center transition-colors hover:bg-muted/30 md:p-6"
+                transition={{ duration: 0.3, delay: Math.min(i * 0.012, 0.4) }}
+                className="bg-background"
               >
-                <div className="flex h-full max-h-[80px] w-full max-w-[140px] items-center justify-center">
-                  <ClientLogo
-                    name={c.name}
-                    className="grayscale transition-all duration-300 group-hover:grayscale-0"
-                    fallback={
-                      <span className="text-balance text-sm font-medium tracking-tight text-foreground/80 transition-colors group-hover:text-teal-600 dark:group-hover:text-teal-400 md:text-base">
-                        {c.name}
-                      </span>
-                    }
-                  />
+                <div className="group relative flex aspect-[4/3] items-center justify-center p-5 transition-colors hover:bg-card md:p-7">
+                  <div className="flex h-full max-h-16 w-full max-w-[140px] items-center justify-center md:max-h-20">
+                    <ClientLogo name={c.name} tone="mono" />
+                  </div>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute right-2 top-2 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                  >
+                    {c.category}
+                  </span>
                 </div>
-                <span className="absolute right-2 top-2 font-mono text-[9px] text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
-                  {c.category}
-                </span>
               </motion.li>
             ))}
-          </ul>
+          </motion.ul>
 
-          <p className="mt-8 text-center text-xs text-muted-foreground">
-            Logo files live at{" "}
+          {/* Admin / honesty strip */}
+          <p className="mt-10 max-w-3xl text-xs text-muted-foreground">
+            <span className="font-mono uppercase tracking-[0.18em] text-foreground/60">
+              Logo verification
+            </span>{" "}
+            ·{" "}
+            <span className="tabular-nums">{stats.verified}</span> of{" "}
+            <span className="tabular-nums">{stats.total}</span> marks are
+            sourced from official brand assets. The rest render as
+            typographic placeholders at the same dimensions until each
+            verified file lands at{" "}
             <code className="rounded bg-muted px-1.5 py-0.5 font-mono">
-              public/clients/
-            </code>{" "}
-            — drop in <code>{`<slug>.png`}</code> (or SVG / JPG) to swap a name
-            for a mark.
+              public/clients/&lt;slug&gt;.svg
+            </code>
+            .
           </p>
         </div>
       </section>

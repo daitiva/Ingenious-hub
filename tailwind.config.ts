@@ -34,10 +34,14 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
 
-        // Brand palette — narrow + intentional
-        ink: "#0E0D0A",
+        // Brand palette — narrow + intentional.
+        // Ink is the deep warm slab colour used for Proof + Impact + final CTA.
+        // Softened from a near-black to a warm graphite so the inverted
+        // sections feel editorial, not AMOLED.
+        ink: "#1A1816",
+        "ink-soft": "#211F1C",
         bone: "#F4F0E8",
-        mist: "#0A0C0F",
+        mist: "#15131A",
         hairline: "#E5E2D9",
 
         teal: {

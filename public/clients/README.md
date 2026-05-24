@@ -1,42 +1,83 @@
 # Client logos
 
-Drop logo files here, one per client. The site picks them up by slug; if a
-file is missing the component falls back to the wordmark, so it's safe to
-add files incrementally.
+This folder is the asset side of the client trust system. The data side
+lives in `lib/clients.ts` and the verification manifest is in
+`lib/client-logos.ts`.
 
-## File spec
+## How the system renders a logo
 
-- **Format**: PNG, SVG, JPG, or WEBP. PNG with a transparent background is
-  the easiest path.
-- **Filename**: `<slug>.png` — lowercase, dashes for spaces, no apostrophes
-  or punctuation.
-  - `Allegiance Education` → `allegiance-education.png`
-  - `Tax2Win` → `tax2win.png`
-  - `Yug Vaastra` → `yug-vaastra.png`
-  - `Modernwala's` → `modernwalas.png`
-  - `TheFabricLibrary` → `thefabriclibrary.png`
-- **Aspect**: cells render at roughly 3:2 or 4:3 — pad your artwork inside
-  the canvas so the safe area stays clear.
-- **Color**: deliver in full colour. The renderer never tints; if you want
-  monochrome chips, deliver them that way.
+The `<ClientLogo>` component (`components/client-logo.tsx`) reads the
+manifest and picks one of three states per client:
 
-## Where the slug comes from
+| Status | Renders |
+| --- | --- |
+| `verified` | The file at `/public/clients/<slug>.<ext>` (preferred: SVG). |
+| `placeholder` | A tasteful typographic placeholder at the same dimensions. |
+| `blocked` | Name as text only (used for organisations whose policy disallows logo reuse). |
 
-Slugs are derived from the `name` field in `lib/clients.ts` via the
-`slugify()` helper in `lib/utils.ts`. Add a new row to `lib/clients.ts`,
-drop the file here with the matching slug, and you're done.
+Everything is `placeholder` by default — you opt-in to `verified` per client.
 
-## Editing client info
+## Adding a verified logo
 
-There is no admin panel yet. All content lives in `lib/*.ts`:
+1. **Source the official asset.** Pull from the brand's own website, their
+   press kit, or their verified LinkedIn page. Prefer SVG; transparent PNG
+   is a fallback. Never use a scraped, blurry, or watermarked image.
+2. **Save it under the correct slug.** Convert the brand name to slug form
+   (lowercase, dashes for spaces, drop apostrophes and punctuation) and
+   save as `<slug>.svg` (or `.png`). Examples:
+   - `Allegiance Education` → `allegiance-education.svg`
+   - `Tax2Win` → `tax2win.svg`
+   - `Yug Vaastra` → `yug-vaastra.svg`
+   - `Modernwala's` → `modernwalas.svg`
+   - `TheFabricLibrary` → `thefabriclibrary.svg`
+3. **Flip the manifest.** Open `lib/client-logos.ts` and uncomment (or
+   add) the override for that slug:
+   ```ts
+   "allegiance-education": {
+     slug: "allegiance-education",
+     status: "verified",
+     ext: "svg",
+     monochrome: false, // set true if the mark is single-colour and
+                        // should auto-invert in dark mode
+   },
+   ```
+4. **Commit + push.** Vercel rebuilds; the wall picks up the new asset.
 
-- `lib/clients.ts` — names, categories
-- `lib/work.ts` — case studies, results
-- `lib/services.ts` — service pillars
-- `lib/insights.ts` — blog posts
+## Slug derivation
 
-Each file is plain TypeScript. Edit, commit, push — Vercel rebuilds in ~60s.
+If you're not sure what slug a client will produce, run the helper:
 
-When you're ready for a true admin (CMS), see the **CMS migration roadmap**
-in the project README — the data shapes here mirror Sanity / Payload
-schemas exactly, so the swap is mechanical.
+```ts
+import { slugify } from "@/lib/utils";
+slugify("Anand Niketan Group of Schools"); // "anand-niketan-group-of-schools"
+```
+
+The same helper is the source of truth for the manifest, so a slug you
+generate locally will match what the renderer expects.
+
+## Aspect, colour, dimensions
+
+- **Aspect**: cells render at roughly 4:3. Pad the artwork inside the
+  SVG canvas so the safe area sits clear of the edge.
+- **Single colour vs full colour**: deliver in full colour. The wall on
+  the homepage and `/clients` defaults to a monochrome treatment via CSS
+  filters — set `tone="default"` on the `<ClientLogo>` if you want
+  colour-out-of-the-box.
+- **Monochrome marks in dark mode**: if a logo is solid black or solid
+  white on transparent, set `monochrome: true` in the manifest and the
+  component will apply `dark:invert` so it stays legible on both themes.
+
+## What's in `_unverified-archive/`
+
+52 PNGs that were bulk-uploaded to this folder before the verification
+manifest landed. They couldn't be confidently mapped to specific brands
+(filenames like `client_2-2.png` give no hint). They live in
+`_unverified-archive/` so they're not lost — when you have time to
+match them, rename to the right slug and move to this folder, then flip
+the manifest entry.
+
+## When `<ClientLogo>` 404s
+
+If the manifest says `verified` but the file isn't there, the component
+catches the error and gracefully falls back to the typographic
+placeholder. Layout never breaks.

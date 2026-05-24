@@ -1,65 +1,114 @@
 "use client";
 
 import * as React from "react";
-import { slugify, cn } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
+import { getLogoEntry } from "@/lib/client-logos";
 
 type ClientLogoProps = {
+  /** Display name — used for alt text + placeholder + slug derivation */
   name: string;
-  /** override slug if filename doesn't match the slugified name */
+  /** Manual slug override; otherwise derived from `name` */
   slug?: string;
-  /** override extension; tries .png first */
-  ext?: "png" | "svg" | "jpg" | "jpeg" | "webp";
+  /** "monochrome" forces dark-mode auto-invert even if the manifest says no */
+  forceMono?: boolean;
+  /** Treatment — adjusts colour handling for monochrome walls */
+  tone?: "auto" | "mono" | "default";
   className?: string;
-  /** what to render when the image is missing — defaults to wordmark text */
+  /** Custom fallback for the placeholder; default uses the brand wordmark */
   fallback?: React.ReactNode;
-  /** image fit; default contain */
-  fit?: "contain" | "cover";
+  /** Lazy-load by default; set "eager" for above-the-fold */
+  loading?: "lazy" | "eager";
 };
 
 /**
- * Renders a client's logo from /public/clients/<slug>.<ext>.
- * If the file doesn't load, falls back to a wordmark.
- * Use this anywhere a brand mark should appear in the UI.
+ * Renders a client logo with three states:
+ *   verified   — loads /public/clients/<slug>.<ext>, lazy by default
+ *   placeholder — tasteful typographic placeholder at consistent dimensions
+ *   blocked    — name rendered as text only (policy)
+ *
+ * Dark-mode safe: monochrome marks get `dark:invert`; full-colour marks pass
+ * through. Lazy + no implicit width so we never trigger CLS at scale.
  */
 export function ClientLogo({
   name,
-  slug,
-  ext = "png",
+  slug: slugOverride,
+  forceMono,
+  tone = "auto",
   className,
   fallback,
-  fit = "contain",
+  loading = "lazy",
 }: ClientLogoProps) {
   const [errored, setErrored] = React.useState(false);
-  const filename = `${slug || slugify(name)}.${ext}`;
-  const src = `/clients/${filename}`;
+  const slug = slugOverride ?? slugify(name);
+  const entry = getLogoEntry(slug);
 
-  if (errored) {
+  // Blocked entries never render an asset.
+  if (entry.status === "blocked") {
     return (
-      <span
-        className={cn(
-          "inline-flex items-center justify-center text-balance font-serif italic leading-none",
-          className
-        )}
-      >
+      <Placeholder name={name} className={className}>
         {fallback ?? name}
-      </span>
+      </Placeholder>
     );
   }
 
-  // Plain <img> rather than next/image so 404s degrade gracefully via onError
-  // without throwing during static generation.
+  // Verified path — render the asset. If it 404s at runtime, gracefully
+  // fall back to the placeholder so layout never breaks.
+  if (entry.status === "verified" && !errored) {
+    const ext = entry.ext ?? "svg";
+    const src = `/clients/${slug}.${ext}`;
+    const mono = forceMono ?? entry.monochrome ?? false;
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={name}
+        loading={loading}
+        decoding="async"
+        onError={() => setErrored(true)}
+        className={cn(
+          "block max-h-full max-w-full object-contain",
+          mono &&
+            "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
+          tone === "mono" &&
+            "[filter:grayscale(1)_contrast(0.9)] opacity-80 transition-[filter,opacity] duration-300 hover:[filter:grayscale(0)] hover:opacity-100 dark:invert",
+          className
+        )}
+      />
+    );
+  }
+
+  // Placeholder path.
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={name}
-      onError={() => setErrored(true)}
+    <Placeholder name={name} className={className}>
+      {fallback ?? name}
+    </Placeholder>
+  );
+}
+
+/**
+ * Typographic placeholder — consistent dimensions, never breaks the grid.
+ * Uses the brand's serif italic so it reads as intentional, not absent.
+ */
+function Placeholder({
+  name,
+  className,
+  children,
+}: {
+  name: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const isLong = name.length > 18;
+  return (
+    <span
+      aria-label={name}
       className={cn(
-        "block max-h-full max-w-full",
-        fit === "contain" ? "object-contain" : "object-cover",
+        "flex h-full w-full items-center justify-center text-balance text-center font-serif italic leading-tight tracking-tight text-foreground/70",
+        isLong ? "text-base md:text-lg" : "text-lg md:text-2xl",
         className
       )}
-      loading="lazy"
-    />
+    >
+      {children}
+    </span>
   );
 }

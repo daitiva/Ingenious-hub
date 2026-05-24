@@ -20,18 +20,21 @@
   }
 
   .dark {
-    /* Dark surface — cool mist */
-    --background: 220 18% 5%;
-    --foreground: 38 28% 92%;
-    --card: 220 18% 7%;
-    --card-foreground: 38 28% 92%;
-    --muted: 220 14% 11%;
-    --muted-foreground: 30 8% 64%;
-    --border: 220 14% 14%;
-    --input: 220 14% 14%;
-    --ring: 173 80% 50%;
-    --primary: 173 80% 42%;
-    --primary-foreground: 220 18% 5%;
+    /* Warm charcoal — editorial, not AMOLED-black.
+     * Reads as graphite with a subtle warm undertone, like print paper
+     * photographed under tungsten. Lifts off pure-black by ~10 points so
+     * eyes don't bleed contrast under prolonged reading. */
+    --background: 30 7% 9%;       /* ≈ #18161A */
+    --foreground: 36 18% 88%;     /* ≈ #E5E1D9 — warm off-white */
+    --card: 30 6% 12%;            /* ≈ #1F1D1B */
+    --card-foreground: 36 18% 88%;
+    --muted: 30 5% 16%;           /* ≈ #2A2825 */
+    --muted-foreground: 30 6% 62%;
+    --border: 30 5% 19%;          /* ≈ #322F2C */
+    --input: 30 5% 19%;
+    --ring: 173 70% 50%;
+    --primary: 173 70% 42%;
+    --primary-foreground: 30 7% 9%;
   }
 
   * {
