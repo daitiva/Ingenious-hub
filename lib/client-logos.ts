@@ -53,12 +53,18 @@ const OVERRIDES: Record<string, LogoManifestEntry> = {
     ext: "svg",
     monochrome: false,
   },
-  // TODO(verification): swap to "verified" once each of these lands under
-  // /public/clients/<slug>.svg (or .png). Maintain the same shape per entry.
-  // Examples — leave commented until the asset is in place:
-  // "allegiance-education": { slug: "allegiance-education", status: "verified", ext: "svg" },
-  // "tax2win":              { slug: "tax2win",              status: "verified", ext: "png", monochrome: true },
-  // "yug-vaastra":          { slug: "yug-vaastra",          status: "verified", ext: "svg" },
+  "yug-vaastra": {
+    slug: "yug-vaastra",
+    status: "verified",
+    ext: "svg",
+    monochrome: false,
+  },
+  // TODO(verification): 40 additional SVGs were uploaded under
+  // /public/clients/ in a batch. They need a per-file audit before
+  // being flipped to "verified": confirm filename slug matches the
+  // CLIENTS entry, check monochrome treatment, rename outliers
+  // (e.g. "pure earth.svg" → "pureearth.svg", "tagore-IPS.svg" →
+  // "tagore-ips.svg"), and add OVERRIDES entries here.
 };
 
 /** Default-derive a manifest entry for any client by slugifying its name. */
