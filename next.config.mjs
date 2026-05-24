@@ -12,6 +12,8 @@ const csp = [
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
+  // `https:` is open by design — client logos auto-source from Google's
+  // favicon CDN until verified SVGs land at /public/clients/<slug>.svg.
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://challenges.cloudflare.com https://*.upstash.io https://api.resend.com https://vitals.vercel-insights.com",
   "frame-src https://challenges.cloudflare.com",

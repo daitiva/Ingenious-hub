@@ -36,12 +36,12 @@ const config: Config = {
 
         // Brand palette — narrow + intentional.
         // Ink is the deep warm slab colour used for Proof + Impact + final CTA.
-        // Softened from a near-black to a warm graphite so the inverted
-        // sections feel editorial, not AMOLED.
-        ink: "#1A1816",
-        "ink-soft": "#211F1C",
+        // Sits in graphite territory: dark enough for tonal contrast against
+        // the bone surface, light enough to feel editorial not AMOLED.
+        ink: "#252220",
+        "ink-soft": "#2F2C29",
         bone: "#F4F0E8",
-        mist: "#15131A",
+        mist: "#1B1916",
         hairline: "#E5E2D9",
 
         teal: {

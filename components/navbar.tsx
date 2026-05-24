@@ -21,6 +21,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const progressRef = React.useRef<HTMLDivElement>(null);
+  const headerRef = React.useRef<HTMLElement>(null);
+  const menuBtnRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     // rAF-batched. `scrolled` state only toggles on threshold crossings, so
@@ -68,13 +70,26 @@ export function Navbar() {
     };
   }, [open]);
 
-  // Escape closes
+  // Escape + outside-tap close. We listen on `pointerdown` so the close
+  // fires before any click on the underlying content, and we ignore clicks
+  // that originate inside the header (menu, toggle, logo, theme button).
   React.useEffect(() => {
+    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    if (open) window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const onPointer = (e: PointerEvent) => {
+      const target = e.target as Node | null;
+      if (!target) return;
+      if (headerRef.current?.contains(target)) return;
+      setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("pointerdown", onPointer);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointerdown", onPointer);
+    };
   }, [open]);
 
   return (
@@ -87,6 +102,7 @@ export function Navbar() {
       />
 
       <header
+        ref={headerRef}
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           scrolled
@@ -146,6 +162,7 @@ export function Navbar() {
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
             <button
+              ref={menuBtnRef}
               type="button"
               className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -161,6 +178,9 @@ export function Navbar() {
         {open && (
           <div
             id="mobile-nav"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
             className="border-t border-border bg-background md:hidden"
           >
             <div className="container flex flex-col py-6">
@@ -184,6 +204,18 @@ export function Navbar() {
           </div>
         )}
       </header>
+
+      {/* Tap-anywhere-to-close backdrop. Only on mobile. Sits below the
+          header (which is z-50) so taps on the menu itself land first. */}
+      {open && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          tabIndex={-1}
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-40 bg-background/30 backdrop-blur-[2px] md:hidden"
+        />
+      )}
     </>
   );
 }

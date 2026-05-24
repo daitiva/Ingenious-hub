@@ -37,28 +37,38 @@ export function Industries() {
           </div>
 
           <div className="md:col-span-8">
+            {/* Tiles are display-only on the home page — they prove breadth
+                without taking the visitor to a coming-soon page. The single
+                "Explore industries" link below leads to the index where
+                each industry has its own real page. */}
             <ul className="grid grid-cols-1 gap-px border border-border bg-border/80 md:grid-cols-2">
               {INDUSTRIES.map((ind, i) => (
                 <Reveal as="li" key={ind.slug} i={i} tone="editorial">
-                  <Link
-                    href={`/industries/${ind.slug}`}
-                    className="focus-ring group flex h-full flex-col justify-between gap-8 bg-background p-6 transition-colors hover:bg-card md:p-8"
-                  >
+                  <div className="flex h-full flex-col justify-between gap-8 bg-background p-6 md:p-8">
                     <p className="font-display text-h-3 font-light tracking-tight">
                       {ind.label}
                     </p>
-                    <div className="flex items-end justify-between gap-4">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                        0{i + 1} / {INDUSTRIES.length}
-                      </span>
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-border text-muted-foreground transition-all group-hover:border-foreground group-hover:bg-foreground group-hover:text-background">
-                        <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45" />
-                      </span>
-                    </div>
-                  </Link>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      0{i + 1} / {INDUSTRIES.length}
+                    </span>
+                  </div>
                 </Reveal>
               ))}
             </ul>
+
+            <Reveal>
+              <div className="mt-6 flex items-center justify-end">
+                <Link
+                  href="/industries"
+                  className="focus-ring group inline-flex items-center gap-2 text-sm font-medium"
+                >
+                  <span className="underline-offset-4 group-hover:underline">
+                    Explore industries
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>

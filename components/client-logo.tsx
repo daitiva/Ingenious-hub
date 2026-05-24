@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn, slugify } from "@/lib/utils";
 import { getLogoEntry } from "@/lib/client-logos";
+import { CLIENTS } from "@/lib/clients";
 
 type ClientLogoProps = {
   /** Display name — used for alt text + placeholder + slug derivation */
@@ -21,14 +22,19 @@ type ClientLogoProps = {
 };
 
 /**
- * Renders a client logo with three states:
- *   verified   — loads /public/clients/<slug>.<ext>, lazy by default
- *   placeholder — tasteful typographic placeholder at consistent dimensions
- *   blocked    — name rendered as text only (policy)
+ * Two-tier source strategy:
+ *   1. /public/clients/<slug>.<ext> if the manifest says `verified`.
+ *   2. Google's favicon service at sz=128 if the client has a public
+ *      `domain` set on lib/clients.ts. This is "good enough" for an
+ *      editorial wall — sharp icon, served from Google's CDN, no
+ *      third-party JS, no privacy hit.
+ *   3. Typographic placeholder at identical dimensions otherwise.
  *
- * Dark-mode safe: monochrome marks get `dark:invert`; full-colour marks pass
- * through. Lazy + no implicit width so we never trigger CLS at scale.
+ * All three render at the same box so the grid never shifts.
  */
+
+const GOOGLE_FAVICON = "https://www.google.com/s2/favicons?sz=128&domain=";
+
 export function ClientLogo({
   name,
   slug: slugOverride,
@@ -38,9 +44,12 @@ export function ClientLogo({
   fallback,
   loading = "lazy",
 }: ClientLogoProps) {
-  const [errored, setErrored] = React.useState(false);
+  const [localErrored, setLocalErrored] = React.useState(false);
+  const [domainErrored, setDomainErrored] = React.useState(false);
+
   const slug = slugOverride ?? slugify(name);
   const entry = getLogoEntry(slug);
+  const client = CLIENTS.find((c) => c.name === name);
 
   // Blocked entries never render an asset.
   if (entry.status === "blocked") {
@@ -51,37 +60,41 @@ export function ClientLogo({
     );
   }
 
-  // Verified path — render the asset. If it 404s at runtime, gracefully
-  // fall back to the placeholder so layout never breaks. Explicit dimensions
-  // + aspect-ratio container so we never trigger CLS even when images load
-  // slowly on a cold cache.
-  if (entry.status === "verified" && !errored) {
+  // Tier 1 — verified local asset.
+  if (entry.status === "verified" && !localErrored) {
     const ext = entry.ext ?? "svg";
     const src = `/clients/${slug}.${ext}`;
     const mono = forceMono ?? entry.monochrome ?? false;
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
+      <BrandImg
         src={src}
         alt={name}
-        width={200}
-        height={120}
         loading={loading}
-        decoding="async"
-        onError={() => setErrored(true)}
-        className={cn(
-          "block h-full w-full max-w-full object-contain",
-          mono &&
-            "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
-          tone === "mono" &&
-            "[filter:grayscale(1)_contrast(0.9)] opacity-80 transition-[filter,opacity] duration-300 hover:[filter:grayscale(0)] hover:opacity-100 dark:invert",
-          className
-        )}
+        mono={mono}
+        tone={tone}
+        className={className}
+        onError={() => setLocalErrored(true)}
       />
     );
   }
 
-  // Placeholder path.
+  // Tier 2 — domain-sourced fallback (Google favicons). Sharp 128px PNG.
+  if (client?.domain && !domainErrored) {
+    return (
+      <BrandImg
+        src={`${GOOGLE_FAVICON}${client.domain}`}
+        alt={name}
+        loading={loading}
+        // Favicons are full-colour by default; respect tone="mono" for the wall
+        mono={forceMono ?? false}
+        tone={tone}
+        className={cn("h-auto max-h-12 w-auto", className)}
+        onError={() => setDomainErrored(true)}
+      />
+    );
+  }
+
+  // Tier 3 — typographic placeholder.
   return (
     <Placeholder name={name} className={className}>
       {fallback ?? name}
@@ -89,10 +102,46 @@ export function ClientLogo({
   );
 }
 
-/**
- * Typographic placeholder — consistent dimensions, never breaks the grid.
- * Uses the brand's serif italic so it reads as intentional, not absent.
- */
+function BrandImg({
+  src,
+  alt,
+  loading,
+  mono,
+  tone,
+  className,
+  onError,
+}: {
+  src: string;
+  alt: string;
+  loading?: "lazy" | "eager";
+  mono?: boolean;
+  tone?: "auto" | "mono" | "default";
+  className?: string;
+  onError?: () => void;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      width={200}
+      height={120}
+      loading={loading ?? "lazy"}
+      decoding="async"
+      referrerPolicy="no-referrer"
+      onError={onError}
+      className={cn(
+        "block h-full w-full max-w-full object-contain",
+        mono &&
+          "[filter:grayscale(1)_contrast(0.95)] opacity-90 dark:invert dark:opacity-95",
+        tone === "mono" &&
+          "[filter:grayscale(1)_contrast(0.9)] opacity-80 transition-[filter,opacity] duration-300 hover:[filter:grayscale(0)] hover:opacity-100",
+        className
+      )}
+    />
+  );
+}
+
 function Placeholder({
   name,
   className,
