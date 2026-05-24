@@ -17,8 +17,9 @@ const COLUMNS = [
     title: "Studio",
     links: [
       { href: "/work", label: "Work" },
-      { href: "/clients", label: "Clients" },
+      { href: "/process", label: "Process" },
       { href: "/about", label: "About" },
+      { href: "/clients", label: "Clients" },
       { href: "/contact", label: "Contact" },
     ],
   },
@@ -103,7 +104,7 @@ export function Footer() {
             rights reserved.
           </p>
           <p className="font-serif italic text-foreground/80">
-            Brands aren&rsquo;t built. They&rsquo;re remembered.
+            We design the brands people choose.
           </p>
         </div>
       </div>

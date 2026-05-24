@@ -41,11 +41,15 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Prevent horizontal overflow from oversized typography / parallax layers */
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss02" 1, "cv11" 1;
+    /* Safety net for any section with transforms that escape its box */
+    overflow-x: clip;
   }
 
   ::selection {
