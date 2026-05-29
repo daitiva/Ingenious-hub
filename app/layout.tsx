@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -7,29 +7,18 @@ import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { SERVICES } from "@/lib/services";
 
-// Open Sans serves both body and display roles until a premium display
-// face is licensed. Variable font axis loaded for full weight range.
+// Single-family typesetting: Open Sans across sans, display, serif
+// (italic), and mono roles. Removing Instrument Serif + JetBrains Mono
+// matches Pentagram's discipline of one voice and ships ~80 KB less
+// font weight than the previous three-family system.
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
+  style: ["normal", "italic"],
   variable: "--font-sans",
 });
 
 const displayFont = openSans;
-
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-instrument",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ingenioushub.com"),
@@ -201,7 +190,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${instrument.variable} ${mono.variable}`}
+      className={openSans.variable}
       style={{ ["--font-display" as string]: displayFont.style.fontFamily }}
       suppressHydrationWarning
     >

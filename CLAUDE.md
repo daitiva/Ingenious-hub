@@ -146,9 +146,12 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
   large blocks of text, never on primary CTAs, never on cards.
 - **Dark mode is warm charcoal**, not AMOLED black. `--background:
   30 7% 14%` (#25221F) and `ink: #1B1916`. Don't darken below this.
-- **Type families**: `font-sans` / `font-display` (Open Sans — placeholder
-  until a premium display is licensed; was Inter pre-Pentagram pass) ·
-  `font-serif` (Instrument Serif, italic only) · `font-mono` (JetBrains Mono).
+- **Type families**: single-family system. Every Tailwind family alias
+  (`font-sans`, `font-display`, `font-serif`, `font-mono`) resolves to
+  **Open Sans**. Instrument Serif + JetBrains Mono were retired when the
+  studio chose Open Sans exclusively. Italic accents still use
+  `font-serif italic` — they just render as Open Sans italic. Don't
+  re-introduce a second family without an explicit call from the studio.
 - **Weights are conservative**: 300 for display, 400 for sub-heading and
   body, 500 for emphasis, 700 reserved for impact metrics only.
 - **Type scale** is a named ladder (`text-d-1`, `text-d-2`, `text-h-1`,

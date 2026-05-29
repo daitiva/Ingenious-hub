@@ -43,28 +43,67 @@ export type LogoManifestEntry = {
 };
 
 /**
- * Explicit overrides. Start small — only add an entry when you've
- * personally verified the file is in /public/clients/<slug>.<ext>.
+ * Verified overrides. Each entry signals that /public/clients/<slug>.<ext>
+ * exists and the studio has confirmed the asset is the official brand mark.
+ * Anything not listed here falls through to the typographic placeholder.
  */
+const verified = (slug: string, monochrome = false): LogoManifestEntry => ({
+  slug,
+  status: "verified",
+  ext: "svg",
+  monochrome,
+});
+
 const OVERRIDES: Record<string, LogoManifestEntry> = {
-  "trueline-technologies": {
-    slug: "trueline-technologies",
-    status: "verified",
-    ext: "svg",
-    monochrome: false,
-  },
-  "yug-vaastra": {
-    slug: "yug-vaastra",
-    status: "verified",
-    ext: "svg",
-    monochrome: false,
-  },
-  // TODO(verification): 40 additional SVGs were uploaded under
-  // /public/clients/ in a batch. They need a per-file audit before
-  // being flipped to "verified": confirm filename slug matches the
-  // CLIENTS entry, check monochrome treatment, rename outliers
-  // (e.g. "pure earth.svg" → "pureearth.svg", "tagore-IPS.svg" →
-  // "tagore-ips.svg"), and add OVERRIDES entries here.
+  // First batch (pre-roster verification).
+  "trueline-technologies": verified("trueline-technologies"),
+  "yug-vaastra": verified("yug-vaastra"),
+
+  // Roster drop — P through Y (40 brands). Filenames pre-matched to
+  // slugify(name) — outliers (pure-earth, tagore-IPS, techzu, etc.)
+  // were renamed on disk to match.
+  "pragyatah": verified("pragyatah"),
+  "prowess-healthcare": verified("prowess-healthcare"),
+  "pureearth": verified("pureearth"),
+  "quincy": verified("quincy"),
+  "res-rajasthan-engineering-colleges-society": verified("res-rajasthan-engineering-colleges-society"),
+  "reliable-media": verified("reliable-media"),
+  "rr-gurukul": verified("rr-gurukul"),
+  "satya-smriti": verified("satya-smriti"),
+  "sbn-group-of-schools": verified("sbn-group-of-schools"),
+  "schege": verified("schege"),
+  "shiksha-setu": verified("shiksha-setu"),
+  "shree-security-fender": verified("shree-security-fender"),
+  "shreenath-group": verified("shreenath-group"),
+  "shubh-vaibhav-decor": verified("shubh-vaibhav-decor"),
+  "summer-hills": verified("summer-hills"),
+  "tagore-ips": verified("tagore-ips"),
+  "tagore-engineering-college": verified("tagore-engineering-college"),
+  "tagore-law-college": verified("tagore-law-college"),
+  "team-phoenix": verified("team-phoenix"),
+  "techzu-software": verified("techzu-software"),
+  "tg-consultancy": verified("tg-consultancy"),
+  "the-rainbow-threads": verified("the-rainbow-threads"),
+  "the-wash-hut": verified("the-wash-hut"),
+  "the-wellness-clinic": verified("the-wellness-clinic"),
+  "unlock-career": verified("unlock-career"),
+  "upjay-foundation": verified("upjay-foundation"),
+  "upturn-health": verified("upturn-health"),
+  "urnik-restro": verified("urnik-restro"),
+  "volimy": verified("volimy"),
+  "volkaline": verified("volkaline"),
+  "wealth-wisdom-consultants": verified("wealth-wisdom-consultants"),
+  "white-eudicots": verified("white-eudicots"),
+  "whmcs-pro": verified("whmcs-pro"),
+  "woocom-pro": verified("woocom-pro"),
+  "yash-publicity": verified("yash-publicity"),
+  "yisf": verified("yisf"),
+  "yogritu": verified("yogritu"),
+  "yogscape": verified("yogscape"),
+
+  // TODO(verification): 46 remaining clients (alphabet A through O) still
+  // have no verified asset and render as typographic placeholders. Drop the
+  // SVG at /public/clients/<slug>.svg and add an entry above as each lands.
 };
 
 /** Default-derive a manifest entry for any client by slugifying its name. */
