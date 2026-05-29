@@ -1,23 +1,14 @@
-import { Hero } from "@/components/sections/hero";
-import { Thesis } from "@/components/sections/thesis";
-import { FeaturedWork } from "@/components/sections/featured-work";
-import { ClientsWall } from "@/components/sections/clients-wall";
-import { ServicesPosture } from "@/components/sections/services-posture";
-import { Industries } from "@/components/sections/industries";
-import { Proof } from "@/components/sections/proof";
-import { FinalCTA } from "@/components/sections/final-cta";
+import { WorkGrid } from "@/components/sections/work-grid";
 
+/**
+ * Homepage — Pentagram-shape.
+ *
+ * The work IS the entry experience. No hero, no thesis slab, no
+ * marketing sections. Visitors land directly on a dense grid of
+ * selected projects and scroll. Marketing-style sections (Services,
+ * Industries, Process) live behind dedicated routes for the few
+ * visitors who want them.
+ */
 export default function HomePage() {
-  return (
-    <>
-      <Hero />
-      <Thesis />
-      <FeaturedWork />
-      <ClientsWall />
-      <ServicesPosture />
-      <Industries />
-      <Proof />
-      <FinalCTA />
-    </>
-  );
+  return <WorkGrid />;
 }

@@ -3,17 +3,18 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
+// Pentagram-shape nav: just the routes a visitor cares about. Services,
+// Process, Industries still ship as standalone pages but live in the
+// footer — they don't compete with the work for primary attention.
 const NAV = [
-  { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
-  { href: "/process", label: "Process" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -154,13 +155,6 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Link
-              href="/contact"
-              className="focus-ring hidden h-10 items-center gap-2 rounded-full bg-foreground px-4 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 md:inline-flex"
-            >
-              Start a project
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
             <button
               ref={menuBtnRef}
               type="button"
@@ -193,13 +187,6 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/contact"
-                className="focus-ring mt-5 inline-flex h-12 items-center justify-between rounded-full bg-foreground px-5 text-sm font-medium text-background"
-              >
-                Start a project
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
             </div>
           </div>
         )}

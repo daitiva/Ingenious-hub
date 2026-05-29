@@ -38,7 +38,7 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 /
 ├── app/                        Next.js App Router
 │   ├── layout.tsx              Root layout — fonts, theme, JSON-LD, footer
-│   ├── page.tsx                Homepage — composes 8 sections
+│   ├── page.tsx                Homepage — Pentagram-shape work grid (no marketing sections)
 │   ├── about/page.tsx          Editorial belief-system essay
 │   ├── api/contact/route.ts    Edge runtime · Turnstile + Upstash + Resend
 │   ├── clients/                Index page + client-side filter shell
@@ -146,9 +146,9 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
   large blocks of text, never on primary CTAs, never on cards.
 - **Dark mode is warm charcoal**, not AMOLED black. `--background:
   30 7% 14%` (#25221F) and `ink: #1B1916`. Don't darken below this.
-- **Type families**: `font-display` (Inter — placeholder until a premium
-  display is licensed) · `font-serif` (Instrument Serif, italic only) ·
-  `font-mono` (JetBrains Mono).
+- **Type families**: `font-sans` / `font-display` (Open Sans — placeholder
+  until a premium display is licensed; was Inter pre-Pentagram pass) ·
+  `font-serif` (Instrument Serif, italic only) · `font-mono` (JetBrains Mono).
 - **Weights are conservative**: 300 for display, 400 for sub-heading and
   body, 500 for emphasis, 700 reserved for impact metrics only.
 - **Type scale** is a named ladder (`text-d-1`, `text-d-2`, `text-h-1`,

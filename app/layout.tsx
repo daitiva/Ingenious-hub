@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Open_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -7,15 +7,15 @@ import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { SERVICES } from "@/lib/services";
 
-const inter = Inter({
+// Open Sans serves both body and display roles until a premium display
+// face is licensed. Variable font axis loaded for full weight range.
+const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
-// Inter doubles as our display family until a premium display can be licensed.
-// The CSS var name is kept distinct so the swap is one line in tailwind.config.
-const displayFont = inter;
+const displayFont = openSans;
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -201,7 +201,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrument.variable} ${mono.variable}`}
+      className={`${openSans.variable} ${instrument.variable} ${mono.variable}`}
       style={{ ["--font-display" as string]: displayFont.style.fontFamily }}
       suppressHydrationWarning
     >

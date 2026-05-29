@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getCase, getAllCaseSlugs, getAdjacentCases } from "@/lib/cases";
 import { ClientLogo } from "@/components/client-logo";
 import { Reveal } from "@/components/motion-reveal";
 import { RegistrationCorners } from "@/components/registration-corners";
-import { cn } from "@/lib/utils";
 
 export const dynamic = "force-static";
 
@@ -33,19 +32,27 @@ export function generateMetadata({
   };
 }
 
-const TONE_BG: Record<string, string> = {
-  bone: "bg-gradient-wash dark:bg-muted/30",
-  ink: "bg-ink text-bone dark:bg-foreground/95 dark:text-background",
-  grey: "bg-grey-100/80 dark:bg-grey-700/30",
-  teal: "bg-teal-600/[0.06] dark:bg-teal-600/[0.12]",
-};
-
+/**
+ * Case study — Pentagram-shape scrolling sequence.
+ *
+ * The page is a long, single-column vertical scroll alternating image
+ * panels with short caption blocks. No metric-grid hero, no impact
+ * slab, no eyebrow rituals — the work and a thin layer of editorial
+ * copy carry the page.
+ *
+ * Drop-in path for real photography (no code change required):
+ *   /public/cases/<slug>/cover.jpg     ← top panel
+ *   /public/cases/<slug>/gallery-01.jpg ← mid panel #1
+ *   /public/cases/<slug>/gallery-02.jpg ← mid panel #2
+ *   /public/cases/<slug>/gallery-03.jpg ← closing panel
+ * Until the files land, each panel renders the typographic placeholder
+ * composition (RegistrationCorners + brand mark).
+ */
 export default function CasePage({ params }: { params: { slug: string } }) {
   const work = getCase(params.slug);
   if (!work) notFound();
   const { detail } = work;
-  const { prev, next } = getAdjacentCases(work.slug);
-  const inverted = detail.tone === "ink";
+  const { next } = getAdjacentCases(work.slug);
 
   const jsonLd = [
     {
@@ -66,257 +73,129 @@ export default function CasePage({ params }: { params: { slug: string } }) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://ingenioushub.com/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Work",
-          item: "https://ingenioushub.com/work",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: work.client,
-          item: `https://ingenioushub.com/work/${work.slug}`,
-        },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://ingenioushub.com/" },
+        { "@type": "ListItem", position: 2, name: "Work", item: "https://ingenioushub.com/work" },
+        { "@type": "ListItem", position: 3, name: work.client, item: `https://ingenioushub.com/work/${work.slug}` },
       ],
     },
   ];
 
+  // Two-paragraph thinking essay → break into separate body blocks
+  // between panels so the page alternates image-text-image-text.
+  const thinking = detail.thinkingEssay;
+
   return (
     <article className="relative">
-      {/* HERO — registration card composition */}
-      <header className={cn("relative border-b border-border", TONE_BG[detail.tone])}>
-        <div className="container py-20 md:py-28">
-          <div className="grid items-end gap-10 md:grid-cols-12 md:gap-12">
-            <div className="md:col-span-7">
-              <p
-                className={cn(
-                  "font-mono text-[11px] uppercase tracking-[0.22em]",
-                  inverted ? "text-bone/60" : "text-muted-foreground"
-                )}
-              >
-                {work.client} · {work.sector}
-              </p>
-              <h1 className="mt-4 text-balance font-display text-d-2 font-light">
-                {work.title}
-              </h1>
-              <p
-                className={cn(
-                  "mt-6 max-w-xl text-body-lg",
-                  inverted ? "text-bone/80" : "text-muted-foreground"
-                )}
-              >
-                {detail.eyebrow}
-              </p>
-            </div>
-
-            <div className="md:col-span-5">
-              <div className="relative mx-auto aspect-[5/4] w-full max-w-md overflow-hidden rounded-2xl border border-hairline bg-background/95">
-                <RegistrationCorners />
-
-                <div className="absolute inset-x-12 inset-y-14 flex items-center justify-center">
-                  <ClientLogo
-                    name={work.client}
-                    slug={work.slug}
-                    className="max-h-[60%] w-auto max-w-full"
-                    fallback={
-                      <span className="text-center font-serif text-5xl italic text-foreground/85">
-                        {work.client}
-                      </span>
-                    }
-                  />
-                </div>
-
-                <div className="absolute inset-x-6 bottom-6 grid grid-cols-3 divide-x divide-hairline border-t border-hairline pt-4">
-                  {detail.metrics.map((m) => (
-                    <div key={m.label} className="px-3 first:pl-0 last:pr-0">
-                      <div className="font-display text-h-3 font-light tabular-nums">
-                        {m.metric}
-                      </div>
-                      <div className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 md:mt-20">
-            <Link
-              href="/work"
-              className="focus-ring inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              All work
-            </Link>
-          </div>
+      {/* TITLE BLOCK — quiet, minimal, no eyebrow ritual */}
+      <header className="border-b border-border">
+        <div className="container py-16 md:py-24">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            {work.client} — {work.sector}
+          </p>
+          <h1 className="mt-6 max-w-4xl text-balance font-display text-d-1 font-light leading-[0.95] tracking-tightest">
+            {work.title}
+          </h1>
+          <p className="mt-8 max-w-2xl text-body-lg text-muted-foreground">
+            {detail.eyebrow}
+          </p>
         </div>
       </header>
 
-      {/* PROBLEM */}
-      <Section eyebrow="01 — Problem">
-        <Reveal as="p" className="text-balance font-display text-h-2 font-light leading-snug">
-          {detail.problemEssay}
-        </Reveal>
-      </Section>
+      {/* PANEL 1 — cover */}
+      <CasePanel slug={work.slug} name={work.client} />
 
-      {/* THINKING */}
-      <Section eyebrow="02 — Thinking" tone="bone">
+      {/* COPY — problem */}
+      <CaseCopy>
+        <p className="text-balance font-display text-h-2 font-light leading-snug">
+          {detail.problemEssay}
+        </p>
+      </CaseCopy>
+
+      {/* PANEL 2 */}
+      <CasePanel slug={work.slug} name={work.client} variant="wide" />
+
+      {/* COPY — thinking */}
+      <CaseCopy>
         <div className="space-y-6 text-body-lg text-foreground/90">
-          {detail.thinkingEssay.map((para, i) => (
+          {thinking.map((para, i) => (
             <Reveal as="p" key={i} i={i} tone="quiet">
               {para}
             </Reveal>
           ))}
         </div>
-      </Section>
+      </CaseCopy>
 
-      {/* EXECUTION */}
-      <Section eyebrow="03 — Execution">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-14">
-          <div className="md:col-span-7">
-            <Reveal as="p" className="text-body-lg text-foreground/90">
-              {detail.executionEssay}
-            </Reveal>
-          </div>
-          <div className="md:col-span-5">
-            <Reveal>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                Deliverables
-              </p>
-              <ul className="mt-4 divide-y divide-border border-y border-border">
-                {detail.deliverables.map((d) => (
-                  <li
-                    key={d}
-                    className="flex items-baseline gap-3 py-3 text-sm md:text-base"
-                  >
-                    <span aria-hidden className="font-mono text-[10px] text-muted-foreground">
-                      ✦
-                    </span>
-                    <span>{d}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </div>
-      </Section>
+      {/* PANEL 3 */}
+      <CasePanel slug={work.slug} name={work.client} />
 
-      {/* IMPACT — inverted slab */}
-      <section className="relative border-y border-foreground/40 bg-ink py-20 text-bone md:py-28">
-        <div className="container">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/55">
-            04 — Impact
-          </p>
-          <Reveal
-            as="p"
-            tone="editorial"
-            className="mt-6 max-w-3xl text-balance font-display text-h-1 font-light text-bone"
-          >
-            {detail.impactEssay}
-          </Reveal>
+      {/* COPY — execution */}
+      <CaseCopy>
+        <p className="text-body-lg text-foreground/90">{detail.executionEssay}</p>
+        <ul className="mt-12 grid grid-cols-1 gap-1 text-sm md:grid-cols-2 md:gap-x-10">
+          {detail.deliverables.map((d) => (
+            <li key={d} className="flex items-baseline gap-3 border-b border-border py-3 last:border-b-0">
+              <span aria-hidden className="font-mono text-[10px] text-muted-foreground">✦</span>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+      </CaseCopy>
 
-          <ul className="mt-12 grid grid-cols-1 gap-y-8 border-t border-bone/15 pt-10 sm:grid-cols-3">
-            {detail.metrics.map((m) => (
-              <li key={m.label}>
-                <div className="font-display text-d-2 font-light leading-none tabular-nums">
-                  {m.metric}
-                </div>
-                <div className="mt-3 max-w-[180px] text-xs text-bone/55">
-                  {m.label}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* PANEL 4 */}
+      <CasePanel slug={work.slug} name={work.client} variant="wide" />
 
-      {/* PULL QUOTE */}
+      {/* PULL QUOTE — single editorial moment */}
       {detail.pullQuote && (
-        <Section>
-          <figure className="mx-auto max-w-3xl text-center">
-            <Reveal as="div" tone="editorial">
+        <section className="border-t border-border">
+          <div className="container py-24 md:py-32">
+            <figure className="mx-auto max-w-3xl text-center">
               <blockquote className="font-display text-h-1 font-light leading-[1.1]">
-                <span className="text-gradient-brand font-serif italic">“</span>
+                <span className="text-gradient-brand font-serif italic">&ldquo;</span>
                 {detail.pullQuote.body}
-                <span className="text-gradient-brand font-serif italic">”</span>
+                <span className="text-gradient-brand font-serif italic">&rdquo;</span>
               </blockquote>
-              <figcaption className="mt-7 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              <figcaption className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 — {detail.pullQuote.name}, {detail.pullQuote.role}
               </figcaption>
-            </Reveal>
-          </figure>
-        </Section>
+            </figure>
+          </div>
+        </section>
       )}
 
-      {/* PREV / NEXT */}
-      <nav
-        aria-label="More case studies"
-        className="relative border-t border-border"
-      >
-        <ul className="grid grid-cols-1 divide-y divide-border border-t border-transparent md:grid-cols-2 md:divide-x md:divide-y-0">
-          {prev && (
-            <li>
-              <Link
-                href={`/work/${prev.slug}`}
-                className="focus-ring group flex h-full flex-col gap-3 p-8 transition-colors hover:bg-muted/40 md:p-12"
-              >
-                <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-                  Previous
-                </span>
-                <span className="font-display text-h-3 font-light">{prev.client}</span>
-                <span className="text-sm text-muted-foreground">{prev.title}</span>
-              </Link>
-            </li>
-          )}
-          {next && (
-            <li>
-              <Link
-                href={`/work/${next.slug}`}
-                className="focus-ring group flex h-full flex-col gap-3 p-8 transition-colors hover:bg-muted/40 md:items-end md:p-12 md:text-right"
-              >
-                <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Next
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
-                <span className="font-display text-h-3 font-light">{next.client}</span>
-                <span className="text-sm text-muted-foreground">{next.title}</span>
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
-
-      {/* SOFT CTA */}
-      <section className="relative border-t border-border py-20 md:py-28">
-        <div className="container text-center">
+      {/* CLOSING IMPACT — one sentence, no slab */}
+      <section className="border-t border-border">
+        <div className="container py-20 md:py-28">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-            Next
+            Impact
           </p>
-          <h2 className="mt-4 text-balance font-display text-d-2 font-light">
-            Have a brief like{" "}
-            <span className="text-gradient-brand font-serif italic">
-              {work.client}&rsquo;s?
-            </span>
-          </h2>
-          <Link
-            href="/contact"
-            className="focus-ring group mt-10 inline-flex h-12 items-center gap-3 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
-          >
-            Start a project
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
-          </Link>
+          <p className="mt-6 max-w-3xl text-balance font-display text-h-1 font-light">
+            {detail.impactEssay}
+          </p>
         </div>
       </section>
+
+      {/* NEXT PROJECT — tiny, single link, no card chrome */}
+      {next && (
+        <nav aria-label="Next project" className="border-t border-border">
+          <Link
+            href={`/work/${next.slug}`}
+            className="focus-ring group block py-16 transition-colors hover:bg-muted/30 md:py-24"
+          >
+            <div className="container flex items-center justify-between gap-6">
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                  Next project
+                </p>
+                <p className="mt-3 font-display text-h-1 font-light leading-tight">
+                  {next.client}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">{next.title}</p>
+              </div>
+              <ArrowRight className="h-6 w-6 shrink-0 transition-transform group-hover:translate-x-1 md:h-8 md:w-8" />
+            </div>
+          </Link>
+        </nav>
+      )}
 
       <script
         type="application/ld+json"
@@ -326,35 +205,60 @@ export default function CasePage({ params }: { params: { slug: string } }) {
   );
 }
 
-function Section({
-  eyebrow,
-  children,
-  tone,
+/**
+ * A single panel in the scrolling sequence.
+ *
+ * `wide` variant uses 16:9; default is 4:5 (vertical phone-shot
+ * proportion which suits brand artefacts photographed on a desk).
+ *
+ * Today: renders the typographic placeholder (RegistrationCorners +
+ * brand mark via ClientLogo). When the studio drops real photography
+ * at /public/cases/<slug>/<file>.jpg, replace this function with a
+ * straight <Image> render against that path — no other surgery needed.
+ */
+function CasePanel({
+  slug,
+  name,
+  variant = "tall",
 }: {
-  eyebrow?: string;
-  children: React.ReactNode;
-  tone?: "bone";
+  slug: string;
+  name: string;
+  variant?: "tall" | "wide";
 }) {
+  const aspect = variant === "wide" ? "aspect-[16/9]" : "aspect-[4/5]";
+
   return (
-    <section
-      className={cn(
-        "relative border-t border-border py-20 md:py-28",
-        tone === "bone" && "bg-gradient-wash"
-      )}
-    >
-      <div className="container">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-12">
-          {eyebrow && (
-            <div className="md:col-span-3">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                {eyebrow}
-              </p>
-            </div>
-          )}
-          <div className={cn(eyebrow ? "md:col-span-9" : "md:col-span-12")}>
-            {children}
+    <section className="relative border-t border-border bg-muted/30">
+      <div className="container py-12 md:py-20">
+        <div className={`relative mx-auto w-full max-w-5xl ${aspect} overflow-hidden bg-background`}>
+          <RegistrationCorners inset="inset-4" />
+          <div className="absolute inset-x-12 inset-y-16 flex items-center justify-center">
+            <ClientLogo
+              name={name}
+              slug={slug}
+              className="max-h-[55%] w-auto max-w-full"
+              fallback={
+                <span className="text-center font-serif text-5xl italic text-foreground/80">
+                  {name}
+                </span>
+              }
+            />
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Caption block between panels. Narrow column, generous vertical
+ * rhythm. Body text only — no eyebrows, no labels.
+ */
+function CaseCopy({ children }: { children: React.ReactNode }) {
+  return (
+    <section className="border-t border-border">
+      <div className="container py-20 md:py-28">
+        <div className="mx-auto max-w-3xl">{children}</div>
       </div>
     </section>
   );
