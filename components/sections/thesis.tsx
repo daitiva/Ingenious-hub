@@ -13,7 +13,7 @@ export function Thesis() {
   return (
     <section
       aria-labelledby="thesis-heading"
-      className="relative border-t border-border bg-bone/40 py-24 dark:bg-muted/20 md:py-32"
+      className="relative border-t border-border bg-gradient-wash py-24 dark:bg-muted/20 md:py-32"
     >
       <div className="container">
         <div className="grid gap-10 md:grid-cols-12 md:gap-12">
@@ -24,7 +24,7 @@ export function Thesis() {
                 Most brands lose <span className="italic text-muted-foreground">slowly</span> — a tagline that argues
                 one thing, a website that argues another, ads that sound like a
                 fourth brand altogether. We make brands that hold their{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">argument</span> across every
+                <span className="text-gradient-brand font-serif italic">argument</span> across every
                 surface. That&rsquo;s the work.
               </span>
             </Reveal>

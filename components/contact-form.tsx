@@ -368,7 +368,7 @@ export function ContactForm() {
                 <p
                   role="alert"
                   aria-live="assertive"
-                  className="rounded-xl border border-rust-500/30 bg-rust-500/5 p-4 text-sm text-rust-600"
+                  className="rounded-xl border border-red-500/30 bg-red-500/5 p-4 text-sm text-red-600 dark:text-red-400"
                 >
                   {errorMsg}
                 </p>

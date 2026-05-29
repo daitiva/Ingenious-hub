@@ -34,9 +34,9 @@ export function generateMetadata({
 }
 
 const TONE_BG: Record<string, string> = {
-  bone: "bg-bone dark:bg-muted/30",
+  bone: "bg-gradient-wash dark:bg-muted/30",
   ink: "bg-ink text-bone dark:bg-foreground/95 dark:text-background",
-  rust: "bg-rust-500/10 dark:bg-rust-500/15",
+  grey: "bg-grey-100/80 dark:bg-grey-700/30",
   teal: "bg-teal-600/[0.06] dark:bg-teal-600/[0.12]",
 };
 
@@ -245,9 +245,9 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           <figure className="mx-auto max-w-3xl text-center">
             <Reveal as="div" tone="editorial">
               <blockquote className="font-display text-h-1 font-light leading-[1.1]">
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">“</span>
+                <span className="text-gradient-brand font-serif italic">“</span>
                 {detail.pullQuote.body}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">”</span>
+                <span className="text-gradient-brand font-serif italic">”</span>
               </blockquote>
               <figcaption className="mt-7 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 — {detail.pullQuote.name}, {detail.pullQuote.role}
@@ -304,7 +304,7 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           </p>
           <h2 className="mt-4 text-balance font-display text-d-2 font-light">
             Have a brief like{" "}
-            <span className="font-serif italic text-teal-600 dark:text-teal-300">
+            <span className="text-gradient-brand font-serif italic">
               {work.client}&rsquo;s?
             </span>
           </h2>
@@ -339,7 +339,7 @@ function Section({
     <section
       className={cn(
         "relative border-t border-border py-20 md:py-28",
-        tone === "bone" && "bg-bone/40 dark:bg-muted/20"
+        tone === "bone" && "bg-gradient-wash"
       )}
     >
       <div className="container">

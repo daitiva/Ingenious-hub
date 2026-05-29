@@ -75,10 +75,9 @@ export const metadata: Metadata = {
     },
   },
   icons: { icon: "/favicon.svg" },
-  // Address-bar tint per theme. Matches the bone background in light and
-  // the warm-charcoal background in dark.
+  // Address-bar tint per theme. White surface in light, warm graphite in dark.
   other: {
-    "theme-color": "#F4F0E8",
+    "theme-color": "#FFFFFF",
   },
 };
 
@@ -86,7 +85,7 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F4F0E8" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
     { media: "(prefers-color-scheme: dark)", color: "#25221F" },
   ],
 };

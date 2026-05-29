@@ -106,7 +106,7 @@ export function Hero() {
               <RevealLine startDelay={0.15}>We design the brands</RevealLine>
               <RevealLine
                 startDelay={0.55}
-                className="font-serif italic tracking-tight text-teal-600 dark:text-teal-400"
+                className="text-gradient-brand font-serif italic tracking-tight"
               >
                 people choose.
               </RevealLine>

@@ -33,7 +33,7 @@ export function ServicesPosture() {
                 id="services-heading"
                 className="mt-4 text-balance font-display text-h-1 font-light"
               >
-                Five pillars. <span className="font-serif italic text-teal-600 dark:text-teal-300">Not thirty.</span>
+                Five pillars. <span className="text-gradient-brand font-serif italic">Not thirty.</span>
               </h2>
               <p className="mt-6 max-w-md text-body text-muted-foreground">
                 We don&rsquo;t do thirty things badly. We do five things well — and we plug them together so positioning, product surface, and acquisition stop fighting each other.

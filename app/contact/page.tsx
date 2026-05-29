@@ -21,7 +21,7 @@ export default function ContactPage() {
             </p>
             <h1 className="mt-4 text-balance font-display text-d-2 font-light leading-[1.05]">
               Tell us what you&rsquo;re{" "}
-              <span className="font-serif italic text-teal-600 dark:text-teal-300">
+              <span className="text-gradient-brand font-serif italic">
                 working on.
               </span>
             </h1>

@@ -34,38 +34,60 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
 
-        // Brand palette — narrow + intentional.
+        // Brand palette — narrow and on-logo.
+        // bone now means "the light surface" → pure white. Kept as alias
+        // so legacy `bg-bone` references render against the new white system.
+        bone: "#FFFFFF",
         // Ink is the deep warm slab colour used for Proof + Impact + final CTA.
         // Sits in graphite territory: dark enough for tonal contrast against
-        // the bone surface, light enough to feel editorial not AMOLED.
-        ink: "#252220",
-        "ink-soft": "#2F2C29",
-        bone: "#F4F0E8",
+        // the white surface, warm enough to feel editorial.
+        ink: "#1B1916",
+        "ink-soft": "#272421",
         mist: "#1B1916",
-        hairline: "#E5E2D9",
+        hairline: "#E5E7EB",
 
+        // Teal scale — 300 and 600 are EXACT logo gradient endpoints.
+        // Both bookends of the wordmark gradient now live as utility
+        // tokens, so `from-teal-300 to-teal-600` reproduces the mark.
         teal: {
           50: "#f0fdfa",
           100: "#ccfbf1",
           200: "#99f6e4",
-          300: "#5EEAD4",
+          300: "#81D5D3",   // ← logo gradient: light bookend
           400: "#2dd4bf",
           500: "#14b8a6",
-          600: "#0D9488",
+          600: "#009E8B",   // ← logo gradient: deep bookend
           700: "#0f766e",
           800: "#115e59",
           900: "#134e4a",
         },
-        // Counterpoint accent — used sparingly (one section per page)
-        rust: {
-          400: "#D86B53",
-          500: "#C8553D",
-          600: "#A8442F",
+        // Brand grey — single warm-neutral counterpoint, replacing rust.
+        // 500 is the exact wordmark grey ("hub" + tagline in logo.svg).
+        grey: {
+          50: "#F8F9FA",
+          100: "#F3F4F6",
+          200: "#E5E7EB",
+          300: "#D1D5DB",
+          400: "#9CA3AF",
+          500: "#636363",   // ← logo grey
+          600: "#4B5563",
+          700: "#374151",
+          800: "#1F2937",
+          900: "#111827",
         },
-        marigold: {
-          400: "#E7B23E",
-          500: "#D89B1F",
+        // Convenience aliases that map to the brand triad — used in
+        // gradient utilities and where readability beats abstraction.
+        brand: {
+          mint: "#81D5D3",
+          teal: "#009E8B",
+          grey: "#636363",
         },
+      },
+      backgroundImage: {
+        // Logo wordmark gradient — light → deep teal, 135deg.
+        // The single source of truth for every gradient surface on the site.
+        "gradient-brand":
+          "linear-gradient(135deg, #81D5D3 0%, #009E8B 100%)",
       },
       borderRadius: {
         lg: "var(--radius)",

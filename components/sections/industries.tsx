@@ -14,7 +14,7 @@ export function Industries() {
   return (
     <section
       aria-labelledby="industries-heading"
-      className="relative border-t border-border bg-bone/40 py-24 dark:bg-muted/20 md:py-32"
+      className="relative border-t border-border bg-gradient-wash py-24 dark:bg-muted/20 md:py-32"
     >
       <div className="container">
         <div className="grid gap-10 md:grid-cols-12">
@@ -28,7 +28,7 @@ export function Industries() {
                 className="mt-4 text-balance font-display text-h-1 font-light"
               >
                 Categories we&rsquo;ve{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">learned to listen to.</span>
+                <span className="text-gradient-brand font-serif italic">learned to listen to.</span>
               </h2>
               <p className="mt-6 max-w-md text-body text-muted-foreground">
                 Each industry has its own grammar — its trust signals, regulatory edges, buyer psychology. The work doesn&rsquo;t translate. The discipline does.

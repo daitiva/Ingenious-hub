@@ -21,7 +21,7 @@ type Case = {
   impact: string;
   metrics: { metric: string; label: string }[];
   eyebrow: string;
-  tone: "bone" | "ink" | "rust" | "teal";
+  tone: "bone" | "ink" | "grey" | "teal";
 };
 
 /**
@@ -86,7 +86,7 @@ const CASES: Case[] = [
       { metric: "75 yrs", label: "lineage" },
     ],
     eyebrow: "Tolaram · since 1950",
-    tone: "rust",
+    tone: "grey",
   },
   {
     index: "04",
@@ -129,7 +129,7 @@ export function FeaturedWork() {
                 className="text-balance font-display text-h-1 font-light"
               >
                 Strategy is{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   upstream
                 </span>{" "}
                 of design.
@@ -159,10 +159,13 @@ export function FeaturedWork() {
   );
 }
 
+// Each tone gives the slab a distinct read against the white surface:
+// bone = soft brand-gradient wash; ink = dark inverted slab;
+// grey = quiet brand-grey wash; teal = light teal tint.
 const TONE_BG: Record<Case["tone"], string> = {
-  bone: "bg-bone dark:bg-muted/30",
+  bone: "bg-gradient-wash dark:bg-muted/30",
   ink: "bg-ink text-bone dark:bg-foreground/95 dark:text-background",
-  rust: "bg-rust-500/10 dark:bg-rust-500/15",
+  grey: "bg-grey-100/80 dark:bg-grey-700/30",
   teal: "bg-teal-600/[0.06] dark:bg-teal-600/[0.12]",
 };
 

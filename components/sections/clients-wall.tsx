@@ -59,7 +59,7 @@ export function ClientsWall() {
                 className="mt-4 text-balance font-display text-h-1 font-light leading-[1.1]"
               >
                 {CLIENTS.length}+ organisations have asked us to{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   argue their case.
                 </span>
               </h2>

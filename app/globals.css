@@ -4,35 +4,38 @@
 
 @layer base {
   :root {
-    /* Light surface — warm bone */
-    --background: 38 35% 93%;
-    --foreground: 35 18% 5%;
-    --card: 36 30% 96%;
-    --card-foreground: 35 18% 5%;
-    --muted: 38 25% 88%;
-    --muted-foreground: 30 8% 36%;
-    --border: 36 18% 86%;
-    --input: 36 18% 86%;
-    --ring: 173 80% 28%;
-    --primary: 173 80% 28%;
-    --primary-foreground: 38 35% 95%;
+    /* Light surface — clean white, brand-aligned.
+     * Background is pure white; foreground is a slightly warm near-black
+     * so type doesn't read as clinical. Cards sit on the same surface
+     * and lean on hairlines + shadows for separation, not tonal tint. */
+    --background: 0 0% 100%;          /* #FFFFFF — pure white */
+    --foreground: 30 9% 11%;          /* ≈ #1F1C1A — warm near-black */
+    --card: 0 0% 100%;                /* same as bg; cards use border + shadow */
+    --card-foreground: 30 9% 11%;
+    --muted: 220 14% 96%;             /* ≈ #F3F4F6 — cool light grey */
+    --muted-foreground: 220 9% 38%;   /* ≈ #5A6271 — mid grey */
+    --border: 220 13% 91%;            /* ≈ #E5E7EB — light hairline */
+    --input: 220 13% 91%;
+    --ring: 173 100% 31%;             /* #009E8B — brand teal */
+    --primary: 173 100% 31%;          /* #009E8B */
+    --primary-foreground: 0 0% 100%;
     --radius: 1rem;
   }
 
   .dark {
-    /* Warm graphite — lifted out of near-black into proper charcoal.
-     * Background reads as quality print paper photographed under tungsten,
+    /* Warm graphite — kept as the dark companion to the new white light
+     * mode. Reads as quality print paper photographed under tungsten,
      * not AMOLED. Foreground is warm off-white so contrast doesn't bleed. */
-    --background: 30 7% 14%;      /* ≈ #25221F — graphite */
-    --foreground: 36 18% 92%;     /* ≈ #ECE8E0 — warm off-white */
-    --card: 30 6% 18%;            /* ≈ #2F2C28 — one step up */
+    --background: 30 7% 14%;          /* ≈ #25221F — graphite */
+    --foreground: 36 18% 92%;         /* ≈ #ECE8E0 — warm off-white */
+    --card: 30 6% 18%;                /* ≈ #2F2C28 — one step up */
     --card-foreground: 36 18% 92%;
-    --muted: 30 5% 22%;           /* ≈ #3A3733 */
+    --muted: 30 5% 22%;               /* ≈ #3A3733 */
     --muted-foreground: 30 6% 65%;
-    --border: 30 5% 26%;          /* ≈ #45413D — visible hairline */
+    --border: 30 5% 26%;              /* ≈ #45413D — visible hairline */
     --input: 30 5% 26%;
-    --ring: 173 70% 50%;
-    --primary: 173 70% 45%;
+    --ring: 173 100% 50%;
+    --primary: 173 100% 45%;
     --primary-foreground: 30 7% 14%;
   }
 
@@ -99,6 +102,49 @@
   /* Focus ring used site-wide */
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Brand gradient text — light-mint → deep-teal, 135deg.
+   * Reserved for one accent per page: a serif-italic word, a metric,
+   * a punctuation flourish. Don't apply to whole headlines. */
+  .text-gradient-brand {
+    background-image: linear-gradient(135deg, #81D5D3 0%, #009E8B 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Section-scale gradient washes — paint the brand quietly behind a
+   * full section. Low opacity so text contrast holds against the wash. */
+  .bg-gradient-wash {
+    background-image: linear-gradient(
+      135deg,
+      rgba(129, 213, 211, 0.08) 0%,
+      rgba(0, 158, 139, 0.06) 100%
+    );
+  }
+  .dark .bg-gradient-wash {
+    background-image: linear-gradient(
+      135deg,
+      rgba(129, 213, 211, 0.10) 0%,
+      rgba(0, 158, 139, 0.10) 100%
+    );
+  }
+
+  .bg-gradient-wash-strong {
+    background-image: linear-gradient(
+      135deg,
+      rgba(129, 213, 211, 0.14) 0%,
+      rgba(0, 158, 139, 0.10) 100%
+    );
+  }
+  .dark .bg-gradient-wash-strong {
+    background-image: linear-gradient(
+      135deg,
+      rgba(129, 213, 211, 0.16) 0%,
+      rgba(0, 158, 139, 0.14) 100%
+    );
   }
 }
 

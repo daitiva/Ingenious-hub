@@ -50,7 +50,7 @@ export function Proof() {
                 className="mt-4 text-balance font-display text-h-1 font-light"
               >
                 Signed off by the{" "}
-                <span className="font-serif italic text-teal-300">people who paid</span> for it.
+                <span className="text-gradient-brand font-serif italic">people who paid</span> for it.
               </h2>
             </Reveal>
           </div>
@@ -60,12 +60,12 @@ export function Proof() {
             {QUOTES.map((q, i) => (
               <Reveal as="figure" key={q.name} i={i} tone="editorial">
                 <blockquote className="font-display text-h-2 font-light text-bone/95">
-                  <span className="font-serif italic text-teal-300">“</span>
+                  <span className="text-gradient-brand font-serif italic">“</span>
                   {q.body}
-                  <span className="font-serif italic text-teal-300">”</span>
+                  <span className="text-gradient-brand font-serif italic">”</span>
                 </blockquote>
                 <figcaption className="mt-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/60">
-                  <span className="h-px w-8 bg-bone/30" />
+                  <span className="h-px w-8 bg-foreground/20" />
                   {q.name}, {q.role}
                 </figcaption>
               </Reveal>

@@ -29,7 +29,7 @@ export default function IndustriesIndexPage() {
                 className="text-balance font-display text-d-2 font-light leading-[1.05]"
               >
                 Each category has its own{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   grammar.
                 </span>
               </Reveal>

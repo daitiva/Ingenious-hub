@@ -21,10 +21,12 @@ showcase, a do-everything boilerplate. Several past iterations drifted
 there; we explicitly reversed them. Don't reintroduce:
 - auto-rotating "Now showing" hero cards
 - infinite marquees on every section
-- floating-blob gradients
+- floating-blob gradients (the brand wordmark gradient is the ONLY
+  gradient on site — use `text-gradient-brand` / `bg-gradient-wash`)
 - numbered nav `01 Home / 02 Work`
 - "we are passionate / driven by innovation" copy
 - pure-black `#000000` dark mode
+- warm-bone surface (`#F4F0E8`) — retired in favour of pure white
 
 The brand voice guide is `lib/voice.md`. Read it before writing copy.
 
@@ -125,11 +127,25 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 
 ## 4. Design tokens — the rules
 
-- **Palette is narrow on purpose**: `ink`, `bone`, `mist`, `hairline` +
-  `teal-600/300` accent + `rust-500` counterpoint. New surfaces use HSL
-  CSS vars from `globals.css`.
+- **Light surface is pure white** (`#FFFFFF`). The earlier warm bone
+  (`#F4F0E8`) was retired — the brand wanted a cleaner, more
+  professional read. The `bone` token name is preserved as an alias
+  for backward compatibility; it now resolves to white.
+- **Brand colour triad**, taken from `logo.svg`:
+  - **Mint** `#81D5D3` — light bookend of the wordmark gradient,
+    also `teal-300`.
+  - **Brand teal** `#009E8B` — deep bookend of the wordmark gradient,
+    also `teal-600` and the `--primary` token.
+  - **Brand grey** `#636363` — the wordmark "hub" + tagline colour;
+    available as `grey-500` and serves as the counterpoint
+    (replacing the retired rust palette).
+- **Gradient is reserved.** Use `text-gradient-brand` for *one*
+  editorial italic accent per section (e.g. the "people choose."
+  italic in the hero). Section-scale washes via `bg-gradient-wash`
+  (subtle) and `bg-gradient-wash-strong` (Final CTA). Never on
+  large blocks of text, never on primary CTAs, never on cards.
 - **Dark mode is warm charcoal**, not AMOLED black. `--background:
-  30 7% 9%` (#18161A) and `ink: #1A1816`. Don't darken below this.
+  30 7% 14%` (#25221F) and `ink: #1B1916`. Don't darken below this.
 - **Type families**: `font-display` (Inter — placeholder until a premium
   display is licensed) · `font-serif` (Instrument Serif, italic only) ·
   `font-mono` (JetBrains Mono).
@@ -138,6 +154,10 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 - **Type scale** is a named ladder (`text-d-1`, `text-d-2`, `text-h-1`,
   `text-h-2`, `text-h-3`, `text-body-lg`, `text-body`, `text-body-sm`,
   `text-meta`). Don't introduce arbitrary `text-[Npx]`.
+- **Don't widen the palette.** If you need contrast, use opacity on an
+  existing token, or use the existing teal/grey scales. Don't reach for
+  amber / red / purple / etc. — `red-500` for form error states is the
+  one exception.
 
 ---
 

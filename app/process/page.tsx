@@ -127,7 +127,7 @@ export default function ProcessPage() {
             <div className="md:col-span-9">
               <Reveal as="h1" tone="editorial" className="text-balance font-display text-d-2 font-light leading-[1.05]">
                 Six steps. Each one has an{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   output a client can hold.
                 </span>
               </Reveal>
@@ -147,7 +147,7 @@ export default function ProcessPage() {
           <article
             key={s.n}
             className={`relative border-b border-border ${
-              i % 2 === 1 ? "bg-bone/40 dark:bg-muted/20" : ""
+              i % 2 === 1 ? "bg-gradient-wash" : ""
             }`}
           >
             <div className="container py-16 md:py-24">
@@ -203,7 +203,7 @@ export default function ProcessPage() {
               </p>
               <Reveal as="h2" tone="editorial" className="mt-4 text-balance font-display text-h-1 font-light">
                 Things that{" "}
-                <span className="font-serif italic text-teal-300">never</span>{" "}
+                <span className="text-gradient-brand font-serif italic">never</span>{" "}
                 change.
               </Reveal>
             </div>
@@ -232,7 +232,7 @@ export default function ProcessPage() {
             </p>
             <h2 className="mt-4 text-balance font-display text-d-2 font-light">
               Send a brief.{" "}
-              <span className="font-serif italic text-teal-600 dark:text-teal-300">
+              <span className="text-gradient-brand font-serif italic">
                 We&rsquo;ll reply within four hours.
               </span>
             </h2>

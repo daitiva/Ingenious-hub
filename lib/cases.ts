@@ -26,8 +26,13 @@ export type CaseDetail = {
   pullQuote?: { body: string; name: string; role: string };
   /** Optional gallery image slots (relative to /public/cases/<slug>/) */
   gallery?: { filename: string; caption: string }[];
-  /** Brand surface — tonal break for the slab */
-  tone: "bone" | "ink" | "rust" | "teal";
+  /** Brand surface — tonal break for the slab.
+   * - "bone"  : soft brand-gradient wash (was warm cream pre-white-system)
+   * - "ink"   : dark inverted slab
+   * - "grey"  : quiet brand-grey wash (replaces former "rust")
+   * - "teal"  : light teal tint
+   */
+  tone: "bone" | "ink" | "grey" | "teal";
 };
 
 export const CASE_DETAILS: Record<string, CaseDetail> = {
@@ -128,7 +133,7 @@ export const CASE_DETAILS: Record<string, CaseDetail> = {
       name: "Yug Tolaram",
       role: "Director, Yug Vaastra",
     },
-    tone: "rust",
+    tone: "grey",
   },
 
   "jaipur-health-festival": {

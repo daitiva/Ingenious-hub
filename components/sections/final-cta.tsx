@@ -11,7 +11,7 @@ import { Reveal } from "@/components/motion-reveal";
  */
 export function FinalCTA() {
   return (
-    <section aria-labelledby="cta-heading" className="relative border-t border-border py-24 md:py-32">
+    <section aria-labelledby="cta-heading" className="relative border-t border-border bg-gradient-wash-strong py-24 md:py-32">
       <div className="container">
         <div className="grid gap-12 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
@@ -24,7 +24,7 @@ export function FinalCTA() {
                 className="mt-4 text-balance font-display text-d-2 font-light"
               >
                 Let&rsquo;s design what{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   comes next.
                 </span>
               </h2>

@@ -30,14 +30,14 @@ export default function WorkIndexPage() {
   return (
     <>
       {/* HEADER */}
-      <section className="relative border-b border-border bg-bone/40 py-20 dark:bg-muted/20 md:py-28">
+      <section className="relative border-b border-border bg-gradient-wash py-20 dark:bg-muted/20 md:py-28">
         <div className="container max-w-4xl">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             Work · {WORK.length} projects
           </p>
           <h1 className="mt-4 text-balance font-display text-d-2 font-light">
             Strategy is{" "}
-            <span className="font-serif italic text-teal-600 dark:text-teal-300">
+            <span className="text-gradient-brand font-serif italic">
               upstream
             </span>{" "}
             of design.

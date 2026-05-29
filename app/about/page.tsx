@@ -68,7 +68,7 @@ export default function AboutPage() {
             <div className="md:col-span-9">
               <Reveal as="h1" tone="editorial" className="text-balance font-display text-d-2 font-light leading-[1.05]">
                 A small studio in Jaipur with a{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   short list of beliefs.
                 </span>
               </Reveal>
@@ -106,7 +106,7 @@ export default function AboutPage() {
       </section>
 
       {/* FIVE BELIEFS */}
-      <section className="relative border-b border-border bg-bone/40 py-20 dark:bg-muted/20 md:py-28">
+      <section className="relative border-b border-border bg-gradient-wash py-20 dark:bg-muted/20 md:py-28">
         <div className="container">
           <div className="grid gap-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
@@ -168,7 +168,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM RHYTHM — no headshots needed */}
-      <section className="relative border-b border-border bg-bone/40 py-20 dark:bg-muted/20 md:py-28">
+      <section className="relative border-b border-border bg-gradient-wash py-20 dark:bg-muted/20 md:py-28">
         <div className="container">
           <div className="grid gap-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
@@ -230,7 +230,7 @@ export default function AboutPage() {
             </p>
             <h2 className="mt-4 text-balance font-display text-d-2 font-light">
               We take{" "}
-              <span className="font-serif italic text-teal-600 dark:text-teal-300">
+              <span className="text-gradient-brand font-serif italic">
                 three or four
               </span>{" "}
               briefs a quarter.

@@ -41,7 +41,7 @@ export function ClientsClient() {
   return (
     <>
       {/* HEADER */}
-      <section className="relative border-b border-border bg-bone/40 py-20 dark:bg-muted/20 md:py-28">
+      <section className="relative border-b border-border bg-gradient-wash py-20 dark:bg-muted/20 md:py-28">
         <div className="container">
           <div className="grid gap-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
@@ -52,7 +52,7 @@ export function ClientsClient() {
             <div className="md:col-span-9">
               <h1 className="text-balance font-display text-d-2 font-light leading-[1.05]">
                 The brands that{" "}
-                <span className="font-serif italic text-teal-600 dark:text-teal-300">
+                <span className="text-gradient-brand font-serif italic">
                   asked us to argue
                 </span>{" "}
                 their case.
