@@ -3,32 +3,62 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
-// Pentagram-shape nav: just the routes a visitor cares about. Services,
-// Process, Industries still ship as standalone pages but live in the
-// footer — they don't compete with the work for primary attention.
-const NAV = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+/**
+ * Navbar — Ogilvy-shape: nav links left, wordmark centered, theme right.
+ *
+ * Structure matches the live ingenioushub.com primary nav:
+ *   Explore ▾ (About Us · Services · Process · Contact Us)
+ *   Work
+ *   Clients
+ *   Blogs
+ *
+ * Explore opens on hover (desktop) or tap (touch). The dropdown sits
+ * absolutely beneath the link with a quiet entrance.
+ *
+ * Mobile collapses to a hamburger that opens a full-screen sheet. The
+ * Explore items inline as a sub-list inside the sheet rather than as
+ * a nested dropdown — sheets are easier to thumb.
+ *
+ * Scroll-progress hairline mutates the DOM via ref (no React re-renders
+ * on every scroll event).
+ */
+
+type NavItem =
+  | { type: "link"; href: string; label: string }
+  | { type: "group"; label: string; items: { href: string; label: string }[] };
+
+const NAV: NavItem[] = [
+  {
+    type: "group",
+    label: "Explore",
+    items: [
+      { href: "/about", label: "About Us" },
+      { href: "/services", label: "Services" },
+      { href: "/process", label: "Process" },
+      { href: "/contact", label: "Contact Us" },
+    ],
+  },
+  { type: "link", href: "/work", label: "Work" },
+  { type: "link", href: "/clients", label: "Clients" },
+  { type: "link", href: "/blogs", label: "Blogs" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [exploreOpen, setExploreOpen] = React.useState(false);
   const progressRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLElement>(null);
-  const menuBtnRef = React.useRef<HTMLButtonElement>(null);
+  const exploreRef = React.useRef<HTMLDivElement>(null);
 
+  // Scroll-progress hairline + scrolled flag
   React.useEffect(() => {
-    // rAF-batched. `scrolled` state only toggles on threshold crossings, so
-    // React re-renders are rare. Progress hairline mutates DOM via ref and
-    // never triggers a re-render at all.
     let raf = 0;
     let lastScrolled = false;
 
@@ -59,10 +89,13 @@ export function Navbar() {
     };
   }, []);
 
-  // Close menu on route change
-  React.useEffect(() => setOpen(false), [pathname]);
+  // Close mobile menu + Explore on route change
+  React.useEffect(() => {
+    setOpen(false);
+    setExploreOpen(false);
+  }, [pathname]);
 
-  // Lock body scroll while menu open
+  // Lock body scroll while mobile menu open
   React.useEffect(() => {
     if (typeof document === "undefined") return;
     document.body.style.overflow = open ? "hidden" : "";
@@ -71,19 +104,25 @@ export function Navbar() {
     };
   }, [open]);
 
-  // Escape + outside-tap close. We listen on `pointerdown` so the close
-  // fires before any click on the underlying content, and we ignore clicks
-  // that originate inside the header (menu, toggle, logo, theme button).
+  // Outside-tap + Escape close
   React.useEffect(() => {
-    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        setExploreOpen(false);
+      }
     };
     const onPointer = (e: PointerEvent) => {
       const target = e.target as Node | null;
       if (!target) return;
-      if (headerRef.current?.contains(target)) return;
-      setOpen(false);
+      // Close Explore if click is outside it
+      if (exploreOpen && exploreRef.current && !exploreRef.current.contains(target)) {
+        setExploreOpen(false);
+      }
+      // Close mobile sheet if click is outside the header
+      if (open && headerRef.current && !headerRef.current.contains(target)) {
+        setOpen(false);
+      }
     };
     window.addEventListener("keydown", onKey);
     window.addEventListener("pointerdown", onPointer);
@@ -91,11 +130,13 @@ export function Navbar() {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("pointerdown", onPointer);
     };
-  }, [open]);
+  }, [open, exploreOpen]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname?.startsWith(href);
 
   return (
     <>
-      {/* Scroll progress hairline — mutated via ref, never via React render */}
       <div
         ref={progressRef}
         aria-hidden
@@ -111,24 +152,78 @@ export function Navbar() {
             : "bg-background/40 backdrop-blur-sm"
         )}
       >
-        <div className="container flex h-16 items-center justify-between gap-6">
-          <Link
-            href="/"
-            className="focus-ring -mx-2 flex items-center px-2"
-            aria-label="Ingenious Hub home"
-          >
-            <Logo />
-          </Link>
-
+        <div className="container grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
+          {/* LEFT — primary nav (desktop) */}
           <nav
             className="hidden items-center gap-1 md:flex"
             aria-label="Primary navigation"
           >
             {NAV.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname?.startsWith(item.href);
+              if (item.type === "group") {
+                return (
+                  <div
+                    key={item.label}
+                    ref={exploreRef}
+                    className="relative"
+                    onMouseEnter={() => setExploreOpen(true)}
+                    onMouseLeave={() => setExploreOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setExploreOpen((v) => !v)}
+                      aria-expanded={exploreOpen}
+                      aria-haspopup="menu"
+                      className={cn(
+                        "focus-ring inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                        item.items.some((i) => isActive(i.href))
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        className={cn(
+                          "h-3.5 w-3.5 transition-transform duration-300",
+                          exploreOpen && "rotate-180"
+                        )}
+                        aria-hidden
+                      />
+                    </button>
+
+                    {/* Dropdown panel */}
+                    <div
+                      role="menu"
+                      aria-label="Explore"
+                      className={cn(
+                        "absolute left-0 top-full pt-3 transition-all duration-200",
+                        exploreOpen
+                          ? "pointer-events-auto opacity-100"
+                          : "pointer-events-none -translate-y-1 opacity-0"
+                      )}
+                    >
+                      <div className="min-w-[200px] overflow-hidden rounded-2xl border border-border bg-background/95 py-2 shadow-[0_30px_80px_-40px_rgba(14,13,10,0.35)] backdrop-blur-md dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
+                        {item.items.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            role="menuitem"
+                            className={cn(
+                              "focus-ring block px-5 py-2.5 text-sm transition-colors",
+                              isActive(sub.href)
+                                ? "text-foreground"
+                                : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                            )}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              const active = isActive(item.href);
               return (
                 <Link
                   key={item.href}
@@ -153,10 +248,19 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          {/* CENTER — wordmark */}
+          <Link
+            href="/"
+            className="focus-ring flex items-center justify-center px-2"
+            aria-label="Ingenious Hub home"
+          >
+            <Logo />
+          </Link>
+
+          {/* RIGHT — theme toggle (desktop) + mobile menu trigger */}
+          <div className="flex items-center justify-end gap-2">
             <ThemeToggle />
             <button
-              ref={menuBtnRef}
               type="button"
               className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -169,6 +273,7 @@ export function Navbar() {
           </div>
         </div>
 
+        {/* MOBILE SHEET */}
         {open && (
           <div
             id="mobile-nav"
@@ -178,22 +283,47 @@ export function Navbar() {
             className="border-t border-border bg-background md:hidden"
           >
             <div className="container flex flex-col py-6">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="focus-ring -mx-2 border-b border-border py-4 px-2 font-display text-h-3 font-light tracking-tight last:border-b-0"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {NAV.map((item) => {
+                if (item.type === "group") {
+                  return (
+                    <div
+                      key={item.label}
+                      className="border-b border-border last:border-b-0"
+                    >
+                      <p className="-mx-2 px-2 pb-2 pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                        {item.label}
+                      </p>
+                      <ul>
+                        {item.items.map((sub) => (
+                          <li key={sub.href}>
+                            <Link
+                              href={sub.href}
+                              className="focus-ring -mx-2 block px-2 py-3 font-display text-h-3 font-light tracking-tight"
+                            >
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="focus-ring -mx-2 border-b border-border py-4 px-2 font-display text-h-3 font-light tracking-tight last:border-b-0"
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
       </header>
 
-      {/* Tap-anywhere-to-close backdrop. Only on mobile. Sits below the
-          header (which is z-50) so taps on the menu itself land first. */}
+      {/* Mobile backdrop — taps close the sheet */}
       {open && (
         <button
           type="button"

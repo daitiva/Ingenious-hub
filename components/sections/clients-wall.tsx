@@ -1,138 +1,125 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { CLIENTS } from "@/lib/clients";
 import { ClientLogo } from "@/components/client-logo";
-import { Reveal } from "@/components/motion-reveal";
+import { cn } from "@/lib/utils";
 
 /**
- * ClientsWall — editorial trust strip for the homepage.
+ * ClientsWall — Section 6 of the homepage.
  *
- * Treatment: a 6-column grid of monochrome marks at consistent dimensions.
- * Each cell holds either a verified asset or a tasteful typographic
- * placeholder. Hover reveals colour. No marquee, no auto-scroll, no
- * "100+ clients" energy — just a curated reading of who's on the list.
+ * The 86-client roster as a sector-filterable wall. Default view is
+ * monochrome; hover reveals colour. Sector tabs above the wall let
+ * the visitor narrow by industry — same mechanic as the /clients
+ * full index page, but lighter (no search, no inline counts).
+ *
+ * Sorted alphabetical within each sector — keeps the read predictable.
  */
-export function ClientsWall() {
-  // Hand-curated headline list. Order is editorial, not alphabetical.
-  // These are the most recognisable + emblematic engagements; the full
-  // 86-strong list lives on /clients.
-  const headlineSlugs = [
-    "Allegiance Education",
-    "Tax2Win",
-    "Yug Vaastra",
-    "Jaipur Health Festival",
-    "Tolaram Group",
-    "Unlock Career",
-    "DNS Pointers",
-    "CRM Pointers",
-    "WooCom Pro",
-    "MasterChef Rajasthan",
-    "Reliable Media",
-    "Apex Bank Co-op",
-    "Trueline Technologies",
-    "PureEarth",
-    "Brands Inc.",
-    "Wealth Wisdom Consultants",
-    "Tagore Engineering College",
-    "Anand Niketan Group of Schools",
-  ];
 
-  const headline = headlineSlugs
-    .map((name) => CLIENTS.find((c) => c.name === name))
-    .filter((c): c is (typeof CLIENTS)[number] => Boolean(c));
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const SECTORS = [
+  "All",
+  "Edtech",
+  "D2C",
+  "Fintech",
+  "Healthcare",
+  "B2B",
+  "Tech",
+  "Media",
+  "Public",
+  "Real Estate",
+] as const;
+
+type Sector = (typeof SECTORS)[number];
+
+export function ClientsWall() {
+  const [active, setActive] = useState<Sector>("All");
+
+  const filtered = useMemo(() => {
+    if (active === "All") return CLIENTS;
+    return CLIENTS.filter((c) => c.category === active);
+  }, [active]);
 
   return (
     <section
-      aria-labelledby="trust-heading"
-      className="relative border-t border-border py-20 md:py-28"
+      aria-labelledby="clients-heading"
+      className="relative border-t border-border"
     >
-      <div className="container">
-        {/* Header — editorial split */}
+      <div className="container py-20 md:py-28">
         <div className="grid items-end gap-8 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-5">
-            <Reveal>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                003 — Selected clients
-              </p>
-              <h2
-                id="trust-heading"
-                className="mt-4 text-balance font-display text-h-1 font-light leading-[1.1]"
-              >
-                {CLIENTS.length}+ organisations have asked us to{" "}
-                <span className="text-gradient-brand font-serif italic">
-                  argue their case.
-                </span>
-              </h2>
-            </Reveal>
+          <div className="md:col-span-3">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              05 — Client ecosystem
+            </p>
           </div>
-          <div className="md:col-span-5 md:col-start-7">
-            <Reveal>
-              <p className="text-body text-muted-foreground">
-                A reading of the list — startups, public-good missions, family
-                enterprises, and one of India&rsquo;s largest textile houses.
-                The full roster lives on the{" "}
-                <Link
-                  href="/clients"
-                  className="focus-ring underline-offset-4 hover:underline"
-                >
-                  clients page
-                </Link>
-                .
-              </p>
-            </Reveal>
+          <div className="md:col-span-7">
+            <h2
+              id="clients-heading"
+              className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
+            >
+              {CLIENTS.length} brands.{" "}
+              <span className="text-gradient-brand font-serif italic">
+                Nine sectors.
+              </span>
+            </h2>
+          </div>
+          <div className="md:col-span-2 md:text-right">
+            <Link
+              href="/clients"
+              className="focus-ring inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+            >
+              Full ecosystem →
+            </Link>
           </div>
         </div>
 
-        {/* The wall — 6 cols on lg, 3 on md, 2 on mobile */}
-        <ul
-          className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border/80 md:mt-20 md:grid-cols-3 lg:grid-cols-6"
-          aria-label="Selected clients"
-        >
-          {headline.map((c, i) => (
-            <Reveal
-              as="li"
-              key={c.name}
-              i={Math.min(i, 8)}
-              tone={i < 6 ? "quiet" : "quiet"}
-              className="bg-background"
+        {/* Sector tabs */}
+        <div className="mt-12 flex flex-wrap gap-2 border-y border-border py-5">
+          {SECTORS.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setActive(s)}
+              className={cn(
+                "focus-ring rounded-full px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors",
+                active === s
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
             >
-              <div className="group relative flex aspect-[4/3] items-center justify-center p-5 transition-colors hover:bg-card md:p-7">
-                <div className="flex h-full max-h-16 w-full max-w-[150px] items-center justify-center md:max-h-20">
-                  <ClientLogo
-                    name={c.name}
-                    tone="mono"
-                    className="transition-[filter,opacity] duration-500"
-                  />
-                </div>
-                {/* Category reveal — only on hover, no clutter */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute right-3 top-3 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
-                >
-                  {c.category}
-                </span>
-              </div>
-            </Reveal>
+              {s}
+            </button>
+          ))}
+        </div>
+
+        {/* The wall — monochrome by default, colour on hover */}
+        <ul className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {filtered.map((c, i) => (
+            <motion.li
+              key={c.name}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, ease: EASE, delay: (i % 12) * 0.02 }}
+              className="group flex aspect-[5/3] items-center justify-center bg-background px-4 py-6 transition-colors hover:bg-muted/40"
+            >
+              <ClientLogo
+                name={c.name}
+                tone="mono"
+                className="max-h-[60%] w-auto max-w-full"
+              />
+            </motion.li>
           ))}
         </ul>
 
-        {/* Footer link */}
-        <Reveal>
-          <div className="mt-10 flex items-center justify-between gap-6 border-t border-border pt-6 md:mt-14">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              {CLIENTS.length}+ engagements · 6 industries
-            </p>
-            <Link
-              href="/clients"
-              className="focus-ring group inline-flex items-center gap-2 text-sm font-medium"
-            >
-              <span className="underline-offset-4 group-hover:underline">
-                Read the full list
-              </span>
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
-            </Link>
-          </div>
-        </Reveal>
+        {filtered.length === 0 && (
+          <p className="mt-10 text-center text-sm text-muted-foreground">
+            No brands in this sector yet.
+          </p>
+        )}
       </div>
     </section>
   );

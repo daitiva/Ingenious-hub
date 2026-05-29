@@ -2,70 +2,98 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { WORK } from "@/lib/work";
 import { ClientLogo } from "@/components/client-logo";
 import { RegistrationCorners } from "@/components/registration-corners";
+import { shuffleStable, getSessionSeed } from "@/lib/shuffle";
 import { cn } from "@/lib/utils";
 
 /**
- * WorkGrid — Pentagram-shape index of selected work.
+ * WorkGrid — Section 3 of the homepage. Selected work, randomised.
  *
- * The page is the grid. No hero, no marketing sections — the work IS
- * the entry experience. Each tile is a large editorial card carrying
- * the brand mark; meta sits beneath, mono and quiet.
+ * The studio's identity feature: order shuffles between sessions, so
+ * a returning visitor never lands on the same wall twice. Within a
+ * session the order is stable (no re-shuffle on re-render).
  *
- * Layout: single column on mobile, two columns at md+, with mildly
- * varied tile aspect ratios to break the rhythm (matches Pentagram's
- * deliberate density). Tiles alternate aspect 4:5 / 5:4 every other
- * row so the page doesn't feel like a tiled spreadsheet.
+ * Layout is asymmetric — matches Ogilvy's varied-tile grid rather
+ * than a uniform spreadsheet. Tile heights pull from a deterministic
+ * pattern keyed off the visual index, so the grid composition stays
+ * coherent across shuffles.
  *
  * Drop-in path for real photography (no code change required):
  *   /public/cases/<slug>/cover.{jpg,png}
- * When present, the renderer prefers the photograph; otherwise it
- * falls through to the typographic / placeholder composition via
- * <ClientLogo>. Documented in /public/cases/README.md.
+ * The probe in <WorkTile> picks up the file on hydration.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const FEATURED_COUNT = 10;
+
+// Aspect rhythm — index N gets aspect TILE_ASPECTS[N % len]. Pre-tuned
+// to feel composed at any shuffle: tall / wide / tall / square / wide …
+const TILE_ASPECTS = [
+  "aspect-[4/5]",  // tall
+  "aspect-[5/4]",  // wide
+  "aspect-[3/4]",  // taller
+  "aspect-[1/1]",  // square
+  "aspect-[5/4]",
+  "aspect-[4/5]",
+  "aspect-[1/1]",
+  "aspect-[5/4]",
+];
 
 export function WorkGrid() {
+  const [seed, setSeed] = useState(1);
+  useEffect(() => {
+    setSeed(getSessionSeed());
+  }, []);
+
+  // Shuffle stably per session; pick the first FEATURED_COUNT.
+  const featured = useMemo(
+    () => shuffleStable(WORK, seed).slice(0, FEATURED_COUNT),
+    [seed]
+  );
+
   return (
     <section
-      aria-labelledby="work-grid-heading"
+      aria-labelledby="work-heading"
       className="relative border-t border-border"
     >
-      {/* Page header — deliberately spare. One line of meta, one title. */}
-      <div className="container pb-6 pt-12 md:pb-10 md:pt-20">
-        <div className="flex items-end justify-between gap-6">
-          <div>
+      <div className="container py-20 md:py-28">
+        <div className="grid items-end gap-8 md:grid-cols-12 md:gap-12">
+          <div className="md:col-span-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Selected work · {WORK.length} projects
+              02 — Selected work
             </p>
-            <h1
-              id="work-grid-heading"
-              className="mt-4 font-display text-d-2 font-light tracking-tightest"
-            >
-              Ingenious Hub
-            </h1>
           </div>
-          <Link
-            href="/about"
-            className="focus-ring hidden text-sm font-medium underline-offset-4 hover:underline md:inline-block"
-          >
-            About
-          </Link>
+          <div className="md:col-span-7">
+            <h2
+              id="work-heading"
+              className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
+            >
+              Brands that argued for{" "}
+              <span className="text-gradient-brand font-serif italic">
+                something specific
+              </span>
+              .
+            </h2>
+          </div>
+          <div className="md:col-span-2 md:text-right">
+            <Link
+              href="/work"
+              className="focus-ring inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+            >
+              All work →
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* The grid */}
-      <div className="border-t border-border">
-        <ul className="grid grid-cols-1 md:grid-cols-2">
-          {WORK.map((w, i) => (
-            <WorkTile key={w.slug} project={w} index={i} />
-          ))}
-        </ul>
-      </div>
+      <ul className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((project, i) => (
+          <WorkTile key={project.slug} project={project} index={i} />
+        ))}
+      </ul>
     </section>
   );
 }
@@ -77,22 +105,11 @@ function WorkTile({
   project: (typeof WORK)[number];
   index: number;
 }) {
-  // Mildly varied aspect ratios so the grid reads as composed, not tiled.
-  // Even-row tiles taller; odd-row tiles wider. The pattern is gentle
-  // enough that scanning still feels even.
-  const tall = index % 4 === 0 || index % 4 === 3;
-  const aspect = tall ? "aspect-[4/5]" : "aspect-[5/4]";
-
-  // CoverImage path convention. When real photography lands at this
-  // path, swap the placeholder card for the photograph.
+  const aspect = TILE_ASPECTS[index % TILE_ASPECTS.length];
   const [hasCover, setHasCover] = useState(false);
   const coverSrc = `/cases/${project.slug}/cover.jpg`;
 
   useEffect(() => {
-    // Probe for the real cover. HEAD request would be cleaner, but Next's
-    // static asset routing serves a 404 HTML for missing files which we'd
-    // need to filter. An <Image> onError pattern is simpler at the cost
-    // of a single dropped request.
     const img = new Image();
     img.onload = () => setHasCover(true);
     img.onerror = () => setHasCover(false);
@@ -100,20 +117,20 @@ function WorkTile({
   }, [coverSrc]);
 
   return (
-    <li className="group relative border-b border-border md:border-r md:[&:nth-child(even)]:border-r-0">
+    <li className="group relative bg-background">
       <Link
         href={`/work/${project.slug}`}
         className="focus-ring block"
         aria-label={`${project.client} — ${project.title}`}
       >
         <motion.figure
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: EASE, delay: (index % 4) * 0.05 }}
-          className="relative overflow-hidden"
+          transition={{ duration: 0.7, ease: EASE, delay: (index % 3) * 0.05 }}
+          className="relative"
         >
-          <div className={cn("relative w-full bg-muted/40", aspect)}>
+          <div className={cn("relative w-full overflow-hidden bg-muted/40", aspect)}>
             {hasCover ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -121,29 +138,43 @@ function WorkTile({
                 alt={`${project.client} — ${project.title}`}
                 loading={index < 4 ? "eager" : "lazy"}
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
             ) : (
               <PlaceholderCover project={project} />
             )}
-          </div>
 
-          {/* Meta strip — sits beneath the tile, generously padded. */}
-          <figcaption className="px-6 py-6 md:px-10 md:py-8">
-            <div className="flex items-baseline justify-between gap-6">
-              <div className="min-w-0">
-                <p className="truncate font-display text-h-3 font-light tracking-tight">
-                  {project.client}
-                </p>
-                <p className="mt-1 truncate text-sm text-muted-foreground">
-                  {project.title}
-                </p>
-              </div>
-              <div className="shrink-0 text-right font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                <div>{project.category}</div>
-                <div className="mt-1">{project.sector.split("·")[0]?.trim()}</div>
+            {/* Hover veil with category + 'View case' pill */}
+            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:p-7">
+              <div className="flex items-end justify-between gap-4">
+                <div className="text-white">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/65">
+                    {project.category} · {project.sector.split("·")[0]?.trim()}
+                  </p>
+                  <p className="mt-2 font-display text-h-3 font-light leading-tight">
+                    {project.title}
+                  </p>
+                </div>
+                <span className="shrink-0 rounded-full border border-white/40 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white">
+                  View case
+                </span>
               </div>
             </div>
+          </div>
+
+          {/* Meta sits below the tile, quiet */}
+          <figcaption className="flex items-baseline justify-between gap-6 px-5 py-5 md:px-6 md:py-6">
+            <div className="min-w-0">
+              <p className="truncate font-display text-h-3 font-light tracking-tight">
+                {project.client}
+              </p>
+              <p className="mt-1 truncate text-sm text-muted-foreground">
+                {project.sector.split("·")[0]?.trim()}
+              </p>
+            </div>
+            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              {project.category}
+            </span>
           </figcaption>
         </motion.figure>
       </Link>
@@ -151,21 +182,17 @@ function WorkTile({
   );
 }
 
-/**
- * Placeholder cover — used until /public/cases/<slug>/cover.jpg lands.
- * Reuses the registration-card composition from the previous hero.
- */
 function PlaceholderCover({ project }: { project: (typeof WORK)[number] }) {
   return (
     <div className="absolute inset-0 bg-background">
       <RegistrationCorners inset="inset-4" />
-      <div className="absolute inset-x-12 inset-y-16 flex items-center justify-center">
+      <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
         <ClientLogo
           name={project.client}
           slug={project.slug}
           className="max-h-[55%] w-auto max-w-full"
           fallback={
-            <span className="text-center font-serif text-4xl italic text-foreground/85 md:text-5xl">
+            <span className="text-center font-serif text-3xl italic text-foreground/85 md:text-4xl">
               {project.client}
             </span>
           }

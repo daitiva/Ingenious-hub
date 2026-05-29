@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s · Ingenious Hub",
   },
   description:
-    "A Jaipur-based strategic branding and digital-experience studio. We design the brands people choose — across edtech, D2C, fintech, healthcare, and B2B.",
+    "Ingenious Hub is a global brand and design agency headquartered in Jaipur. Strategy, identity, advertising, marketing, PR, and digital — built as one practice across edtech, D2C, fintech, healthcare, B2B, and public sectors.",
   keywords: [
     "branding agency India",
     "creative agency Jaipur",
@@ -91,7 +91,7 @@ const SCHEMAS = [
     slogan: "We design the brands people choose.",
     foundingDate: "2016",
     description:
-      "A strategic branding and digital-experience studio for ambitious brands.",
+      "A global brand and design agency. Strategy, identity, advertising, marketing, PR, and digital — headquartered in Jaipur, working across India, the UAE, the UK, and the US.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Jaipur",

@@ -1,47 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
-import { ClientLogo } from "@/components/client-logo";
-import { RegistrationCorners } from "@/components/registration-corners";
-import { cn } from "@/lib/utils";
 
 /**
- * Hero — Section 1 of the homepage narrative arc.
+ * Hero — full-bleed brand wash, Ogilvy-shape.
  *
- * Composition: 7/5 asymmetric split. Left: thesis statement + single CTA.
- * Right: an editorial tearsheet stack — three overlapping case cards
- * (Allegiance front, Tax2Win middle, Yug Vaastra back) angled like a
- * physical pile of brand spec sheets on a desk. Each card pulls its mark
- * from the verified-logo manifest; when the studio drops a real artefact
- * at /public/clients/<slug>.svg (and flips the manifest), the card swaps
- * to the real mark — same component, no rewrite.
+ * The page opens on the brand teal gradient as the entire viewport.
+ * A centered wordmark sits at the top, a three-sentence thesis at the
+ * optical centre, and as the user scrolls the wordmark scales up
+ * cinematically before the section retires. No carousel, no card,
+ * no parallax artefact — the brand colour, the wordmark, the claim.
  *
- * Motion choreography:
- *   t=0.05  eyebrow fades in
- *   t=0.15  headline line 1 reveals word-by-word
- *   t=0.55  headline line 2 (serif italic accent)
- *   t=1.35  sub-text settles
- *   t=1.55  CTA enters
- *   t=1.85  back card resolves
- *   t=1.95  middle card resolves
- *   t=2.05  front card resolves
- *   t=2.25  meta-strip stats stagger in
+ * Motion choreography (all behind prefers-reduced-motion via globals.css):
+ *   - On load: word-by-word mask reveal of the thesis copy
+ *   - On scroll: wordmark scales 1× → 4×, then fades through opacity 0
  *
- * Reveal masking: the per-line mask is `overflow-hidden pb-[0.2em]
- * -mb-[0.2em]`. Earlier per-word masks clipped italic glyph overshoot
- * + serif descenders ("p" in "people", "g" in "design") because each
- * word sat in its own narrow clip box. Per-line keeps the mask at
- * line boundaries where overshoot is harmless.
- *
- * Everything respects prefers-reduced-motion via the global media-query
- * safety net in globals.css.
+ * Inverted typography (white on teal) is the point — this section reads
+ * as a brand statement, not as a neutral marketing slab.
  */
-
-// Standard ease-out-quart — used everywhere on the hero for a cohesive feel.
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+const THESIS = [
+  "Brands aren't built by louder voices.",
+  "They're built by stronger arguments.",
+  "Ingenious Hub is the agency for brands with something to say — and the conviction to say it across every surface that matters.",
+];
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -50,311 +34,99 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax only on screens that can hold attention; mobile reads straight through.
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia(
       "(min-width: 768px) and (prefers-reduced-motion: no-preference)"
     );
-    const handler = () => setIsDesktop(mq.matches);
-    handler();
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const h = () => setEnabled(mq.matches);
+    h();
+    mq.addEventListener("change", h);
+    return () => mq.removeEventListener("change", h);
   }, []);
 
-  // Each card moves at its own rate — front slowest, back fastest — to
-  // create depth differential without overdoing it.
-  const yFront = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const yMid = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
-  const yBack = useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]);
-  const yLetter = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacityStack = useTransform(scrollYProgress, [0, 0.8], [1, 0.5]);
+  const wordmarkScale = useTransform(scrollYProgress, [0, 1], [1, 3.4]);
+  const wordmarkOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [0.18, 0.08, 0]);
+  const copyY = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.6, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative isolate flex min-h-[calc(100svh-64px)] items-end overflow-hidden pb-12 pt-28 md:pb-16 md:pt-32"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-gradient-brand text-white"
+      aria-labelledby="hero-thesis"
     >
-      <div className="grain absolute inset-0 -z-10" aria-hidden />
-
-      {/* Oversized brand letter that parallaxes upward — counter-motion to the stack */}
+      {/* Massive wordmark, sits behind the thesis as a quiet brand presence.
+          Scales up + fades as the user scrolls out of the section. */}
       <motion.div
         aria-hidden
-        style={isDesktop ? { y: yLetter } : undefined}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, delay: 0.4, ease: EASE }}
-        className="pointer-events-none absolute -bottom-32 right-[-8vw] -z-10 select-none font-serif italic leading-[0.7] text-foreground/[0.04] dark:text-foreground/[0.06] text-[clamp(20rem,42vw,55rem)]"
+        style={enabled ? { scale: wordmarkScale, opacity: wordmarkOpacity } : { opacity: 0.18 }}
+        className="pointer-events-none absolute inset-0 flex select-none items-center justify-center"
       >
-        a
+        <span className="whitespace-nowrap font-display text-[clamp(8rem,22vw,28rem)] font-light leading-none tracking-tightest text-white">
+          Ingenious Hub
+        </span>
       </motion.div>
 
-      <div className="container relative">
-        <div className="grid items-end gap-10 md:grid-cols-12 md:gap-x-8 md:gap-y-16">
-          {/* LEFT — thesis */}
-          <div className="md:col-span-7">
-            <motion.p
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-              className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground"
-            >
-              The Studio · Jaipur · Worldwide · Since 2016
-            </motion.p>
-
-            <h1 className="mt-7 pb-[0.12em] font-display font-light text-d-1">
-              <RevealLine startDelay={0.15}>We design the brands</RevealLine>
-              <RevealLine
-                startDelay={0.55}
-                className="text-gradient-brand font-serif italic tracking-tight"
-              >
-                people choose.
-              </RevealLine>
-            </h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 1.35, ease: EASE }}
-              className="mt-8 max-w-md text-body-lg text-muted-foreground"
-            >
-              A strategic branding and digital-experience studio. We argue that
-              brands are won on coherence — not budget — and then we build for it.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.55, ease: EASE }}
-              className="mt-10"
-            >
-              <Link
-                href="/contact"
-                className="focus-ring group inline-flex h-12 items-center gap-3 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
-              >
-                Start a project
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* RIGHT — tearsheet stack */}
-          <div className="md:col-span-5">
-            <motion.figure
-              style={isDesktop ? { opacity: opacityStack } : undefined}
-              className="relative mx-auto aspect-[4/5] w-full max-w-md"
-            >
-              {/* Back — Yug Vaastra. Hidden on mobile so the layout breathes. */}
-              <div
-                aria-hidden
-                className="absolute inset-0 hidden -translate-x-[7%] translate-y-[6%] rotate-[-4deg] md:block"
-              >
-                <motion.div
-                  style={isDesktop ? { y: yBack } : undefined}
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: 0.55, scale: 1 }}
-                  transition={{ duration: 1.2, delay: 1.85, ease: EASE }}
-                  className="h-full w-full"
-                >
-                  <CaseCard
-                    slug="yug-vaastra"
-                    name="Yug Vaastra"
-                    sector="D2C · Fashion"
-                    metric="+48%"
-                    tone="back"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Middle — Tax2Win. Hidden on mobile. */}
-              <div
-                aria-hidden
-                className="absolute inset-0 hidden translate-x-[4%] translate-y-[3%] rotate-[3deg] md:block"
-              >
-                <motion.div
-                  style={isDesktop ? { y: yMid } : undefined}
-                  initial={{ opacity: 0, scale: 0.94 }}
-                  animate={{ opacity: 0.85, scale: 1 }}
-                  transition={{ duration: 1.15, delay: 1.95, ease: EASE }}
-                  className="h-full w-full"
-                >
-                  <CaseCard
-                    slug="liaison360"
-                    name="Liaison360"
-                    sector="B2B · Identity"
-                    metric="New"
-                    tone="mid"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Front — Allegiance. The primary read, single card on mobile. */}
-              <motion.div
-                style={isDesktop ? { y: yFront } : undefined}
-                initial={{ opacity: 0, scale: 0.97, y: 12 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 2.05, ease: EASE }}
-                className="relative h-full w-full"
-              >
-                <CaseCard
-                  slug="allegiance-education"
-                  name="Allegiance Education"
-                  sector="Edtech · Test Prep"
-                  metric="+62%"
-                  tone="front"
-                />
-              </motion.div>
-            </motion.figure>
-          </div>
-        </div>
-
-        {/* Micro-trust strip — staggered in last so the eye finishes here */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { delayChildren: 2.25, staggerChildren: 0.08 },
-            },
-          }}
-          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border pt-6 text-sm md:mt-24 md:grid-cols-4"
+      {/* Thesis copy — sits over the wordmark, brand-white at full opacity.
+          Each sentence reveals in a quiet stagger; the whole block parallaxes
+          up as the user starts to scroll, suggesting the next section is
+          already loading. */}
+      <motion.div
+        style={enabled ? { y: copyY, opacity: copyOpacity } : undefined}
+        className="container relative z-10 mx-auto max-w-4xl text-center"
+      >
+        <p
+          className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/70"
         >
-          <Stat label="Brands shipped" value="60+" />
-          <Stat label="Google rating" value="4.6 ★" />
-          <Stat label="Reply window" value="< 4 working hrs" />
-          <Stat label="Accreditation" value="DesignRush · Clutch" />
-        </motion.div>
+          A global brand and design agency · Headquartered in Jaipur
+        </p>
+        <h1
+          id="hero-thesis"
+          className="mt-10 font-display font-light leading-[1.05] tracking-tight text-white"
+        >
+          {THESIS.map((line, i) => (
+            <ThesisLine key={i} delay={0.2 + i * 0.35}>
+              {line}
+            </ThesisLine>
+          ))}
+        </h1>
+      </motion.div>
+
+      {/* Scroll cue — quiet at the bottom, never animated */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex items-center justify-center">
+        <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/55">
+          Scroll
+        </span>
       </div>
     </section>
   );
 }
 
 /**
- * One tearsheet card. Chrome (border, RegistrationCorners, caption) is
- * shared; the brand mark routes through ClientLogo, which reads the
- * verified-logo manifest. Drop a real artefact at /public/clients/<slug>.svg
- * (and flip the manifest entry to "verified") and the card replaces its
- * typographic placeholder with the real mark — same code path.
+ * One line of the thesis. Each line is its own mask block so the reveal
+ * choreography reads as deliberate sentence-by-sentence pacing rather
+ * than a wall of text wiping in at once.
  */
-function CaseCard({
-  slug,
-  name,
-  sector,
-  metric,
-  tone,
-}: {
-  slug: string;
-  name: string;
-  sector: string;
-  metric: string;
-  tone: "front" | "mid" | "back";
-}) {
-  return (
-    <figure
-      className={cn(
-        "relative h-full w-full",
-        tone === "back" && "blur-[0.5px]"
-      )}
-    >
-      <div className="absolute inset-0 rounded-2xl border border-hairline bg-card/90 shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:bg-card/60 dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]" />
-      <RegistrationCorners inset="inset-3" />
-
-      <div className="absolute inset-x-10 inset-y-12 flex items-center justify-center">
-        <ClientLogo
-          name={name}
-          slug={slug}
-          className="max-h-[60%] w-auto max-w-full"
-          loading={tone === "front" ? "eager" : "lazy"}
-          fallback={
-            <span className="text-center font-serif text-4xl italic text-foreground/85 md:text-5xl">
-              {name.split(" ")[0]}
-            </span>
-          }
-        />
-      </div>
-
-      <figcaption className="absolute inset-x-4 bottom-4 flex items-end justify-between rounded-lg border border-hairline bg-card px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground dark:bg-card/80">
-        <span>{sector}</span>
-        <span className="font-mono">{metric}</span>
-      </figcaption>
-    </figure>
-  );
-}
-
-/**
- * RevealLine — wraps a single line of headline copy in a per-line mask
- * and animates each word rising from below.
- *
- * Per-line (not per-word) clipping: italic / serif glyphs overshoot
- * their own box on the slanted side. When each word had its own narrow
- * clip box, that overshoot was clipped at the word boundary, producing
- * visibly truncated letters in line 2 ("people choose."). One line-wide
- * mask keeps the overshoot inside the clip and only ever clips at the
- * line's outer edges, where there's nothing to overshoot into.
- *
- * pb-[0.2em] / -mb-[0.2em]: the mask extends 0.2em below the line-box
- * so descenders ("p", "g", "y") sit inside the visible band. The
- * negative margin pulls the next sibling back up so layout doesn't
- * shift. 0.2em clears Instrument Serif Italic descenders; the previous
- * 0.12em was tuned for sans only.
- */
-function RevealLine({
+function ThesisLine({
   children,
-  startDelay = 0,
-  stagger = 0.05,
-  className,
+  delay,
 }: {
   children: string;
-  startDelay?: number;
-  stagger?: number;
-  className?: string;
+  delay: number;
 }) {
-  const words = String(children).split(/(\s+)/);
   return (
     <span
-      className={cn(
-        "relative -mb-[0.2em] block overflow-hidden pb-[0.2em]",
-        className
-      )}
+      className="relative -mb-[0.18em] block overflow-hidden pb-[0.18em] text-balance text-[clamp(1.75rem,4.5vw,3.5rem)]"
     >
-      {words.map((segment, i) => {
-        // Preserve raw whitespace segments so wrapping behaves naturally.
-        if (/^\s+$/.test(segment)) {
-          return <span key={i}>{segment}</span>;
-        }
-        return (
-          <motion.span
-            key={i}
-            initial={{ y: "110%" }}
-            animate={{ y: 0 }}
-            transition={{
-              duration: 1,
-              ease: EASE,
-              delay: startDelay + i * stagger,
-            }}
-            className="inline-block"
-          >
-            {segment}
-          </motion.span>
-        );
-      })}
+      <motion.span
+        initial={{ y: "110%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.1, ease: EASE, delay }}
+        className="inline-block"
+      >
+        {children}
+      </motion.span>
     </span>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 8 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-      }}
-    >
-      <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-        {label}
-      </div>
-      <div className="mt-1 font-medium tracking-tight">{value}</div>
-    </motion.div>
   );
 }

@@ -1,9 +1,15 @@
 # Ingenious Hub — Claude Code project notes
 
-This is a working website for **Ingenious Hub**, a Jaipur-based strategic
-branding and digital-experience studio. The deployed preview lives at
-<https://ingenious-hub.vercel.app/>. Production target domain:
-`ingenioushub.com` (Vercel-hosted).
+This is a working website for **Ingenious Hub**, a global brand and
+design agency headquartered in Jaipur. Strategy, identity, advertising,
+marketing, PR, and digital — built as one practice. The deployed
+preview lives at <https://ingenious-hub.vercel.app/>. Production target
+domain: `ingenioushub.com` (Vercel-hosted).
+
+**Positioning** (locked 2026-05-29): "Ingenious Hub is a global brand
+and design agency based in Jaipur." Not "a Jaipur studio." Every hero
+line, JSON-LD self-description, and footer line speaks as a global
+agency. Reference: ogilvy.com, pentagram.com.
 
 Read this file at the start of every new session so you don't relitigate
 choices that are already locked.
@@ -38,15 +44,14 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 /
 ├── app/                        Next.js App Router
 │   ├── layout.tsx              Root layout — fonts, theme, JSON-LD, footer
-│   ├── page.tsx                Homepage — Pentagram-shape work grid (no marketing sections)
+│   ├── page.tsx                Homepage — 8-section Ogilvy-shape experience flow
 │   ├── about/page.tsx          Editorial belief-system essay
 │   ├── api/contact/route.ts    Edge runtime · Turnstile + Upstash + Resend
 │   ├── clients/                Index page + client-side filter shell
 │   │   ├── page.tsx
 │   │   └── clients-client.tsx
 │   ├── contact/page.tsx        Calm two-step scope picker
-│   ├── industries/             Index + dynamic [slug] (ComingSoon)
-│   ├── insights/               Index page (ComingSoon)
+│   ├── blogs/page.tsx          Editorial index (renamed from /insights)
 │   ├── process/page.tsx        Six-step methodology essay
 │   ├── services/               Pillar overview + dynamic [slug] (ComingSoon)
 │   ├── work/                   Index + dynamic [slug] (real cases)
@@ -59,14 +64,14 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 │
 ├── components/
 │   ├── sections/               One file per homepage section
-│   │   ├── hero.tsx
-│   │   ├── thesis.tsx
-│   │   ├── featured-work.tsx
-│   │   ├── clients-wall.tsx
-│   │   ├── services-posture.tsx
-│   │   ├── industries.tsx
-│   │   ├── proof.tsx
-│   │   └── final-cta.tsx
+│   │   ├── hero.tsx            01 — Full-bleed brand wash + thesis
+│   │   ├── capabilities.tsx    02 — Nine disciplines editorial list
+│   │   ├── work-grid.tsx       03 — Randomised selected work
+│   │   ├── featured-case.tsx   04 — One immersive case (Allegiance)
+│   │   ├── proof.tsx           05 — Accreditation + testimonials
+│   │   ├── clients-wall.tsx    06 — 86-brand sectored wall
+│   │   ├── insights.tsx        07 — Magazine 3-up of recent writing
+│   │   └── final-cta.tsx       08 — Closing brand wash + CTAs
 │   ├── client-logo.tsx         Reads the manifest → asset or placeholder
 │   ├── client-logo placeholders happen via manifest, never hard-coded
 │   ├── registration-corners.tsx  Shared editorial trim marks (4 in one)

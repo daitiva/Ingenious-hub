@@ -59,6 +59,17 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // /insights renamed to /blogs to match live ingenioushub.com nav.
+      // 301s preserve any external link integrity to the old paths.
+      { source: "/insights", destination: "/blogs", permanent: true },
+      { source: "/insights/:slug", destination: "/blogs/:slug", permanent: true },
+      // /industries folded into /work + /services per the redesign brief.
+      { source: "/industries", destination: "/work", permanent: true },
+      { source: "/industries/:slug", destination: "/work", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

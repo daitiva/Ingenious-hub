@@ -19,11 +19,11 @@ import type { MetadataRoute } from "next";
  * Path policy:
  *   - /api/                          server endpoints, never indexed.
  *   - /clients/_unverified-archive/  unmatched assets, never indexed.
- *   - /industries/* (slug pages)     ComingSoon — handled via per-page
+ *   - /services/[slug]               ComingSoon — handled via per-page
  *                                    noindex meta, not blocked here so
  *                                    visitors who follow a link still see
  *                                    a real page.
- *   - /services/[slug], /insights    same.
+ *   - /blogs/[slug]                  same.
  *
  * Sitemap exposure: the sitemap URL is published for search engines.
  * It only lists production-ready URLs (see app/sitemap.ts) — ComingSoon

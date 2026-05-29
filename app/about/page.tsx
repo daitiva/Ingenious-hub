@@ -4,9 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion-reveal";
 
 export const metadata: Metadata = {
-  title: "About — the studio",
+  title: "About — the agency",
   description:
-    "A strategic branding studio in Jaipur. How we think, what we refuse to do, and why restraint is the most undervalued tool in our field.",
+    "Ingenious Hub is a global brand and design agency headquartered in Jaipur. How we think, what we refuse to do, and why restraint is the most undervalued tool in our field.",
   alternates: { canonical: "/about" },
 };
 
@@ -62,12 +62,12 @@ export default function AboutPage() {
           <div className="grid gap-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                About — the studio
+                About — the agency
               </p>
             </div>
             <div className="md:col-span-9">
               <Reveal as="h1" tone="editorial" className="text-balance font-display text-d-2 font-light leading-[1.05]">
-                A small studio in Jaipur with a{" "}
+                A global brand and design agency. Headquartered in Jaipur. Built on a{" "}
                 <span className="text-gradient-brand font-serif italic">
                   short list of beliefs.
                 </span>
@@ -95,10 +95,11 @@ export default function AboutPage() {
                 weren&rsquo;t.
               </Reveal>
               <Reveal as="p" className="text-body-lg text-muted-foreground">
-                Today the studio is a tight crew that runs brand strategy,
-                identity, web, and acquisition under one masthead. We work with
-                founders we like, in categories we understand, on briefs we
-                think we can argue an honest position for.
+                Today the agency is a tight global team that runs brand strategy,
+                identity, advertising, marketing, PR, and digital under one
+                masthead. We work with founders we like, in categories we
+                understand, on briefs we think we can argue an honest position
+                for — out of Jaipur, across India, the UAE, the UK, and the US.
               </Reveal>
             </div>
           </div>
