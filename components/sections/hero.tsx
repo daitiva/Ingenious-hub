@@ -179,10 +179,10 @@ export function Hero() {
                   className="h-full w-full"
                 >
                   <CaseCard
-                    slug="tax2win"
-                    name="Tax2Win"
-                    sector="Fintech · Tax Filing"
-                    metric="3.2×"
+                    slug="liaison360"
+                    name="Liaison360"
+                    sector="B2B · Identity"
+                    metric="New"
                     tone="mid"
                   />
                 </motion.div>
