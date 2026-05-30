@@ -32,7 +32,7 @@ export default function RouteError({
           <div className="md:col-span-9">
             <h1 className="text-balance font-display text-d-2 font-light leading-[1.05]">
               Something{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 went sideways.
               </span>
             </h1>

@@ -103,7 +103,7 @@ export function Footer() {
             © {new Date().getFullYear()} Ingenious Hub Enterprise (P) Ltd. All
             rights reserved.
           </p>
-          <p className="font-serif italic text-foreground/80">
+          <p className="font-serif text-foreground/80">
             We design the brands people choose.
           </p>
         </div>

@@ -21,7 +21,7 @@ export default function ServicesPage() {
           </p>
           <h1 className="mt-3 text-balance text-4xl font-light leading-[1.05] tracking-tightest md:text-6xl">
             Five focused offerings.{" "}
-            <span className="font-serif italic">Zero fluff.</span>
+            <span className="font-serif">Zero fluff.</span>
           </h1>
           <p className="mt-4 text-pretty text-base text-muted-foreground md:text-lg">
             We don&rsquo;t sell 30 disconnected services. We design integrated systems
@@ -58,7 +58,7 @@ export default function ServicesPage() {
                     <h2 className="mt-6 text-3xl font-light leading-tight tracking-tight">
                       {s.title}
                     </h2>
-                    <p className="mt-2 font-serif text-lg italic text-muted-foreground">
+                    <p className="mt-2 font-serif text-lg text-muted-foreground">
                       {s.tagline}
                     </p>
                     <Button asChild className="mt-7" size="sm">

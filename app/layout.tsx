@@ -8,11 +8,11 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { SERVICES } from "@/lib/services";
 
 // Open Sans is the body + utility family — every sans/mono/display
-// role resolves here. Italic accents (font-serif italic) use
-// Baskervville instead, giving the editorial flourish moments a
-// classic transitional-serif voice without re-introducing a second
-// body family. (Cormorant was tried and pulled — it didn't sit
-// visually next to Open Sans.)
+// role resolves here. Editorial accents (font-serif) use Baskervville
+// in regular weight — no italic, per the studio's call. Gives the
+// flourish a classic transitional-serif voice without the slant.
+// (Cormorant was tried and pulled — it didn't sit visually next to
+// Open Sans.)
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -23,7 +23,7 @@ const openSans = Open_Sans({
 const baskervville = Baskervville({
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
+  style: "normal",
   display: "swap",
   variable: "--font-serif",
 });

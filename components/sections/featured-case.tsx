@@ -62,7 +62,7 @@ export function FeaturedCase() {
                     className="max-h-[55%] w-auto max-w-full"
                     loading="lazy"
                     fallback={
-                      <span className="text-center font-serif text-5xl italic text-foreground/85">
+                      <span className="text-center font-serif text-5xl text-foreground/85">
                         {work.client}
                       </span>
                     }

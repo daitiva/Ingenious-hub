@@ -45,7 +45,7 @@ export function FinalCTA() {
               className="mt-6 max-w-3xl text-balance font-display font-light leading-[1.04] tracking-tightest"
             >
               <span className="block text-d-2">Let&rsquo;s build the brand</span>
-              <span className="block text-d-2 font-serif italic text-white/90">
+              <span className="block text-d-2 font-serif text-white/90">
                 people remember.
               </span>
             </motion.h2>

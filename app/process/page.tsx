@@ -127,7 +127,7 @@ export default function ProcessPage() {
             <div className="md:col-span-9">
               <Reveal as="h1" tone="editorial" className="text-balance font-display text-d-2 font-light leading-[1.05]">
                 Six steps. Each one has an{" "}
-                <span className="text-gradient-brand font-serif italic">
+                <span className="text-gradient-brand font-serif">
                   output a client can hold.
                 </span>
               </Reveal>
@@ -203,7 +203,7 @@ export default function ProcessPage() {
               </p>
               <Reveal as="h2" tone="editorial" className="mt-4 text-balance font-display text-h-1 font-light">
                 Things that{" "}
-                <span className="text-gradient-brand font-serif italic">never</span>{" "}
+                <span className="text-gradient-brand font-serif">never</span>{" "}
                 change.
               </Reveal>
             </div>
@@ -232,7 +232,7 @@ export default function ProcessPage() {
             </p>
             <h2 className="mt-4 text-balance font-display text-d-2 font-light">
               Send a brief.{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 We&rsquo;ll reply within four hours.
               </span>
             </h2>

@@ -83,7 +83,7 @@ export function ClientLogo({
 
 /**
  * The placeholder is a tight, hand-tuned typographic composition designed
- * to look intentional next to real logos on the same wall. Serif italic for
+ * to look intentional next to real logos on the same wall. Serif for
  * the wordmark, a thin hairline rule above and below to mimic a printer's
  * nameplate, and a tiny mono colophon underneath that contextualises it.
  *
@@ -120,7 +120,7 @@ function Placeholder({
       {/* Wordmark */}
       <span
         className={cn(
-          "block text-balance font-serif italic leading-[1.05] tracking-tight text-foreground/85",
+          "block text-balance font-serif leading-[1.05] tracking-tight text-foreground/85",
           size
         )}
       >

@@ -94,7 +94,7 @@ export function Insights() {
               className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
             >
               Where the{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 argument
               </span>{" "}
               is written down.

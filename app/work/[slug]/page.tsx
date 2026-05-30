@@ -150,9 +150,9 @@ export default function CasePage({ params }: { params: { slug: string } }) {
           <div className="container py-24 md:py-32">
             <figure className="mx-auto max-w-3xl text-center">
               <blockquote className="font-display text-h-1 font-light leading-[1.1]">
-                <span className="text-gradient-brand font-serif italic">&ldquo;</span>
+                <span className="text-gradient-brand font-serif">&ldquo;</span>
                 {detail.pullQuote.body}
-                <span className="text-gradient-brand font-serif italic">&rdquo;</span>
+                <span className="text-gradient-brand font-serif">&rdquo;</span>
               </blockquote>
               <figcaption className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 — {detail.pullQuote.name}, {detail.pullQuote.role}
@@ -238,7 +238,7 @@ function CasePanel({
               slug={slug}
               className="max-h-[55%] w-auto max-w-full"
               fallback={
-                <span className="text-center font-serif text-5xl italic text-foreground/80">
+                <span className="text-center font-serif text-5xl text-foreground/80">
                   {name}
                 </span>
               }

@@ -37,7 +37,7 @@ export default function WorkIndexPage() {
           </p>
           <h1 className="mt-4 text-balance font-display text-d-2 font-light">
             Strategy is{" "}
-            <span className="text-gradient-brand font-serif italic">
+            <span className="text-gradient-brand font-serif">
               upstream
             </span>{" "}
             of design.
@@ -114,7 +114,7 @@ export default function WorkIndexPage() {
                             slug={w.slug}
                             className="max-h-[60%] w-auto max-w-full"
                             fallback={
-                              <span className="text-center font-serif text-4xl italic text-foreground/85 md:text-5xl">
+                              <span className="text-center font-serif text-4xl text-foreground/85 md:text-5xl">
                                 {w.client}
                               </span>
                             }

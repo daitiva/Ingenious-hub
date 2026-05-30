@@ -75,7 +75,7 @@ export function WorkGrid() {
               className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
             >
               Brands that argued for{" "}
-              <span className="font-serif italic text-gradient-brand">
+              <span className="font-serif text-gradient-brand">
                 something specific
               </span>
               .
@@ -222,7 +222,7 @@ function PlaceholderCover({ project }: { project: (typeof WORK)[number] }) {
           slug={project.slug}
           className="max-h-[55%] w-auto max-w-full"
           fallback={
-            <span className="text-center font-serif text-3xl italic text-foreground/85 md:text-4xl">
+            <span className="text-center font-serif text-3xl text-foreground/85 md:text-4xl">
               {project.client}
             </span>
           }

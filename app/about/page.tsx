@@ -68,7 +68,7 @@ export default function AboutPage() {
             <div className="md:col-span-9">
               <Reveal as="h1" tone="editorial" className="text-balance font-display text-d-2 font-light leading-[1.05]">
                 A global brand and design agency. Headquartered in Jaipur. Built on a{" "}
-                <span className="text-gradient-brand font-serif italic">
+                <span className="text-gradient-brand font-serif">
                   short list of beliefs.
                 </span>
               </Reveal>
@@ -231,7 +231,7 @@ export default function AboutPage() {
             </p>
             <h2 className="mt-4 text-balance font-display text-d-2 font-light">
               We take{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 three or four
               </span>{" "}
               briefs a quarter.

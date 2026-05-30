@@ -24,7 +24,7 @@ export default function NotFound() {
           <div className="md:col-span-9">
             <h1 className="text-balance font-display text-d-2 font-light leading-[1.05]">
               That URL doesn&rsquo;t lead anywhere we&rsquo;ve{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 shipped yet.
               </span>
             </h1>

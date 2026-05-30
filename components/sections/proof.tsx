@@ -51,7 +51,7 @@ export function Proof() {
               className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
             >
               The work is{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="text-gradient-brand font-serif">
                 signed off
               </span>{" "}
               by the people who paid for it.
@@ -77,9 +77,9 @@ export function Proof() {
               transition={{ duration: 0.9, ease: EASE, delay: i * 0.1 }}
             >
               <blockquote className="text-balance font-display text-h-2 font-light leading-tight">
-                <span className="text-gradient-brand font-serif italic">&ldquo;</span>
+                <span className="text-gradient-brand font-serif">&ldquo;</span>
                 {q.body}
-                <span className="text-gradient-brand font-serif italic">&rdquo;</span>
+                <span className="text-gradient-brand font-serif">&rdquo;</span>
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 <span className="h-px w-8 bg-foreground/30" />

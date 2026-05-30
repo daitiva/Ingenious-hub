@@ -85,7 +85,7 @@ export function ClientsWall() {
               className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
             >
               {CLIENTS.length} brands.{" "}
-              <span className="font-serif italic text-gradient-brand">
+              <span className="font-serif text-gradient-brand">
                 Nine sectors.
               </span>
             </h2>

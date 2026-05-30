@@ -105,7 +105,7 @@
   }
 
   /* Brand gradient text — light-mint → deep-teal, 135deg.
-   * Reserved for one accent per page: a serif-italic word, a metric,
+   * Reserved for one accent per page: a serif word, a metric,
    * a punctuation flourish. Don't apply to whole headlines. */
   .text-gradient-brand {
     background-image: linear-gradient(135deg, #81D5D3 0%, #009E8B 100%);

@@ -63,7 +63,7 @@ export function Hero() {
         style={enabled ? { scale: wordmarkScale, opacity: wordmarkOpacity } : { opacity: 0.18 }}
         className="pointer-events-none absolute inset-0 flex select-none items-center justify-center"
       >
-        <span className="whitespace-nowrap font-serif text-[clamp(6rem,18vw,22rem)] font-light italic leading-none tracking-tight text-white">
+        <span className="whitespace-nowrap font-serif text-[clamp(6rem,18vw,22rem)] font-light leading-none tracking-tight text-white">
           energize your brand
         </span>
       </motion.div>
