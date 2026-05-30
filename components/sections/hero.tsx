@@ -56,15 +56,15 @@ export function Hero() {
       className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-gradient-brand text-white"
       aria-labelledby="hero-thesis"
     >
-      {/* Massive wordmark, sits behind the thesis as a quiet brand presence.
+      {/* Massive tagline, sits behind the thesis as a quiet brand presence.
           Scales up + fades as the user scrolls out of the section. */}
       <motion.div
         aria-hidden
         style={enabled ? { scale: wordmarkScale, opacity: wordmarkOpacity } : { opacity: 0.18 }}
         className="pointer-events-none absolute inset-0 flex select-none items-center justify-center"
       >
-        <span className="whitespace-nowrap font-display text-[clamp(8rem,22vw,28rem)] font-light leading-none tracking-tightest text-white">
-          Ingenious Hub
+        <span className="whitespace-nowrap font-serif text-[clamp(6rem,18vw,22rem)] font-light italic leading-none tracking-tight text-white">
+          energize your brand
         </span>
       </motion.div>
 
@@ -79,7 +79,7 @@ export function Hero() {
         <p
           className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/70"
         >
-          A global brand and design agency · Headquartered in Jaipur
+          A global brand and design agency
         </p>
         <h1
           id="hero-thesis"

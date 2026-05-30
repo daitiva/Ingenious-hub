@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
@@ -53,6 +53,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [exploreOpen, setExploreOpen] = React.useState(false);
+  // Mobile sheet: Explore stays collapsed by default. User taps it to expand.
+  const [mobileExploreOpen, setMobileExploreOpen] = React.useState(false);
   const progressRef = React.useRef<HTMLDivElement>(null);
   const headerRef = React.useRef<HTMLElement>(null);
   const exploreRef = React.useRef<HTMLDivElement>(null);
@@ -93,6 +95,7 @@ export function Navbar() {
   React.useEffect(() => {
     setOpen(false);
     setExploreOpen(false);
+    setMobileExploreOpen(false);
   }, [pathname]);
 
   // Lock body scroll while mobile menu open
@@ -153,11 +156,19 @@ export function Navbar() {
         )}
       >
         <div className="container grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
-          {/* LEFT — primary nav (desktop) */}
-          <nav
-            className="hidden items-center gap-1 md:flex"
-            aria-label="Primary navigation"
-          >
+          {/* LEFT cell.
+              Mobile: theme toggle.
+              Desktop: primary nav.
+              The two share the same grid cell so the column stays balanced. */}
+          <div className="flex items-center justify-start">
+            {/* Mobile-only theme */}
+            <div className="md:hidden">
+              <ThemeToggle />
+            </div>
+            <nav
+              className="hidden items-center gap-1 md:flex"
+              aria-label="Primary navigation"
+            >
             {NAV.map((item) => {
               if (item.type === "group") {
                 return (
@@ -246,7 +257,8 @@ export function Navbar() {
                 </Link>
               );
             })}
-          </nav>
+            </nav>
+          </div>
 
           {/* CENTER — wordmark */}
           <Link
@@ -257,9 +269,14 @@ export function Navbar() {
             <Logo />
           </Link>
 
-          {/* RIGHT — theme toggle (desktop) + mobile menu trigger */}
+          {/* RIGHT cell.
+              Mobile: burger menu trigger.
+              Desktop: theme toggle. */}
           <div className="flex items-center justify-end gap-2">
-            <ThemeToggle />
+            {/* Desktop-only theme */}
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
             <button
               type="button"
               className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
@@ -290,21 +307,43 @@ export function Navbar() {
                       key={item.label}
                       className="border-b border-border last:border-b-0"
                     >
-                      <p className="-mx-2 px-2 pb-2 pt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                      <button
+                        type="button"
+                        onClick={() => setMobileExploreOpen((v) => !v)}
+                        aria-expanded={mobileExploreOpen}
+                        aria-controls={`mobile-${item.label.toLowerCase()}`}
+                        className="focus-ring -mx-2 flex w-[calc(100%+1rem)] items-center justify-between px-2 py-4 font-display text-h-3 font-light tracking-tight"
+                      >
                         {item.label}
-                      </p>
-                      <ul>
-                        {item.items.map((sub) => (
-                          <li key={sub.href}>
-                            <Link
-                              href={sub.href}
-                              className="focus-ring -mx-2 block px-2 py-3 font-display text-h-3 font-light tracking-tight"
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                        <ChevronRight
+                          aria-hidden
+                          className={cn(
+                            "h-5 w-5 text-muted-foreground transition-transform duration-300",
+                            mobileExploreOpen && "rotate-90"
+                          )}
+                        />
+                      </button>
+                      <div
+                        id={`mobile-${item.label.toLowerCase()}`}
+                        className={cn(
+                          "grid overflow-hidden transition-[grid-template-rows] duration-300 ease-out",
+                          mobileExploreOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                        )}
+                      >
+                        <ul className="overflow-hidden">
+                          {item.items.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                className="focus-ring -mx-2 block px-2 py-3 pl-6 text-base text-muted-foreground hover:text-foreground"
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                          <li aria-hidden className="pb-2" />
+                        </ul>
+                      </div>
                     </div>
                   );
                 }

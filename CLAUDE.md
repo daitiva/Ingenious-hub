@@ -151,12 +151,16 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
   large blocks of text, never on primary CTAs, never on cards.
 - **Dark mode is warm charcoal**, not AMOLED black. `--background:
   30 7% 14%` (#25221F) and `ink: #1B1916`. Don't darken below this.
-- **Type families**: single-family system. Every Tailwind family alias
-  (`font-sans`, `font-display`, `font-serif`, `font-mono`) resolves to
-  **Open Sans**. Instrument Serif + JetBrains Mono were retired when the
-  studio chose Open Sans exclusively. Italic accents still use
-  `font-serif italic` — they just render as Open Sans italic. Don't
-  re-introduce a second family without an explicit call from the studio.
+- **Type families**: two-family system.
+  - **Open Sans** is body, display, and mono. Every `font-sans`,
+    `font-display`, and `font-mono` resolves here.
+  - **Cormorant** is the editorial italic-accent face. Every
+    `font-serif italic` (one moment per section: "people choose.",
+    "Nine sectors.", "upstream", etc.) renders in Cormorant italic.
+    Pairs the Open Sans grotesk discipline with a real serif voice
+    for the flourish.
+  - Don't introduce a third family without an explicit call from
+    the studio.
 - **Weights are conservative**: 300 for display, 400 for sub-heading and
   body, 500 for emphasis, 700 reserved for impact metrics only.
 - **Type scale** is a named ladder (`text-d-1`, `text-d-2`, `text-h-1`,

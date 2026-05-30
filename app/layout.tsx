@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Cormorant } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -7,15 +7,23 @@ import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { SERVICES } from "@/lib/services";
 
-// Single-family typesetting: Open Sans across sans, display, serif
-// (italic), and mono roles. Removing Instrument Serif + JetBrains Mono
-// matches Pentagram's discipline of one voice and ships ~80 KB less
-// font weight than the previous three-family system.
+// Open Sans is the body + utility family — every sans/mono/display
+// role resolves here. Italic accents (font-serif italic) use Cormorant
+// instead, giving the editorial flourish moments a true serif voice
+// without re-introducing a second body family.
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
   style: ["normal", "italic"],
   variable: "--font-sans",
+});
+
+const cormorant = Cormorant({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-serif",
 });
 
 const displayFont = openSans;
@@ -190,7 +198,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={openSans.variable}
+      className={`${openSans.variable} ${cormorant.variable}`}
       style={{ ["--font-display" as string]: displayFont.style.fontFamily }}
       suppressHydrationWarning
     >

@@ -94,14 +94,15 @@ const config: Config = {
         md: "calc(var(--radius) - 4px)",
         sm: "calc(var(--radius) - 8px)",
       },
-      // Single-family system. Every role resolves to Open Sans. The
-      // `serif` and `mono` Tailwind class names still work site-wide;
-      // they just render Open Sans (italic for serif, regular for mono).
-      // This matches the studio's call to use Open Sans exclusively.
+      // Two-family system. Open Sans is body / display / mono. Cormorant
+      // is the editorial italic accent face — kicks in everywhere
+      // `font-serif italic` is used (one moment per section). Keeps the
+      // body discipline single-voice while giving the flourish a real
+      // serif character.
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-sans)", "system-ui", "sans-serif"],
-        serif: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Cormorant", "Georgia", "serif"],
         mono: ["var(--font-sans)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: {

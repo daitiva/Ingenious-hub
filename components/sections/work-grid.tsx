@@ -27,7 +27,11 @@ import { cn } from "@/lib/utils";
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const FEATURED_COUNT = 10;
+// Show every project on the homepage — the studio's call.
+// The shuffle still rotates per session so the order feels alive.
+// Mobile gets a "Show more" pager below MOBILE_INITIAL to keep the
+// fold tight.
+const MOBILE_INITIAL = 6;
 
 // Aspect rhythm — index N gets aspect TILE_ASPECTS[N % len]. Pre-tuned
 // to feel composed at any shuffle: tall / wide / tall / square / wide …
@@ -44,15 +48,14 @@ const TILE_ASPECTS = [
 
 export function WorkGrid() {
   const [seed, setSeed] = useState(1);
+  const [showAllMobile, setShowAllMobile] = useState(false);
   useEffect(() => {
     setSeed(getSessionSeed());
   }, []);
 
-  // Shuffle stably per session; pick the first FEATURED_COUNT.
-  const featured = useMemo(
-    () => shuffleStable(WORK, seed).slice(0, FEATURED_COUNT),
-    [seed]
-  );
+  // Shuffle every project stably per session — preserves the studio's
+  // randomised-on-refresh identity feature without picking favourites.
+  const projects = useMemo(() => shuffleStable(WORK, seed), [seed]);
 
   return (
     <section
@@ -72,7 +75,7 @@ export function WorkGrid() {
               className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
             >
               Brands that argued for{" "}
-              <span className="text-gradient-brand font-serif italic">
+              <span className="font-serif italic text-gradient-brand">
                 something specific
               </span>
               .
@@ -90,10 +93,35 @@ export function WorkGrid() {
       </div>
 
       <ul className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((project, i) => (
-          <WorkTile key={project.slug} project={project} index={i} />
+        {projects.map((project, i) => (
+          <WorkTile
+            key={project.slug}
+            project={project}
+            index={i}
+            hiddenOnMobile={!showAllMobile && i >= MOBILE_INITIAL}
+          />
         ))}
       </ul>
+
+      {/* Mobile "Show more" — only appears when there are still hidden
+          projects below the initial slice. md+ shows everything. */}
+      {!showAllMobile && projects.length > MOBILE_INITIAL && (
+        <div className="container mt-10 flex flex-col items-center gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={() => setShowAllMobile(true)}
+            className="focus-ring inline-flex h-11 items-center justify-center rounded-full border border-border bg-background px-6 text-sm font-medium transition-colors hover:border-foreground"
+          >
+            Show more ({projects.length - MOBILE_INITIAL} more)
+          </button>
+          <Link
+            href="/work"
+            className="focus-ring text-sm font-medium underline-offset-4 hover:underline"
+          >
+            All work →
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
@@ -101,9 +129,11 @@ export function WorkGrid() {
 function WorkTile({
   project,
   index,
+  hiddenOnMobile,
 }: {
   project: (typeof WORK)[number];
   index: number;
+  hiddenOnMobile: boolean;
 }) {
   const aspect = TILE_ASPECTS[index % TILE_ASPECTS.length];
   const [hasCover, setHasCover] = useState(false);
@@ -117,7 +147,7 @@ function WorkTile({
   }, [coverSrc]);
 
   return (
-    <li className="group relative bg-background">
+    <li className={cn("group relative bg-background", hiddenOnMobile && "hidden sm:block")}>
       <Link
         href={`/work/${project.slug}`}
         className="focus-ring block"
