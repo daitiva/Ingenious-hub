@@ -94,15 +94,14 @@ const config: Config = {
         md: "calc(var(--radius) - 4px)",
         sm: "calc(var(--radius) - 8px)",
       },
-      // Two-family system. Open Sans is body / display / mono. Cormorant
-      // is the editorial italic accent face — kicks in everywhere
-      // `font-serif italic` is used (one moment per section). Keeps the
-      // body discipline single-voice while giving the flourish a real
-      // serif character.
+      // Two-family system. Open Sans is body / display / mono.
+      // Baskervville is the editorial italic accent face — kicks in
+      // everywhere `font-serif italic` is used (one moment per section).
+      // Transitional serif that pairs cleanly with Open Sans grotesque.
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-sans)", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "Cormorant", "Georgia", "serif"],
+        serif: ["var(--font-serif)", "Baskervville", "Georgia", "serif"],
         mono: ["var(--font-sans)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: {

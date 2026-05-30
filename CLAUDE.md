@@ -154,11 +154,12 @@ The brand voice guide is `lib/voice.md`. Read it before writing copy.
 - **Type families**: two-family system.
   - **Open Sans** is body, display, and mono. Every `font-sans`,
     `font-display`, and `font-mono` resolves here.
-  - **Cormorant** is the editorial italic-accent face. Every
+  - **Baskervville** is the editorial italic-accent face. Every
     `font-serif italic` (one moment per section: "people choose.",
-    "Nine sectors.", "upstream", etc.) renders in Cormorant italic.
-    Pairs the Open Sans grotesk discipline with a real serif voice
-    for the flourish.
+    "Nine sectors.", "upstream", etc.) renders in Baskervville italic.
+    Transitional serif that pairs cleanly with the Open Sans grotesque.
+    (Cormorant was tried first and pulled — didn't visually sit next
+    to Open Sans.)
   - Don't introduce a third family without an explicit call from
     the studio.
 - **Weights are conservative**: 300 for display, 400 for sub-heading and

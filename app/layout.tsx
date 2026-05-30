@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans, Cormorant } from "next/font/google";
+import { Open_Sans, Baskervville } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -8,9 +8,11 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { SERVICES } from "@/lib/services";
 
 // Open Sans is the body + utility family — every sans/mono/display
-// role resolves here. Italic accents (font-serif italic) use Cormorant
-// instead, giving the editorial flourish moments a true serif voice
-// without re-introducing a second body family.
+// role resolves here. Italic accents (font-serif italic) use
+// Baskervville instead, giving the editorial flourish moments a
+// classic transitional-serif voice without re-introducing a second
+// body family. (Cormorant was tried and pulled — it didn't sit
+// visually next to Open Sans.)
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -18,9 +20,9 @@ const openSans = Open_Sans({
   variable: "--font-sans",
 });
 
-const cormorant = Cormorant({
+const baskervville = Baskervville({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "400",
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-serif",
@@ -198,7 +200,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${cormorant.variable}`}
+      className={`${openSans.variable} ${baskervville.variable}`}
       style={{ ["--font-display" as string]: displayFont.style.fontFamily }}
       suppressHydrationWarning
     >
