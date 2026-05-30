@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { INSIGHTS } from "@/lib/insights";
+import { INSIGHTS, type Insight } from "@/lib/insights";
 
 /**
  * Insights — Section 7 of the homepage.
@@ -11,9 +11,12 @@ import { INSIGHTS } from "@/lib/insights";
  * right. No "blog cards" with gradients — pure editorial layout, the
  * post titles do the work.
  *
- * Dates are stable (ISO strings in /lib/insights.ts). Routes to /blogs
- * — which is the live ingenioushub.com path; the prior /insights
- * route remains as a 301 redirect so any old links survive.
+ * Dates are stable (ISO strings in /lib/insights.ts). Slugs match the
+ * live WordPress paths so the Phase C migration is one-to-one.
+ *
+ * Until the CMS migration lands (Phase C), each post links out to its
+ * live WordPress URL via `externalHref` — visitors can read the real
+ * essay today instead of hitting a placeholder.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -24,6 +27,47 @@ function formatDate(iso: string) {
     month: "long",
     day: "numeric",
   });
+}
+
+/**
+ * Routes to the post: external WordPress URL if present, else the
+ * future /blogs/<slug> path. Keeps the Insights surface working
+ * during the migration window without code surgery later — flipping
+ * `externalHref` off in lib/insights.ts is the only change needed
+ * once posts land natively.
+ */
+function postHref(post: Insight): { href: string; external: boolean } {
+  if (post.externalHref) return { href: post.externalHref, external: true };
+  return { href: `/blogs/${post.slug}`, external: false };
+}
+
+function PostLink({
+  post,
+  className,
+  children,
+}: {
+  post: Insight;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const { href, external } = postHref(post);
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
 }
 
 export function Insights() {
@@ -70,10 +114,7 @@ export function Insights() {
         <div className="mt-16 grid gap-10 border-t border-border pt-12 md:grid-cols-12 md:gap-12">
           {/* Featured */}
           <article className="md:col-span-7">
-            <Link
-              href={`/blogs/${featured.slug}`}
-              className="focus-ring group block"
-            >
+            <PostLink post={featured} className="focus-ring group block">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +134,7 @@ export function Insights() {
                   Read essay →
                 </span>
               </motion.div>
-            </Link>
+            </PostLink>
           </article>
 
           {/* Two smaller, stacked */}
@@ -101,8 +142,8 @@ export function Insights() {
             <ul className="grid gap-10">
               {secondary.map((post, i) => (
                 <li key={post.slug}>
-                  <Link
-                    href={`/blogs/${post.slug}`}
+                  <PostLink
+                    post={post}
                     className="focus-ring group block border-t border-border pt-8 first:border-t-0 first:pt-0"
                   >
                     <motion.div
@@ -125,7 +166,7 @@ export function Insights() {
                         {post.excerpt}
                       </p>
                     </motion.div>
-                  </Link>
+                  </PostLink>
                 </li>
               ))}
             </ul>
