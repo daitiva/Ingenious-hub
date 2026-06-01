@@ -33,18 +33,12 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 // fold tight.
 const MOBILE_INITIAL = 6;
 
-// Aspect rhythm — index N gets aspect TILE_ASPECTS[N % len]. Pre-tuned
-// to feel composed at any shuffle: tall / wide / tall / square / wide …
-const TILE_ASPECTS = [
-  "aspect-[4/5]",  // tall
-  "aspect-[5/4]",  // wide
-  "aspect-[3/4]",  // taller
-  "aspect-[1/1]",  // square
-  "aspect-[5/4]",
-  "aspect-[4/5]",
-  "aspect-[1/1]",
-  "aspect-[5/4]",
-];
+// Every tile uses the same aspect ratio so the grid reads as a clean,
+// streamlined wall. Earlier we varied 4:5 / 5:4 / 3:4 / 1:1 to feel
+// "composed", but with real project photography the varied heights
+// produced ragged rows. Uniform 5:4 (gentle landscape) lines up clean
+// and matches what Ogilvy uses.
+const TILE_ASPECT = "aspect-[5/4]";
 
 export function WorkGrid() {
   const [seed, setSeed] = useState(1);
@@ -135,7 +129,6 @@ function WorkTile({
   index: number;
   hiddenOnMobile: boolean;
 }) {
-  const aspect = TILE_ASPECTS[index % TILE_ASPECTS.length];
   const [hasCover, setHasCover] = useState(false);
   const coverSrc = `/cases/${project.slug}/cover.jpg`;
 
@@ -160,7 +153,7 @@ function WorkTile({
           transition={{ duration: 0.7, ease: EASE, delay: (index % 3) * 0.05 }}
           className="relative"
         >
-          <div className={cn("relative w-full overflow-hidden bg-muted/40", aspect)}>
+          <div className={cn("relative w-full overflow-hidden bg-muted/40", TILE_ASPECT)}>
             {hasCover ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
