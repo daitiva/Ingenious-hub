@@ -104,6 +104,30 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
+  /* Animated underline — draws left→right on hover/focus, retracts to
+   * the right on leave. Replaces static hover:underline on editorial
+   * links so the detail reads handcrafted, not default. */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
   /* Brand gradient text — light-mint → deep-teal, 135deg.
    * Reserved for one accent per page: a serif word, a metric,
    * a punctuation flourish. Don't apply to whole headlines. */

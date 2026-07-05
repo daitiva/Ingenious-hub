@@ -91,8 +91,19 @@ function CapabilityRow({
   return (
     <li
       ref={ref}
-      className="group relative border-b border-border transition-colors hover:bg-muted/40"
+      className="group relative transition-colors hover:bg-muted/40"
     >
+      {/* Hairline separator draws left→right as the row enters —
+          replaces the static border-b so the list assembles itself
+          in step with the scroll. */}
+      <motion.span
+        aria-hidden
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 1, ease: EASE, delay: 0.15 }}
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-border"
+      />
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans, Baskervville } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { MotionProvider } from "@/components/motion-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -209,12 +210,14 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <SmoothScroll />
-          <Navbar />
-          <main id="main" className="pt-[64px]">
-            {children}
-          </main>
-          <Footer />
+          <MotionProvider>
+            <SmoothScroll />
+            <Navbar />
+            <main id="main" className="pt-[64px]">
+              {children}
+            </main>
+            <Footer />
+          </MotionProvider>
         </ThemeProvider>
         {SCHEMAS.map((s, i) => (
           <script

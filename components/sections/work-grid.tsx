@@ -78,7 +78,7 @@ export function WorkGrid() {
           <div className="md:col-span-2 md:text-right">
             <Link
               href="/work"
-              className="focus-ring inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+              className="focus-ring link-underline inline-flex items-center gap-1.5 text-sm font-medium"
             >
               All work →
             </Link>
@@ -153,7 +153,16 @@ function WorkTile({
           transition={{ duration: 0.7, ease: EASE, delay: (index % 3) * 0.05 }}
           className="relative"
         >
-          <div className={cn("relative w-full overflow-hidden bg-muted/40", TILE_ASPECT)}>
+          {/* Cover unmasks (clip-path inset → 0) as it enters, a beat
+              behind the figure's rise — reads as the image being
+              revealed rather than just fading in. */}
+          <motion.div
+            initial={{ clipPath: "inset(12% 6% 12% 6%)" }}
+            whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.9, ease: EASE, delay: (index % 3) * 0.05 + 0.1 }}
+            className={cn("relative w-full overflow-hidden bg-muted/40", TILE_ASPECT)}
+          >
             {hasCover ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -183,7 +192,7 @@ function WorkTile({
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Meta sits below the tile, quiet */}
           <figcaption className="flex items-baseline justify-between gap-6 px-5 py-5 md:px-6 md:py-6">

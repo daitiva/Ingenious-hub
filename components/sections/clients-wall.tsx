@@ -93,7 +93,7 @@ export function ClientsWall() {
           <div className="md:col-span-2 md:text-right">
             <Link
               href="/clients"
-              className="focus-ring inline-flex items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+              className="focus-ring link-underline inline-flex items-center gap-1.5 text-sm font-medium"
             >
               Full ecosystem →
             </Link>

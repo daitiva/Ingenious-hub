@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { Magnetic } from "@/components/magnetic";
 
 /**
  * FinalCTA — Section 8 of the homepage.
@@ -72,27 +73,31 @@ export function FinalCTA() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
               className="flex flex-col items-stretch gap-3"
             >
-              <Link
-                href="/contact"
-                className="focus-ring group inline-flex h-14 items-center justify-between gap-6 rounded-full bg-white px-6 text-foreground transition-transform hover:-translate-y-0.5"
-              >
-                <span className="text-base font-medium">Start a project</span>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-white">
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
-                </span>
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/contact"
+                  className="focus-ring group flex h-14 items-center justify-between gap-6 rounded-full bg-white px-6 text-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  <span className="text-base font-medium">Start a project</span>
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-foreground text-white">
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
+                  </span>
+                </Link>
+              </Magnetic>
 
-              <Link
-                href="https://wa.me/919587015816"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="focus-ring group inline-flex h-14 items-center justify-between gap-6 rounded-full border border-white/40 px-6 text-white transition-colors hover:bg-white/10"
-              >
-                <span className="text-base font-medium">WhatsApp the studio</span>
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40">
-                  <MessageCircle className="h-4 w-4" />
-                </span>
-              </Link>
+              <Magnetic>
+                <Link
+                  href="https://wa.me/919587015816"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring group flex h-14 items-center justify-between gap-6 rounded-full border border-white/40 px-6 text-white transition-colors hover:bg-white/10"
+                >
+                  <span className="text-base font-medium">WhatsApp the studio</span>
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40">
+                    <MessageCircle className="h-4 w-4" />
+                  </span>
+                </Link>
+              </Magnetic>
 
               <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-white/65">
                 hello@ingenioushub.com &middot; +91 95870 15816

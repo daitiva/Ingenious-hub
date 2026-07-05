@@ -4,6 +4,49 @@ Recorded per `CLAUDE.md` Section 11 "files that double as decision logs". Every 
 
 ---
 
+## 2026-07-05 — Design-elevation pass ("less but better")
+
+Studio issued a design-only brief: elevate UI/UX/motion to
+international-agency grade **without changing any content**. All copy,
+navigation, services, and projects frozen. Changes shipped:
+
+### Motion accessibility becomes policy, not per-component effort
+`MotionConfig reducedMotion="user"` now wraps the whole app
+(`components/motion-provider.tsx`). Framer drives transforms from JS,
+so the CSS `prefers-reduced-motion` kill-switch never reached them —
+this closes that gap in one line. Transforms collapse to opacity
+fades for reduced-motion visitors, site-wide.
+
+### Route transitions
+`app/template.tsx` — every navigation fades + rises in (0.55s,
+house ease). Deliberately no exit animation: App Router unmounts
+synchronously and holding the old page for an outro reads as lag.
+
+### Animated underline replaces static hover:underline
+`.link-underline` utility (globals.css): draws left→right on
+hover/focus, retracts right on leave. Applied to the recurring
+section links (All work / Full ecosystem / All writing).
+
+### Work-grid image mask reveals
+Tiles unmask via `clip-path: inset(12% 6%…) → 0` a beat behind the
+figure's rise. Image is *revealed*, not just faded.
+
+### 3D used twice, quietly — never as a gimmick
+- Featured-case artefact card: pointer-tracked tilt, max ±2.5°,
+  spring-damped, `perspective: 1200`. Fine pointers only;
+  reduced-motion opts out entirely.
+- Final CTA pills: `Magnetic` wrapper (`components/magnetic.tsx`),
+  ≤6px drift toward cursor, springs back. Same gating.
+Rule going forward: depth effects must be felt rather than seen.
+No WebGL, no scenes, no floating blobs.
+
+### Capabilities hairline choreography
+Each row's separator draws left→right (`scaleX 0→1`) as the row
+enters — the list assembles itself in step with the scroll.
+Replaces the static `border-b`.
+
+---
+
 ## 2026-05-29 — Full surface rebuild
 
 ### Positioning
