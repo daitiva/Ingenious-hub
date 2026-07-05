@@ -24,7 +24,10 @@ export function FinalCTA() {
       aria-labelledby="cta-heading"
       className="relative border-t border-border bg-gradient-brand text-white"
     >
-      <div className="container py-24 md:py-36">
+      {/* Paper-grain overlay — matches the hero so the page opens and
+          closes on the same printed-stock texture */}
+      <div aria-hidden className="grain-light pointer-events-none absolute inset-0" />
+      <div className="container relative py-24 md:py-36">
         <div className="grid items-end gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-8">
             <motion.p

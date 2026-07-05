@@ -48,6 +48,24 @@
     -webkit-text-size-adjust: 100%;
     /* Prevent horizontal overflow from oversized typography / parallax layers */
     overflow-x: clip;
+    /* Windows/Linux show classic scrollbars — reserving the gutter stops
+     * the whole page shifting sideways when navigating between short and
+     * long pages. No-op on macOS/iOS overlay scrollbars. */
+    scrollbar-gutter: stable;
+  }
+
+  /* Keyboard users: anchor jumps (skip-link → #main) should be instant,
+   * not a smooth glide past the content they asked to skip to. Pointer
+   * scrolling is unaffected — scroll-behavior only governs programmatic
+   * and anchor scrolls. */
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  body {
+    /* Kill iOS Safari's grey flash on every tap — focus states are
+     * handled by the .focus-ring system instead. */
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -97,6 +115,17 @@
     background-size: 14px 14px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  /* Grain for the brand-wash (teal) sections — white dots at very low
+   * opacity so the flat gradient reads as printed stock, not a CSS
+   * fill. Overlay layer; pointer-events stay off via usage. */
+  .grain-light {
+    background-image: radial-gradient(
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      );
+    background-size: 12px 12px;
   }
 
   /* Focus ring used site-wide */

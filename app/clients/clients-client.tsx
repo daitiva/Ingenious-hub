@@ -8,11 +8,14 @@ import { ClientLogo } from "@/components/client-logo";
 import { logoStats } from "@/lib/client-logos";
 import { cn } from "@/lib/utils";
 
+// One chip per category that actually has clients. "B2C" was listed
+// here previously but no roster entry uses it — an always-empty filter
+// chip reads as a template artefact, so it's gone until a B2C client
+// exists in lib/clients.ts.
 const FILTERS = [
   "All",
   "Edtech",
   "D2C",
-  "B2C",
   "Fintech",
   "B2B",
   "Healthcare",

@@ -124,7 +124,7 @@ export function Insights() {
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
                   {featured.topic} · {formatDate(featured.date)} · {featured.readMins} min read
                 </p>
-                <h3 className="mt-6 text-balance font-display text-h-1 font-light leading-tight tracking-tightest transition-colors group-hover:text-gradient-brand">
+                <h3 className="mt-6 text-balance font-display text-h-1 font-light leading-tight tracking-tightest transition-colors duration-300 group-hover:text-teal-600 dark:group-hover:text-teal-300">
                   {featured.title}
                 </h3>
                 <p className="mt-5 max-w-2xl text-body-lg text-muted-foreground">

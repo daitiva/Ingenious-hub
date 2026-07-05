@@ -40,6 +40,29 @@ const MOBILE_INITIAL = 6;
 // and matches what Ogilvy uses.
 const TILE_ASPECT = "aspect-[5/4]";
 
+// Cover-probe results, cached for the lifetime of the page session.
+// Without this, every SPA navigation back to the homepage re-fires
+// one image request per tile — 18 avoidable 404s in the network log
+// until real covers land. Probe once, remember the verdict.
+const coverCache = new Map<string, boolean>();
+
+function probeCover(src: string): Promise<boolean> {
+  const cached = coverCache.get(src);
+  if (cached !== undefined) return Promise.resolve(cached);
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      coverCache.set(src, true);
+      resolve(true);
+    };
+    img.onerror = () => {
+      coverCache.set(src, false);
+      resolve(false);
+    };
+    img.src = src;
+  });
+}
+
 export function WorkGrid() {
   const [seed, setSeed] = useState(1);
   const [showAllMobile, setShowAllMobile] = useState(false);
@@ -133,14 +156,17 @@ function WorkTile({
   const coverSrc = `/cases/${project.slug}/cover.jpg`;
 
   useEffect(() => {
-    const img = new Image();
-    img.onload = () => setHasCover(true);
-    img.onerror = () => setHasCover(false);
-    img.src = coverSrc;
+    let cancelled = false;
+    probeCover(coverSrc).then((ok) => {
+      if (!cancelled) setHasCover(ok);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [coverSrc]);
 
   return (
-    <li className={cn("group relative bg-background", hiddenOnMobile && "hidden sm:block")}>
+    <li className={cn("group relative bg-background", hiddenOnMobile && "hidden md:block")}>
       <Link
         href={`/work/${project.slug}`}
         className="focus-ring block"

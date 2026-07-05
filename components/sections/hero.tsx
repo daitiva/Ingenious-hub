@@ -53,9 +53,11 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-gradient-brand text-white"
+      className="relative isolate flex min-h-[calc(100svh-64px)] items-center overflow-hidden bg-gradient-brand text-white"
       aria-labelledby="hero-thesis"
     >
+      {/* Paper-grain overlay — the gradient reads as printed stock */}
+      <div aria-hidden className="grain-light pointer-events-none absolute inset-0" />
       {/* Massive tagline, sits behind the thesis as a quiet brand presence.
           Scales up + fades as the user scrolls out of the section. */}
       <motion.div

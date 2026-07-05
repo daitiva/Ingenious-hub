@@ -20,6 +20,7 @@ const COLUMNS = [
       { href: "/process", label: "Process" },
       { href: "/about", label: "About" },
       { href: "/clients", label: "Clients" },
+      { href: "/blogs", label: "Blogs" },
       { href: "/contact", label: "Contact" },
     ],
   },
@@ -32,8 +33,9 @@ export function Footer() {
         <div className="md:col-span-5">
           <Logo size="lg" />
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">
-            A creative + growth studio in Jaipur. Strategy, design, and performance —
-            built as one engine.
+            A global brand and design agency, headquartered in Jaipur.
+            Strategy, identity, advertising, marketing, PR, and digital —
+            built as one practice.
           </p>
           <div className="mt-6 space-y-2 text-sm text-muted-foreground">
             <p className="flex items-center gap-2">

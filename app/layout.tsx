@@ -34,7 +34,7 @@ const displayFont = openSans;
 export const metadata: Metadata = {
   metadataBase: new URL("https://ingenioushub.com"),
   title: {
-    default: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
+    default: "Ingenious Hub — Global Brand & Design Agency",
     template: "%s · Ingenious Hub",
   },
   description:
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
+    title: "Ingenious Hub — Global Brand & Design Agency",
     description: "We design the brands people choose.",
     url: "https://ingenioushub.com",
     siteName: "Ingenious Hub",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ingenious Hub — Strategic Branding & Digital Experience Studio",
+    title: "Ingenious Hub — Global Brand & Design Agency",
     description: "We design the brands people choose.",
   },
   robots: {
@@ -75,10 +75,8 @@ export const metadata: Metadata = {
     },
   },
   icons: { icon: "/favicon.svg" },
-  // Address-bar tint per theme. White surface in light, warm graphite in dark.
-  other: {
-    "theme-color": "#FFFFFF",
-  },
+  // theme-color lives in the viewport export below (both schemes) —
+  // declaring it here too rendered a duplicate, conflicting meta tag.
 };
 
 export const viewport = {

@@ -4,6 +4,48 @@ Recorded per `CLAUDE.md` Section 11 "files that double as decision logs". Every 
 
 ---
 
+## 2026-07-05 — Handcrafted QA pass (10 defects fixed)
+
+Studio asked for the site to read handcrafted, work across every
+OS/screen/platform, and carry none of the "typical AI bugs". A full
+audit found and fixed ten real defects:
+
+1. Hero was `min-h-[100svh]` under a 64px fixed navbar — the scroll
+   cue sat below the fold. Now `calc(100svh-64px)`.
+2. Work-grid mobile "Show more": tiles revealed at `sm` but the
+   button hid at `md` — between 640–768px it promised hidden tiles
+   that were already visible. Both now break at `md`.
+3. /clients had a "B2C" filter chip with zero matching clients — an
+   always-empty filter. Removed until a B2C client exists.
+4. Footer still said "creative + growth studio in Jaipur" (pre-
+   positioning copy) and was missing the Blogs link. Both fixed.
+5. Insights featured-post hover used `group-hover:text-gradient-brand`
+   with `transition-colors` — background-clip gradients can't
+   transition, so it snapped. Replaced with a smooth teal colour
+   transition.
+6. `theme-color` was declared in both `metadata.other` and the
+   `viewport` export — duplicate, conflicting meta tags. Single
+   source now (viewport, both schemes).
+7. Homepage cover-probes re-fired 18 image requests on every SPA
+   navigation (404 spam until real covers land). Added a module-level
+   probe cache — one probe per slug per page session.
+8. `<title>`/OG/Twitter titles still read "Strategic Branding &
+   Digital Experience Studio" — contradicted the locked positioning.
+   Now "Global Brand & Design Agency" everywhere.
+9. iOS Safari's grey tap-flash on links suppressed
+   (`-webkit-tap-highlight-color: transparent`) — focus states come
+   from the `.focus-ring` system.
+10. `scrollbar-gutter: stable` on html (kills the Windows sideways
+    layout shift between short/long pages) and
+    `html:focus-within { scroll-behavior: auto }` (skip-link jumps
+    instantly for keyboard users instead of smooth-gliding).
+
+Plus one handcrafted texture: `.grain-light` white-dot paper grain
+overlaid on the two brand-wash sections (hero + final CTA) so the
+teal gradient reads as printed stock, not a CSS fill.
+
+---
+
 ## 2026-07-05 — Design-elevation pass ("less but better")
 
 Studio issued a design-only brief: elevate UI/UX/motion to
