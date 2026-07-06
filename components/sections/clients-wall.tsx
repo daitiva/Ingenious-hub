@@ -73,31 +73,28 @@ export function ClientsWall() {
       className="relative border-t border-border"
     >
       <div className="container py-20 md:py-28">
-        <div className="grid items-end gap-8 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              05 — Client ecosystem
-            </p>
-          </div>
-          <div className="md:col-span-7">
-            <h2
-              id="clients-heading"
-              className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
-            >
-              {CLIENTS.length} brands.{" "}
-              <span className="font-serif text-gradient-brand">
-                Nine sectors.
-              </span>
-            </h2>
-          </div>
-          <div className="md:col-span-2 md:text-right">
-            <Link
-              href="/clients"
-              className="focus-ring link-underline inline-flex items-center gap-1.5 text-sm font-medium"
-            >
-              Full ecosystem →
-            </Link>
-          </div>
+        {/* Mirrored composition — eyebrow + heading ride the right edge,
+            counterweighting the centered Work section above and the
+            left-aligned sections around it. */}
+        <div className="flex flex-col gap-5 md:items-end md:text-right">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            05 — Client ecosystem
+          </p>
+          <h2
+            id="clients-heading"
+            className="max-w-3xl text-balance font-display text-d-2 font-light leading-[1.02] tracking-tightest"
+          >
+            {CLIENTS.length} brands.{" "}
+            <span className="font-serif text-gradient-brand">
+              Nine sectors.
+            </span>
+          </h2>
+          <Link
+            href="/clients"
+            className="focus-ring link-underline inline-flex items-center gap-1.5 text-sm font-medium"
+          >
+            Full ecosystem →
+          </Link>
         </div>
 
         {/* Sector tabs */}

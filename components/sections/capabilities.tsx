@@ -1,20 +1,18 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 /**
  * Capabilities — Section 2.
  *
  * Nine disciplines as an editorial running list. Not icon cards.
- * Each capability is a full-bleed row: an oversized index number on
- * the left, the capability name in heavy display type next to it,
- * a single descriptive line below, and a hairline separator that
- * draws in as the row enters the viewport.
+ * Each row: an oversized watermark numeral sitting BEHIND the
+ * capability name (overlapping layers, not columns), the name in
+ * large display type on top, and a single descriptive line to the
+ * right. The hairline separator draws in as the row enters.
  *
- * Reads as a manifesto — the studio's claim of breadth made by typing,
- * not by stamping logos. Pentagram-shape restraint; Ogilvy-scale
- * confidence.
+ * Reads as a manifesto — the studio's claim of breadth made by
+ * typography and layering, not by stamping logos.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -48,7 +46,7 @@ export function Capabilities() {
           <div className="md:col-span-9">
             <h2
               id="caps-heading"
-              className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
+              className="text-balance font-display text-d-1 font-light leading-[0.98] tracking-tightest"
             >
               Nine disciplines.{" "}
               <span className="text-gradient-brand font-serif">
@@ -80,21 +78,10 @@ function CapabilityRow({
   cap: (typeof CAPS)[number];
   index: number;
 }) {
-  const ref = useRef<HTMLLIElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  // Tiny opacity lift on the number as the row enters — quiet, never showy.
-  const numOpacity = useTransform(scrollYProgress, [0, 0.4], [0.25, 1]);
-
   return (
-    <li
-      ref={ref}
-      className="group relative transition-colors hover:bg-muted/40"
-    >
+    <li className="group relative overflow-hidden transition-colors hover:bg-muted/40">
       {/* Hairline separator draws left→right as the row enters —
-          replaces the static border-b so the list assembles itself
+          replaces a static border-b so the list assembles itself
           in step with the scroll. */}
       <motion.span
         aria-hidden
@@ -104,30 +91,33 @@ function CapabilityRow({
         transition={{ duration: 1, ease: EASE, delay: 0.15 }}
         className="absolute inset-x-0 bottom-0 h-px origin-left bg-border"
       />
-      <div className="container">
+
+      <div className="container relative">
+        {/* Watermark numeral — oversized, low-contrast, sits behind
+            the capability name. Overlapping layers give the row depth
+            without a single pixel of decoration. */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 select-none font-display text-[clamp(6rem,14vw,12rem)] font-light leading-none tabular-nums text-foreground/[0.05] transition-colors duration-500 group-hover:text-foreground/[0.09] md:left-6"
+        >
+          {cap.n}
+        </span>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: EASE, delay: (index % 3) * 0.05 }}
-          className="grid grid-cols-[3.5rem_1fr] items-baseline gap-6 py-10 md:grid-cols-[6rem_1fr_minmax(0,32ch)] md:gap-10 md:py-14"
+          className="relative grid gap-4 py-12 pl-10 md:grid-cols-[1fr_minmax(0,32ch)] md:items-baseline md:gap-10 md:py-16 md:pl-24"
         >
-          {/* Index — oversized, low-contrast, lights up as you arrive */}
-          <motion.span
-            aria-hidden
-            style={{ opacity: numOpacity }}
-            className="font-display text-[clamp(2.5rem,4vw,4rem)] font-light tabular-nums text-foreground/30 group-hover:text-foreground/60 transition-colors"
-          >
-            {cap.n}
-          </motion.span>
-
-          {/* Capability name — the load-bearing typography moment per row */}
-          <h3 className="text-balance font-display text-[clamp(2rem,5vw,4rem)] font-light leading-[1.04] tracking-tightest">
+          {/* Capability name — the load-bearing typography moment,
+              sitting on top of its own numeral */}
+          <h3 className="text-balance font-display text-[clamp(2.5rem,6vw,5.5rem)] font-light leading-[1.02] tracking-tightest">
             {cap.label}
           </h3>
 
           {/* Right-side description, fixed width — magazine-shape */}
-          <p className="col-start-2 max-w-[32ch] text-body text-muted-foreground md:col-start-3 md:mt-2">
+          <p className="max-w-[32ch] text-body text-muted-foreground">
             {cap.body}
           </p>
         </motion.div>

@@ -4,6 +4,30 @@ Recorded per `CLAUDE.md` Section 11 "files that double as decision logs". Every 
 
 ---
 
+## 2026-07-06 — Visible contrast pass
+
+Studio feedback: "I can't see any major visual and design changes" —
+correct, because the two prior passes were motion + QA (felt, not
+seen). Diagnosis of the static sameness: every section shared one
+skeleton (eyebrow-left / heading-right), almost every section was
+white, and every heading sat at the same d-2 size. Fixes, content
+untouched:
+
+1. **Proof is now a full dark ink slab** — the page's one hard tonal
+   break. Homepage arc: teal → white → grey wash → INK → white → teal.
+2. **Headings raise their voice** — Capabilities, Work, and Proof
+   heads moved d-2 → d-1.
+3. **Compositions vary per section** — Work header is centered;
+   Clients header rides the right edge; Capabilities rows carry an
+   oversized watermark numeral BEHIND the discipline name
+   (overlapping layers, not columns) with names scaled to
+   clamp(2.5rem → 5.5rem).
+
+Standing rule: no two adjacent homepage sections may share both the
+same background tone and the same header composition.
+
+---
+
 ## 2026-07-05 — Handcrafted QA pass (10 defects fixed)
 
 Studio asked for the site to read handcrafted, work across every

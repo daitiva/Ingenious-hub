@@ -79,33 +79,30 @@ export function WorkGrid() {
       aria-labelledby="work-heading"
       className="relative border-t border-border"
     >
-      <div className="container py-20 md:py-28">
-        <div className="grid items-end gap-8 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-3">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              02 — Selected work
-            </p>
-          </div>
-          <div className="md:col-span-7">
-            <h2
-              id="work-heading"
-              className="text-balance font-display text-d-2 font-light leading-[1.04] tracking-tightest"
-            >
-              Brands that argued for{" "}
-              <span className="font-serif text-gradient-brand">
-                something specific
-              </span>
-              .
-            </h2>
-          </div>
-          <div className="md:col-span-2 md:text-right">
-            <Link
-              href="/work"
-              className="focus-ring link-underline inline-flex items-center gap-1.5 text-sm font-medium"
-            >
-              All work →
-            </Link>
-          </div>
+      {/* Centered composition — deliberately breaks the eyebrow-left /
+          heading-right skeleton the neighbouring sections use, so the
+          homepage doesn't repeat one layout eight times. */}
+      <div className="container py-20 md:py-32">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            02 — Selected work
+          </p>
+          <h2
+            id="work-heading"
+            className="mt-7 text-balance font-display text-d-1 font-light leading-[0.98] tracking-tightest"
+          >
+            Brands that argued for{" "}
+            <span className="font-serif text-gradient-brand">
+              something specific
+            </span>
+            .
+          </h2>
+          <Link
+            href="/work"
+            className="focus-ring link-underline mt-9 inline-flex items-center gap-1.5 text-sm font-medium"
+          >
+            All work →
+          </Link>
         </div>
       </div>
 
