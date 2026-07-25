@@ -44,14 +44,27 @@ export function FeaturedCase() {
   });
   const yArt = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
-  // Subtle pointer-tracked depth on the artefact card. Max ±2.5° —
-  // felt as physicality rather than seen as a trick. Fine pointers
-  // only; reduced-motion opts the visitor out completely.
+  // Scroll-driven 3D on the artefact card: it yaws from -7° to +3°
+  // across the section, so the card turns to face the reader as they
+  // arrive and away again as they leave. Scroll-driven rather than
+  // pointer-driven means touch devices get the identical effect —
+  // hover depth is invisible on a phone.
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const cardRotateY = useTransform(smoothProgress, [0, 0.5, 1], [-7, 0, 3]);
+  const cardRotateX = useTransform(smoothProgress, [0, 0.5, 1], [5, 0, -3]);
+  const cardScale = useTransform(smoothProgress, [0, 0.5, 1], [0.95, 1, 0.97]);
+
+  // Pointer tilt is layered on top for fine-pointer devices only —
+  // an extra ±2° of responsiveness for mouse users, never required.
   const [tiltEnabled, setTiltEnabled] = useState(false);
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
-  const springX = useSpring(tiltX, { stiffness: 160, damping: 20 });
-  const springY = useSpring(tiltY, { stiffness: 160, damping: 20 });
+  const pointerX = useSpring(tiltX, { stiffness: 160, damping: 20 });
+  const pointerY = useSpring(tiltY, { stiffness: 160, damping: 20 });
 
   useEffect(() => {
     const mq = window.matchMedia(
@@ -68,8 +81,8 @@ export function FeaturedCase() {
     const rect = e.currentTarget.getBoundingClientRect();
     const relX = (e.clientX - rect.left) / rect.width - 0.5;
     const relY = (e.clientY - rect.top) / rect.height - 0.5;
-    tiltY.set(relX * 5); // rotateY follows horizontal travel
-    tiltX.set(relY * -5); // rotateX counter-follows vertical travel
+    tiltY.set(relX * 4);
+    tiltX.set(relY * -4);
   };
 
   const onCardPointerLeave = () => {
@@ -89,18 +102,29 @@ export function FeaturedCase() {
     >
       <div className="container py-20 md:py-32">
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
-          {/* LEFT — artefact column, parallaxes mildly on scroll.
-              Perspective wrapper gives the tilt real depth. */}
-          <div className="md:col-span-6 md:order-1" style={{ perspective: 1200 }}>
+          {/* LEFT — artefact column. Two nested transform layers:
+              the outer carries scroll-driven 3D (works on touch), the
+              inner adds optional pointer tilt for mouse users. */}
+          <div className="md:col-span-6 md:order-1" style={{ perspective: 1300 }}>
+            <motion.div
+              style={{
+                y: yArt,
+                rotateY: cardRotateY,
+                rotateX: cardRotateX,
+                scale: cardScale,
+                transformStyle: "preserve-3d",
+                willChange: "transform",
+              }}
+            >
             <motion.div
               style={
                 tiltEnabled
-                  ? { y: yArt, rotateX: springX, rotateY: springY }
-                  : { y: yArt }
+                  ? { rotateX: pointerX, rotateY: pointerY }
+                  : undefined
               }
               onPointerMove={onCardPointerMove}
               onPointerLeave={onCardPointerLeave}
-              className="relative will-change-transform"
+              className="relative"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-hairline bg-background shadow-[0_30px_80px_-40px_rgba(14,13,10,0.25)] dark:shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
                 <RegistrationCorners />
@@ -132,6 +156,7 @@ export function FeaturedCase() {
                   ))}
                 </div>
               </div>
+            </motion.div>
             </motion.div>
           </div>
 

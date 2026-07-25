@@ -3,6 +3,7 @@
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { ACCREDITATIONS } from "@/lib/accreditations";
+import { TiltIn } from "@/components/scroll-3d";
 
 /**
  * Proof — Section 5 of the homepage.
@@ -107,12 +108,11 @@ function Accreditation({
   const isGoogle = item.org === "Google";
 
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: EASE, delay: index * 0.06 }}
-    >
+    <li>
+      {/* Scroll-driven 3D — each accreditation hinges upright as the
+          slab arrives. Shallower than the work tiles (5°) because
+          these sit five-across and a steeper angle reads as noise. */}
+      <TiltIn depth={5} origin="bottom">
       <ContentTag
         {...(item.href
           ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
@@ -132,7 +132,8 @@ function Accreditation({
           {item.byline}
         </span>
       </ContentTag>
-    </motion.li>
+      </TiltIn>
+    </li>
   );
 }
 

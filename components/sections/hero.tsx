@@ -50,19 +50,41 @@ export function Hero() {
   const copyY = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.6, 0]);
 
+  // 3D depth on scroll: the thesis block pitches back and recedes on
+  // the Z axis as the visitor scrolls out of the hero, so leaving the
+  // section feels like pulling away from a surface rather than sliding
+  // content off-screen. Scroll-driven, so touch gets it too.
+  const copyRotateX = useTransform(scrollYProgress, [0, 1], [0, -12]);
+  const copyZ = useTransform(scrollYProgress, [0, 1], [0, -180]);
+  // The tagline behind it recedes on a different curve, opening real
+  // parallax separation between the two layers.
+  const taglineZ = useTransform(scrollYProgress, [0, 1], [0, 120]);
+
   return (
     <section
       ref={ref}
       className="relative isolate flex min-h-[calc(100svh-64px)] items-center overflow-hidden bg-gradient-brand text-white"
       aria-labelledby="hero-thesis"
+      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
     >
       {/* Paper-grain overlay — the gradient reads as printed stock */}
       <div aria-hidden className="grain-light pointer-events-none absolute inset-0" />
       {/* Massive tagline, sits behind the thesis as a quiet brand presence.
-          Scales up + fades as the user scrolls out of the section. */}
+          Scales up, recedes on Z, and fades as the user scrolls out —
+          the Z curve differs from the thesis block's, which is what
+          creates genuine parallax depth between the two layers. */}
       <motion.div
         aria-hidden
-        style={enabled ? { scale: wordmarkScale, opacity: wordmarkOpacity } : { opacity: 0.18 }}
+        style={
+          enabled
+            ? {
+                scale: wordmarkScale,
+                opacity: wordmarkOpacity,
+                translateZ: taglineZ,
+                willChange: "transform, opacity",
+              }
+            : { opacity: 0.18 }
+        }
         className="pointer-events-none absolute inset-0 flex select-none items-center justify-center"
       >
         <span className="whitespace-nowrap font-serif text-[clamp(6rem,18vw,22rem)] font-light leading-none tracking-tight text-white">
@@ -70,12 +92,23 @@ export function Hero() {
         </span>
       </motion.div>
 
-      {/* Thesis copy — sits over the wordmark, brand-white at full opacity.
-          Each sentence reveals in a quiet stagger; the whole block parallaxes
-          up as the user starts to scroll, suggesting the next section is
-          already loading. */}
+      {/* Thesis copy — sits over the tagline. Each sentence reveals in a
+          quiet stagger; on scroll the whole block pitches back and
+          recedes on Z, so leaving the hero reads as pulling away from a
+          physical surface rather than sliding content off-screen. */}
       <motion.div
-        style={enabled ? { y: copyY, opacity: copyOpacity } : undefined}
+        style={
+          enabled
+            ? {
+                y: copyY,
+                opacity: copyOpacity,
+                rotateX: copyRotateX,
+                translateZ: copyZ,
+                transformOrigin: "center top",
+                willChange: "transform, opacity",
+              }
+            : undefined
+        }
         className="container relative z-10 mx-auto max-w-4xl text-center"
       >
         <p

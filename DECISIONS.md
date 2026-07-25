@@ -4,6 +4,48 @@ Recorded per `CLAUDE.md` Section 11 "files that double as decision logs". Every 
 
 ---
 
+## 2026-07-06 — Scroll-driven 3D (desktop + mobile)
+
+Studio asked for 3D animation on scroll, explicitly on **both** web
+and mobile. That constraint decides the architecture: the depth must
+be **scroll-driven, not pointer-driven**, because hover-based 3D is
+invisible on a phone.
+
+New primitives in `components/scroll-3d.tsx`:
+- `TiltIn` — element hinges upright from its lower edge as it crosses
+  the viewport (rotateX depth° → 0, plus scale and opacity). The
+  workhorse.
+- `DepthLayer` — Z-axis parallax; stack two or three at different
+  `speed` values for genuine depth separation.
+- `ScrollScene` — shared perspective camera for grouped children.
+- `FloatCard` — slow continuous idle drift (8s loop) for objects that
+  would read as dead if fully static.
+- `ParallaxText` — horizontal drift on oversized decorative type.
+
+All five spring-smooth their scroll input (`useSpring`) so motion
+never feels mechanically linear, animate transform/opacity only, and
+carry an internal `prefers-reduced-motion` gate on top of the global
+`MotionProvider`.
+
+Wired in:
+- **Work grid** — every tile hinges upright at 9° as it enters.
+- **Proof** — accreditation cards hinge at 5° (shallower; five-across
+  at a steeper angle reads as noise).
+- **Featured case** — card now yaws −7° → +3° and pitches 5° → −3°
+  across the section, so it turns to face the reader on arrival and
+  away on exit. Pointer tilt survives as an *additional* ±2° layer
+  for fine-pointer devices, nested inside the scroll transform.
+- **Hero** — thesis block pitches back 12° and recedes 180px on Z
+  while the "energize your brand" tagline advances 120px on a
+  different curve. The opposing Z curves are what create real
+  parallax depth rather than a flat fade.
+
+Rotation budget: nothing exceeds 12°. Standing rule — depth is felt
+as physicality, never seen as a trick. No WebGL, no Three.js, no new
+dependencies; Framer Motion covers all of it.
+
+---
+
 ## 2026-07-06 — Visible contrast pass
 
 Studio feedback: "I can't see any major visual and design changes" —

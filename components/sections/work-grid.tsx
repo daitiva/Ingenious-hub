@@ -7,6 +7,7 @@ import { WORK } from "@/lib/work";
 import { ClientLogo } from "@/components/client-logo";
 import { RegistrationCorners } from "@/components/registration-corners";
 import { shuffleStable, getSessionSeed } from "@/lib/shuffle";
+import { TiltIn } from "@/components/scroll-3d";
 import { cn } from "@/lib/utils";
 
 /**
@@ -164,18 +165,16 @@ function WorkTile({
 
   return (
     <li className={cn("group relative bg-background", hiddenOnMobile && "hidden md:block")}>
+      {/* Scroll-driven 3D: each tile hinges upright from its lower edge
+          as it enters. Works identically on touch — the driver is
+          scroll position, not the pointer. */}
+      <TiltIn depth={9} origin="bottom">
       <Link
         href={`/work/${project.slug}`}
         className="focus-ring block"
         aria-label={`${project.client} — ${project.title}`}
       >
-        <motion.figure
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: EASE, delay: (index % 3) * 0.05 }}
-          className="relative"
-        >
+        <figure className="relative">
           {/* Cover unmasks (clip-path inset → 0) as it enters, a beat
               behind the figure's rise — reads as the image being
               revealed rather than just fading in. */}
@@ -231,8 +230,9 @@ function WorkTile({
               {project.category}
             </span>
           </figcaption>
-        </motion.figure>
+        </figure>
       </Link>
+      </TiltIn>
     </li>
   );
 }
